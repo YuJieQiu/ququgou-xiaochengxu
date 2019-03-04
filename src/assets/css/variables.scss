@@ -1,0 +1,70 @@
+$tabbar-h: 100rpx;
+$navbar-h: 100rpx;
+$line-color: #d1d3d4;
+$line-height: 1.714286;
+$mainBd: #f7f7f7;
+$mainColor: #1ec8a2;
+$mainColorActive: #1aa889;
+$mainRed: #e93b3d;
+$mainGreen: #00CC66;
+$mainYellow: #ef9b37;
+$mainBlack1: #333333;
+$mainBlack2: #666666;
+$mainBlack3: #999999;
+
+$shadow: 0 0 20rpx -5rpx rgba(0,0,0,0.1);
+$active: #efefef;
+
+%clearfloat {
+    &:after {
+        display: block;
+        content: "clear";
+        height: 0;
+        clear: both;
+        overflow: hidden;
+        visibility: hidden;
+    }
+}
+
+%flex-center {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+%flex-bottom {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
+}
+
+%flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+
+@mixin flex-item($scale: 1) {
+    -webkit-box-flex: $scale;
+    -webkit-flex: $scale;
+    flex: $scale;
+}
+
+@mixin line($line: 1) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+    overflow: hidden;
+    word-break: break-all;
+}
+
+%cell-param {
+    padding: 20rpx 30rpx;
+    background-color: #fff;
+}

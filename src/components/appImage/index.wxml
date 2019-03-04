@@ -1,0 +1,1 @@
+<image mode="scaleToFill" src="{{url}}" binderror="imageOnError" style="background-color: #f7f7f7"></image>

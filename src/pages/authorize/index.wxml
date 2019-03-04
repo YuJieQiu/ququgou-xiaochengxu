@@ -1,0 +1,7 @@
+<view class="container">
+    <form>
+        <view class="info">1、同意当前小程序获取我的微信头像；</view>
+        <view class="info">2、同意当前小程序获取我的微信昵称等其他信息；</view>
+        <button class="app-btn" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+    </form>
+</view>

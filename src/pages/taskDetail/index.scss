@@ -1,0 +1,221 @@
+@import "../../assets/css/variables.scss";
+Page {
+  .map-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 158rpx;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    &.isX {
+      bottom: 198rpx;
+    }
+    .map {
+      width: 100%;
+      height: 100%;
+    }
+
+    .user, .scan, .location, .task {
+      position: absolute;
+      height: 84rpx;
+      width: 84rpx;
+      z-index: 2;
+      padding: 10rpx 18rpx;
+      cover-image {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .location {
+      right: 0rpx;
+      bottom: 18rpx;
+    }
+  }
+
+  .tip {
+    @extend %flex-center;
+    position: fixed;
+    padding: 20rpx;
+    background: #ffffff;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    &.isX {
+      padding-bottom: 60rpx;
+    }
+    .bd {
+      @include flex-item;
+      .info1 {
+        @include line(1);
+        height: 40rpx;
+        margin-bottom: 10rpx;
+        font-weight: bold;
+      }
+      .info2 {
+        @include line(2);
+        height: 68rpx;
+        font-size: 24rpx;
+        color: $mainBlack3;
+      }
+    }
+  }
+
+  .tip1 {
+    position: fixed;
+    background: #ffffff;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    height: 270rpx;
+    &.isX {
+      padding-bottom: 60rpx;
+    }
+    .empty {
+      text-align: center;
+      color: $mainBlack2;
+      line-height: 270rpx;
+    }
+    .info1 {
+      @extend %flex-center;
+      padding: 20rpx 30rpx 0;
+      .bd {
+        @include flex-item;
+        font-weight: bold;
+        & > view {
+          @include line(1);
+        }
+      }
+      .ft {
+        color: $mainColor;
+        padding: 20rpx;
+        margin: -20rpx -20rpx -20rpx 20rpx;
+        .con {
+          display: inline-block;
+          vertical-align: middle;
+        }
+        image {
+          width: 28rpx;
+          height: 28rpx;
+          margin-left: 10rpx;
+          vertical-align: middle;
+        }
+      }
+    }
+    .info2 {
+      font-size: 24rpx;
+      color: $mainBlack3;
+      padding: 20rpx 30rpx;
+    }
+    .info22 {
+      width: 100%;
+      font-size: 24rpx;
+      color: $mainBlack3;
+      white-space: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding: 20rpx 30rpx;
+      box-sizing:border-box;
+      .location {
+        display: inline-block;
+        &:last-child {
+          .line {
+            display: none !important;
+          }
+          .name {
+            padding-right: 0 !important;
+          }
+        }
+        .name {
+          @include line;
+          color: $mainBlack3;
+          margin-top: 16rpx;
+          font-weight: bold;
+          font-style: italic;
+          padding-right: 20rpx;
+        }
+
+        .dotWrap {
+          @extend %flex-center;
+          .dot {
+            width: 20rpx;
+            height: 20rpx;
+            border-radius: 50%;
+            background: rgba(153, 153, 153, 0.2);
+            box-shadow: 0 0.15rem 0.3rem rgba(153, 153, 153, 0.2);
+            display: inline-block;
+            padding: 6rpx;
+            & > view {
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+              background: $mainBlack3;
+            }
+          }
+          .line {
+            @include flex-item;
+            height: 2rpx;
+            background: $mainBlack3;
+            box-shadow: 0 0.15rem 0.3rem rgba(153, 153, 153, 0.2);
+          }
+        }
+        .btns {
+          @extend %flex-center;
+          .btn {
+            color: #fff;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            text-align: center;
+            padding: 10rpx;
+            line-height: $line-height;
+            margin-right: 20rpx;
+            margin-top: 20rpx;
+            font-size: 24rpx;
+            width: 120rpx;
+            border-radius: 100rpx;
+          }
+          .btn1 {
+            $color1: #e93b3d;
+            $color2: #ff9474;
+            $color3: rgba(233, 59, 61, 0.2);
+            background: -webkit-gradient(linear,left top,right top,from($color1),to($color2));
+            background: -webkit-linear-gradient(left,$color1,$color2);
+            background: linear-gradient(90deg,$color1,$color2);
+            box-shadow: 0 0.15rem 0.3rem $color3;
+          }
+          .btn2 {
+            $color1: #1ec8a2;
+            $color2: rgba(30, 200, 162, 0.6);
+            $color3: rgba(30, 200, 162, 0.2);
+            background: -webkit-gradient(linear,left top,right top,from($color1),to($color2));
+            background: -webkit-linear-gradient(left,$color1,$color2);
+            background: linear-gradient(90deg,$color1,$color2);
+            box-shadow: 0 0.15rem 0.3rem $color3;
+          }
+        }
+        &.cur {
+          .name {
+            color: $mainColor !important;
+          }
+          .dotWrap {
+            .dot {
+              background: rgba(30, 200, 162, 0.2) !important;
+              box-shadow: 0 0.15rem 0.3rem rgba(30, 200, 162, 0.1) !important;
+              & > view {
+                background: $mainColor !important;
+              }
+            }
+            .line {
+              background: $mainColor !important;
+              box-shadow: 0 0.15rem 0.3rem rgba(30, 200, 162, 0.1) !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

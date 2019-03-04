@@ -1,0 +1,57 @@
+<view class="list">
+    <view class="listItem"
+          wx:for="{{listData}}"
+          wx:key="{{item.id}}"
+          wx:for-index="i"
+          data-index="{{i}}"
+          bindtap="showDetail">
+        <view class="hd">
+            <image src="{{item.images[0].url}}"></image>
+        </view>
+        <view class="bd">
+            <view class="name">
+                <view wx:if="{{item.status === 0}}" class="status1">(未开始)</view>
+                <view wx:if="{{item.status === 1}}" class="status2">(进行中)</view>
+                <view wx:if="{{item.status === 2}}" class="status3">(已结束)</view>
+                <view class="chBd">
+                    <view>{{item.name}}</view>
+                </view>
+                <view wx:if="{{item.open}}" class="chFt">
+                    <image src="/assets/images/main/public.png"></image>
+                </view>
+                <view wx:else class="chFt">
+                    <image src="/assets/images/main/private.png"></image>
+                </view>
+            </view>
+            <view class="des">
+                {{item.description}}
+            </view>
+            <view class="groupInfo">
+                <view class="chHd">
+                    分组:
+                </view>
+                <view class="chBd">
+                    <view>
+                        <view class="text" wx:for="{{item.groups}}" wx:key="{{index}}">
+                            {{item.name}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="dotInfo">
+                <view class="chHd">
+                    点位:
+                </view>
+                <view class="chBd">
+                    <view>
+                        <view class="text" wx:for="{{item.events}}" wx:key="{{index}}">
+                            {{item.name}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <EmptyList requesting="{{requesting}}" end="{{end}}" listData="{{listData}}"></EmptyList>
+</view>

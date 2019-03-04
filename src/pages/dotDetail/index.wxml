@@ -1,0 +1,74 @@
+<view class="headImg">
+    <swiper
+            indicator-dots="{{indicatorDots}}"
+            autoplay="{{autoplay}}"
+            interval="{{interval}}"
+            duration="{{duration}}"
+    >
+        <block wx:for="{{dotData.images}}" wx:key="*this">
+            <swiper-item>
+                <image src="{{item.url}}" class="slide-image" />
+            </swiper-item>
+        </block>
+    </swiper>
+
+    <image src="{{dotData.images[0].url}}"></image>
+</view>
+<view class="headInfo">
+    <view class="info1">
+        <view class="bd">
+            <view>
+                {{dotData.name}}
+            </view>
+        </view>
+    </view>
+    <view class="info2">
+        {{dotData.description}}
+    </view>
+</view>
+
+<view wx:if="{{questionShow}}" class="questionModal" bindtap="toggleQuestionShow"></view>
+
+<view wx:if="{{questionShow}}" class="question">
+    <view class="title">
+        <view>{{question.name}}</view>
+    </view>
+    <view class="content">
+        <view class="answer {{item.checked ? 'cur' : ''}}" wx:for="{{question.answer_all}}" wx:key="{{index}}" bindtap="selectAnswer" data-index="{{index}}">
+            <view class="bd">
+                {{item.value}}
+            </view>
+            <view class="ft" wx:if="{{item.checked}}">
+                <image src="/assets/images/main/checked.png"></image>
+            </view>
+            <view class="ft" wx:else>
+                <image src="/assets/images/main/unchecked.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="bottom">
+        <view class="cancel-btn" bindtap="toggleQuestionShow">
+            取消
+        </view>
+        <view class="info"></view>
+        <view class="confirm-btn" bindtap="sign">
+            确认
+        </view>
+    </view>
+</view>
+
+<view class="emptyBottom {{isIphoneX ? 'isX' : ''}}"></view>
+
+<block wx:if="{{dotData.user_event_status === 0}}">
+    <view wx:if="{{distance != -1 && distance <= 1000000}}" class="btn {{isIphoneX ? 'isX' : ''}}" bindtap="chooseDot">
+        打卡{{distance != -1 ? '(' + distance + '米)' : ''}}
+    </view>
+    <view wx:else class="btn2 {{isIphoneX ? 'isX' : ''}}">
+        请到达该点附近进行打卡
+    </view>
+</block>
+<block wx:else>
+    <view class="btn2 {{isIphoneX ? 'isX' : ''}}">
+        该点已打卡
+    </view>
+</block>

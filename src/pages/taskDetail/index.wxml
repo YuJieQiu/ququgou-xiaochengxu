@@ -1,0 +1,23 @@
+<view class="map-wrapper {{isIphoneX ? 'isX' : ''}}">
+  <map id="map"
+       class="map"
+       longitude="{{longitude}}"
+       latitude="{{latitude}}"
+       scale="{{scale}}"
+       show-location="true"
+       markers="{{markers}}"
+       bindmarkertap="markerTap"
+       subkey="{{mapKey}}"
+  >
+    <cover-view class="location" bindtap="showMyLocation">
+      <cover-image src="/assets/images/main/location.png" />
+    </cover-view>
+  </map>
+</view>
+
+<view class="tip {{isIphoneX ? 'isX' : ''}}">
+  <view class="bd">
+    <view class="info1">{{taskInfo.sequence ? '(有顺序)' : ''}}{{taskInfo.name}}</view>
+    <view class="info2">{{taskInfo.description}}</view>
+  </view>
+</view>

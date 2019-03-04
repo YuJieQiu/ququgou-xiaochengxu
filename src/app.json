@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/taskList/index",
+    "pages/taskDetail/index",
+    "pages/dotDetail/index",
+    "pages/rankingList/index",
+    "pages/profile/index",
+    "pages/historyTask/index",
+    "pages/authorize/index",
+    "pages/shopCart/index"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "",
+    "backgroundColor": "#f7f7f7"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#8b9099",
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "iconPath": "assets/images/tab/home.png",
+        "selectedIconPath": "assets/images/tab/homeCur.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/shopCart/index",
+        "iconPath": "assets/images/tab/shopcart.png",
+        "selectedIconPath": "assets/images/tab/shopcartCur.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "iconPath": "assets/images/tab/avatar.png",
+        "selectedIconPath": "assets/images/tab/avatarCur.png",
+        "text": "个人"
+      }
+    ]
+  }
+}

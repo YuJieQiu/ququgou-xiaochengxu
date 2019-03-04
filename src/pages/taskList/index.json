@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "城市任务/CityTask",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "EmptyList": "../../components/emptyList/index"
+  }
+}

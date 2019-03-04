@@ -1,0 +1,11 @@
+Page {
+  padding-top: 50rpx;
+  padding-bottom: 1rpx;
+}
+Page .info {
+  color: #666666;
+  padding: 20rpx;
+}
+Page .app-btn {
+  margin-top: 80rpx;
+}

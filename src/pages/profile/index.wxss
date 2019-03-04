@@ -1,0 +1,87 @@
+Page .list .listItem {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+Page .headWrap {
+  height: 360rpx;
+  background: #1ec8a2;
+  text-align: center;
+  position: relative;
+}
+Page .headWrap .headBd {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 250rpx;
+}
+Page .headWrap .headContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+Page .headWrap .headContent > .avatar {
+  display: inline-block;
+  width: 160rpx;
+  height: 160rpx;
+  margin-top: 50rpx;
+  padding: 8rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  box-sizing: border-box;
+}
+Page .headWrap .headContent > .avatar > view {
+  width: 100%;
+  height: 100%;
+  padding: 4rpx;
+  border-radius: 50%;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+Page .headWrap .headContent > .avatar > view image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+Page .headWrap .headContent > .name {
+  padding: 30rpx;
+  color: #fff;
+}
+Page .list {
+  border-top: 1rpx solid #d1d3d4;
+  border-bottom: 1rpx solid #d1d3d4;
+  background: #ffffff;
+  margin: 30rpx 0;
+}
+Page .list .listItem {
+  position: relative;
+  padding: 20rpx 30rpx;
+  line-height: 1.714286;
+}
+Page .list .listItem:active {
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+  background: #efefef;
+}
+Page .list .listItem:not(:last-child):before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30rpx;
+  right: 0;
+  border-bottom: 1rpx solid #d1d3d4;
+}
+Page .list .listItem .bd {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}

@@ -1,0 +1,54 @@
+<!-- banner S -->
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}" wx:key="*this">
+        <swiper-item>
+            <image src="{{item.link_url}}" class="slide-image" />
+        </swiper-item>
+    </block>
+</swiper>
+<!-- banner E -->
+<!-- category S -->
+<view class="section">
+    <view class="section__title"></view>
+    <van-tabs active="{{ active }}" bind:change="onChange">
+        <van-tab title="热销">
+            <van-card num="2" tag="标签" origin-price="10.00" centered="true" currency="¥" price="2.00" desc="描述信息" title="2018秋冬新款男士休闲时尚军绿飞行夹克秋冬新款男" thumb="https://dsimg.wowjpn.goo.ne.jp/rs/?src=https://wow-j.com/images/ext/allguides/00935/00935_001.jpg&maxw=770&maxh=0&resize=1">
+                <view slot="tags">标签</view>
+                <view slot="footer">
+                    <van-button size="mini" round type="danger">购买</van-button>
+                </view>
+            </van-card>
+            <van-card num="2" tag="标签" origin-price="10.00" centered="true" currency="¥" price="2.00" desc="描述信息" title="2018秋冬新款男士休闲时尚军绿飞行夹克秋冬新款男" thumb="https://dsimg.wowjpn.goo.ne.jp/rs/?src=https://wow-j.com/images/ext/allguides/00935/00935_001.jpg&maxw=770&maxh=0&resize=1">
+                <view slot="tags">标签</view>
+                <view slot="footer">
+                    <van-button size="mini" round type="danger">购买</van-button>
+                </view>
+            </van-card>
+            <van-card num="2" tag="标签" origin-price="10.00" centered="true" currency="¥" price="2.00" desc="描述信息" title="2018秋冬新款男士休闲时尚军绿飞行夹克秋冬新款男" thumb="https://dsimg.wowjpn.goo.ne.jp/rs/?src=https://wow-j.com/images/ext/allguides/00935/00935_001.jpg&maxw=770&maxh=0&resize=1">
+                <view slot="tags">标签</view>
+                <view slot="footer">
+                    <van-button size="mini" round type="danger">购买</van-button>
+                </view>
+            </van-card>
+            <van-card num="2" tag="标签" origin-price="10.00" centered="true" currency="¥" price="2.00" desc="描述信息" title="2018秋冬新款男士休闲时尚军绿飞行夹克秋冬新款男" thumb="https://dsimg.wowjpn.goo.ne.jp/rs/?src=https://wow-j.com/images/ext/allguides/00935/00935_001.jpg&maxw=770&maxh=0&resize=1">
+                <view slot="tags">标签</view>
+                <view slot="footer">
+                    <van-button size="mini" round type="danger">购买</van-button>
+                </view>
+            </van-card>
+            <van-card num="2" tag="标签" origin-price="10.00" centered="true" currency="¥" price="2.00" desc="描述信息" title="2018秋冬新款男士休闲时尚军绿飞行夹克秋冬新款男" thumb="https://dsimg.wowjpn.goo.ne.jp/rs/?src=https://wow-j.com/images/ext/allguides/00935/00935_001.jpg&maxw=770&maxh=0&resize=1">
+                <view slot="tags">标签</view>
+                <view slot="footer">
+                    <van-button size="mini" round type="danger">购买</van-button>
+                </view>
+            </van-card>
+        </van-tab>
+        <van-tab title="精选">精选</van-tab>
+        <van-tab title="特惠">特惠</van-tab>
+        <van-tab title="全部">全部</van-tab>
+    </van-tabs>
+</view>
+<!-- category S -->
+<!-- <view class="list"> 
+    <EmptyList requesting="{{requesting}}" end="{{end}}" listData="{{listData}}"></EmptyList>
+</view> -->

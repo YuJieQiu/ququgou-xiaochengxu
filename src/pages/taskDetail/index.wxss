@@ -1,0 +1,224 @@
+Page .tip, Page .tip1 .info1, Page .tip1 .info22 .location .dotWrap, Page .tip1 .info22 .location .btns {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+Page .map-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 158rpx;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+Page .map-wrapper.isX {
+  bottom: 198rpx;
+}
+Page .map-wrapper .map {
+  width: 100%;
+  height: 100%;
+}
+Page .map-wrapper .user, Page .map-wrapper .scan, Page .map-wrapper .location, Page .map-wrapper .task {
+  position: absolute;
+  height: 84rpx;
+  width: 84rpx;
+  z-index: 2;
+  padding: 10rpx 18rpx;
+}
+Page .map-wrapper .user cover-image, Page .map-wrapper .scan cover-image, Page .map-wrapper .location cover-image, Page .map-wrapper .task cover-image {
+  width: 100%;
+  height: 100%;
+}
+Page .map-wrapper .location {
+  right: 0rpx;
+  bottom: 18rpx;
+}
+Page .tip {
+  position: fixed;
+  padding: 20rpx;
+  background: #ffffff;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+Page .tip.isX {
+  padding-bottom: 60rpx;
+}
+Page .tip .bd {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+Page .tip .bd .info1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  word-break: break-all;
+  height: 40rpx;
+  margin-bottom: 10rpx;
+  font-weight: bold;
+}
+Page .tip .bd .info2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-break: break-all;
+  height: 68rpx;
+  font-size: 24rpx;
+  color: #999999;
+}
+Page .tip1 {
+  position: fixed;
+  background: #ffffff;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  height: 270rpx;
+}
+Page .tip1.isX {
+  padding-bottom: 60rpx;
+}
+Page .tip1 .empty {
+  text-align: center;
+  color: #666666;
+  line-height: 270rpx;
+}
+Page .tip1 .info1 {
+  padding: 20rpx 30rpx 0;
+}
+Page .tip1 .info1 .bd {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  font-weight: bold;
+}
+Page .tip1 .info1 .bd > view {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  word-break: break-all;
+}
+Page .tip1 .info1 .ft {
+  color: #1ec8a2;
+  padding: 20rpx;
+  margin: -20rpx -20rpx -20rpx 20rpx;
+}
+Page .tip1 .info1 .ft .con {
+  display: inline-block;
+  vertical-align: middle;
+}
+Page .tip1 .info1 .ft image {
+  width: 28rpx;
+  height: 28rpx;
+  margin-left: 10rpx;
+  vertical-align: middle;
+}
+Page .tip1 .info2 {
+  font-size: 24rpx;
+  color: #999999;
+  padding: 20rpx 30rpx;
+}
+Page .tip1 .info22 {
+  width: 100%;
+  font-size: 24rpx;
+  color: #999999;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 20rpx 30rpx;
+  box-sizing: border-box;
+}
+Page .tip1 .info22 .location {
+  display: inline-block;
+}
+Page .tip1 .info22 .location:last-child .line {
+  display: none !important;
+}
+Page .tip1 .info22 .location:last-child .name {
+  padding-right: 0 !important;
+}
+Page .tip1 .info22 .location .name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  word-break: break-all;
+  color: #999999;
+  margin-top: 16rpx;
+  font-weight: bold;
+  font-style: italic;
+  padding-right: 20rpx;
+}
+Page .tip1 .info22 .location .dotWrap .dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: rgba(153, 153, 153, 0.2);
+  box-shadow: 0 0.15rem 0.3rem rgba(153, 153, 153, 0.2);
+  display: inline-block;
+  padding: 6rpx;
+}
+Page .tip1 .info22 .location .dotWrap .dot > view {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #999999;
+}
+Page .tip1 .info22 .location .dotWrap .line {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  height: 2rpx;
+  background: #999999;
+  box-shadow: 0 0.15rem 0.3rem rgba(153, 153, 153, 0.2);
+}
+Page .tip1 .info22 .location .btns .btn {
+  color: #fff;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  padding: 10rpx;
+  line-height: 1.714286;
+  margin-right: 20rpx;
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  width: 120rpx;
+  border-radius: 100rpx;
+}
+Page .tip1 .info22 .location .btns .btn1 {
+  background: -webkit-gradient(linear, left top, right top, from(#e93b3d), to(#ff9474));
+  background: -webkit-linear-gradient(left, #e93b3d, #ff9474);
+  background: linear-gradient(90deg, #e93b3d, #ff9474);
+  box-shadow: 0 0.15rem 0.3rem rgba(233, 59, 61, 0.2);
+}
+Page .tip1 .info22 .location .btns .btn2 {
+  background: -webkit-gradient(linear, left top, right top, from(#1ec8a2), to(rgba(30, 200, 162, 0.6)));
+  background: -webkit-linear-gradient(left, #1ec8a2, rgba(30, 200, 162, 0.6));
+  background: linear-gradient(90deg, #1ec8a2, rgba(30, 200, 162, 0.6));
+  box-shadow: 0 0.15rem 0.3rem rgba(30, 200, 162, 0.2);
+}
+Page .tip1 .info22 .location.cur .name {
+  color: #1ec8a2 !important;
+}
+Page .tip1 .info22 .location.cur .dotWrap .dot {
+  background: rgba(30, 200, 162, 0.2) !important;
+  box-shadow: 0 0.15rem 0.3rem rgba(30, 200, 162, 0.1) !important;
+}
+Page .tip1 .info22 .location.cur .dotWrap .dot > view {
+  background: #1ec8a2 !important;
+}
+Page .tip1 .info22 .location.cur .dotWrap .line {
+  background: #1ec8a2 !important;
+  box-shadow: 0 0.15rem 0.3rem rgba(30, 200, 162, 0.1) !important;
+}

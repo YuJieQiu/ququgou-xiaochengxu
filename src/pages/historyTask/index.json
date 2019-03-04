@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "已完成任务",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "EmptyList": "../../components/emptyList/index"
+  }
+}

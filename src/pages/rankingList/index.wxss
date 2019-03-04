@@ -1,0 +1,159 @@
+Page .list .listItem {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+Page {
+  padding-top: 400rpx;
+  padding-bottom: 1rpx;
+  background: #ffffff;
+}
+Page .headWrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300rpx;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+  background: #ffffff;
+}
+Page .headWrap .headContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background: -webkit-linear-gradient(top, #1ec8a2, rgba(30, 200, 162, 0.7));
+  background: linear-gradient(180deg, #1ec8a2, rgba(30, 200, 162, 0.7));
+}
+Page .headWrap .headContent .group {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+}
+Page .headWrap .headContent > .name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  word-break: break-all;
+  padding: 20rpx;
+  font-size: 36rpx;
+}
+Page .headWrap .headContent > .process {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  word-break: break-all;
+  padding: 20rpx;
+  font-size: 50rpx;
+}
+Page .headWrap .headContent > .score {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  word-break: break-all;
+  padding: 20rpx;
+  font-size: 30rpx;
+  color: #ffffff;
+}
+Page .tabList {
+  position: fixed;
+  top: 300rpx;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  background: #ffffff;
+  text-align: center;
+  color: #999999;
+}
+Page .tabList .tabWrap {
+  display: inline-block;
+  position: relative;
+}
+Page .tabList .tabWrap .line {
+  position: absolute;
+  left: 0;
+  bottom: 10rpx;
+  height: 2px;
+  border-radius: 2px;
+  background: #1ec8a2;
+  width: 112rpx;
+  transform: translateX(30rpx);
+  -webkit-transform: translateX(30rpx);
+  transform-origin: 50% 50% 0;
+}
+Page .tabList .tabWrap .tab {
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+  display: inline-block;
+  padding: 30rpx;
+}
+Page .tabList .tabWrap .tab.cur {
+  color: #333333;
+  font-weight: 700;
+}
+Page .list .listItem {
+  position: relative;
+  padding: 20rpx 30rpx;
+  line-height: 1.714286;
+}
+Page .list .listItem:active {
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+  background: #efefef;
+}
+Page .list .listItem:not(:last-child):before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30rpx;
+  right: 30rpx;
+  border-bottom: 1rpx solid #d1d3d4;
+}
+Page .list .listItem .rank1 {
+  margin-right: 30rpx;
+  font-weight: bold;
+  width: 40rpx;
+}
+Page .list .listItem .rank2 {
+  margin-right: 30rpx;
+  font-size: 0;
+}
+Page .list .listItem .rank2 image {
+  width: 40rpx;
+  height: 40rpx;
+}
+Page .list .listItem .hd {
+  font-size: 0;
+  margin-right: 32rpx;
+  height: 80rpx;
+}
+Page .list .listItem .hd image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+Page .list .listItem .bd {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  word-break: break-all;
+}
+Page .list .listItem .score {
+  color: #ef9b37;
+  margin-left: 20rpx;
+}

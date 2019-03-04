@@ -1,0 +1,134 @@
+@import "./assets/css/variables.scss";
+
+Page {
+    background: $mainBd;
+    font-size: 28rpx;
+    color: $mainBlack1;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Liberation Sans","PingFang SC","Microsoft YaHei","Hiragino Sans GB","Wenquanyi Micro Hei","WenQuanYi Zen Hei","ST Heiti",SimHei,"WenQuanYi Zen Hei Sharp",sans-serif;
+}
+
+.app-triangle {
+    position: relative;
+    padding-right: 50rpx !important;
+    &:after {
+        content: " ";
+        display: inline-block;
+        height: 16rpx;
+        width: 16rpx;
+        border-width: 2rpx 2rpx 0 0;
+        border-color: $mainBlack3;
+        border-style: solid;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        position: absolute;
+        top: 50%;
+        right: 30rpx;
+        margin-top: -8rpx;
+    }
+}
+
+.app-triangle-up {
+    position: relative;
+    padding-right: 50px !important;
+    &:after {
+        content: " ";
+        display: inline-block;
+        height: 12rpx;
+        width: 12rpx;
+        border-width: 2rpx 2rpx 0 0;
+        border-color: $mainBlack3;
+        border-style: solid;
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        position: absolute;
+        top: 50%;
+        right: 30rpx;
+        margin-top: -6rpx;
+    }
+}
+
+.app-triangle-down {
+    position: relative;
+    padding-right: 50px !important;
+    &:after {
+        content: " ";
+        display: inline-block;
+        height: 12rpx;
+        width: 12rpx;
+        border-width: 2rpx 2rpx 0 0;
+        border-color: $mainBlack3;
+        border-style: solid;
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
+        position: absolute;
+        top: 50%;
+        right: 30rpx;
+        margin-top: -8rpx;
+    }
+}
+
+.app-btn {
+    margin: 20rpx 20rpx 50rpx;
+    border-radius: 0;
+    height: 90rpx;
+    padding: 20rpx;
+    line-height: 50rpx;
+    text-align: center;
+    color: #fff;
+    box-sizing: border-box;
+    font-size: 28rpx;
+
+    &::after {
+        border: 0;
+    }
+
+    background: $mainColor;
+    -webkit-box-shadow: 0 2rpx 4rpx 0 rgba(0,0,0,0.2);
+    box-shadow: 0 2rpx 4rpx 0 rgba(0,0,0,0.2);
+
+    -webkit-transition: background 0.3s, color 0.3s;
+    transition: background 0.3s, color 0.3s;
+    &:active {
+        background: $mainColorActive;
+        -webkit-box-shadow: 0 2rpx 4rpx 0 rgba(0,0,0,0.1);
+        box-shadow: 0 2rpx 4rpx 0 rgba(0,0,0,0.1);
+        color: #cccccc;
+    }
+}
+
+.app-btns {
+    @extend %flex-center;
+    position: fixed;
+    bottom: 50rpx;
+    left: 16rpx;
+    right: 16rpx;
+    border-radius: 6rpx;
+    height: 90rpx;
+    padding: 20rpx;
+    line-height: 50rpx;
+    text-align: center;
+    color: #fff;
+    box-sizing: border-box;
+
+    background-image: -webkit-linear-gradient(90deg, $mainColor, #0edcff);
+    background-image: linear-gradient(90deg, $mainColor, #0edcff);
+
+    -webkit-box-shadow: 0 2rpx 4rpx 0 rgba(0,0,0,0.2);
+    box-shadow: 0 2rpx 4rpx 0 rgba(0,0,0,0.2);
+
+    & > view, & > navigator, & > button {
+        @include flex-item;
+        &:not(:last-child) {
+            border-right: 1px solid #fff;
+        }
+    }
+}
+
+.app-label {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}

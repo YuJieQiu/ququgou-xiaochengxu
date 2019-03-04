@@ -1,0 +1,21 @@
+<view class="headWrap">
+    <image src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIzMDAiIGhlaWdodD0iMTAwIj4KCTxnIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4zKSI+CgkgICAgPHBhdGggZD0iTSAwIDcwIFEgNzUgMzksIDE1MCA3MCBUIDMwMCA3MCBUIDQ1MCA3MCBUIDYwMCA3MCBUIDc1MCA3MCBWIDEwMCBIIDAgViAwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLCAwKSI+PC9wYXRoPgoJPC9nPgoJPGcgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjE1KSI+CgkgICAgPHBhdGggZD0iTSAwIDcwIFEgNzUgMzksIDE1MCA3MCBUIDMwMCA3MCBUIDQ1MCA3MCBUIDYwMCA3MCBUIDc1MCA3MCBWIDEwMCBIIDAgViAwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTAsIDApIj48L3BhdGg+Cgk8L2c+Cjwvc3ZnPiA=" class="headBd" mode="aspectFill"></image>
+    <view class="headContent">
+        <view class="avatar">
+            <view>
+                <AppImage url="{{avatar || '/assets/images/profile/avatarDefault.svg'}}" defaultUrl="/assets/images/profile/avatarDefault.svg"></AppImage>
+            </view>
+        </view>
+        <view class="name">
+            {{name}}
+        </view>
+    </view>
+</view>
+
+<view class="list">
+    <navigator url="/pages/historyTask/index" hover-class="none" class="listItem app-triangle">
+        <view class="hd"></view>
+        <view class="bd">我的任务</view>
+        <view class="ft"></view>
+    </navigator>
+</view>
