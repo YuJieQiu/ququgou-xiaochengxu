@@ -18,11 +18,14 @@
         wx:for-index="i"
         data-index="{{i}}">
 
-           <van-card  wx:for="{{tabs}}" 
-        wx:key="{{item.id}}"  
-         num="2" tag="标签" origin-price="10.00" centered="true" currency="¥" price="2.00" desc="描述信息" title="2018秋冬新款男士休闲时尚军绿飞行夹克秋冬新款男" thumb="https://dsimg.wowjpn.goo.ne.jp/rs/?src=https://wow-j.com/images/ext/allguides/00935/00935_001.jpg&maxw=770&maxh=0&resize=1">
+           <van-card  wx:for="{{item.productSmallInfos}}" 
+        wx:key="{{item.guid}}"
+         num="" tag="标签" origin-price="{{item.original_price}}" centered="true" currency="¥" price="{{item.min_price}}" desc="{{item.description}}" title="{{item.name}}"  thumb="{{item.image}}">
                 <view slot="tags">标签</view>
+                {{item.image}}
+                 <image wx:if="{{item.image}}" class="avatar" src="{{item.image}}"></image> 
                 <view slot="footer">
+                   
                     <van-button size="mini" round type="danger">购买</van-button>
                 </view>
             </van-card>

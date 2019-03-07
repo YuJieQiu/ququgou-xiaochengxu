@@ -11,7 +11,7 @@
 		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.5.1",
+	"libVersion": "2.6.1",
 	"appid": "wxa3fd96e049a8eef9",
 	"projectname": "lbs",
 	"condition": {

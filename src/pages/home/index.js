@@ -19,7 +19,7 @@ Page({
         });
     },
     getHomeData(){
-        app.httpGet('wechat/getHomeData').then((res) => {
+        app.httpGet('homeProductConfig/getConfigProductList').then((res) => {
             if(res && res.data) {
                 this.setData({
                     tabs: res.data
