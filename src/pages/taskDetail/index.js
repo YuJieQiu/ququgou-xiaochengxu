@@ -90,7 +90,7 @@ Page({
         });
 
         this.showMyLocation();
-
+        
         this.changeTask(this.data.taskInfo);
     }
 })

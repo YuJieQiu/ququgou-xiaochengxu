@@ -27,6 +27,19 @@ Page({
             }
         });
     },
+    showDetail(e) {
+        console.log(e.currentTarget.dataset.guid)
+        let guid = e.currentTarget.dataset.guid;
+        
+        //console.log(this.data)
+        // let index = e.currentTarget.dataset;
+        // let data = this.data.tabs[index];
+        // console.log(index)
+        // console.log(data)
+        wx.navigateTo({
+            url: '/pages/productDetail/index?guid='+guid
+        });
+    },
     onPullDownRefresh() {
         //this.getData('refresh', pageStart);
     },

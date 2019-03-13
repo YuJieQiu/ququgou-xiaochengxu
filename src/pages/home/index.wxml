@@ -20,13 +20,22 @@
 
            <van-card  wx:for="{{item.productSmallInfos}}" 
         wx:key="{{item.guid}}"
-         num="" tag="标签" origin-price="{{item.original_price}}" centered="true" currency="¥" price="{{item.min_price}}" desc="{{item.description}}" title="{{item.name}}"  thumb="{{item.image}}">
-                <view slot="tags">标签</view>
-                {{item.image}}
-                 <image wx:if="{{item.image}}" class="avatar" src="{{item.image}}"></image> 
+         num="" 
+         tag="标签" 
+         origin-price="{{item.original_price}}" 
+         centered="true" currency="¥" 
+         price="{{item.min_price}}" 
+         desc="{{item.description}}" 
+         title="{{item.name}}"  
+         thumb="{{item.image}}"
+         data-guid="{{item.guid}}"
+         bindtap="showDetail"
+         >
+         
+                <view slot="tags" wx:for="{{item.tags}}">{{item}}</view>
+               
                 <view slot="footer">
-                   
-                    <van-button size="mini" round type="danger">购买</van-button>
+                    <van-button  size="mini" round type="danger">购买</van-button>
                 </view>
             </van-card>
             

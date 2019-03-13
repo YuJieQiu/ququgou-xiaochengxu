@@ -44,8 +44,8 @@ App({
         });
     },
     mapKey: 'VPPBZ-7WY3Q-ZFJ5E-GCK5J-SDG45-K5BER',
-    baseUrl1: 'http://118.25.17.249:8888/',
-    baseUrl:  'http://118.25.17.249:8888/api/v1/',
+  baseUrl1: 'http://118.25.17.249:8888/',
+  baseUrl:  'http://118.25.17.249:8888/api/v1/',
     httpBase: function (method, url, data, loading) {
         let _this = this;
         let requestUrl =  this.baseUrl + url;
