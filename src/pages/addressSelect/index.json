@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "区区购",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+      "van-search": "/dist/search/index"
+    }
+  }

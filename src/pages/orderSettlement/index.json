@@ -1,0 +1,18 @@
+{
+    "navigationBarTitleText": "区区购",
+    "enablePullDownRefresh": true,
+    "usingComponents": { 
+      "van-row": "/dist/row/index",
+      "van-col": "/dist/col/index",
+      "van-tab": "/dist/tab/index",
+      "van-tabs": "/dist/tabs/index",
+      "van-card": "/dist/card/index",
+      "van-button": "/dist/button/index",
+      "van-cell": "/dist/cell/index",
+      "van-cell-group": "/dist/cell-group/index",
+      "van-icon": "/dist/icon/index",
+      "van-submit-bar": "/dist/submit-bar/index",
+      "van-field": "/dist/field/index",
+      "van-toast": "/dist/toast/index"
+    }
+  }

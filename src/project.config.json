@@ -11,9 +11,11 @@
 		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.1",
+	"libVersion": "2.6.2",
 	"appid": "wxa3fd96e049a8eef9",
 	"projectname": "lbs",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -35,16 +37,9 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "test",
-					"pathName": "pages/taskList/index",
-					"query": "task_id=400",
-					"scene": null
-				},
-				{
-					"id": 1,
-					"name": "测试",
-					"pathName": "pages/taskList/index",
-					"query": "task_id%3D421",
+					"name": "",
+					"pathName": "",
+					"query": "",
 					"scene": null
 				}
 			]

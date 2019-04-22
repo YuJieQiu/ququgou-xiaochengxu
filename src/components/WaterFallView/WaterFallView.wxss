@@ -1,0 +1,15 @@
+.fall-container {
+    width: 100%;
+    display: flex;
+  }
+  
+  .fall-left {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .fall-right {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20rpx;
+  }

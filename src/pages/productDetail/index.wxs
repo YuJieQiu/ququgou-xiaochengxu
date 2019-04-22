@@ -1,0 +1,21 @@
+
+// 支持es4语法
+var filter = {
+	numberToFixed: function(value){
+		return 1
+    },
+    arrayExist: function(array,value){
+        return array.indexOf(value)!==-1
+    },
+    priceStr: function(price) {
+        var eachPrice=((price *100) / 100).toFixed(2);
+        return eachPrice;   //(price *100 / 100).toFixed(2);
+    },
+}
+
+// 导出对外暴露的属性
+module.exports = {
+    numberToFixed: filter.numberToFixed,
+    arrayExist: filter.arrayExist,
+    priceStr: filter.priceStr
+} 

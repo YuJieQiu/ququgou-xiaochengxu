@@ -1,0 +1,72 @@
+/* Page .address{
+    
+}
+  */
+ 
+Page .address-sex-radio-group{
+  margin-left: 22%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+Page .address-cell-text{
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 12px;
+}
+
+Page .address-cell-radio{
+  display: inline-block;
+  vertical-align: bottom;
+}
+Page .address-cell{
+  
+}
+Page .address-cell-label{
+  color: #969799;
+  font-size: 12px;
+  margin-top: 5px;
+  line-height: 18px;
+  margin-left: 30px;
+}
+
+Page .address-swipe-delete{
+    color: #fff;
+    font-size: 15px;
+    width: 65px;
+   
+    display: inline-block;
+    text-align: center;
+    
+    background-color: #f44;
+ 
+}
+
+Page .main{
+  margin-top: 10px;
+}
+Page .main .content{
+  height: calc(100vh - 115px);
+  overflow:scroll;
+}
+
+Page .add-button{ 
+  position:fixed;
+  width: 95%; 
+  margin-left: 10px; 
+  bottom:50px;
+}
+
+Page .i-swipeout-demo-item{
+ 
+  /* height: 83px;
+  line-height: 83px; */
+
+}
+
+Page .i-swipeout-demo-item-slot{
+  /* height: 83px; */
+}
+
+/* Page .address .address-add .address-add-icon{
+    text-align:left;
+} */

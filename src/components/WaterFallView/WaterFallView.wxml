@@ -1,0 +1,16 @@
+<view class='fall-container'>
+    <!-- 左边一列 -->
+    <view class='fall-left'>
+        <block wx:for="{{leftList}}" wx:key="{{item.id}}">
+            <!-- 瀑布流内容卡片 -->
+            <template is='goodsCard' data="{{data:item}}" />
+        </block>
+    </view>
+    <!-- 右边一列 -->
+    <view class='fall-right'>
+        <block wx:for="{{rightList}}" wx:key="{{item.id}}">
+            <!-- 瀑布流内容卡片 -->
+            <template is='goodsCard' data="{{data:item}}" />
+        </block>
+    </view>
+</view>

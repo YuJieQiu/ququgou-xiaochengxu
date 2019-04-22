@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "得分信息",
-  "usingComponents": {
-    "EmptyList": "../../components/emptyList/index",
-    "AppImage": "../../components/appImage/index"
-  }
-}

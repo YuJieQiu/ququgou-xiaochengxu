@@ -24,5 +24,6 @@ Page({
             avatar: userInfo.avatarUrl,
             name: userInfo.nickName
         });
+        console.log(this.data.avatar)
     }
 });

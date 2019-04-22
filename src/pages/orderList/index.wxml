@@ -1,0 +1,277 @@
+<view class="main">
+  
+  <van-tabs active="{{ active }}" 
+    swipe-threshold="5"
+    swipeable="{{true}}" 
+    data-all="{{true}}"
+    data-status="1"
+    bind:click="onClickTab" 
+    >
+    <van-tab title="全部" index="0">
+ 
+    <view  class="order-list"
+    wx:for="{{list}}" wx:for-item="listItem">
+      
+     <van-panel use-footer-slot footer-class="o-footer">
+         <view slot="header">
+            <van-cell
+            value="待付款" 
+            icon="shop-o"
+            title="{{listItem.merName}}"
+            is-link
+          />
+        </view>
+
+        <view>
+           <van-card custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" 
+          centered="{{true}}" 
+          lazy-load="{{true}}" 
+          wx:for="{{listItem.products}}" 
+          wx:for-item="product" 
+          thumb="{{product.cover}}" 
+          num="{{product.count}}" 
+          price="{{product.unitPrice}}"> 
+            <view slot="title" class="goods-list-card-title">{{product.name}}</view>
+            <view slot="desc" class="goods-list-card-desc">
+              <block wx:for="{{product.skuInfo}}">{{index}}:{{item}} 
+              </block>
+            </view>
+          </van-card>
+        </view>
+ 
+        <view slot="footer" >
+          <view class="o-footer-money">
+              合计: <view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view>
+          </view>
+
+          <view class="o-footer-but">
+            <van-button size="small">取消订单</van-button>
+            <van-button size="small" type="danger">立即支付</van-button>
+          </view>
+         
+        </view>
+      </van-panel>
+  
+    </view>
+
+
+      <!-- <van-card
+        num="2"
+        price="2.00"
+        desc="描述信息"
+        title="商品标题"
+        thumb="https://img14.360buyimg.com/n0/jfs/t3088/268/6366969996/109449/7d1e9e84/58a2a127N7b5041ce.jpg"
+        
+      > 
+      </van-card> -->
+
+
+     <!-- <view slot="footer">
+           
+            <van-button size="mini">按钮</van-button>
+            <van-button size="mini">按钮</van-button>
+
+             <text >实际付款 ¥10.00</text>
+          </view> -->
+
+
+    </van-tab> 
+
+    <van-tab title="待付款" index="1">
+      
+
+    <view  class="order-list"
+    wx:for="{{list}}" wx:for-item="listItem">
+      
+     <van-panel use-footer-slot footer-class="o-footer">
+         <view slot="header">
+            <van-cell
+            value="待付款" 
+            icon="shop-o"
+            title="{{listItem.merName}}"
+            is-link 
+            bind:click=""
+          />
+        </view>
+
+        <view>
+           <van-card custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" 
+          centered="{{true}}" 
+          lazy-load="{{true}}" 
+          wx:for="{{listItem.products}}" 
+          wx:for-item="product" 
+          thumb="{{product.cover}}" 
+          num="{{product.count}}" 
+          price="{{product.unitPrice}}"> 
+            <view slot="title" class="goods-list-card-title">{{product.name}}</view>
+            <view slot="desc" class="goods-list-card-desc">
+              <block wx:for="{{product.skuInfo}}">{{index}}:{{item}} 
+              </block>
+            </view>
+          </van-card>
+        </view>
+ 
+        <view slot="footer" >
+          <view class="o-footer-money">
+              合计: <view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view>
+          </view>
+
+          <view class="o-footer-but">
+            <van-button size="small">取消订单</van-button>
+            <van-button size="small" type="danger">立即支付</van-button>
+          </view>
+         
+        </view>
+      </van-panel>
+  
+    </view>
+    </van-tab>
+
+    <van-tab title="待发货"index="2">
+      
+
+    <view  class="order-list"
+    wx:for="{{list}}" wx:for-item="listItem">
+      
+     <van-panel use-footer-slot footer-class="o-footer">
+         <view slot="header">
+            <van-cell
+            value="待付款" 
+            icon="shop-o"
+            title="{{listItem.merName}}"
+            is-link
+          />
+        </view>
+
+        <view>
+           <van-card custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" 
+          centered="{{true}}" 
+          lazy-load="{{true}}" 
+          wx:for="{{listItem.products}}" 
+          wx:for-item="product" 
+          thumb="{{product.cover}}" 
+          num="{{product.count}}" 
+          price="{{product.unitPrice}}"> 
+            <view slot="title" class="goods-list-card-title">{{product.name}}</view>
+            <view slot="desc" class="goods-list-card-desc">
+              <block wx:for="{{product.skuInfo}}">{{index}}:{{item}} 
+              </block>
+            </view>
+          </van-card>
+        </view>
+ 
+        <view slot="footer" >
+          <view class="o-footer-money">
+              合计: <view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view>
+          </view>
+
+          <view class="o-footer-but">
+            <van-button size="small">取消订单</van-button>
+            <van-button size="small" type="danger">立即支付</van-button>
+          </view>
+         
+        </view>
+      </van-panel>
+  
+    </view>
+    </van-tab>
+
+    <van-tab title="待收货"index="3">
+      
+
+    <view  class="order-list"
+    wx:for="{{list}}" wx:for-item="listItem">
+      
+     <van-panel use-footer-slot footer-class="o-footer">
+         <view slot="header">
+            <van-cell
+            value="待付款" 
+            icon="shop-o"
+            title="{{listItem.merName}}"
+            is-link
+          />
+        </view>
+
+        <view>
+           <van-card custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" 
+          centered="{{true}}" 
+          lazy-load="{{true}}" 
+          wx:for="{{listItem.products}}" 
+          wx:for-item="product" 
+          thumb="{{product.cover}}" 
+          num="{{product.count}}" 
+          price="{{product.unitPrice}}"> 
+            <view slot="title" class="goods-list-card-title">{{product.name}}</view>
+            <view slot="desc" class="goods-list-card-desc">
+              <block wx:for="{{product.skuInfo}}">{{index}}:{{item}} 
+              </block>
+            </view>
+          </van-card>
+        </view>
+ 
+        <view slot="footer" >
+          <view class="o-footer-money">
+              合计: <view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view>
+          </view>
+
+          <view class="o-footer-but">
+            <van-button size="small">取消订单</van-button>
+            <van-button size="small" type="danger">立即支付</van-button>
+          </view>
+         
+        </view>
+      </van-panel>
+  
+    </view>
+    </van-tab>
+    
+    <van-tab title="待评价" index="4">
+      
+    <view  class="order-list"
+    wx:for="{{list}}" wx:for-item="listItem">
+      
+     <van-panel use-footer-slot footer-class="o-footer">
+         <view slot="header">
+            <van-cell
+            value="待付款" 
+            icon="shop-o"
+            title="{{listItem.merName}}"
+            is-link
+          />
+        </view>
+
+        <view>
+           <van-card custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" 
+          centered="{{true}}" 
+          lazy-load="{{true}}" 
+          wx:for="{{listItem.products}}" 
+          wx:for-item="product" 
+          thumb="{{product.cover}}" 
+          num="{{product.count}}" 
+          price="{{product.unitPrice}}"> 
+            <view slot="title" class="goods-list-card-title">{{product.name}}</view>
+            <view slot="desc" class="goods-list-card-desc">
+              <block wx:for="{{product.skuInfo}}">{{index}}:{{item}} 
+              </block>
+            </view>
+          </van-card>
+        </view>
+ 
+        <view slot="footer" >
+          <view class="o-footer-money">
+              合计: <view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view>
+          </view>
+
+          <view class="o-footer-but">
+            <van-button size="small">取消订单</van-button>
+            <van-button size="small" type="danger">立即支付</van-button>
+          </view>
+         
+        </view>
+      </van-panel>
+  
+    </view>
+    </van-tab>
+  </van-tabs>
+   
+</view> 

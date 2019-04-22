@@ -1,6 +1,12 @@
 {
-  "navigationBarTitleText": "个人中心",
+  "navigationStyle": "custom",
   "usingComponents": {
-    "AppImage": "../../components/appImage/index"
+    "AppImage": "../../components/appImage/index",
+    "cu-custom":"/colorui/components/cu-custom",
+    "i-avatar": "/iview/dist/avatar/index",
+    "van-cell": "/dist/cell/index",
+    "van-cell-group": "/dist/cell-group/index",
+    "van-tabbar": "/dist/tabbar/index",
+    "van-tabbar-item": "/dist/tabbar-item/index"
   }
 }

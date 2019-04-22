@@ -1,54 +1,56 @@
-<!-- banner S -->
-<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-    <block wx:for="{{imgUrls}}" wx:key="*this">
-        <swiper-item>
-            <image src="{{item.link_url}}" class="slide-image" />
-        </swiper-item>
-    </block>
-</swiper>
-<!-- banner E -->
-<!-- category S -->
-<view class="section">
-    <view class="section__title"></view>
-    <van-tabs active="{{ active }}" bind:change="onChange">
-        
-        <van-tab title="{{item.text}}" 
-        wx:for="{{tabs}}" 
-        wx:key="{{item.id}}"  
-        wx:for-index="i"
-        data-index="{{i}}">
+<view class="{{isIPX ? 'main-IPX':'main'}}">
+    <view class="header"> 
+            <van-row>
+                        <van-col span="5">
+                            <van-icon name="location-o" custom-class="header-location" />
+                            <view class='header-location-name'>{{ad_info.city}}</view>
+                            <view class="header-arrow-down">
+                                <van-icon name="arrow-down" />
+                            </view>
+                        
+                        </van-col>
+                        <van-col span="13">
+                             <van-search value="{{ value }}" placeholder="请输入搜索关键词"custom-class="header-search" 
+                             background="none"
+                             field-class="header-search-field"
+                             input-class="header-search-input"/>
+                        </van-col>
+                        <!-- <van-col span="8" offset="4">span: 8</van-col> -->
+            </van-row> 
+       
 
-           <van-card  wx:for="{{item.productSmallInfos}}" 
-        wx:key="{{item.guid}}"
-         num="" 
-         tag="标签" 
-         origin-price="{{item.original_price}}" 
-         centered="true" currency="¥" 
-         price="{{item.min_price}}" 
-         desc="{{item.description}}" 
-         title="{{item.name}}"  
-         thumb="{{item.image}}"
-         data-guid="{{item.guid}}"
-         bindtap="showDetail"
-         >
-         
-                <view slot="tags" wx:for="{{item.tags}}">{{item}}</view>
-               
-                <view slot="footer">
-                    <van-button  size="mini" round type="danger">购买</van-button>
-                </view>
-            </van-card>
-            
-        </van-tab>
-        
-    </van-tabs>
-</view>
-<!-- category S -->
-<!-- <view class="list"> 
+        <!-- <view class="header-right">
+            <van-search value="{{ value }}" placeholder="请输入搜索关键词" input-class="header-right-input"/>
+        </view> -->
+    </view>
+    <!-- banner S -->
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{imgUrls}}" wx:key="*this">
+            <swiper-item>
+                <image src="{{item.images[0].url}}" class="slide-image" />
+            </swiper-item>
+        </block>
+    </swiper>
+    <!-- banner E -->
+    <!-- category S -->
+    <view class="section">
+        <view class="section__title"></view>
+        <van-tabs active="{{ active }}" bind:change="onChange">
+            <van-tab title="{{item.text}}" wx:for="{{tabs}}" wx:key="{{item.id}}" wx:for-index="i" data-index="{{i}}">
+                <van-card wx:for="{{item.productSmallInfos}}" wx:key="{{item.guid}}" num="" tag="标签" origin-price="{{item.original_price}}" centered="true" currency="¥" price="{{item.min_price}}" desc="{{item.description}}" title="{{item.name}}" thumb="{{item.image}}" data-guid="{{item.guid}}" bindtap="showDetail">
+                    <view slot="tags" wx:for="{{item.tags}}">{{item}}</view>
+                    <view slot="footer">
+                        <van-button size="mini" round type="danger">购买</van-button>
+                    </view>
+                </van-card>
+            </van-tab>
+        </van-tabs>
+    </view>
+    <!-- category S -->
+    <!-- <view class="list"> 
     <EmptyList requesting="{{requesting}}" end="{{end}}" listData="{{listData}}"></EmptyList>
 </view> -->
-<!-- 
-<van-tab title="热销">
+    <!-- <van-tab title="热销">
             <van-card num="2" tag="标签" origin-price="10.00" centered="true" currency="¥" price="2.00" desc="描述信息" title="2018秋冬新款男士休闲时尚军绿飞行夹克秋冬新款男" thumb="https://dsimg.wowjpn.goo.ne.jp/rs/?src=https://wow-j.com/images/ext/allguides/00935/00935_001.jpg&maxw=770&maxh=0&resize=1">
                 <view slot="tags">标签</view>
                 <view slot="footer">
@@ -80,3 +82,4 @@
                 </view>
             </van-card>
         </van-tab> -->
+</view>

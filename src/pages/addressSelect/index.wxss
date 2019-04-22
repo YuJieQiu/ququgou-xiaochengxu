@@ -1,0 +1,22 @@
+/* Page .address{
+    
+}
+  */
+Page .address .address-add{
+    text-align:left;
+}
+Page .address .address-sex-radio{
+  display: inline-block;
+  margin-left: 20px;
+  /* margin-top: 20px;
+  margin-bottom: 20px; */
+}
+Page .address-sex-radio-group{
+  margin-left: 22%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Page .address .address-add .address-add-icon{
+    text-align:left;
+} */

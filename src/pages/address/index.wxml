@@ -1,0 +1,104 @@
+<view class="address">
+  <van-cell-group>
+  <van-field
+    value="{{ username }}"
+    clearable
+    label="姓名"
+    placeholder="请输入收货人姓名"
+    error-message="{{errUsername}}"
+    bind:click-icon="onClickIcon"
+    bind:input="onInputUsername"
+  />
+
+  <van-cell>
+ <view class="address-sex-radio-group">
+      <van-radio-group value="{{ radio }}"   bind:change="onChangeSexRadio">
+      <van-radio checked-color="#07c160" name="1" custom-class="address-sex-radio">先生</van-radio>
+      <van-radio checked-color="#07c160" name="2" custom-class="address-sex-radio">女士</van-radio>
+      </van-radio-group>
+  </view>
+  </van-cell>
+  
+  <van-field
+    value="{{ phone }}"
+    error-message="{{errPhone}}"
+    clearable
+    label="电话"
+    placeholder="请填写收货人电话"
+    bind:click-icon="onClickIcon"
+    bind:input="onInputPhone"
+  />
+
+  <!-- TODO://地址选择 根据当前位置，获取附近的地点 addressSelect 页面 待完成 -->
+  <!-- <van-field
+    value="{{ username }}"
+    clearable
+    label="地址"
+    placeholder="请选择"
+    bind:click-icon="onClickIcon"
+  >
+  请选择asdafa
+  </van-field> -->
+
+  <!-- <view class="van-cell__title van-cell__title" style="max-width:90px;min-width:90px" role="" aria-label=""> 地址 </view>
+   -->
+
+  <van-cell
+    title="地址"
+    title-width="70px"
+    icon="location-o"  
+    on
+    is-link
+  > 
+  <view class="address-region">
+    <picker mode="region" bindchange="onChangeRegion" class="address-region-block" value="{{region}}" custom-item="{{customItem}}">
+      <view class="address-region-value">
+        <block wx:if="{{region.length>0}}" >
+          {{region[0]}}，{{region[1]}}，{{region[2]}}
+        </block>
+         <block wx:else>
+            请选择 
+         </block> 
+      </view>
+    </picker>
+  </view>
+
+  </van-cell>
+ 
+  <van-field
+    value="{{ detailInfo }}"
+    error-message="{{errDetailInfo}}"
+    label="详细地址"
+    type="textarea"
+    placeholder="如楼栋、单元室、门牌号等"
+    autosize
+    border="{{ false }}"
+    bind:input="onInputDetailInfo"
+  />
+
+ <van-switch-cell
+  title="是否默认"
+  checked="{{ defult }}"
+  active-color="#07c160"
+  bind:change="onChangeSwitchDefult"
+/>
+
+</van-cell-group>
+
+  <van-button type="primary" size="large" custom-class="address-save-but" disabled="{{butSaveDisabled}}" bind:click="onButtonSave">
+  保存
+  </van-button>
+</view>
+
+<!--弹出层-->
+<van-popup
+  show="{{ show }}"
+  position="top"
+  overlay="{{ false }}"
+  bind:close="onClosePopup"
+>
+  <view class="popup-show-content">
+    {{errMessage}}
+  </view>
+    
+</van-popup>

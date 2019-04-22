@@ -4,8 +4,9 @@ App({
         //判断机型(适配iphoneX)
         wx.getSystemInfo({
             success: (res) => {
+                console.log(res.model);
                 if (res.model.search('iPhone X') != -1) {
-                    this.globalData.isIphoneX = true
+                    this.globalData.isIPX = true
                 }
             }
         });
@@ -18,7 +19,7 @@ App({
                     wx.getUserInfo({
                         success: res => {
                             let userInfo = res.userInfo;
-
+                            
                             wx.setStorageSync('userInfo', JSON.stringify(userInfo));
 
                             this.login(userInfo);
@@ -34,7 +35,7 @@ App({
     login(userInfo) {
         wx.login({
             success: (res) => {
-                this.httpPost("/wechat/login", {code: res.code, ...userInfo}, true).then((res) => {
+                this.httpPost("wechat/login", {code: res.code, ...userInfo}, true).then((res) => {
                     wx.setStorageSync('token', res.data);
                     wx.reLaunch({
                         url: '/pages/home/index'
@@ -43,9 +44,10 @@ App({
             }
         });
     },
-    mapKey: 'VPPBZ-7WY3Q-ZFJ5E-GCK5J-SDG45-K5BER',
-  baseUrl1: 'http://118.25.17.249:8888/',
-  baseUrl:  'http://118.25.17.249:8888/api/v1/',
+    mapKey: 'DSXBZ-6AY3U-QLAVO-4H6LL-ZOIT3-ALFUW',
+    baseUrl1: 'http://118.25.17.249:8888/',
+    //baseUrl:  'http://118.25.17.249:8888/api/v1/',
+    baseUrl:  'http://127.0.0.1:8888/api/v1/',
     httpBase: function (method, url, data, loading) {
         let _this = this;
         let requestUrl =  this.baseUrl + url;
@@ -113,6 +115,6 @@ App({
     },
     globalData: {
         version: "1.0.0",
-        isIphoneX: false
+        isIPX: false
     },
 })

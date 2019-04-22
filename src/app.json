@@ -1,15 +1,17 @@
 {
   "pages": [
+    "pages/merchant/index",
     "pages/home/index",
-    "pages/productDetail/index",
-    "pages/taskList/index",
-    "pages/taskDetail/index",
-    "pages/dotDetail/index",
-    "pages/rankingList/index",
+    "pages/orderDetail/index",
     "pages/profile/index",
-    "pages/historyTask/index",
+    "pages/orderList/index",
+    "pages/orderSettlement/index",
+    "pages/addressList/index",
+    "pages/address/index",
+    "pages/productDetail/index",
     "pages/authorize/index",
-    "pages/shopCart/index"
+    "pages/shopCart/index",
+    "pages/addressSelect/index"
   ],
   "permission": {
     "scope.userLocation": {
@@ -48,5 +50,6 @@
         "text": "个人"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

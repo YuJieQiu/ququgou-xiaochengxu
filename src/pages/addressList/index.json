@@ -1,0 +1,18 @@
+{
+    "navigationBarTitleText": "区区购",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+      "van-search": "/dist/search/index",
+      "van-cell": "/dist/cell/index",
+      "van-cell-group": "/dist/cell-group/index",
+      "van-radio": "/dist/radio/index",
+      "van-radio-group": "/dist/radio-group/index",
+      "van-icon": "/dist/icon/index",
+      "van-button": "/dist/button/index",
+      "van-swipe-cell": "/dist/swipe-cell/index",
+      "i-swipeout": "/iview/dist/swipeout/index",
+      "i-icon": "/iview/dist/icon/index",
+      "i-row": "/iview/dist/row/index",
+      "i-col": "/iview/dist/col/index"
+    }
+  }

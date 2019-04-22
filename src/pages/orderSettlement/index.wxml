@@ -1,0 +1,76 @@
+<view class="main">
+  <!-- 收货地址 S -->
+  <view class="address">
+    <van-cell wx:if="{{address.id===0}}" clickable="{{true}}" bind:click="" is-link url="/pages/addressList/index">
+      <view class='address-add'>
+        <van-icon name="add-o" custom-style="address-add-icon" />
+        添加新的收货地址
+      </view>
+    </van-cell>
+    <van-cell wx:else custom-class="address-cell" clickable="{{true}}" is-link title="{{address.city}}{{address.region}}{{address.town}}{{address.address}}" label="{{address.username}} {{address.phone}}" icon="location-o" center="{{true}}" size="large" is-link="{{true}}" border="{{true}}" bind:click="onClickAddress">
+      <view slot="title">
+        <!-- <view class="address-cell-text">
+         龙之梦雅士大厦815 address.city address.region address.town address.address
+      </view> -->
+        <!-- <view class="address-cell-label">王先生 1347868768</view> -->
+      </view>
+    </van-cell>
+  </view>
+  <!-- 收货地址 E -->
+  <!-- 商品列表 S -->
+  <view class="goods-info">
+    <block wx:for="{{list}}" wx:for-item="listItem">
+      <van-card custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" centered="{{true}}" lazy-load="{{true}}" 
+    wx:for="{{listItem.skuList}}" wx:for-item="sku" thumb="{{sku.image}}" num="{{sku.number}}" price="{{sku.price}}">
+      <!-- <view slot="thumb" class="goods-list-card-thumb" > 
+              <image  
+            src="http://qiniu.media.q.dfocuspace.cn/static/images/c427dca3e80a4fceb39e415d65f1dea3.jpg"
+            ></image> 
+        </view> -->
+      <view slot="title" class="goods-list-card-title">{{sku.productName}}</view>
+      <view slot="desc" class="goods-list-card-desc">
+        <block wx:for="{{sku.pidNames}}">{{item}}
+          {{sku.vidNames[index]}}</block>
+      </view>
+      <!-- <view slot="footer" class="goods-list-card-footer">footer</view> -->
+    </van-card>
+    </block>
+  </view>
+  <!-- 商品列表 E -->
+  <!-- 优惠卷列表 S -->
+  <!-- TODO: 待完成 -->
+  <!-- 优惠卷列表 E -->
+  <!-- 价格统计 S -->
+  <view></view>
+  <!-- 价格统计 E -->
+  <!-- <view>优惠卷列表</view>
+  <view>价格统计</view>
+  <view>提交按钮</view> -->
+
+  <view class="remark">
+    <van-field
+      value="{{ remark }}"
+      label="订单备注"
+      type="textarea"
+      placeholder="可输入备注,最多100字哟～"
+      maxlength="{{100}}"
+      autosize
+      border="{{ false }}"
+      bind:input=""
+    /> 
+  </view>
+
+
+  
+  <!-- 提交订单 S -->
+  <van-submit-bar price="{{ orderAmount*100 }}" button-text="提交订单"
+  bind:submit="onSubmitOrderCreate" tip="{{ true }}">
+    <!-- <van-tag type="primary">标签</van-tag> -->
+    <view slot="tip">
+      所有商品都包邮
+      <!-- <text>修改地址</text> -->
+    </view>
+  </van-submit-bar>
+  <!-- 提交订单 E -->
+</view>
+<van-toast id="van-toast" />

@@ -1,13 +1,12 @@
 {
   "navigationBarTitleText": "区区购",
   "enablePullDownRefresh": true,
-  "usingComponents": {
-    "EmptyList": "../../components/emptyList/index",
-    "van-row": "/miniprogram_npm/vant-weapp/row/index",
-    "van-col": "/miniprogram_npm/vant-weapp/col/index",
-    "van-tab": "/miniprogram_npm/vant-weapp/tab/index",
-    "van-tabs": "/miniprogram_npm/vant-weapp/tabs/index",
-    "van-card": "/miniprogram_npm/vant-weapp/card/index",
-    "van-button": "/miniprogram_npm/vant-weapp/button/index"
+  "usingComponents": { 
+    "van-row": "/dist/row/index",
+    "van-col": "/dist/col/index",
+    "van-tab": "/dist/tab/index",
+    "van-tabs": "/dist/tabs/index",
+    "van-card": "/dist/card/index",
+    "van-button": "/dist/button/index"
   }
 }

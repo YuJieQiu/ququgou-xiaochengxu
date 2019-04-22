@@ -1,0 +1,20 @@
+
+<view> 地址选择页面 </view>
+
+<van-search
+  label="地址"
+  value="{{ value }}"
+  placeholder="请输入搜索关键词"
+  use-action-slot
+  bind:search="onSearch"
+  
+>
+  
+  <view slot="action" bind:tap="onSearch">搜索</view>
+</van-search>
+
+
+
+
+
+   

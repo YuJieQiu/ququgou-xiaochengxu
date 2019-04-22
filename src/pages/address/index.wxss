@@ -1,0 +1,60 @@
+Page .address{
+    margin-top: 10px;
+}
+ 
+Page .address .address-add{
+    text-align:left;
+}
+Page .address .address-sex-radio{
+  display: inline-block;
+  margin-left: 20px;
+  /* margin-top: 20px;
+  margin-bottom: 20px; */
+}
+Page .address-sex-radio-group{
+  margin-left: 22%;
+   
+  text-align:left;
+}
+
+Page .address-region{
+  display: inline-block;
+  text-align:left;
+  width: 1000%;
+}
+
+Page .address-region-value{
+  display: inline-block;
+  color:#333;
+
+}
+
+Page .address-save-but{
+  width: 95%;
+  margin-top: 50px;
+  margin-left: 10px;
+}
+Page .address-region-block{
+  width: 1000%;
+}
+
+Page .popup-show-content{
+  color: #fff;
+  width: 100%;
+  border-radius: 0;
+  line-height: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 16px;
+  box-sizing: border-box;
+  text-align: left;
+}
+ 
+
+@import "/lib/weui.wxss";
+.picker{
+    padding: 13px;
+    background-color: #FFFFFF;
+}
+/* Page .address .address-add .address-add-icon{
+    text-align:left;
+} */

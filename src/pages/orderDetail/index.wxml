@@ -1,0 +1,90 @@
+<view class="main">
+  <!--订单信息 S-->
+  <view class="order-info">
+     <van-row>
+      <van-col span="10">
+        <van-icon name="pending-payment" /> 待付款
+      </van-col> 
+    </van-row>
+    <van-row>
+      <van-col span="6">
+        订单编号:
+      </van-col> 
+      <van-col span="10">
+        {{order.no}}
+      </van-col> 
+    </van-row>
+    <van-row>
+      <van-col span="6">
+        下单时间:
+      </van-col> 
+      <van-col span="10">
+        {{order.createdTime}}
+      </van-col> 
+    </van-row>
+  </view>
+ 
+  <!--订单信息 E-->
+
+  <!-- 收货地址 S -->
+  <!-- <view class="order-address">
+    <van-cell  custom-class="address-cell" clickable="{{true}}" is-link title="{{address.city address.region address.town address.address}} " label="{{address.username address.phone}}" icon="location-o" center="{{true}}" size="large" border="{{true}}" >
+      <view slot="title">
+       
+      </view>
+    </van-cell>
+  </view> -->
+  <!-- 收货地址 E -->
+  
+  
+  
+  <van-panel use-footer-slot footer-class="o-footer">
+         <view slot="header">
+            <van-cell
+            value="待付款" 
+            icon="shop-o"
+            title="{{listItem.merName}}"
+            is-link 
+            bind:click=""
+          />
+        </view>
+
+        <view>
+           <van-card custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" 
+          centered="{{true}}" 
+          lazy-load="{{true}}" 
+          wx:for="{{products}}" 
+          wx:for-item="product" 
+          thumb="{{product.cover}}" 
+          num="{{product.count}}" 
+          price="{{product.unitPrice}}"> 
+            <view slot="title" class="goods-list-card-title">{{product.name}}</view>
+            <view slot="desc" class="goods-list-card-desc">
+              <block wx:for="{{product.skuInfo}}">{{index}}:{{item}} 
+              </block>
+            </view>
+          </van-card>
+        </view>
+ 
+        <view slot="footer" >
+          <view class="o-footer-money">
+              <!-- 合计: <view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view> -->
+          </view>
+
+          <view class="o-footer-but">
+            <van-button size="small">取消订单</van-button>
+            <van-button size="small" type="danger">立即支付</van-button>
+          </view>
+         
+        </view>
+      </van-panel>
+  
+  <!-- <van-panel title="标题" desc="描述信息" status="状态" use-footer-slot>
+  <view>内容内容内容内容内容内容</view>
+  <view slot="footer">
+    <van-button size="small">按钮</van-button>
+    <van-button size="small" type="danger">按钮</van-button>
+  </view>
+</van-panel> -->
+
+</view> 

@@ -1,4 +1,114 @@
-<view class="headWrap">
+<view class="main">
+    <!-- header S -->
+    <view class="shader ">
+        <view class="havatar">
+            <i-avatar src="{{avatar}}" size="large" shape="circle" i-class="havatar-avatar"></i-avatar>
+        </view>
+        <view class="hnamer">
+            <text class="text-df">{{name}}</text>
+        </view>
+    </view>
+    <!-- 订单信息 S -->
+    <view class="order">
+        <van-cell title="我的订单" custom-class="order-cell" is-link url="/pages/orderList/index"  border="{{false}}"/>
+
+        <van-tabbar active="{{  }}" custom-class="order-tabbar" border="{{false}}"  active-color="#ed1c24" bind:change="onChange" fixed="{{false}}">
+            <van-tabbar-item icon="pending-payment" info="5">待付款</van-tabbar-item>
+            <van-tabbar-item icon="paid" dot>待发货</van-tabbar-item>
+            <van-tabbar-item icon="logistics">待收货</van-tabbar-item>
+            <van-tabbar-item icon="comment-o" >评价</van-tabbar-item>
+            <van-tabbar-item icon="after-sale">售后</van-tabbar-item>
+        </van-tabbar>
+    </view>
+    <!-- 订单信息 E -->
+    <!-- <view class="UCenter-bg">
+        <image src="{{avatar}}" class="png" mode="widthFix"></image>
+        <view class="text-xl">
+            <text class="text-df"></text>
+        </view>
+        <view class="margin-top-sm">
+            <text></text>
+        </view>
+    </view> -->
+    <!-- header E -->
+    <!-- <view class="padding flex text-center text-grey bg-white shadow-warp">
+        <view class="flex flex-sub flex-direction solid-right">
+            <view class="text-xxl text-orange">{{1}}</view>
+            <view class="margin-top-sm">
+                <text class="icon-attentionfill"></text>
+                1
+            </view>
+        </view>
+        <view class="flex flex-sub flex-direction solid-right">
+            <view class="text-xxl text-blue">{{2}}</view>
+            <view class="margin-top-sm">
+                <text class="icon-favorfill"></text>
+                2
+            </view>
+        </view>
+        <view class="flex flex-sub flex-direction">
+            <view class="text-xxl text-green">{{3}}</view>
+            <view class="margin-top-sm">
+                <text class="icon-fork"></text>
+                3
+            </view>
+        </view>
+    </view>
+    <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+        <view class="cu-item arrow">
+            <view class="content" bindtap="CopyLink" data-link="https://github.com/weilanwl/ColorUI">
+                <text class="icon-github text-grey"></text>
+                <text class="text-grey">GitHub</text>
+            </view>
+        </view>
+        <view class="cu-item arrow">
+            <navigator class="content" url="/pages/about/about/about" hover-class="none">
+                <image src="" class="png" mode="aspectFit"></image>
+                <text class="text-grey">关于ColorUI组件库</text>
+            </navigator>
+        </view>
+        <view class="cu-item arrow">
+            <navigator class="content" url="/pages/about/log/log" hover-class="none">
+                <text class="icon-formfill text-green"></text>
+                <text class="text-grey">日志</text>
+            </navigator>
+        </view>
+        <view class="cu-item arrow">
+            <view class="content" bindtap="showQrcode">
+                <text class="icon-appreciatefill text-red"></text>
+                <text class="text-grey">赞赏支持</text>
+            </view>
+        </view>
+        <view class="cu-item arrow">
+            <button class="cu-btn content" open-type="feedback">
+                <text class="icon-writefill text-cyan"></text>
+                <text class="text-grey">意见反馈</text>
+            </button>
+        </view>
+        <view class="cu-item arrow">
+            <navigator class="content" url="/pages/about/test/list" hover-class="none">
+                <text class="icon-creativefill text-orange"></text>
+                <text class="text-grey">Bug测试</text>
+            </navigator>
+        </view>
+    </view>
+    <view class="cu-tabbar-height"></view> -->
+</view>
+<!-- <view class="main">
+    个人中心
+    <view class="head">
+        
+    </view>
+    <view class="avatar">
+        
+    </view>
+
+     <view class="name">
+        
+    </view>
+
+</view> -->
+<!-- <view class="headWrap">
     <image src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIzMDAiIGhlaWdodD0iMTAwIj4KCTxnIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4zKSI+CgkgICAgPHBhdGggZD0iTSAwIDcwIFEgNzUgMzksIDE1MCA3MCBUIDMwMCA3MCBUIDQ1MCA3MCBUIDYwMCA3MCBUIDc1MCA3MCBWIDEwMCBIIDAgViAwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLCAwKSI+PC9wYXRoPgoJPC9nPgoJPGcgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjE1KSI+CgkgICAgPHBhdGggZD0iTSAwIDcwIFEgNzUgMzksIDE1MCA3MCBUIDMwMCA3MCBUIDQ1MCA3MCBUIDYwMCA3MCBUIDc1MCA3MCBWIDEwMCBIIDAgViAwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTAsIDApIj48L3BhdGg+Cgk8L2c+Cjwvc3ZnPiA=" class="headBd" mode="aspectFill"></image>
     <view class="headContent">
         <view class="avatar">
@@ -10,12 +120,11 @@
             {{name}}
         </view>
     </view>
-</view>
-
-<view class="list">
+</view> -->
+<!-- <view class="list">
     <navigator url="/pages/historyTask/index" hover-class="none" class="listItem app-triangle">
         <view class="hd"></view>
-        <view class="bd">我的任务</view>
+        <view class="bd"> </view>
         <view class="ft"></view>
     </navigator>
-</view>
+</view> -->
