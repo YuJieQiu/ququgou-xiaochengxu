@@ -11,7 +11,7 @@
 		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.2",
+	"libVersion": "2.7.4",
 	"appid": "wxa3fd96e049a8eef9",
 	"projectname": "lbs",
 	"simulatorType": "wechat",
