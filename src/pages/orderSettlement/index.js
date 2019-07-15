@@ -53,7 +53,7 @@ Page({
         })
     },
     onSubmitOrderCreate() {
-       
+
         this.orderCreare()
 
     },
@@ -98,11 +98,21 @@ Page({
             products: products
         }
 
+        //TODO:倒计时结束自动关闭
         console.log(data)
         app.httpPost("order/create", data, false).then((res) => {
-            toast.clear(); 
+            toast.clear();
             console.log(res)
-        });
+            // wx.navigateTo({
+            //     url: '/pages/orderList/index'
+            // })
+            wx.redirectTo({
+                url: '/pages/orderList/index'
+            })
+        }).catch((error) => {
+            toast.clear();
+            console.log(error);
+        })
     },
     //优惠卷选择
     //运输方式选择

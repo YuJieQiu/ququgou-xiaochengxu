@@ -118,3 +118,11 @@ App({
         isIPX: false
     },
 })
+
+
+// {
+      //   "pagePath": "pages/merchant/index",
+      //   "iconPath": "assets/images/tab/merchant.png",
+      //   "selectedIconPath": "assets/images/tab/merchantCur.png",
+      //   "text": "商户"
+      // },

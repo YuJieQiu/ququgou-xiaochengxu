@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/merchant/index",
     "pages/home/index",
+    "pages/merchant/index",
     "pages/orderDetail/index",
     "pages/profile/index",
     "pages/orderList/index",
@@ -43,6 +43,7 @@
         "selectedIconPath": "assets/images/tab/shopcartCur.png",
         "text": "购物车"
       },
+
       {
         "pagePath": "pages/profile/index",
         "iconPath": "assets/images/tab/avatar.png",
