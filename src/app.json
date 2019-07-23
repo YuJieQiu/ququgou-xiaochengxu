@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/home/index",
     "pages/merchant/index",
+    "pages/home/index",
     "pages/orderDetail/index",
     "pages/profile/index",
     "pages/orderList/index",
@@ -32,7 +32,7 @@
     "backgroundColor": "#fff",
     "list": [
       {
-        "pagePath": "pages/home/index",
+        "pagePath": "pages/merchant/index",
         "iconPath": "assets/images/tab/home.png",
         "selectedIconPath": "assets/images/tab/homeCur.png",
         "text": "首页"

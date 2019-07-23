@@ -32,7 +32,7 @@ Page .centre .centre-row-phone {
     line-height: 100%; */
 }
 
-Page .tab-card-list { 
+Page .tab-card-list {
   height: 800px;
   margin-top: 10rpx;
 }
@@ -42,16 +42,15 @@ Page .custom-card {
   display: inline-block;
   vertical-align: middle;
   margin-left: 10rpx;
-  margin-right: 10rpx; 
+  margin-right: 10rpx;
   margin-bottom: 10rpx;
   background-color: #fff;
 }
 
-Page .custom-card-centre { 
+Page .custom-card-centre {
 }
 
 Page .custom-card-centre .custom-card__thumb {
-   
 }
 
 Page .custom-card__thumb .custom-card__img {
@@ -59,11 +58,11 @@ Page .custom-card__thumb .custom-card__img {
   height: 385rpx;
 }
 
-Page .custom-card__content { 
+Page .custom-card__content {
 }
 
-Page .custom-card__title { 
-  font-size:14px; 
+Page .custom-card__title {
+  font-size: 14px;
   font-weight: 500;
   word-wrap: break-word;
   line-height: 30rpx;
@@ -71,14 +70,13 @@ Page .custom-card__title {
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  margin-bottom: 8rpm;  
+  margin-bottom: 8rpm;
 }
 
-Page .custom-card__price{
-
+Page .custom-card__price {
 }
 
-Page .custom-card__price .now-price{
+Page .custom-card__price .now-price {
   display: inline-block;
   margin-left: 10rpx;
   color: #e93b3d;
@@ -87,7 +85,7 @@ Page .custom-card__price .now-price{
   font-size: 15px;
 }
 
-Page .custom-card__price .original-price{
+Page .custom-card__price .original-price {
   display: inline-block;
   margin-left: 15rpx;
   font-size: 12px;
@@ -110,5 +108,9 @@ Page .centre-row1-location{
   height: 170rpx;
   line-height: 170rpx;
 } */
+Page .centre-row1-location {
+  width: 100%;
+}
 
-Page .centre-row1-location-cell {}
+Page .centre-row1-location-cell {
+}

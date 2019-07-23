@@ -1,14 +1,8 @@
 <view class="main">
     <view class="swiper">
         <swiper indicator-dots="true" autoplay="true" interval="10000" duration="500" circular="true" class='swiper'>
-            <swiper-item>
-                <image src="http://qiniu.media.q.dfocuspace.cn/static/images/f28239ab6f214ffea1629c08877e4c26.jpg" />
-            </swiper-item>
-            <swiper-item>
-                <image src="http://qiniu.media.q.dfocuspace.cn/static/images/4635710aa0194d60b23414a044009a26.jpg" />
-            </swiper-item>
-            <swiper-item>
-                <image src="http://qiniu.media.q.dfocuspace.cn/static/images/187a2038d6ad4899875b32381fe35fb0.jpg" />
+            <swiper-item wx:for="{{merInfo.resources}}">
+                <image mode="aspectFill" src="{{item.url}}" />
             </swiper-item>
         </swiper>
     </view>
@@ -22,61 +16,46 @@
         </i-row> -->
         <van-row>
             <van-col span="" custom-class="centre-row1-location">
-                <van-cell icon="location-o" title="控江路2068号恺瑞居国际服务公寓1214室(鞍山新村地铁8号线4号口进)" custom-class="centre-row1-location-cell" is-link bind:click="onAddressClick" />
+                <van-cell icon="location-o" title="{{merInfo.address.address}}" custom-class="centre-row1-location-cell" is-link bind:click="onAddressClick" />
             </van-col>
         </van-row>
         <van-row>
             <van-col span="14">
-                <i-cell title="营业时间: 06:00-22:00">
+                <i-cell title="营业时间: {{merInfo.businessTime.startTime}}-{{merInfo.businessTime.endTime}}">
                     <i-icon slot="icon" type="time" />
                 </i-cell>
             </van-col>
             <van-col span="10">
-                <van-cell icon="phone-o" title="12345678" clickable="{{true}}" custom-class="centre-row-phone" bind:click="onPhoneClick" />
+                <van-cell icon="phone-o" title="{{merInfo.phones}}" clickable="{{true}}" custom-class="centre-row-phone" bind:click="onPhoneClick" />
             </van-col>
         </van-row>
         <van-row>
             <van-col span="" custom-class="centre-row-tag">
-                <van-tag custom-class="centre-row-tag-item" size="medium" mark color="#f2826a">
-                    生活百货
-                </van-tag>
-                <van-tag custom-class="centre-row-tag-item" size="medium" mark color="#f2826a">
-                    五金建材
-                </van-tag>
-                <van-tag custom-class="centre-row-tag-item" size="medium" mark color="#f2826a">
-                    灯具
-                </van-tag>
-                <van-tag custom-class="centre-row-tag-item" size="medium" mark color="#f2826a">
-                    水暖
-                </van-tag>
-                <van-tag custom-class="centre-row-tag-item" size="medium" mark color="#f2826a">
-                    安装服务
-                </van-tag>
-                <van-tag custom-class="centre-row-tag-item" size="medium" mark color="#f2826a">
-                    维修服务
+                <van-tag custom-class="centre-row-tag-item" size="medium" mark color="#f2826a" wx:for="{{merInfo.label}}">
+                    {{item.text}}
                 </van-tag>
             </van-col>
         </van-row>
     </view>
     <!-- <view class="ad">广告位置</view> -->
     <view class="tab">
-        <van-tabs active="{{ active }}" bind:change="onChange" sticky="{{true}}" swipeable="{{true}}" 
-        bind:scroll="onTabsScroll">
+        <van-tabs active="{{ active }}" bind:change="onChange" sticky="{{true}}" swipeable="{{true}}" bind:scroll="onTabsScroll">
             <!-- 商品 S -->
             <van-tab title="商品">
-                <scroll-view class="tab-card-list"
-                scroll-y="{{ifScrollY}}">
-                    <view class="custom-card" wx:for="{{tlist}}" data-guid="123" bindtap="onClickToShowDetail">
+                <scroll-view class="tab-card-list" scroll-y="{{ifScrollY}}">
+                    <view class="custom-card" wx:for="{{goods}}" data-guid="{{item.guid}}" bindtap="onClickToShowDetail">
                         <view class="custom-card-centre">
                             <view class="custom-card__thumb">
-                                <image src="{{ thumb }}" mode="aspectFit" lazy-load="true" class="custom-card__img" />
+                                <image src="{{ item.image }}" mode="aspectFill" lazy-load="true" class="custom-card__img" />
                             </view>
                             <view class="custom-card__content">
-                                <view class="custom-card__title">{{ title }}</view>
+                                <view class="custom-card__title">{{ item.name }}</view>
                                 <view class="custom-card__price">
-                                    <view class="now-price">{{ currency }} {{ price }}</view>
-                                    <view class="original-price">
-                                        {{ currency }} {{ originPrice }}
+                                    <view class="now-price">
+                                        {{ currency }} {{ item.currentPrice }}
+                                    </view>
+                                    <view class="original-price" wx:for="{{item.originalPrice>0}}">
+                                        {{ currency }} {{ item.originalPrice }}
                                     </view>
                                 </view>
                             </view>
@@ -88,11 +67,9 @@
                 </scroll-view>
             </van-tab>
             <!-- 商品 E -->
-
-             <!-- 服务 S -->
-            <van-tab title="服务"> 
-                 <scroll-view class="tab-card-list"
-                scroll-y="{{ifScrollY}}">
+            <!-- 服务 S -->
+            <van-tab title="服务">
+                <!-- <scroll-view class="tab-card-list" scroll-y="{{ifScrollY}}">
                     <view class="custom-card" wx:for="{{tlist}}" data-guid="123" bindtap="onClickToShowDetail">
                         <view class="custom-card-centre">
                             <view class="custom-card__thumb">
@@ -109,19 +86,18 @@
                             </view>
                         </view>
                         <view class="van-card__footer">
-                            <!-- 暂不添加 -->
+                         暂不添加 
                         </view>
                     </view>
-                </scroll-view>
+                </scroll-view> -->
             </van-tab>
-             <!-- 服务 E -->
-
+            <!-- 服务 E -->
             <van-tab title="评论">内容 3</van-tab>
         </van-tabs>
     </view>
     <view class="foot">
         <van-goods-action>
-            <van-goods-action-icon icon="chat-o" text="联系商家" open-type="contact" bind:click="onClickIcon" />
+            <!-- <van-goods-action-icon icon="chat-o" text="联系商家" open-type="contact" bind:click="onClickIcon" /> -->
             <!-- <van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon" /> -->
             <!-- <van-goods-action-button text="" type="warning" bind:click="onClickButton" /> -->
             <!-- <van-goods-action-button text="" bind:click="onClickButton" /> -->
