@@ -1,95 +1,137 @@
 <!-- 引入.wxs文件 src为相对路径，module指定当前模块的名称 -->
-<wxs module="wxs" src="index.wxs"></wxs>
+<wxs module="wxs" src="index.wxs" />
 <!-- swiper.wxml -->
-<swiper indicator-dots="true" autoplay="true" interval="10000" duration="500" circular="true" class='swiper'>
-  <block wx:for="{{products.resources}}">
-    <swiper-item>
-      <image mode="aspectFill" wx:if="{{item.url}}" src="{{item.url}}" />
-    </swiper-item>
-  </block>
+<swiper
+ indicator-dots="true"
+ autoplay="true"
+ interval="10000"
+ duration="500"
+ circular="true"
+ class='swiper'
+>
+	<block wx:for="{{ product.resources}}">
+		<swiper-item>
+			<image mode="aspectFill" wx:if="{{item.url}}" src="{{item.url}}" />
+		</swiper-item>
+	</block>
 </swiper>
 <!-- 中间部分 -->
 <view class="product">
-  <view class='matter'>
-    <view class="min_price">
-      <view class='price'>¥{{wxs.priceStr(products.currentPrice)}}</view>
-    </view>
-    <view class="original_price" wx:if="{{products.originalPrice>0}}">
-      {{wxs.priceStr(products.originalPrice)}}
-    </view>
-    <view class="sales">销量{{products.sales}}</view>
-  </view>
-  <view class="title">
-    <view class="title-name">{{products.name}}</view>
-    <view class='title-description'>{{products.description}}</view>
-  </view>
-  <view class='share'>
-    <van-tag color="rgb(255, 68, 68)" round type="primary" size="large">分享</van-tag>
-  </view>
+	<view class='matter'>
+		<view class="min_price">
+			<view class='price'>¥{{wxs.priceStr( product.currentPrice)}}</view>
+		</view>
+		<view class="original_price" wx:if="{{ product.originalPrice>0}}">
+			{{wxs.priceStr( product.originalPrice)}}
+		</view>
+		<view class="sales">销量{{ product.sales}}</view>
+	</view>
+	<view class="title">
+		<view class="title-name">{{ product.name}}</view>
+		<view class='title-description'>{{ product.description}}</view>
+	</view>
+	<view class='share'>
+		<van-tag
+		 color="rgb(255, 68, 68)"
+		 round
+		 type="primary"
+		 size="large"
+		>分享
+		</van-tag>
+	</view>
 </view>
 <view class='attribute'>
-  <van-cell clickable="true" bind:click="onClickButton" is-link>
-    <view class='attribute-title'>
-      数量x {{selectSku.number}}
-      <!-- 规格: <view wx:for="{{selectSku.pidNames}}">{{item}}
-      {{selectSku.vidNames[index]}}</view> -->
-    </view>
-  </van-cell>
+	<van-cell clickable="true" bind:click="onClickButton" is-link>
+		<view class='attribute-title'>
+			数量 {{selectSku.number}}
+			<view wx:for="{{selectSku.anames}}">
+				<!-- {{item}} -->
+				{{selectSku.vnames[index]}}
+			</view>
+		</view>
+	</van-cell>
 </view>
 <!-- <view>物流信息</view> -->
 <van-tabs active="{{ active }}" bind:change="onChange">
-  <van-tab title="商品描述">
-    <view style="margin-bottom:120rpx;">
-      <rich-text nodes="{{products.content}}" style="word-break:break-all;" bindtap="tap"></rich-text>
-    </view>
-  </van-tab>
-  <van-tab title="商品评论">商品评论</van-tab>
+	<van-tab title="商品描述">
+		<view style="margin-bottom:120rpx;">
+			<rich-text nodes="{{product.content}}" style="word-break:break-all;" bindtap="tap" />
+		</view>
+	</van-tab>
+	<van-tab title="商品评论">商品评论</van-tab>
 </van-tabs>
 <!-- 弹出层 规格选择 S -->
-<van-popup show="{{ show }}" position="bottom" overlay="{{ true }}" bind:close="onClose">
-  <view class="sku-pro">
-    <view class="sku-image">
-      <image src="{{products.resources[0].url}}" />
-    </view>
-    <view class="sku-detail">
-      <view class="sku-title">{{products.name}}
-              {{selectSku.name}}</view>
-      <view class="sku-pro-price">
-        <view class="h">
-          ¥ 
-              
-              {{selectSku.price==0?wxs.priceStr(products.minPrice):wxs.priceStr(selectSku.price)}}
-        </view>
-      </view>
-      <view class="sku-pro-stock">库存 {{selectSku.stock==0?"请选择":selectSku.stock}}</view>
-    </view>
-  </view>
-  <view class="sku-info">
-    <view wx:for="{{products.attributes}}" wx:for-item="attributes">
-      <view class="sku-info-h">
-        {{attributes.name}}
-        <view class="sku-info-choose">
-          <van-button custom-class="{{(wxs.arrayExist(selectSku.vids,item.vid))?'item-select':'item'}}" disabled="{{(attrInfo.length>0&&!wxs.arrayExist(attrInfo,item.vid)&&selectSku.vids.length>0&&!wxs.arrayExist(selectSku.vids,item.vid))||(attrInfo.length<=0&&selectSku.vids.length>0&&!wxs.arrayExist(selectSku.vids,item.vid))}}" size="small" bindtap="{{(wxs.arrayExist(selectSku.vids,item.vid))||(attrInfo.length>0&&!wxs.arrayExist(attrInfo,item.vid)&&selectSku.vids.length>0&&!wxs.arrayExist(selectSku.vids,item.vid))||(attrInfo.length<=0&&selectSku.vids.length>0&&!wxs.arrayExist(selectSku.vids,item.vid))?'onCancelSku':'onSelectSku'}}" data-vid="{{item.vid}}" data-vidName="{{item.name}}" data-pid="{{attributes.pid}}" data-pidName="{{attributes.name}}" wx:for="{{attributes.options}}">
-            {{item.name}}
-          </van-button>
-        </view>
-      </view>
-    </view>
-  </view>
-  <view class='select-sku-number'>
-    数量x
-    <van-stepper custom-class="select-sku-number-stepper" disabled="{{selectSku.id===0&&!products.isSingle}}" min="{{1}}" max="{{selectSku.stock}}" value="{{ selectSku.number }}" bind:change="onSkuNumberChange" />
-  </view>
-  <van-button size="large" bindtap="onSkuSelectConfirm" custom-class="sku-confirm-button">
-    确定
-  </van-button>
+<van-popup
+ show="{{ show }}"
+ position="bottom"
+ overlay="{{ true }}"
+ bind:close="onClose"
+>
+	<view class="sku-pro">
+		<view class="sku-image">
+			<image mode="aspectFill" src="{{selectSku.id>0?selectSku.image:product.resources[0].url}}" />
+		</view>
+		<view class="sku-detail">
+			<view class="sku-title">{{ product.name}}
+				{{selectSku.name}}</view>
+			<view class="sku-pro-price">
+				<view class="h">
+					¥
+					{{selectSku.price==0?wxs.priceStr( product.minPrice):wxs.priceStr(selectSku.price)}}
+				</view>
+			</view>
+			<view class="sku-pro-stock">库存 {{selectSku.stock==0?"请选择":selectSku.stock}}</view>
+		</view>
+	</view>
+	<view class="sku-info">
+		<view wx:for="{{ product.attributes}}" wx:for-item="attributes">
+			<view class="sku-info-h">
+				{{attributes.name}}
+				<view class="sku-info-choose">
+					<van-button
+					 custom-class="{{(wxs.arrayExist(selectSku.vids,item.vid))?'item-select':'item'}}"
+					 disabled="{{(attrInfo.length>0&&!wxs.arrayExist(attrInfo,item.vid)&&selectSku.vids.length>0&&!wxs.arrayExist(selectSku.vids,item.vid))||(attrInfo.length<=0&&selectSku.vids.length>0&&!wxs.arrayExist(selectSku.vids,item.vid))}}"
+					 size="small"
+					 bindtap="{{(wxs.arrayExist(selectSku.vids,item.vid))||(attrInfo.length>0&&!wxs.arrayExist(attrInfo,item.vid)&&selectSku.vids.length>0&&!wxs.arrayExist(selectSku.vids,item.vid))||(attrInfo.length<=0&&selectSku.vids.length>0&&!wxs.arrayExist(selectSku.vids,item.vid))?'onCancelSku':'onSelectSku'}}"
+					 data-vid="{{item.vid}}"
+					 data-vname="{{item.name}}"
+					 data-aid="{{attributes.aid}}"
+					 data-aname="{{attributes.name}}"
+					 wx:for="{{attributes.options}}"
+					>
+						{{item.name}}
+					</van-button>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class='select-sku-number'>
+		数量x
+		<van-stepper
+		 custom-class="select-sku-number-stepper"
+		 disabled="{{selectSku.id===0&&! product.isSingle}}"
+		 min="{{1}}"
+		 max="{{selectSku.stock}}"
+		 value="{{ selectSku.number }}"
+		 bind:change="onSkuNumberChange"
+		/>
+	</view>
+	<van-button size="large" bindtap="onSkuSelectConfirm" custom-class="sku-confirm-button">
+		确定
+	</van-button>
 </van-popup>
 <!-- 弹出层 规格选择 E -->
 <!-- GoodsAction S -->
 <van-goods-action>
-  <van-goods-action-icon icon="chat-o" text="客服" open-type="contact" bind:click="onClickIcon" />
-  <van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon" />
-  <van-goods-action-button text="加入购物车" type="warning" bind:click="onClickAddShopCart" />
-  <van-goods-action-button text="立即购买" bind:click="onClickBuyNow" />
+	<van-goods-action-icon
+	 icon="chat-o"
+	 text="客服"
+	 open-type="contact"
+	 bind:click="onClickIcon"
+	/>
+	<van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon" />
+	<van-goods-action-button text="加入购物车" type="warning" bind:click="onClickAddShopCart" />
+	<van-goods-action-button text="立即购买" bind:click="onClickBuyNow" />
 </van-goods-action>
 <!-- GoodsAction D -->
+

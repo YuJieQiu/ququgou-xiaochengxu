@@ -6,7 +6,7 @@ const pageStart = 1
 Page({
   data: {
     tabs: [],
-    products: [],
+    product: {},
     guid: '',
     show: false,
     buyNow: false,
@@ -16,15 +16,13 @@ Page({
       price: 0,
       name: '',
       stock: 0,
-      pids: [],
+      aids: [],
       vids: [],
-      vidNames: [],
-      pidNames: [],
+      vnames: [],
+      anames: [],
       checkAll: false,
-      number: 1,
-      attrNames: []
+      number: 1
     },
-
     attrInfo: []
   },
   changeIndicatorDots(e) {
@@ -48,21 +46,22 @@ Page({
     })
   },
 
-  getProductInfo(guid) {
-    app.httpGet('shop/product/detail?guid=' + guid).then(res => {
+  getProductInfo() {
+    var that = this
+    app.httpGet('shop/product/detail?guid=' + that.data.guid).then(res => {
       wx.stopPullDownRefresh()
       if (res && res.data) {
         let data = res.data
 
-        this.setData({
-          products: data
+        that.setData({
+          product: data
         })
 
         if (data.isSingle) {
           let selectSku = data.skuInfo[0]
           selectSku.image = data.resources[0].url
           selectSku.number = 1
-          this.setData({
+          that.setData({
             selectSku: selectSku
           })
         }
@@ -80,9 +79,6 @@ Page({
   onClose() {
     this.setData({ show: false })
   },
-  onPullDownRefresh() {
-    //this.getData('refresh', pageStart);
-  },
   onSkuSelectConfirm(e) {
     this.setData({ show: false })
     console.log(this.data.buyNow)
@@ -91,112 +87,109 @@ Page({
       this.navigateToOrderSettlement()
     }
   },
+  //选择规格
   onSelectSku(e) {
+    const that = this
+
     if (this.data.selectSku.checkAll) {
       return
     }
 
-    console.log(e)
-    return
-
-    //let sku=e.currentTarget.dataset.sku;
-    let pid = e.currentTarget.dataset.pid
+    let aid = e.currentTarget.dataset.aid
     let vid = e.currentTarget.dataset.vid
-    let pidName = e.currentTarget.dataset.pidname
-    let vidName = e.currentTarget.dataset.vidname
-    // this.data.selectSku.pids.push(pid);
-    // this.data.selectSku.vids.push(vid);
-    let pids = this.data.selectSku.pids
-    let vids = this.data.selectSku.vids
+    let aname = e.currentTarget.dataset.aname
+    let vname = e.currentTarget.dataset.vname
 
-    let pidNames = this.data.selectSku.pidNames
-    let vidNames = this.data.selectSku.vidNames
+    let aids = that.data.selectSku.aids
+    let vids = that.data.selectSku.vids
+    let anames = that.data.selectSku.anames
+    let vnames = that.data.selectSku.vnames
 
-    pidNames.push(pidName)
-    vidNames.push(vidName)
-
-    pids.push(pid)
+    anames.push(aname)
+    vnames.push(vname)
+    aids.push(aid)
     vids.push(vid)
 
-    this.setData({
-      'selectSku.pids': pids,
+    that.setData({
+      'selectSku.aids': aids,
       'selectSku.vids': vids,
-      'selectSku.pidNames': pidNames,
-      'selectSku.vidNames': vidNames
+      'selectSku.anames': anames,
+      'selectSku.vnames': vnames
     })
+    let _new_vids = []
+    for (var sku of this.data.product.skuInfo) {
+      let _exist_aid = false
+      let _exist_vid = false
 
-    // let aaa={
-    //     2:4,
-    //     5:6,
-    //     1:3
-    // };
-    // console.log(aaa.length);
-    // let arr=Object.keys(aaa)
-    // console.log(arr)
-
-    // console.log( this.data.selectSku.pids)
-    //console.log(this.data.vidss.indexOf(-1))
-
-    let newVids = []
-    for (var sku of this.data.products.skuInfo) {
-      let existPid = false
-      let existVid = false
-
-      for (var key of Object.keys(sku.propPath)) {
-        if (key == pid && sku.propPath[key] == vid) {
-          existPid = true
-          existVid = true
+      for (var _att_value of sku.attributeInfo) {
+        if (_att_value.aid == aid && _att_value.vid == vid) {
+          _exist_aid = true
+          _exist_vid = true
           break
         }
       }
 
-      if (existPid && existVid) {
-        for (var key of Object.keys(sku.propPath)) {
-          if (this.data.selectSku.pids.indexOf(parseInt(key)) === -1) {
-            newVids.push(parseInt(sku.propPath[key]))
+      if (_exist_aid && _exist_vid) {
+        for (var _att_value of sku.attributeInfo) {
+          if (
+            that.data.selectSku.aids.indexOf(parseInt(_att_value.aid)) === -1
+          ) {
+            _new_vids.push(parseInt(_att_value.vid))
           }
         }
       }
 
-      if (pids.length === Object.keys(sku.propPath).length) {
-        this.setData({
+      if (aids.length === sku.attributeInfo.length) {
+        that.setData({
           'selectSku.checkAll': true
         })
       }
     }
 
-    this.setData({
-      attrInfo: newVids
+    that.setData({
+      attrInfo: _new_vids
     })
 
-    if (this.data.selectSku.checkAll == true) {
-      let attrNames = ''
-      for (var sku of this.data.products.skuInfo) {
-        let exist = true
-        for (var i of this.data.selectSku.pids) {
-          if (Object.keys(sku.propPath).indexOf(i.toString()) === -1) {
-            exist = false
-            break
+    //已选择全部sku
+    if (that.data.selectSku.checkAll == true) {
+      for (var sku of that.data.product.skuInfo) {
+        let exist = false
+
+        //是否存在 aid
+        for (var i of that.data.selectSku.aids) {
+          for (var av of sku.attributeInfo) {
+            if (av.aid == i) {
+              exist = true
+              break
+            }
           }
         }
 
         if (!exist) {
           continue
         }
+
+        exist = false
+
+        //是否存在 vid
         for (var i of this.data.selectSku.vids) {
-          if (Object.values(sku.propPath).indexOf(i) === -1) {
-            exist = false
-            break
+          for (var av of sku.attributeInfo) {
+            if (av.vid == i) {
+              exist = true
+              break
+            }
           }
         }
-
         if (!exist) {
           continue
         }
-
-        this.setData({
-          'selectSku.id': sku.skuId,
-          'selectSku.image': sku.skuImage !== null ? sku.skuImage[0].url : '',
+        console.log(sku)
+        that.setData({
+          'selectSku.id': sku.id,
+          'selectSku.image':
+            sku.skuImage !== null
+              ? sku.skuImage.url
+              : that.data.product.resources[0].url,
           'selectSku.price': sku.price,
           'selectSku.name': sku.skuName,
           'selectSku.stock': sku.stock,
@@ -204,100 +197,39 @@ Page({
         })
         break
       }
-      console.log(this.data.selectSku)
+      console.log(that.data.selectSku)
     }
-
-    // console.log(this.data.attrInfo);
-    // console.log(this.data.selectSku.checkAll);
-    // console.log(this.data.selectSku.pids);
-    //console.log(newVids)
-    // for(var p of this.data.selectSku.pids){
-    //     if(key!=p){
-    //         console.log("p:"+p)
-    //         console.log("p1:"+key)
-    //         console.log("sku:"+sku.propPath[key])
-    //         //newVids.push(sku.propPath[key])
-    //     }
-    // }
-    // console.log(this.data.selectSku.pids)
-    // console.log(this.data.selectSku.pids.indexOf(1))
-    // let aa=this.data.attrInfo;
-    // aa.push(...vids)
-    // this.setData({
-    //     attrInfo:aa
-    // });
-    // for(var value of Object.values(sku.propPath)){
-    //     if(value==vid){
-    //         existVid=true;
-    //         continue;
-    //     }
-    // }
-
-    // if(existPid&&existVid){
-    //     console.log(vids)
-    //     // let aa=this.data.attrInfo;
-    //     // aa.push(...vids)
-    //     // this.setData({
-    //     //     attrInfo:aa
-    //     // });
-    //     // console.log(this.data.attrInfo)
-    // }
-
-    // for(var value of Object.values(sku.propPath)){
-    //     if(value==vid){
-    //         existVid=true;
-    //     }
-    //     for(var i of this.data.selectSku.pids){
-    //         if(value!=sku.propPath[i]){
-    //             vids.push(value)
-    //         }
-    //     }
-    // }
-    // console.log(existVid);
-    // console.log(existPid);
-
-    // console.log(value.keys(value));
-    // console.log(value.values(value));
-    // console.log(sku);
-    // console.log(Object.keys(sku.propPath));
-    // console.log(Object.values(sku.propPath));
-    // this.setData({ selectSku:{
-    //     id:sku.id,
-    //     image:sku.image[0].url,
-    //     price:sku.price,
-    // }});
-    //console.log(e.currentTarget.dataset.sku)
-    //console.log(this.createSelectorQuery())
   },
+  //取消选择规格
   onCancelSku(e) {
-    let pid = e.currentTarget.dataset.pid
+    let aid = e.currentTarget.dataset.aid
     let vid = e.currentTarget.dataset.vid
 
-    let pids = this.data.selectSku.pids
+    let aids = this.data.selectSku.aids
     let vids = this.data.selectSku.vids
 
-    let pidName = e.currentTarget.dataset.pidname
-    let vidName = e.currentTarget.dataset.vidname
+    let aname = e.currentTarget.dataset.aname
+    let vname = e.currentTarget.dataset.vname
 
-    let pidNames = this.data.selectSku.pidNames
-    let vidNames = this.data.selectSku.vidNames
+    let anames = this.data.selectSku.anames
+    let vnames = this.data.selectSku.vnames
 
     if (this.data.selectSku.vids.indexOf(vid) === -1) {
       return
     }
 
-    pids.splice(pids.findIndex(item => item === pid), 1)
+    aids.splice(aids.findIndex(item => item === aid), 1)
     vids.splice(vids.findIndex(item => item === vid), 1)
 
-    pidNames.splice(pidNames.findIndex(item => item === pidName), 1)
-    vidNames.splice(vidNames.findIndex(item => item === vidName), 1)
+    anames.splice(anames.findIndex(item => item === aname), 1)
+    vnames.splice(vnames.findIndex(item => item === vname), 1)
 
     this.setData({
       selectSku: {
-        pids: pids,
+        aids: aids,
         vids: vids,
-        pidNames: pidNames,
-        vidNames: vidNames,
+        anames: anames,
+        vnames: vnames,
         checkAll: false,
         name: '',
         id: 0,
@@ -307,32 +239,45 @@ Page({
       }
     })
 
-    if (this.data.selectSku.pids.length <= 0) {
+    if (this.data.selectSku.aids.length <= 0) {
       this.setData({
         attrInfo: []
       })
       return
     }
 
-    let newVids = []
-    for (var sku of this.data.products.skuInfo) {
-      let existPid = false
-      let existVid = false
+    let _new_vids = []
+    for (var sku of this.data.product.skuInfo) {
+      let _exist_aid = false
+      let _exist_vid = false
 
-      for (var key of Object.keys(sku.propPath)) {
-        if (key == pid && sku.propPath[key] == vid) {
-          existPid = true
-          existVid = true
+      for (var av of sku.attributeInfo) {
+        if (av.aid == aid && av.vid == vid) {
+          _exist_aid = true
+          _exist_vid = true
           break
         }
       }
+      // for (var key of Object.keys(sku.propPath)) {
+      //   if (key == pid && sku.propPath[key] == vid) {
+      //     existPid = true
+      //     existVid = true
+      //     break
+      //   }
+      // }
 
-      if (existPid && existVid) {
-        for (var key of Object.keys(sku.propPath)) {
-          if (this.data.selectSku.pids.indexOf(parseInt(key)) === -1) {
-            newVids.push(parseInt(sku.propPath[key]))
+      if (_exist_vid && _exist_aid) {
+        for (var av of sku.attributeInfo) {
+          if (this.data.selectSku.aids.indexOf(parseInt(av.aid)) === -1) {
+            _new_vids.push(parseInt(av.aid))
           }
         }
+
+        // for (var key of Object.keys(sku.propPath)) {
+        //   if (this.data.selectSku.pids.indexOf(parseInt(key)) === -1) {
+        //     newVids.push(parseInt(sku.propPath[key]))
+        //   }
+        // }
       }
     }
 
@@ -367,21 +312,22 @@ Page({
   },
   //上拉刷新
   onPullDownRefresh() {
-    this.getProductInfo(options.guid)
+    this.getProductInfo()
   },
   onLoad(options) {
-    this.data.guid = options.guid
-    this.getProductInfo(options.guid)
-    //    console.log(options.guid)
+    this.setData({
+      guid: options.guid
+    })
+    this.getProductInfo()
   },
   navigateToOrderSettlement: function() {
     //到结算页面
     let data = {
-      merId: this.data.products.merId,
+      merId: this.data.product.merId,
       skuList: [
         {
-          productNo: this.data.products.guid,
-          productName: this.data.products.name,
+          productNo: this.data.product.guid,
+          productName: this.data.product.name,
           id: this.data.selectSku.id,
           name: this.data.selectSku.name,
           price: this.data.selectSku.price,
