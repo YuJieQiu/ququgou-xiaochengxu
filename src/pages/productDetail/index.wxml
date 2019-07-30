@@ -55,7 +55,12 @@
 <van-tabs active="{{ active }}" bind:change="onChange">
 	<van-tab title="商品描述">
 		<view style="margin-bottom:120rpx;">
-			<rich-text nodes="{{product.content}}" style="word-break:break-all;" bindtap="tap" />
+			<rich-text
+			 class="ql-container"
+			 nodes="{{product.content}}"
+			 style="word-break:break-all;"
+			 bindtap="tap"
+			/>
 		</view>
 	</van-tab>
 	<van-tab title="商品评论">商品评论</van-tab>

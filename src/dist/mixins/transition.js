@@ -22,68 +22,81 @@ export const transition = function (showDefaultValue) {
             },
             name: {
                 type: String,
-                value: 'fade',
-                observer: 'updateClasses'
+                value: 'fade'
             }
         },
         data: {
             type: '',
             inited: false,
-            display: false,
-            classNames: getClassNames('fade')
+            display: false
         },
         attached() {
             if (this.data.show) {
-                this.show();
+                this.enter();
             }
         },
         methods: {
             observeShow(value) {
                 if (value) {
-                    this.show();
+                    this.enter();
                 }
                 else {
                     this.leave();
                 }
             },
-            updateClasses(name) {
-                this.set({
-                    classNames: getClassNames(name)
-                });
-            },
-            show() {
-                const { classNames, duration } = this.data;
+            enter() {
+                const { duration, name } = this.data;
+                const classNames = getClassNames(name);
                 const currentDuration = isObj(duration) ? duration.leave : duration;
+                this.status = 'enter';
                 Promise.resolve()
                     .then(nextTick)
-                    .then(() => this.set({
-                    inited: true,
-                    display: true,
-                    classes: classNames.enter,
-                    currentDuration
-                }))
+                    .then(() => {
+                    this.checkStatus('enter');
+                    this.set({
+                        inited: true,
+                        display: true,
+                        classes: classNames.enter,
+                        currentDuration
+                    });
+                })
                     .then(nextTick)
-                    .then(() => this.set({
-                    classes: classNames['enter-to']
-                }));
+                    .then(() => {
+                    this.checkStatus('enter');
+                    this.set({
+                        classes: classNames['enter-to']
+                    });
+                })
+                    .catch(() => { });
             },
             leave() {
-                const { classNames, duration } = this.data;
+                const { duration, name } = this.data;
+                const classNames = getClassNames(name);
                 const currentDuration = isObj(duration) ? duration.leave : duration;
-                if (+currentDuration === 0) {
-                    this.onTransitionEnd();
-                    return;
-                }
+                this.status = 'leave';
                 Promise.resolve()
                     .then(nextTick)
-                    .then(() => this.set({
-                    classes: classNames.leave,
-                    currentDuration
-                }))
+                    .then(() => {
+                    this.checkStatus('leave');
+                    this.set({
+                        classes: classNames.leave,
+                        currentDuration
+                    });
+                })
+                    .then(() => setTimeout(() => this.onTransitionEnd(), currentDuration))
                     .then(nextTick)
-                    .then(() => this.set({
-                    classes: classNames['leave-to']
-                }));
+                    .then(() => {
+                    this.checkStatus('leave');
+                    this.set({
+                        classes: classNames['leave-to']
+                    });
+                })
+                    .catch(() => { });
+            },
+            checkStatus(status) {
+                if (status !== this.status) {
+                    throw new Error(`incongruent status: ${status}`);
+                }
             },
             onTransitionEnd() {
                 if (!this.data.show) {

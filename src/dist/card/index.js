@@ -8,7 +8,6 @@ VantComponent({
         'title-class',
         'price-class',
         'origin-price-class',
-        'view-thumb-class',
     ],
     mixins: [link],
     props: {

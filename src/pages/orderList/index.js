@@ -6,7 +6,7 @@ Page({
   data: {
     list: [],
     page: 1, //默认第一页开始
-    limit: 3, //默认每页10条
+    limit: 10, //默认每页10条
     all: true,
     status: 0,
     pageEnd: false
