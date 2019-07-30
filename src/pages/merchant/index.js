@@ -11,7 +11,7 @@ Page({
     tabs: [],
     isIPX: app.globalData.isIPX,
     currency: '¥',
-    ifScrollY: false,
+    //ifScrollY: false,
     page: {
       page: 1, //默认第一页开始
       limit: 10, //默认每页10条
@@ -45,17 +45,19 @@ Page({
       scale: 18
     })
   },
-  onTabsScroll(e) {
-    if (e.detail.isFixed == true) {
-      this.setData({
-        ifScrollY: true
-      })
-    } else {
-      this.setData({
-        ifScrollY: false
-      })
-    }
-  },
+  // onTabsScroll(e) {
+  //   console.log('Scroll')
+  //   // console.log(e.detail)
+  //   if (e.detail.isFixed == true) {
+  //     this.setData({
+  //       ifScrollY: true
+  //     })
+  //   } else {
+  //     // this.setData({
+  //     //   ifScrollY: false
+  //     // })
+  //   }
+  // },
   onClickToShowDetail(e) {
     console.log(e.currentTarget.dataset.guid)
     let guid = e.currentTarget.dataset.guid
@@ -117,13 +119,14 @@ Page({
       })
   },
   onReachBottom() {
-    if (!this.data.page.pageEnd && this.data.ifScrollY == true) {
+    console.log('Bottom')
+    if (!this.data.page.pageEnd) {
       this.setData({ 'page.page': this.data.page.page + 1 })
       this.getMerProductList()
     }
   },
   onPullDownRefresh() {
-    this.setData({ 'page.page': 1, ifScrollY: false })
+    this.setData({ 'page.page': 1, 'page.pageEnd': false })
     this.getMerInfo()
     this.getMerProductList()
   },
