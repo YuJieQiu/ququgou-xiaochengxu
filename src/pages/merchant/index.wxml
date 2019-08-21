@@ -94,9 +94,7 @@
 							<view class="custom-card__content">
 								<view class="custom-card__title">{{ item.name }}</view>
 								<view class="custom-card__price">
-									<view class="now-price">
-										{{ currency }} {{ item.currentPrice }}
-									</view>
+									<view class="now-price">{{ currency }} {{ item.currentPrice }}</view>
 									<view class="original-price" wx:for="{{item.originalPrice>0}}">
 										{{ currency }} {{ item.originalPrice }}
 									</view>

@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 3,
 			"list": [
 				{
 					"id": 0,
@@ -54,6 +54,13 @@
 					"name": "个人中心",
 					"pathName": "pages/profile/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "orderList",
+					"pathName": "pages/orderList/index",
+					"query": "guid=0a7a296cb6ff4f6795cb7fb4bde83344",
 					"scene": null
 				}
 			]

@@ -20,7 +20,9 @@
               <view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view>
             </view>
             <view class="o-footer-but">
-              <van-button size="small">取消订单</van-button>
+              <van-button size="small" data-no="{{listItem.no}}" bindtap="onOrderCancel">
+                取消订单
+              </van-button>
               <van-button size="small" type="danger">立即支付</van-button>
             </view>
           </view>
@@ -152,4 +154,5 @@
       </view>
     </van-tab>
   </van-tabs>
+  <van-dialog id="van-dialog" />
 </view>

@@ -1,30 +1,46 @@
 <view class="main">
-  <view class="content">
-    <van-radio-group value="{{ selectId }}">
-      <i-swipeout i-class="i-swipeout-demo-item" actions="{{actions}}" wx:for="{{list}}">
-        <view slot="content" operate-width="83" i-class="i-swipeout-demo-item-slot">
-          <van-cell custom-class="address-cell" border="{{false}}" data-id="{{item.id}}">
-            <view slot="title">
-              <view class="address-cell-radio" data-index="{{index}}" data-id="{{item.id}}" bindtap="onRadioClick">
-                <van-radio checked-color="#07c160" name="{{item.id}}" custom-class="address-cell-radio" data-id="{{item.id}}" />
-              </view>
-              <view class="address-cell-text">
-                {{item.city}}{{item.region}} {{item.town}} {{item.address}}
-              </view>
-              <view class="address-cell-label">{{item.username}}   {{item.phone}}</view>
-            </view>
-            <view>
-              <van-icon name="edit" size="25px" bind:click="onEditClick" />
-            </view>
-          </van-cell>
-        </view>
-      </i-swipeout>
-    </van-radio-group>
-  </view>
-  
-  <view class="add-button">
-    <van-button type="primary" size="large" custom-class="address-save-but" bind:click="onAddClick">新增地址</van-button>
-  </view>
+	<view class="content">
+		<van-radio-group value="{{ selectId }}">
+			<i-swipeout i-class="i-swipeout-demo-item" actions="{{actions}}" wx:for="{{list}}">
+				<view slot="content" operate-width="83" i-class="i-swipeout-demo-item-slot">
+					<van-cell custom-class="address-cell" border="{{false}}" data-id="{{item.id}}">
+						<view slot="title">
+							<view
+							 class="address-cell-radio"
+							 data-index="{{index}}"
+							 data-id="{{item.id}}"
+							 bindtap="onRadioClick"
+							>
+								<van-radio
+								 checked-color="#07c160"
+								 name="{{item.id}}"
+								 custom-class="address-cell-radio"
+								 data-id="{{item.id}}"
+								/>
+							</view>
+							<view class="address-cell-text">
+								{{item.city}}{{item.region}} {{item.town}} {{item.address}}
+							</view>
+							<view class="address-cell-label">{{item.username}} {{item.phone}}</view>
+						</view>
+						<view>
+							<van-icon name="edit" size="25px" bind:click="onEditClick" />
+						</view>
+					</van-cell>
+				</view>
+			</i-swipeout>
+		</van-radio-group>
+	</view>
+	<view class="add-button">
+		<van-button
+		 type="primary"
+		 size="large"
+		 custom-class="address-save-but"
+		 bind:click="onAddClick"
+		>
+			新增地址
+		</van-button>
+	</view>
 </view>
 <!-- <van-cell  label="描述信息" custom-class="address-cell"    data-name="1" bind:click="onClick">
             <view slot="title">
@@ -100,3 +116,4 @@
       单元格
       </view>
       <van-tag type="danger">标签</van-tag> -->
+
