@@ -5,14 +5,14 @@
 	 swipeable="{{true}}"
 	 data-all="{{true}}"
 	 data-status="1"
-	 bind:click="onClickTab"
+	 bind:change="onClickTab"
 	>
 		<van-tab title="全部" index="0">
 			<view class="order-list" wx:for="{{list}}" wx:for-item="listItem">
 				<van-panel use-footer-slot footer-class="o-footer">
 					<view slot="header">
 						<van-cell
-						 value="待付款"
+						 value="{{listItem.statusText}}"
 						 icon="shop-o"
 						 title="{{listItem.merName}}"
 						 is-link
@@ -45,10 +45,17 @@
 							<view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view>
 						</view>
 						<view class="o-footer-but">
-							<van-button size="small" data-no="{{listItem.no}}" bindtap="onOrderCancel">
+							<van-button
+							 size="small"
+							 data-no="{{listItem.no}}"
+							 bindtap="onOrderCancel"
+							 wx:if="{{listItem.status=='0'}}"
+							>
 								取消订单
 							</van-button>
-							<van-button size="small" type="danger">立即支付</van-button>
+							<van-button size="small" type="danger" wx:if="{{listItem.status=='0'}}">
+								立即支付
+							</van-button>
 						</view>
 					</view>
 				</van-panel>
@@ -75,7 +82,7 @@
 				<van-panel use-footer-slot footer-class="o-footer">
 					<view slot="header">
 						<van-cell
-						 value="待付款"
+						 value="{{listItem.statusText}}"
 						 icon="shop-o"
 						 title="{{listItem.merName}}"
 						 is-link
@@ -109,8 +116,17 @@
 							<view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view>
 						</view>
 						<view class="o-footer-but">
-							<van-button size="small">取消订单</van-button>
-							<van-button size="small" type="danger">立即支付</van-button>
+							<van-button
+							 size="small"
+							 data-no="{{listItem.no}}"
+							 bindtap="onOrderCancel"
+							 wx:if="{{listItem.status=='0'}}"
+							>
+								取消订单
+							</van-button>
+							<van-button size="small" type="danger" wx:if="{{listItem.status=='0'}}">
+								立即支付
+							</van-button>
 						</view>
 					</view>
 				</van-panel>
@@ -121,7 +137,7 @@
 				<van-panel use-footer-slot footer-class="o-footer">
 					<view slot="header">
 						<van-cell
-						 value="待付款"
+						 value="{{listItem.statusText}}"
 						 icon="shop-o"
 						 title="{{listItem.merName}}"
 						 is-link
@@ -154,8 +170,17 @@
 							<view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view>
 						</view>
 						<view class="o-footer-but">
-							<van-button size="small">取消订单</van-button>
-							<van-button size="small" type="danger">立即支付</van-button>
+							<van-button
+							 size="small"
+							 data-no="{{listItem.no}}"
+							 bindtap="onOrderCancel"
+							 wx:if="{{listItem.status=='0'}}"
+							>
+								取消订单
+							</van-button>
+							<van-button size="small" type="danger" wx:if="{{listItem.status=='0'}}">
+								立即支付
+							</van-button>
 						</view>
 					</view>
 				</van-panel>
@@ -166,7 +191,7 @@
 				<van-panel use-footer-slot footer-class="o-footer">
 					<view slot="header">
 						<van-cell
-						 value="待付款"
+						 value="{{listItem.statusText}}"
 						 icon="shop-o"
 						 title="{{listItem.merName}}"
 						 is-link
@@ -199,8 +224,17 @@
 							<view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view>
 						</view>
 						<view class="o-footer-but">
-							<van-button size="small">取消订单</van-button>
-							<van-button size="small" type="danger">立即支付</van-button>
+							<van-button
+							 size="small"
+							 data-no="{{listItem.no}}"
+							 bindtap="onOrderCancel"
+							 wx:if="{{listItem.status=='0'}}"
+							>
+								取消订单
+							</van-button>
+							<van-button size="small" type="danger" wx:if="{{listItem.status=='0'}}">
+								立即支付
+							</van-button>
 						</view>
 					</view>
 				</van-panel>
@@ -211,7 +245,7 @@
 				<van-panel use-footer-slot footer-class="o-footer">
 					<view slot="header">
 						<van-cell
-						 value="待付款"
+						 value="{{listItem.statusText}}"
 						 icon="shop-o"
 						 title="{{listItem.merName}}"
 						 is-link
@@ -244,8 +278,17 @@
 							<view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view>
 						</view>
 						<view class="o-footer-but">
-							<van-button size="small">取消订单</van-button>
-							<van-button size="small" type="danger">立即支付</van-button>
+							<van-button
+							 size="small"
+							 data-no="{{listItem.no}}"
+							 bindtap="onOrderCancel"
+							 wx:if="{{listItem.status=='0'}}"
+							>
+								取消订单
+							</van-button>
+							<van-button size="small" type="danger" wx:if="{{listItem.status=='0'}}">
+								立即支付
+							</van-button>
 						</view>
 					</view>
 				</van-panel>
