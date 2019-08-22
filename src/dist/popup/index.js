@@ -1,6 +1,6 @@
 import { VantComponent } from '../common/component';
 import { transition } from '../mixins/transition';
-import { iphonex } from '../mixins/iphonex';
+import { safeArea } from '../mixins/safe-area';
 VantComponent({
     classes: [
         'enter-class',
@@ -10,7 +10,7 @@ VantComponent({
         'leave-active-class',
         'leave-to-class'
     ],
-    mixins: [transition(false), iphonex],
+    mixins: [transition(false), safeArea()],
     props: {
         transition: {
             type: String,
@@ -48,10 +48,13 @@ VantComponent({
         },
         observeClass() {
             const { transition, position } = this.data;
-            this.updateClasses(transition || position);
+            const updateData = {
+                name: transition || position
+            };
             if (transition === 'none') {
-                this.set({ duration: 0 });
+                updateData.duration = 0;
             }
+            this.set(updateData);
         }
     }
 });

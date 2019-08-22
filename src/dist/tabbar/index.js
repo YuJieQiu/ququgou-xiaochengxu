@@ -1,27 +1,38 @@
 import { VantComponent } from '../common/component';
-import { iphonex } from '../mixins/iphonex';
+import { safeArea } from '../mixins/safe-area';
 VantComponent({
-    mixins: [iphonex],
+    mixins: [safeArea()],
     relation: {
         name: 'tabbar-item',
         type: 'descendant',
         linked(target) {
-            this.data.items.push(target);
-            setTimeout(() => {
-                this.setActiveItem();
-            });
+            this.children.push(target);
+            target.parent = this;
+            target.updateFromParent();
         },
         unlinked(target) {
-            this.data.items = this.data.items.filter(item => item !== target);
-            setTimeout(() => {
-                this.setActiveItem();
-            });
+            this.children = this.children.filter((item) => item !== target);
+            this.updateChildren();
         }
     },
     props: {
-        active: Number,
-        activeColor: String,
+        active: {
+            type: [Number, String],
+            observer: 'updateChildren'
+        },
+        activeColor: {
+            type: String,
+            observer: 'updateChildren'
+        },
+        inactiveColor: {
+            type: String,
+            observer: 'updateChildren'
+        },
         fixed: {
+            type: Boolean,
+            value: true
+        },
+        border: {
             type: Boolean,
             value: true
         },
@@ -30,33 +41,22 @@ VantComponent({
             value: 1
         }
     },
-    data: {
-        items: []
-    },
-    watch: {
-        active(active) {
-            this.currentActive = active;
-            this.setActiveItem();
-        }
-    },
-    created() {
-        this.currentActive = this.data.active;
+    beforeCreate() {
+        this.children = [];
     },
     methods: {
-        setActiveItem() {
-            this.data.items.forEach((item, index) => {
-                item.setActive({
-                    active: index === this.currentActive,
-                    color: this.data.activeColor
-                });
-            });
+        updateChildren() {
+            const { children } = this;
+            if (!Array.isArray(children) || !children.length) {
+                return Promise.resolve();
+            }
+            return Promise.all(children.map((child) => child.updateFromParent()));
         },
         onChange(child) {
-            const active = this.data.items.indexOf(child);
-            if (active !== this.currentActive && active !== -1) {
+            const index = this.children.indexOf(child);
+            const active = child.data.name || index;
+            if (active !== this.data.active) {
                 this.$emit('change', active);
-                this.currentActive = active;
-                this.setActiveItem();
             }
         }
     }

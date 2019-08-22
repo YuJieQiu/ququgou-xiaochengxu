@@ -21,9 +21,10 @@
       </i-swipeout>
     </van-radio-group>
   </view>
-  
   <view class="add-button">
-    <van-button type="danger" size="large" custom-class="address-save-but" bind:click="onAddClick">新增地址</van-button>
+    <van-button type="danger" size="large" custom-class="address-save-but" bind:click="onAddClick">
+      新增地址
+    </van-button>
   </view>
 </view>
 <!-- <van-cell  label="描述信息" custom-class="address-cell"    data-name="1" bind:click="onClick">

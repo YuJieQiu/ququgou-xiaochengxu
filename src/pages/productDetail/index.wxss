@@ -7,7 +7,9 @@ Page .list .listItem .bd .name {
   align-items: center;
 }
 
-Page .list .listItem, Page .list .listItem .bd .groupInfo, Page .list .listItem .bd .dotInfo {
+Page .list .listItem,
+Page .list .listItem .bd .groupInfo,
+Page .list .listItem .bd .dotInfo {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -18,15 +20,16 @@ Page {
 }
 
 Page swiper {
-  height: 482rpx;
+  height: 582rpx;
 }
 
 Page swiper image {
   width: 100%;
+  height: 582rpx;
 }
 
 Page .product {
-  margin-top: 20rpx;
+  padding-top: 20rpx;
   margin-bottom: 20rpx;
   background: #ffffff;
   padding-bottom: 20px;
@@ -72,8 +75,8 @@ Page .product .matter .sales {
 }
 
 Page .product .title {
-  padding: 3px 10px 0!important;
-  background-color: #FFF;
+  padding: 3px 10px 0 !important;
+  background-color: #fff;
   background: #ffffff;
   margin-top: 5px;
   width: 80%;
@@ -97,7 +100,7 @@ Page .product .title .title-description {
 }
 
 Page .product .title .text {
-  color: #051B28;
+  color: #051b28;
   line-height: 20px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -222,4 +225,7 @@ Page .attribute .attribute-title {
 
 Page .attribute .attribute-title view {
   display: inline-block;
+}
+Page .ql-container {
+  height: 100%;
 }

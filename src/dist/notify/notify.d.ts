@@ -1,7 +1,12 @@
-declare type NotifyOptions = {
-    selector?: string;
+interface NotifyOptions {
+    text: string;
+    color?: string;
+    backgroundColor?: string;
     duration?: number;
+    selector?: string;
     context?: any;
-};
-export default function Notify(options?: NotifyOptions): void;
+    safeAreaInsetTop?: boolean;
+    zIndex?: number;
+}
+export default function Notify(options: NotifyOptions | string): void;
 export {};
