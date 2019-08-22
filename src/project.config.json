@@ -1,79 +1,86 @@
 {
-  "description": "项目配置文件。",
-  "setting": {
-    "urlCheck": false,
-    "es6": true,
-    "postcss": true,
-    "minified": true,
-    "newFeature": true,
-    "nodeModules": true,
-    "autoAudits": false,
-    "uglifyFileName": true
-  },
-  "compileType": "miniprogram",
-  "libVersion": "2.7.4",
-  "appid": "wxa3fd96e049a8eef9",
-  "projectname": "lbs",
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
-  "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
-    "plugin": {
-      "current": -1,
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "current": -1,
-      "list": []
-    },
-    "miniprogram": {
-      "current": 4,
-      "list": [
-        {
-          "id": 0,
-          "name": "",
-          "pathName": "",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": 1,
-          "name": "p detail",
-          "pathName": "pages/productDetail/index",
-          "query": "guid=0a7a296cb6ff4f6795cb7fb4bde83344",
-          "scene": null
-        },
-        {
-          "id": 2,
-          "name": "个人中心",
-          "pathName": "pages/profile/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "orderList",
-          "pathName": "pages/orderList/index",
-          "query": "guid=0a7a296cb6ff4f6795cb7fb4bde83344",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "shopCart",
-          "pathName": "pages/shopCart/index",
-          "scene": null
-        }
-      ]
-    }
-  }
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": true,
+		"autoAudits": false,
+		"uglifyFileName": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.8.0",
+	"appid": "wxa3fd96e049a8eef9",
+	"projectname": "lbs",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 4,
+			"list": [
+				{
+					"id": 0,
+					"name": "",
+					"pathName": "",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "p detail",
+					"pathName": "pages/productDetail/index",
+					"query": "guid=0a7a296cb6ff4f6795cb7fb4bde83344",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "个人中心",
+					"pathName": "pages/profile/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "orderList",
+					"pathName": "pages/orderList/index",
+					"query": "guid=0a7a296cb6ff4f6795cb7fb4bde83344",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "shopCart",
+					"pathName": "pages/shopCart/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/addressList/index",
+					"pathName": "pages/addressList/index",
+					"scene": null
+				}
+			]
+		}
+	}
 }
