@@ -13,8 +13,8 @@
   <van-cell>
  <view class="address-sex-radio-group">
       <van-radio-group value="{{ radio }}"   bind:change="onChangeSexRadio">
-      <van-radio checked-color="#07c160" name="1" custom-class="address-sex-radio">先生</van-radio>
-      <van-radio checked-color="#07c160" name="2" custom-class="address-sex-radio">女士</van-radio>
+      <van-radio checked-color="#f44" name="1" custom-class="address-sex-radio">先生</van-radio>
+      <van-radio checked-color="#f44" name="2" custom-class="address-sex-radio">女士</van-radio>
       </van-radio-group>
   </view>
   </van-cell>
@@ -79,13 +79,13 @@
  <van-switch-cell
   title="是否默认"
   checked="{{ defult }}"
-  active-color="#07c160"
+  active-color="#f44"
   bind:change="onChangeSwitchDefult"
 />
 
 </van-cell-group>
 
-  <van-button type="primary" size="large" custom-class="address-save-but" disabled="{{butSaveDisabled}}" bind:click="onButtonSave">
+  <van-button type="danger" size="large" custom-class="address-save-but" disabled="{{butSaveDisabled}}" bind:click="onButtonSave">
   保存
   </van-button>
 </view>

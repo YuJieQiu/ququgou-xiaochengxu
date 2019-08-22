@@ -32,6 +32,10 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 1,
 			"list": [
@@ -47,6 +51,19 @@
 					"name": "p detail",
 					"pathName": "pages/productDetail/index",
 					"query": "guid=0a7a296cb6ff4f6795cb7fb4bde83344",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/addressList/index",
+					"pathName": "pages/addressList/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/address/index",
+					"pathName": "pages/address/index",
 					"scene": null
 				}
 			]
