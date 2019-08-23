@@ -57,6 +57,7 @@ Page({
     return
   },
   orderCreare: function() {
+    let that = this
     const toast = Toast.loading({
       mask: true,
       message: '处理中...',
@@ -99,6 +100,7 @@ Page({
       .then(res => {
         toast.clear()
         console.log(res)
+        that.removeShopCart()
         // wx.navigateTo({
         //     url: '/pages/orderList/index'
         // })
@@ -116,11 +118,21 @@ Page({
   onInputRemark(e) {
     this.setData({ remark: e.detail })
   },
+  removeShopCart() {
+    let currentPages = getCurrentPages()
+    if (currentPages.length > 1) {
+      let cartPage = currentPages[currentPages.length - 2]
+      if (cartPage.route == 'pages/shopCart/index') {
+        cartPage.setData({
+          checkboxData: [],
+          allCheckboxData: false,
+          selectProductList: [],
+          totalPrice: 0
+        })
+      }
+    }
+  },
   onLoad(options) {
-    let arrPages = getCurrentPages()
-
-    console.log(arrPages)
-
     let object = JSON.parse(options.jsonData)
 
     let list = this.data.list
@@ -138,16 +150,9 @@ Page({
     //订单
     list.forEach(l => {
       l.skuList.forEach(s => {
-        console.log(s.price)
-        console.log(s.number)
-        console.log(s.price * s.number)
         productAmount += s.price * s.number
       })
     })
-
-    console.log(productAmount)
-    console.log(discountsAmount)
-    console.log(productAmount - discountsAmount)
 
     orderAmount = productAmount - discountsAmount
 
@@ -156,7 +161,5 @@ Page({
       discountsAmount: discountsAmount,
       orderAmount: orderAmount
     })
-
-    //this.setData({detail:object});
   }
 })

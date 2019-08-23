@@ -99,13 +99,13 @@ Page({
     var data = this.data.selectProductList
 
     let json = JSON.stringify(data)
-    console.log(json)
-    this.setData({
-      checkboxData: [],
-      allCheckboxData: false,
-      selectProductList: [],
-      totalPrice: 0
-    })
+    // console.log(json)
+    // this.setData({
+    //   checkboxData: [],
+    //   allCheckboxData: false,
+    //   selectProductList: [],
+    //   totalPrice: 0
+    // })
 
     wx.navigateTo({
       url: '/pages/orderSettlement/index?jsonData=' + json
