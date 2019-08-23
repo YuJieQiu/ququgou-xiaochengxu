@@ -296,18 +296,25 @@ Page({
   onReachBottom() {
     //this.getData('more', this.data.page);
   },
-  onClickBuyNow(e) {
-    console.log(this.data.selectSku.id)
-
+  //加入购物车
+  onClickAddShopCart(e) {
     if (this.data.selectSku.id <= 0) {
-      console.log('onClickBuyNow')
       this.setData({
         show: true,
         buyNow: true
       })
       return
     }
-
+  },
+  //立即购买
+  onClickBuyNow(e) {
+    if (this.data.selectSku.id <= 0) {
+      this.setData({
+        show: true,
+        buyNow: true
+      })
+      return
+    }
     this.navigateToOrderSettlement()
   },
   //上拉刷新
