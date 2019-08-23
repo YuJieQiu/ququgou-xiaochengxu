@@ -1,53 +1,75 @@
 <view class="main">
 	<view class="shop-cart">
-		<van-panel use-footer-slot footer-class="o-footer">
-			<view slot="header">
-				<van-cell
-				 value="{{listItem.statusText}}"
-				 icon="shop-o"
-				 title="{{listItem.merName}}"
-				 is-link
-				/>
-			</view>
-			<view>
-				<van-card
-				 custom-class="goods-info-card"
-				 price-class="goods-info-card-price"
-				 num-class="goods-info-card-number"
-				 thumb-class="goods-list-card-thumb"
-				 view-thumb-class="goods-list-card-thumb"
-				 centered="{{true}}"
-				 lazy-load="{{true}}"
-				 wx:for="{{listItem.products}}"
-				 wx:for-item="product"
-				 thumb="{{product.cover}}"
-				 num="{{product.count}}"
-				 price="{{product.unitPrice}}"
-				>
-					<view slot="title" class="goods-list-card-title">{{product.name}}</view>
-					<view slot="desc" class="goods-list-card-desc">
-						<block wx:for="{{product.skuInfo}}">{{index}}:{{item}}</block>
-					</view>
-				</van-card>
-			</view>
-			<view slot="footer">
-				<view class="o-footer-money">
-					合计:
-					<view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view>
+		<view class="" wx:for="{{list}}" wx:for-item="mer">
+			<van-panel use-footer-slot footer-class="o-footer">
+				<view slot="header">
+					<van-cell value="" is-link>
+						<view slot="title">
+							<view class="van-cell-checkbox">
+								<van-checkbox checked-color="#f44" value="{{ allCheckboxData }}" bind:change="onChangeAllCheck" />
+							</view>
+							<view class="van-cell-text">{{mer.merName}}</view>
+						</view>
+					</van-cell>
 				</view>
-				<view class="o-footer-but">
-					<van-button
-					 size="small"
-					 data-no="{{listItem.no}}"
-					 bindtap="onOrderCancel"
-					 wx:if="{{listItem.status=='0'}}"
-					>
-						取消订单
-					</van-button>
-					<van-button size="small" type="danger" wx:if="{{listItem.status=='0'}}">立即支付</van-button>
+				<view>
+					<van-checkbox-group value="{{ checkboxData }}" bind:change="onChangeCheckbox">
+						<i-swipeout
+						 i-class="i-swipeout-demo-item"
+						 actions="{{actions}}"
+						 bind:change="handleCancel2"
+						 data-id="{{product.cartId}}"
+						 wx:for="{{mer.products}}"
+						 wx:for-item="product"
+						>
+							<view slot="content" operate-width="{{83}}">
+								<view slot="title">
+									<view class="content-checkbox">
+										<van-checkbox checked-color="#f44" custom-class="cus-checkbox" name="{{ product.cartId }}" />
+									</view>
+									<view class="content-card">
+										<van-card
+										 custom-class="goods-info-card"
+										 price-class="goods-info-card-price"
+										 num-class="goods-info-card-number"
+										 thumb-class="goods-list-card-thumb"
+										 centered="{{false}}"
+										 lazy-load="{{true}}"
+										 thumb="{{product.img.url}}"
+										 thumb-mode="aspectFill"
+										 num="{{product.number}}"
+										 price="{{product.price}}"
+										>
+											<view slot="title" class="goods-list-card-title">{{product.name}}</view>
+											<view slot="desc" class="goods-list-card-desc">
+												<block wx:if="{{product.attributeInfo!=null}}" wx:for="{{product.attributeInfo}}">
+													{{item.attName}}:{{item.valueName}}
+												</block>
+											</view>
+										</van-card>
+									</view>
+								</view>
+							</view>
+						</i-swipeout>
+					</van-checkbox-group>
 				</view>
-			</view>
-		</van-panel>
+				<view slot="footer">
+					<view class="o-footer-money" />
+					<view class="o-footer-but" />
+				</view>
+			</van-panel>
+		</view>
 	</view>
+	<!-- 购买 S -->
+	<van-submit-bar
+	 price="{{totalPrice*100}}"
+	 button-text="购买"
+	 bind:submit="navigateToOrderSettlement"
+	 tip="{{ true }}"
+	>
+		<!-- <van-tag type="primary">标签</van-tag> -->
+		<!-- <view slot="tip" /> -->
+	</van-submit-bar>
+	<!-- 购买 E -->
 </view>
 

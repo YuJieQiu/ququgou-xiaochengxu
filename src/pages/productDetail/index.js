@@ -10,6 +10,8 @@ Page({
     guid: '',
     show: false,
     buyNow: false,
+    addCart: false,
+    cartCount: 0,
     selectSku: {
       id: 0,
       image: '',
@@ -49,6 +51,7 @@ Page({
   getProductInfo() {
     var that = this
     app.httpGet('shop/product/detail?guid=' + that.data.guid).then(res => {
+      console.log(res)
       wx.stopPullDownRefresh()
       if (res && res.data) {
         let data = res.data
@@ -81,8 +84,9 @@ Page({
   },
   onSkuSelectConfirm(e) {
     this.setData({ show: false })
-    console.log(this.data.buyNow)
-    if (this.data.buyNow == true) {
+    if (this.data.addCart) {
+      this.onClickAddShopCart(e)
+    } else if (this.data.buyNow) {
       //到结算页面
       this.navigateToOrderSettlement()
     }
@@ -296,28 +300,48 @@ Page({
   onReachBottom() {
     //this.getData('more', this.data.page);
   },
-  //加入购物车
+  //Add cart
   onClickAddShopCart(e) {
+    let that = this
     if (this.data.selectSku.id <= 0) {
       this.setData({
         show: true,
-        buyNow: true
+        buyNow: false,
+        addCart: true
       })
       return
     }
+
+    let data = {
+      merId: this.data.product.merId,
+      productNo: this.data.product.guid,
+      productSkuId: this.data.selectSku.id,
+      number: this.data.selectSku.number,
+      price: this.data.selectSku.price
+    }
+
+    app.httpPost('shop/cart/add', data).then(res => {
+      console.log(res)
+      if (res.code == 200) {
+        that.setData({
+          cartCount: that.data.cartCount + that.data.selectSku.number
+        })
+      }
+    })
   },
-  //立即购买
+  //nuy now
   onClickBuyNow(e) {
     if (this.data.selectSku.id <= 0) {
       this.setData({
         show: true,
-        buyNow: true
+        buyNow: true,
+        addCart: false
       })
       return
     }
     this.navigateToOrderSettlement()
   },
-  //上拉刷新
+  //Refresh
   onPullDownRefresh() {
     this.getProductInfo()
   },
@@ -340,8 +364,8 @@ Page({
           price: this.data.selectSku.price,
           image: this.data.selectSku.image,
           number: this.data.selectSku.number,
-          vidNames: this.data.selectSku.vidNames,
-          pidNames: this.data.selectSku.pidNames
+          attributeInfo: this.data.selectSku.attributeInfo,
+          shopCartId: 0
         }
       ]
     }

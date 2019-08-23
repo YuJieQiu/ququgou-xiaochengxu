@@ -15,6 +15,10 @@
     "van-field": "/dist/field/index",
     "van-toast": "/dist/toast/index",
     "van-panel": "/dist/panel/index",
-    "van-dialog": "/dist/dialog/index"
+    "van-dialog": "/dist/dialog/index",
+    "i-swipeout": "/iview/dist/swipeout/index",
+    "i-panel": "/iview/dist/panel/index",
+    "van-checkbox": "/dist/checkbox/index",
+    "van-checkbox-group": "/dist/checkbox-group/index"
   }
 }
