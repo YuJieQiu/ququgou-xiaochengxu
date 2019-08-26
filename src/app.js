@@ -48,9 +48,9 @@ App({
     })
   },
   mapKey: 'DSXBZ-6AY3U-QLAVO-4H6LL-ZOIT3-ALFUW',
-  baseUrl: 'http://148.70.176.93/user/api/v1/',
+  //baseUrl: 'http://148.70.176.93/user/api/v1/',
   //baseUrl: 'https://ququgo.club//user/api/v1/',
-  //baseUrl: 'http://127.0.0.1:8070/user/api/v1/',
+  baseUrl: 'http://127.0.0.1:8070/user/api/v1/',
   httpBase: function(method, url, data, loading) {
     let _this = this
     let requestUrl = this.baseUrl + url
