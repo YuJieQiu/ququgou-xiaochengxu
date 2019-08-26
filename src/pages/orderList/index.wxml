@@ -36,7 +36,9 @@
 						>
 							<view slot="title" class="goods-list-card-title">{{product.name}}</view>
 							<view slot="desc" class="goods-list-card-desc">
-								<block wx:for="{{product.skuInfo}}">{{index}}:{{item}}</block>
+								<block wx:if="{{product.skuInfo!=null}}" wx:for="{{product.skuInfo}}">
+									{{item.attName}}:{{item.valueName}}
+								</block>
 							</view>
 						</van-card>
 					</view>
@@ -108,7 +110,9 @@
 						>
 							<view slot="title" class="goods-list-card-title">{{product.name}}</view>
 							<view slot="desc" class="goods-list-card-desc">
-								<block wx:for="{{product.skuInfo}}">{{index}}:{{item}}</block>
+								<block wx:if="{{product.skuInfo!=null}}" wx:for="{{product.skuInfo}}">
+									{{item.attName}}:{{item.valueName}}
+								</block>
 							</view>
 						</van-card>
 					</view>
@@ -163,7 +167,9 @@
 						>
 							<view slot="title" class="goods-list-card-title">{{product.name}}</view>
 							<view slot="desc" class="goods-list-card-desc">
-								<block wx:for="{{product.skuInfo}}">{{index}}:{{item}}</block>
+								<block wx:if="{{product.skuInfo!=null}}" wx:for="{{product.skuInfo}}">
+									{{item.attName}}:{{item.valueName}}
+								</block>
 							</view>
 						</van-card>
 					</view>
@@ -218,7 +224,9 @@
 						>
 							<view slot="title" class="goods-list-card-title">{{product.name}}</view>
 							<view slot="desc" class="goods-list-card-desc">
-								<block wx:for="{{product.skuInfo}}">{{index}}:{{item}}</block>
+								<block wx:if="{{product.skuInfo!=null}}" wx:for="{{product.skuInfo}}">
+									{{item.attName}}:{{item.valueName}}
+								</block>
 							</view>
 						</van-card>
 					</view>
@@ -273,7 +281,9 @@
 						>
 							<view slot="title" class="goods-list-card-title">{{product.name}}</view>
 							<view slot="desc" class="goods-list-card-desc">
-								<block wx:for="{{product.skuInfo}}">{{index}}:{{item}}</block>
+								<block wx:if="{{product.skuInfo!=null}}" wx:for="{{product.skuInfo}}">
+									{{item.attName}}:{{item.valueName}}
+								</block>
 							</view>
 						</van-card>
 					</view>

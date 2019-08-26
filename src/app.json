@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/merchant/index",
     "pages/home/index",
+    "pages/merchant/index",
     "pages/orderDetail/index",
     "pages/profile/index",
     "pages/orderList/index",
@@ -11,6 +11,7 @@
     "pages/productDetail/index",
     "pages/authorize/index",
     "pages/shopCart/index",
+    "pages/shopCart/cart",
     "pages/addressSelect/index"
   ],
   "permission": {
@@ -32,10 +33,16 @@
     "backgroundColor": "#fff",
     "list": [
       {
-        "pagePath": "pages/merchant/index",
+        "pagePath": "pages/home/index",
         "iconPath": "assets/images/tab/home.png",
         "selectedIconPath": "assets/images/tab/homeCur.png",
         "text": "首页"
+      },
+      {
+        "pagePath": "pages/merchant/index",
+        "iconPath": "assets/images/tab/merchant.png",
+        "selectedIconPath": "assets/images/tab/merchantCur.png",
+        "text": "商户"
       },
       {
         "pagePath": "pages/shopCart/index",
