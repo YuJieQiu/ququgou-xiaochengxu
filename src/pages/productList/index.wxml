@@ -1,5 +1,15 @@
 <view class="main">
-	list
+	<view class="nav">
+		<view class="nav-item">
+			<van-button icon="arrow-up" type="default">默认按钮</van-button>
+		</view>
+		<view class="nav-item">
+			<van-button icon="arrow-up" type="default">默认按钮</van-button>
+		</view>
+		<view class="nav-item">
+			<van-button icon="arrow-up" type="default">默认按钮</van-button>
+		</view>
+	</view>
 	<!-- <van-tabbar active="{{ active }}" fixed="{{false}}" bind:change="onChange">
 		<van-tabbar-item icon="home-o">标签</van-tabbar-item>
 		<van-tabbar-item icon="search">标签</van-tabbar-item>

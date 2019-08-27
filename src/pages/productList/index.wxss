@@ -1,0 +1,23 @@
+Page .main {
+  margin-top: 10px;
+}
+
+Page .nav {
+  display: -webkit-flex;
+  display: flex;
+  padding: 5rpx 0;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  background-color: #fff;
+  vertical-align: middle;
+}
+
+Page .nav-item {
+  height: 100%;
+  width: 35%;
+  /* padding: 0 20rpx; */
+  /* margin-left: 5rpx; */
+  /* background-color: antiquewhite; */
+  text-align: center;
+}
