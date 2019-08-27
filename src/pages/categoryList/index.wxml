@@ -1,112 +1,77 @@
-<view class="{{isIPX ? 'main-IPX':'main'}}">
-	<view class="header">
-		<van-row>
-			<van-col span="5">
-				<van-icon name="location-o" custom-class="header-location" />
-				<view class='header-location-name'>{{ad_info.city}}</view>
-				<view class="header-arrow-down">
-					<van-icon name="arrow-down" />
+<view class='cu-custom'>
+	<view class="cu-bar fixed bg-shadeTop" style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+		<navigator
+		 class='action'
+		 open-type="navigateBack"
+		 delta="1"
+		 hover-class="none"
+		>
+			<text class='cuIcon-back' />
+
+						<!-- 返回 -->
+				</navigator>
+				<view class='content' style='top:{{statusBar}}px;'>
+						<!-- 分类 -->
 				</view>
-			</van-col>
-			<van-col span="13">
-				<van-search
-				 value="{{ value }}"
-				 placeholder="请输入搜索关键词"
-				 custom-class="header-search"
-				 background="none"
-				 field-class="header-search-field"
-				 input-class="header-search-input"
-				/>
-			</van-col>
-			<!-- <van-col span="8" offset="4">span: 8</van-col> -->
-		</van-row>
-		<!-- <view class="header-right">
-            <van-search value="{{ value }}" placeholder="请输入搜索关键词" input-class="header-right-input"/>
-        </view> -->
+		</view>
+</view>
+<!-- 图片S -->
+<swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+		<swiper-item wx:for="{{4}}" wx:key>
+				<image src="https://image.weilanwl.com/img/4x3-{{index+1}}.jpg" mode='aspectFill' />
+		</swiper-item>
+</swiper>
+<!-- 图片E -->
+<view class="VerticalBox">
+		<!-- 左边S -->
+		<scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{verticalNavTop}}" style="height:calc(100vh - 375rpx)">
+				<view class="cu-item {{item.id==tabCur?'text-red cur':''}}" wx:for="{{list}}" wx:key bindtap='tabSelect' data-id="{{item.id}}">
+						{{item.text}}
+				</view>
+		</scroll-view>
+		<!-- 左边E -->
+		<!-- 右边S -->
+		<scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx)" scroll-into-view="main-{{mainCur}}" bindscroll="verticalMain">
+				<view class="padding-top padding-lr" wx:for="{{list}}" wx:key id="main-{{item.id}}">
+						<view class='cu-bar solid-bottom bg-white'>
+								<view class='action'>
+										<text class='cuIcon-title text-red'>
+												<!-- . -->
+										
+</text>
+			{{item.text}}
 	</view>
-	<!-- banner S -->
-	<swiper
-	 indicator-dots="{{indicatorDots}}"
-	 autoplay="{{autoplay}}"
-	 interval="{{interval}}"
-	 duration="{{duration}}"
-	>
-		<block wx:for="{{banners}}" wx:key="*this">
-			<swiper-item>
-				<image src="{{item.images.url}}" class="slide-image" />
-			</swiper-item>
-		</block>
-	</swiper>
-	<!-- banner E -->
-	<!-- category S -->
-	<view class="section">
-		<view class="section__title" />
-		<van-tabs active="{{ active }}" bind:change="onChange">
-			<van-tab
-			 title="{{item.text}}"
-			 wx:for="{{tabs}}"
-			 wx:key="{{item.id}}"
-			 wx:for-index="i"
-			 data-index="{{i}}"
-			>
-				<van-card
-				 wx:for="{{item.productSmallInfos}}"
-				 wx:key="{{item.guid}}"
-				 num=""
-				 tag="标签"
-				 origin-price="{{item.original_price}}"
-				 centered="true"
-				 currency="¥"
-				 price="{{item.min_price}}"
-				 desc="{{item.description}}"
-				 title="{{item.name}}"
-				 thumb="{{item.image}}"
-				 data-guid="{{item.guid}}"
-				 bindtap="showDetail"
-				>
-					<view slot="tags" wx:for="{{item.tags}}">{{item}}</view>
-					<view slot="footer">
-						<van-button size="mini" round type="danger">购买</van-button>
-					</view>
-				</van-card>
-			</van-tab>
-		</van-tabs>
+</view>
+<view class="cu-list menu-avatar">
+	<view class="cu-item" wx:for="{{item.children}}" wx:for-item="children">
+		<view class="cu-avatar round lg" style="background-image:url({{children.img}});">
+			<view class="cu-tag badge" wx:if="{{false}}">
+				<!-- 99+ -->
+			</view>
+		</view>
+		<view class="content">
+			<view class="text-grey">
+				<text class="text-cut">{{children.text}}</text>
+				<view class="cu-tag round bg-orange sm" wx:if="{{false}}">
+					<!-- 战士 -->
+				</view>
+			</view>
+			<view class="text-gray text-sm flex">
+				<text class="text-cut">
+																<!-- text -->
+														</text>
+			</view>
+		</view>
+		<view class="action">
+			<view class="text-grey text-xs">
+				<!-- 22:20 -->
+			</view>
+			<view class="cuIcon-notice_forbid_fill text-gray" />
+		</view>
 	</view>
-	<!-- category S -->
-	<!-- <view class="list"> 
-    <EmptyList requesting="{{requesting}}" end="{{end}}" listData="{{listData}}"></EmptyList>
-</view> -->
-	<!-- <van-tab title="热销">
-            <van-card num="2" tag="标签" origin-price="10.00" centered="true" currency="¥" price="2.00" desc="描述信息" title="2018秋冬新款男士休闲时尚军绿飞行夹克秋冬新款男" thumb="https://dsimg.wowjpn.goo.ne.jp/rs/?src=https://wow-j.com/images/ext/allguides/00935/00935_001.jpg&maxw=770&maxh=0&resize=1">
-                <view slot="tags">标签</view>
-                <view slot="footer">
-                    <van-button size="mini" round type="danger">购买</van-button>
-                </view>
-            </van-card>
-            <van-card num="2" tag="标签" origin-price="10.00" centered="true" currency="¥" price="2.00" desc="描述信息" title="2018秋冬新款男士休闲时尚军绿飞行夹克秋冬新款男" thumb="https://dsimg.wowjpn.goo.ne.jp/rs/?src=https://wow-j.com/images/ext/allguides/00935/00935_001.jpg&maxw=770&maxh=0&resize=1">
-                <view slot="tags">标签</view>
-                <view slot="footer">
-                    <van-button size="mini" round type="danger">购买</van-button>
-                </view>
-            </van-card>
-            <van-card num="2" tag="标签" origin-price="10.00" centered="true" currency="¥" price="2.00" desc="描述信息" title="2018秋冬新款男士休闲时尚军绿飞行夹克秋冬新款男" thumb="https://dsimg.wowjpn.goo.ne.jp/rs/?src=https://wow-j.com/images/ext/allguides/00935/00935_001.jpg&maxw=770&maxh=0&resize=1">
-                <view slot="tags">标签</view>
-                <view slot="footer">
-                    <van-button size="mini" round type="danger">购买</van-button>
-                </view>
-            </van-card>
-            <van-card num="2" tag="标签" origin-price="10.00" centered="true" currency="¥" price="2.00" desc="描述信息" title="2018秋冬新款男士休闲时尚军绿飞行夹克秋冬新款男" thumb="https://dsimg.wowjpn.goo.ne.jp/rs/?src=https://wow-j.com/images/ext/allguides/00935/00935_001.jpg&maxw=770&maxh=0&resize=1">
-                <view slot="tags">标签</view>
-                <view slot="footer">
-                    <van-button size="mini" round type="danger">购买</van-button>
-                </view>
-            </van-card>
-            <van-card num="2" tag="标签" origin-price="10.00" centered="true" currency="¥" price="2.00" desc="描述信息" title="2018秋冬新款男士休闲时尚军绿飞行夹克秋冬新款男" thumb="https://dsimg.wowjpn.goo.ne.jp/rs/?src=https://wow-j.com/images/ext/allguides/00935/00935_001.jpg&maxw=770&maxh=0&resize=1">
-                <view slot="tags">标签</view>
-                <view slot="footer">
-                    <van-button size="mini" round type="danger">购买</van-button>
-                </view>
-            </van-card>
-        </van-tab> -->
+</view>
+</view>
+</scroll-view>
+<!-- 右边E -->
 </view>
 

@@ -1,100 +1,84 @@
 const app = getApp()
-const { appUtils, appValidate } = require('../../utils/util.js')
-const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
-const qqmapsdk = new QQMapWX({ key: app.mapKey })
-const pageStart = 1
 
 Page({
   data: {
-    banners: [],
-    tabs: [],
-    isIPX: app.globalData.isIPX,
-    ad_info: {}
+    list: [],
+    curList: [],
+    tabCur: 0,
+    mainCur: 0,
+    verticalNavTop: 0,
+    list: [],
+    load: true,
+    customBar: app.globalData.customBar,
+    custom: app.globalData.custom,
+    statusBar: app.globalData.statusBar
   },
-
-  getBannerList() {
-    app.httpGet('home/banner/getList').then(res => {
-      if (res && res.data) {
-        this.setData({
-          banners: res.data
-        })
+  tabSelect(e) {
+    var curList = {}
+    let id = e.currentTarget.dataset.id
+    this.data.list.forEach(element => {
+      if (element.id == id) {
+        curList = element
       }
     })
+    this.setData({
+      tabCur: id,
+      mainCur: id,
+      verticalNavTop: (e.currentTarget.dataset.id - 1) * 50,
+      curList: curList
+    })
   },
-  getHomeData() {
-    app.httpGet('home/productConfig/getConfigProductList').then(res => {
+  verticalMain(e) {
+    let that = this
+    let list = this.data.list
+    let tabHeight = 0
+    if (this.data.load) {
+      for (let i = 0; i < list.length; i++) {
+        let view = wx.createSelectorQuery().select('#main-' + list[i].id)
+        view
+          .fields(
+            {
+              size: true
+            },
+            data => {
+              list[i].top = tabHeight
+              tabHeight = tabHeight + data.height
+              list[i].bottom = tabHeight
+            }
+          )
+          .exec()
+      }
+      that.setData({
+        load: false,
+        list: list
+      })
+    }
+    let scrollTop = e.detail.scrollTop + 100
+    for (let i = 0; i < list.length; i++) {
+      if (scrollTop > list[i].top && scrollTop < list[i].bottom) {
+        that.setData({
+          verticalNavTop: (list[i].id - 1) * 50,
+          tabCur: list[i].id,
+          curList: list[i]
+        })
+        return false
+      }
+    }
+  },
+  getDataList: function() {
+    const that = this
+    app.httpGet('category/get/list').then(res => {
       if (res && res.data) {
-        this.setData({
-          tabs: res.data
+        that.setData({
+          list: res.data,
+          curList: res.data[0],
+          tabCur: res.data[0].id
         })
       }
+      console.log(res)
     })
-  },
-  showDetail(e) {
-    console.log(e.currentTarget.dataset.guid)
-    let guid = e.currentTarget.dataset.guid
-
-    //console.log(this.data)
-    // let index = e.currentTarget.dataset;
-    // let data = this.data.tabs[index];
-    // console.log(index)
-    // console.log(data)
-    wx.navigateTo({
-      url: '/pages/productDetail/index?guid=' + guid
-    })
-  },
-  onPullDownRefresh() {
-    //this.getData('refresh', pageStart);
-  },
-  onReachBottom() {
-    //this.getData('more', this.data.page);
   },
   onLoad(options) {
-    // wx.getLocation({
-    //     type: 'wgs84', //
-    //     success(res) {
-    //       const latitude = res.latitude
-    //       const longitude = res.longitude
-    //       const speed = res.speed
-    //       const accuracy = res.accuracy
-
-    //       console.log(res)
-    //     }
-    //   })
-    const _this = this
-
-    wx.getLocation({
-      type: 'wgs84',
-      success(res) {
-        const latitude = res.latitude
-        const longitude = res.longitude
-        const speed = res.speed
-        const accuracy = res.accuracy
-
-        qqmapsdk.reverseGeocoder({
-          location: {
-            latitude: latitude,
-            longitude: longitude
-          },
-          success: function(res) {
-            // console.log(JSON.stringify(res));
-            // let province = res.result.ad_info.province
-            // let city = res.result.ad_info.city
-
-            _this.setData({
-              ad_info: res.result.ad_info
-            })
-          },
-          fail: function(res) {
-            console.log(res)
-          },
-          complete: function(res) {
-            // console.log(res);
-          }
-        })
-      }
-    })
-    this.getBannerList()
-    this.getHomeData()
+    this.getDataList()
   }
 })

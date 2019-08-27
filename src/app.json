@@ -12,7 +12,9 @@
     "pages/authorize/index",
     "pages/shopCart/index",
     "pages/shopCart/cart",
-    "pages/addressSelect/index"
+    "pages/addressSelect/index",
+    "pages/categoryList/index",
+    "pages/productList/index"
   ],
   "permission": {
     "scope.userLocation": {
@@ -43,6 +45,12 @@
         "iconPath": "assets/images/tab/merchant.png",
         "selectedIconPath": "assets/images/tab/merchantCur.png",
         "text": "商户"
+      },
+      {
+        "pagePath": "pages/categoryList/index",
+        "iconPath": "assets/images/tab/category.png",
+        "selectedIconPath": "assets/images/tab/categoryCur.png",
+        "text": "分类"
       },
       {
         "pagePath": "pages/shopCart/index",
