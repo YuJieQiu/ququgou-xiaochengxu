@@ -21,3 +21,82 @@ Page .nav-item {
   /* background-color: antiquewhite; */
   text-align: center;
 }
+
+.on {
+  color: #c53f3f;
+}
+
+/*列表*/
+.group-list {
+  padding-top: 80rpx;
+}
+
+.filter-list {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  background-color: #fff;
+}
+
+.filter-list.filter-lists {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  background-color: #fff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.filter-list .filter-item {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding-left: 50rpx;
+  cursor: pointer;
+  display: flex;
+  position: relative;
+}
+
+.filter-list .filter-item .icon_box {
+  position: absolute;
+  color: #3a3a3a;
+  width: 50rpx;
+  right: 30rpx;
+  top: 26rpx;
+}
+
+.filter-list .filter-item .icon_box .icon-up {
+  display: block;
+  position: absolute;
+  left: -10rpx;
+  top: -6rpx;
+  font-size: 50rpx;
+  line-height: 30rpx;
+}
+
+.filter-list .filter-item .icon_box .icon-down {
+  display: block;
+  position: absolute;
+  left: -10rpx;
+  top: 8rpx;
+  font-size: 50rpx;
+  line-height: 30rpx;
+}
+
+.filter-list .show-type-btn {
+  padding: 0 15rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.filter-list .show-type-btn > icon {
+  font-size: 32rpx;
+  color: rgba(58, 58, 58, 1);
+}
