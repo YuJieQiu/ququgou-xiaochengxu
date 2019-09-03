@@ -337,6 +337,21 @@ Page({
   onPullDownRefresh() {
     this.getProductInfo()
   },
+  onShareAppMessage22() {
+    console.log('123')
+    let that = this
+    wx.shareAppMessage({ title: '', imageUrl: '', query: '', imageUrlId: '' })
+  },
+  //分享
+  onShareAppMessage() {
+    let that = this
+    wx.onShareAppMessage(() => {
+      return {
+        title: that.data.product.name,
+        imageUrl: that.data.product.resources[0].url // 图片 URL
+      }
+    })
+  },
   onLoad(options) {
     this.setData({
       guid: options.guid
