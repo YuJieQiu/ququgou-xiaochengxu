@@ -4,7 +4,14 @@ App({
     //判断机型(适配iphoneX)
     wx.getSystemInfo({
       success: res => {
-        console.log(res.model)
+        console.log()
+
+        let custom = wx.getMenuButtonBoundingClientRect()
+        this.globalData.statusBar = res.statusBarHeight
+        this.globalData.custom = custom
+        this.globalData.customBar =
+          custom.bottom + custom.top - res.statusBarHeight
+
         if (res.model.search('iPhone X') != -1) {
           this.globalData.isIPX = true
         }
@@ -48,8 +55,8 @@ App({
     })
   },
   mapKey: 'DSXBZ-6AY3U-QLAVO-4H6LL-ZOIT3-ALFUW',
-  baseUrl: 'http://148.70.176.93/user/api/v1/',
-  //baseUrl: 'https://ququgo.club//user/api/v1/',
+  //baseUrl: 'http://148.70.176.93/user/api/v1/',
+  baseUrl: 'https://ququgo.club/user/api/v1/',
   //baseUrl: 'http://127.0.0.1:8070/user/api/v1/',
   httpBase: function(method, url, data, loading) {
     let _this = this
@@ -118,7 +125,10 @@ App({
   },
   globalData: {
     version: '1.0.0',
-    isIPX: false
+    isIPX: false,
+    custom: {},
+    customBar: {},
+    statusBar: {}
   }
 })
 

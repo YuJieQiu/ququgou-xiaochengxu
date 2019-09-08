@@ -31,14 +31,23 @@
 			<view class="title-name">{{ product.name}}</view>
 			<view class='title-description'>{{ product.description}}</view>
 		</view>
+		<!-- <button open-type="share" bindtap="onShareAppMessage">TTT</button> -->
 		<view class='share'>
-			<van-tag
+			<van-button
+			 type="danger"
+			 custom-class="share-button"
+			 open-type="share"
+			 bind:click="onShareAppMessage"
+			>
+				分享
+			</van-button>
+			<!-- <van-tag
 			 color="rgb(255, 68, 68)"
 			 round
 			 type="primary"
 			 size="large"
 			>分享
-			</van-tag>
+			</van-tag> -->
 		</view>
 	</view>
 	<view class='attribute'>
@@ -53,8 +62,13 @@
 		</van-cell>
 	</view>
 	<!-- <view>物流信息</view> -->
-	<van-tabs active="{{ active }}" bind:change="onChange">
-		<van-tab title="商品描述">
+	<van-tabs
+	 active="{{ active }}"
+	 bind:change="onChange"
+	 border="{{false}}"
+	 type="{{card}}"
+	>
+		<van-tab title="详情">
 			<view style="margin-bottom:120rpx;">
 				<rich-text
 				 class="ql-container"
@@ -64,11 +78,13 @@
 				/>
 			</view>
 		</van-tab>
-		<van-tab title="商品评论">商品评论</van-tab>
+		<!-- <van-tab title="参数">参数</van-tab>
+		<van-tab title="商品评论">商品评论</van-tab> -->
 	</van-tabs>
 	<!-- 弹出层 规格选择 S -->
 	<van-popup
 	 show="{{ show }}"
+	 custom-class="sku-popup"
 	 position="bottom"
 	 overlay="{{ true }}"
 	 bind:close="onClose"
@@ -139,7 +155,7 @@
 		 icon="cart-o"
 		 text="购物车"
 		 info="{{cartCount==0?'':cartCount}}"
-		 bind:click="onClickIcon"
+		 url="{{'/pages/shopCart/cart'}}"
 		/>
 		<van-goods-action-button text="加入购物车" type="warning" bind:click="onClickAddShopCart" />
 		<van-goods-action-button text="立即购买" bind:click="onClickBuyNow" />

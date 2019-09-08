@@ -11,7 +11,10 @@
     "pages/productDetail/index",
     "pages/authorize/index",
     "pages/shopCart/index",
-    "pages/addressSelect/index"
+    "pages/shopCart/cart",
+    "pages/addressSelect/index",
+    "pages/categoryList/index",
+    "pages/productList/index"
   ],
   "permission": {
     "scope.userLocation": {

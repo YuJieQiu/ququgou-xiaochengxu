@@ -1,8 +1,4 @@
 const app = getApp()
-const { appUtils, appValidate } = require('../../utils/util.js')
-
-const pageStart = 1
-
 Page({
   data: {
     tabs: [],
@@ -68,7 +64,6 @@ Page({
             selectSku: selectSku
           })
         }
-        console.log(data)
       }
     })
   },
@@ -76,7 +71,6 @@ Page({
     Toast('点击图标')
   },
   onClickButton() {
-    console.log('点击立即购买按钮')
     this.setData({ show: true })
   },
   onClose() {
@@ -187,7 +181,6 @@ Page({
         if (!exist) {
           continue
         }
-        console.log(sku)
         that.setData({
           'selectSku.id': sku.id,
           'selectSku.image':
@@ -201,7 +194,6 @@ Page({
         })
         break
       }
-      console.log(that.data.selectSku)
     }
   },
   //取消选择规格
@@ -345,6 +337,21 @@ Page({
   onPullDownRefresh() {
     this.getProductInfo()
   },
+  onShareAppMessage22() {
+    console.log('123')
+    let that = this
+    wx.shareAppMessage({ title: '', imageUrl: '', query: '', imageUrlId: '' })
+  },
+  //分享
+  onShareAppMessage() {
+    let that = this
+    wx.onShareAppMessage(() => {
+      return {
+        title: that.data.product.name,
+        imageUrl: that.data.product.resources[0].url // 图片 URL
+      }
+    })
+  },
   onLoad(options) {
     this.setData({
       guid: options.guid
@@ -352,26 +359,30 @@ Page({
     this.getProductInfo()
   },
   navigateToOrderSettlement: function() {
-    //到结算页面
-    let data = {
-      merId: this.data.product.merId,
-      skuList: [
-        {
-          productNo: this.data.product.guid,
-          productName: this.data.product.name,
-          id: this.data.selectSku.id,
-          name: this.data.selectSku.name,
-          price: this.data.selectSku.price,
-          image: this.data.selectSku.image,
-          number: this.data.selectSku.number,
-          attributeInfo: this.data.selectSku.attributeInfo,
-          shopCartId: 0
-        }
-      ]
+    if (this.data.selectSku.id <= 0) {
+      return
     }
+    //到结算页面
+    let data = [
+      {
+        merId: this.data.product.merId,
+        skuList: [
+          {
+            productNo: this.data.product.guid,
+            productName: this.data.product.name,
+            id: this.data.selectSku.id,
+            name: this.data.selectSku.name,
+            price: this.data.selectSku.price,
+            image: this.data.selectSku.image,
+            number: this.data.selectSku.number,
+            attributeInfo: this.data.selectSku.attributeInfo,
+            shopCartId: 0
+          }
+        ]
+      }
+    ]
 
     let json = JSON.stringify(data)
-    console.log(json)
     wx.navigateTo({
       url: '/pages/orderSettlement/index?jsonData=' + json
     })

@@ -79,7 +79,7 @@ Page .product .title {
   background-color: #fff;
   background: #ffffff;
   margin-top: 5px;
-  width: 80%;
+  width: 75%;
   display: inline-block;
   vertical-align: middle;
 }
@@ -87,6 +87,13 @@ Page .product .title {
 Page .product .share {
   display: inline-block;
   vertical-align: middle;
+}
+
+Page .product .share-button {
+  height: 66rpx;
+  line-height: 66rpx;
+  size: 10;
+  border-radius: 30rpx;
 }
 
 Page .product .title .title-name {
@@ -112,18 +119,25 @@ Page .product .title .text {
 }
 
 Page .sku-pro {
+  /* padding-top: 30rpx; */
   margin-left: 20rpx;
   margin-bottom: 35rpx;
 }
 
+Page .sku-popup {
+  /* background-color: #999; */
+  /* position: absolute; */
+}
+
 Page .sku-pro .sku-image {
-  /* position:relative; */
+  /* position: relative; */
   width: 90px;
   height: 90px;
   margin-right: 10px;
   -webkit-flex: none;
   display: inline-block;
   vertical-align: middle;
+  padding-top: 10rpx;
   /* flex:none;   */
 }
 
