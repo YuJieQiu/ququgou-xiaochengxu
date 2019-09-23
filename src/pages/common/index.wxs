@@ -12,6 +12,19 @@ var filter = {
     }
     var eachPrice = ((price * 100) / 100).toFixed(2)
     return eachPrice //(price *100 / 100).toFixed(2);
+  },
+  enum: {
+    orderStatus: {
+      WaitPay: 0, //待付款
+      PaySuccess: 1, //付款成功
+      Ship: 3, //已发货
+      Delivered: 5, //已签收
+      RefundApply: -1, //退货申请
+      Refund: -3, //退货中
+      RefundSuccess: -5, //已退货
+      OrderCancel: -7, //取消交易
+      ApplyCancel: -9 //撤销申请
+    }
   }
 }
 
@@ -19,5 +32,6 @@ var filter = {
 module.exports = {
   numberToFixed: filter.numberToFixed,
   arrayExist: filter.arrayExist,
-  priceStr: filter.priceStr
+  priceStr: filter.priceStr,
+  orderStatus: filter.enum.orderStatus
 }

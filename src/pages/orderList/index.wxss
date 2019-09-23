@@ -6,11 +6,11 @@
 Page .main {
   margin-top: 10px;
 }
- 
+
 Page .goods-list-card-title {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 
 Page .goods-info {
@@ -44,8 +44,8 @@ Page .goods-info-card-number {
 }
 
 Page .goods-list-card-thumb {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
 }
 
 Page .goods-list-card-thumb image {
@@ -63,25 +63,25 @@ Page .remark {
   margin-left: 10px;
 }
 
-Page .o-footer{
+Page .o-footer {
   height: 55rpx;
 }
 
-Page .o-footer-money{
+Page .o-footer-money {
   display: inline-block;
   float: left;
   flex: 1;
-    font-weight: 500;
-    text-align: right;
-    color: #323233;
-    padding-right: 12px;
+  font-weight: 500;
+  text-align: right;
+  color: #323233;
+  padding-right: 12px;
 }
 
-Page  .o-footer-but{
+Page .o-footer-but {
   display: inline-block;
-  float:right;
+  float: right;
 }
-Page .o-footer-money-block{
+Page .o-footer-money-block {
   color: #f44;
   font-size: 18px;
   font-weight: 500;

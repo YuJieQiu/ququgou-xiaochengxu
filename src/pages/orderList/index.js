@@ -132,6 +132,12 @@ Page({
   onInputRemark(e) {
     this.setData({ remark: e.detail })
   },
+  //跳转到详情页面
+  onClickRedirectionDetail(e) {
+    let that = this
+    let no = e.currentTarget.dataset.no
+    wx.navigateTo({ url: '/pages/orderDetail/index?orderNo=' + no })
+  },
   onLoad(options) {
     this.getOrderListInfo()
   }

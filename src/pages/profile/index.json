@@ -2,11 +2,13 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "AppImage": "../../components/appImage/index",
-    "cu-custom":"/colorui/components/cu-custom",
+    "cu-custom": "/colorui/components/cu-custom",
     "i-avatar": "/iview/dist/avatar/index",
     "van-cell": "/dist/cell/index",
     "van-cell-group": "/dist/cell-group/index",
     "van-tabbar": "/dist/tabbar/index",
-    "van-tabbar-item": "/dist/tabbar-item/index"
+    "van-tabbar-item": "/dist/tabbar-item/index",
+    "van-panel": "/dist/panel/index",
+    "van-icon": "/dist/icon/index"
   }
 }

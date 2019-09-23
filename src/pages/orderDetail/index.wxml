@@ -1,84 +1,92 @@
+<wxs module="wxs" src="../common/index.wxs" />
 <view class="main">
-  <!--订单信息 S-->
+  <!-- 收货地址 S -->
+  <view class="order-address">
+    <van-cell custom-class="address-cell" clickable="{{true}}" is-link title="{{address.city}}{{address.region}}{{address.town}}{{address.address}}" label="{{address.username}}{{address.phone}}" icon="location-o" center="{{true}}" size="large" border="{{true}}">
+      <view slot="title"></view>
+    </van-cell>
+  </view>
+  <!-- 收货地址 E -->
+  <!-- 订单信息 S -->
   <view class="order-info">
-     <van-row>
+    <van-row>
       <van-col span="10">
-        <van-icon name="pending-payment" /> 待付款
-      </van-col> 
+        <van-icon name="pending-payment" />
+        待付款
+      </van-col>
     </van-row>
     <van-row>
-      <van-col span="6">
-        订单编号:
-      </van-col> 
-      <van-col span="10">
-        {{order.no}}
-      </van-col> 
+      <van-col span="6">订单编号:</van-col>
+      <van-col span="10">{{order.no}}</van-col>
     </van-row>
     <van-row>
-      <van-col span="6">
-        下单时间:
-      </van-col> 
-      <van-col span="10">
-        {{order.createdTime}}
-      </van-col> 
+      <van-col span="6">下单时间:</van-col>
+      <van-col span="10">{{order.createdTime}}</van-col>
+    </van-row>
+    <van-row>
+      <van-col span="6">支付方式</van-col>
+      <van-col span="10">{{"微信支付"}}</van-col>
+    </van-row>
+    <van-row wx:if="{{order.paymentTime!=''}}">
+      <van-col span="6">支付时间:</van-col>
+      <van-col span="10">{{order.paymentTime}}</van-col>
+    </van-row>
+    <van-row wx:if="{{order.cancelTime!=''}}">
+      <van-col span="6">取消时间:</van-col>
+      <van-col span="10">{{order.cancelTime}}</van-col>
+    </van-row>
+    <van-row wx:if="{{order.remark!=''}}">
+      <van-col span="6">备注:</van-col>
+      <van-col span="10">{{order.remark}}</van-col>
     </van-row>
   </view>
- 
-  <!--订单信息 E-->
-
-  <!-- 收货地址 S -->
-  <!-- <view class="order-address">
-    <van-cell  custom-class="address-cell" clickable="{{true}}" is-link title="{{address.city address.region address.town address.address}} " label="{{address.username address.phone}}" icon="location-o" center="{{true}}" size="large" border="{{true}}" >
-      <view slot="title">
-       
-      </view>
-    </van-cell>
-  </view> -->
-  <!-- 收货地址 E -->
-  
-  
-  
+  <!-- 订单信息 E -->
   <van-panel use-footer-slot footer-class="o-footer">
-         <view slot="header">
-            <van-cell
-            value="待付款" 
-            icon="shop-o"
-            title="{{listItem.merName}}"
-            is-link 
-            bind:click=""
-          />
+    <view slot="header">
+      <van-cell value="" icon="shop-o" title="{{order.merName}}" is-link bind:click="" />
+    </view>
+    <view>
+      <!-- origin-price="{{wxs.priceStr(product.unitPrice*product.count)}}" -->
+      <van-card custom-class="goods-info-card" thumb-mode="aspectFill" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" centered="{{false}}" lazy-load="{{true}}" wx:for="{{products}}" wx:for-item="product" thumb="{{product.cover}}" num="{{product.count}}" price="{{wxs.priceStr(product.unitPrice)}}">
+        <view slot="title" class="goods-list-card-title">{{product.name}}</view>
+        <view slot="desc" class="goods-list-card-desc">
+          <block wx:if="{{product.skuInfo!=null}}" wx:for="{{product.skuInfo}}">
+            {{item.attName}}:{{item.valueName}}
+          </block>
         </view>
-
-        <view>
-           <van-card custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" 
-          centered="{{true}}" 
-          lazy-load="{{true}}" 
-          wx:for="{{products}}" 
-          wx:for-item="product" 
-          thumb="{{product.cover}}" 
-          num="{{product.count}}" 
-          price="{{product.unitPrice}}"> 
-            <view slot="title" class="goods-list-card-title">{{product.name}}</view>
-            <view slot="desc" class="goods-list-card-desc">
-              <block wx:for="{{product.skuInfo}}">{{index}}:{{item}} 
-              </block>
-            </view>
-          </van-card>
-        </view>
- 
-        <view slot="footer" >
-          <view class="o-footer-money">
-              <!-- 合计: <view class="o-footer-money-block">¥{{listItem.orderAmountTotal}}</view> -->
-          </view>
-
-          <view class="o-footer-but">
-            <van-button size="small">取消订单</van-button>
-            <van-button size="small" type="danger">立即支付</van-button>
-          </view>
-         
-        </view>
-      </van-panel>
-  
+      </van-card>
+    </view>
+    <view slot="footer">
+      <view class="o-footer-money">
+        合计：
+        <view class="o-footer-money-block">¥{{wxs.priceStr(order.orderAmountTotal)}}</view>
+      </view>
+      <view class="o-footer-money" wx:if="{{order.discountsAmountTotal>0}}">
+        优惠金额：
+        <view class="o-footer-money-block">¥{{wxs.priceStr(order.discountsAmountTotal)}}</view>
+      </view>
+      <!-- <view class="o-footer-but">
+        <van-button size="small">取消订单</van-button>
+        <van-button size="small" type="danger">立即支付</van-button>
+      </view> -->
+    </view>
+  </van-panel>
+  <!-- 操作按钮 S -->
+  <view class="footer-option-but">
+    <view class="option-but option-but-left" wx:if="{{order.status==wxs.orderStatus.WaitPay}}">
+      <view class="money">
+        合计：
+        <view class="o-footer-money-block">¥{{wxs.priceStr(order.orderAmountTotal)}}</view>
+      </view>
+    </view>
+    <view class="option-but option-but-right" wx:if="{{order.status==wxs.orderStatus.WaitPay}}">
+      <van-button type="danger" square="{{true}}">立即支付</van-button>
+    </view>
+    <view class="option-but option-but-right" wx:if="{{order.status==wxs.orderStatus.WaitPay}}">
+      <van-button type="warning" square="{{true}}" bindtap="onOrderCancel">取消订单</van-button>
+    </view>
+  </view>
+  <!-- 操作按钮 E -->
   <!-- <van-panel title="标题" desc="描述信息" status="状态" use-footer-slot>
   <view>内容内容内容内容内容内容</view>
   <view slot="footer">
@@ -86,5 +94,5 @@
     <van-button size="small" type="danger">按钮</van-button>
   </view>
 </van-panel> -->
-
-</view> 
+  <van-dialog id="van-dialog" />
+</view>
