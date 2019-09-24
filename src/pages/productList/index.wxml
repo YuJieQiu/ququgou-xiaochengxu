@@ -1,5 +1,5 @@
 <view class="main">
-	<!-- <view class="nav">
+		<!-- <view class="nav">
 		<view class="nav-item">
 			<van-button icon="arrow-up" type="default">默认按钮</van-button>
 		</view>
@@ -10,32 +10,28 @@
 			<van-button icon="arrow-up" type="default">默认按钮</van-button>
 		</view>
 	</view> -->
-	<view class="filter-list filter-lists">
-		<view class="filter-item on" bindtap="normalSort">默认</view>
-		<view class="filter-item" bindtap="goodsSales">
-			<text class=" on">默认2</text>
-			<view class="icon_box">
-				<text class="icon-up iconfont on" />
-
-								<text class="icon-down iconfont on" />
+		<view class="filter-list filter-lists">
+				<view class="filter-item on" bindtap="normalSort">默认</view>
+				<view class="filter-item" bindtap="goodsSales">
+						<view class="item-text on">默认2</view>
+						<view class="item-icon ">
+								<van-icon custom-class="" color="#c53f3f" name="arrow-up" />
 						</view>
+						<!-- <text class="icon-up iconfont">1</text> -->
+						<!-- <van-icon custom-class="icon-up iconfont" name="close" /> -->
+						<!-- <text class="icon-up iconfont on" />
+								<text class="icon-down iconfont on" /> -->
 				</view>
 				<view class="filter-item" bindtap="newProduct">
-						<text class="on">默认3
-</text>
-				<view class="icon_box">
-					<text class="icon-up iconfont on" />
-
-								<text class="icon-down iconfont on" />
+						<view class="item-text on">默认3</view>
+						<view class="item-icon ">
+								<van-icon custom-class="" color="#c53f3f" name="arrow-down" />
 						</view>
 				</view>
 				<view class="filter-item " bindtap="goodsPrice">
-						<text class="on">默认5
-</text>
-					<view class="icon_box">
-						<text class="icon-up iconfont on" />
-
-								<text class="icon-down iconfont on" />
+						<view class="item-text on">默认5</view>
+						<view class="item-icon ">
+								<van-icon custom-class="" color="#c53f3f" name="arrow-up" />
 						</view>
 				</view>
 				<view class="show-type-btn" bindtap="goodsToggle">
@@ -50,4 +46,3 @@
 		<van-tabbar-item icon="setting-o">标签</van-tabbar-item>
 	</van-tabbar> -->
 </view>
-

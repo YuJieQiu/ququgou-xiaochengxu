@@ -96,6 +96,20 @@ Page .nav-item {
   overflow: hidden;
 }
 
+.filter-item .item-text {
+  display: inline-block;
+}
+.filter-item .item-icon {
+  display: inline-block;
+  vertical-align: middle;
+  /* position: absolute; */
+  color: #3a3a3a;
+  width: 10rpx;
+  margin-left: 5rpx;
+  /* right: 30rpx;
+  top: 26rpx; */
+}
+
 .filter-list .show-type-btn > icon {
   font-size: 32rpx;
   color: rgba(58, 58, 58, 1);

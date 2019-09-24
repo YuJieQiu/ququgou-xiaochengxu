@@ -1,6 +1,6 @@
 //app.js
 App({
-  onLaunch: function() {
+  onLaunch: function () {
     //判断机型(适配iphoneX)
     wx.getSystemInfo({
       success: res => {
@@ -56,9 +56,9 @@ App({
   },
   mapKey: 'DSXBZ-6AY3U-QLAVO-4H6LL-ZOIT3-ALFUW',
   //baseUrl: 'http://148.70.176.93/user/api/v1/',
-  //baseUrl: 'https://ququgo.club/user/api/v1/',
-  baseUrl: 'http://127.0.0.1:8070/user/api/v1/',
-  httpBase: function(method, url, data, loading) {
+  baseUrl: 'https://ququgo.club/user/api/v1/',
+  //baseUrl: 'http://127.0.0.1:8070/user/api/v1/',
+  httpBase: function (method, url, data, loading) {
     let _this = this
     let requestUrl = this.baseUrl + url
     let token = wx.getStorageSync('token')
@@ -77,7 +77,7 @@ App({
         method: method,
         url: requestUrl,
         data: data,
-        success: function(result) {
+        success: function (result) {
           if (loading) {
             wx.hideLoading()
           }
@@ -102,7 +102,7 @@ App({
             reject(res)
           }
         },
-        fail: function(res) {
+        fail: function (res) {
           reject(res)
           if (loading) {
             wx.hideLoading()
@@ -117,10 +117,10 @@ App({
 
     return new Promise(request)
   },
-  httpGet: function(url, data, loading) {
+  httpGet: function (url, data, loading) {
     return this.httpBase('GET', url, data, loading)
   },
-  httpPost: function(url, data, loading) {
+  httpPost: function (url, data, loading) {
     return this.httpBase('POST', url, data, loading)
   },
   globalData: {
