@@ -1,4 +1,11 @@
-<view class="main">
+<view class="{{isIPX ? 'main-IPX':'main'}}">
+		<view class="header">
+				<van-col>
+						<view class="header-search">
+								<van-search value="{{ value }}" placeholder="请输入搜索关键词" custom-class="header-search-van" background="none" field-class="header-search-field" input-class="header-search-input" />
+						</view>
+				</van-col>
+		</view>
 		<!-- <view class="nav">
 		<view class="nav-item">
 			<van-button icon="arrow-up" type="default">默认按钮</van-button>
@@ -38,6 +45,14 @@
 						<icon wx:if="{{listStyle === 'list'}}" class="iconfont icon-list" />
 						<icon wx:elif="{{listStyle === 'small' || listStyle == 'big'}}" class="iconfont icon-card" />
 				</view>
+		</view>
+		<view class="goods-list">
+				<van-card wx:for="{{goods}}" wx:key="{{item.guid}}" num="" tag="标签" origin-price="{{item.originalPrice>0?item.originalPrice:''}}" centered="true" currency="¥" price="{{item.currentPrice}}" desc="{{item.description}}" title="{{item.name}}" thumb="{{item.image}}" data-guid="{{item.guid}}" bindtap="showDetail">
+						<view slot="tags" wx:for="{{item.tags}}">{{item}}</view>
+						<view slot="footer">
+								<van-button size="mini" round type="danger">购买</van-button>
+						</view>
+				</van-card>
 		</view>
 		<!-- <van-tabbar active="{{ active }}" fixed="{{false}}" bind:change="onChange">
 		<van-tabbar-item icon="home-o">标签</van-tabbar-item>

@@ -2,6 +2,17 @@ Page .main {
   margin-top: 10px;
 }
 
+Page .main-IPX {
+  margin-top: 66rpx;
+}
+
+Page .header {
+  /* margin-bottom: 10rpx; */
+  height: 100rpx;
+  line-height: 100rpx;
+  margin-top: 50rpx;
+}
+
 Page .nav {
   display: -webkit-flex;
   display: flex;
@@ -45,7 +56,7 @@ Page .nav-item {
   display: -webkit-flex;
   display: flex;
   background-color: #fff;
-  position: fixed;
+  /* position: fixed; */
   left: 0;
   /* top: 0; */
   z-index: 2;
@@ -113,4 +124,35 @@ Page .nav-item {
 .filter-list .show-type-btn > icon {
   font-size: 32rpx;
   color: rgba(58, 58, 58, 1);
+}
+
+Page .goods-list {
+  clear: both;
+  margin-top: 10rpx;
+  background-color: #fff;
+}
+
+Page .header-search {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  /* width: 570rpx; */
+  height: 100rpx;
+  line-height: 100rpx;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 50rpx;
+}
+
+Page .header-search .header-search-van {
+  height: 100rpx;
+  line-height: 100rpx;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+Page .header-search-input {
+}
+Page .header-search-field {
 }

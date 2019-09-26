@@ -1,5 +1,6 @@
 {
-  "navigationBarTitleText": "list",
+  "navigationBarTitleText": "商品列表",
+  "navigationStyle": "custom",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "van-row": "/dist/row/index",
