@@ -1,12 +1,3 @@
-/* Page .address{
-    
-}
-  */
-
-Page .main {
-  margin-top: 10px;
-}
-
 Page .goods-list-card-title {
   overflow: hidden;
   text-overflow: ellipsis;

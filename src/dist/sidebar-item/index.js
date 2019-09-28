@@ -2,12 +2,13 @@ import { VantComponent } from '../common/component';
 VantComponent({
     relation: {
         type: 'ancestor',
-        name: 'badge-group',
+        name: 'sidebar',
         linked(target) {
             this.parent = target;
         }
     },
     props: {
+        dot: Boolean,
         info: null,
         title: String
     },
@@ -17,14 +18,14 @@ VantComponent({
             if (!parent) {
                 return;
             }
-            const index = parent.badges.indexOf(this);
+            const index = parent.items.indexOf(this);
             parent.setActive(index).then(() => {
                 this.$emit('click', index);
                 parent.$emit('change', index);
             });
         },
         setActive(active) {
-            return this.set({ active });
+            return this.setData({ active });
         }
     }
 });

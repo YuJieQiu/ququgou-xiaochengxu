@@ -1,8 +1,8 @@
 {
   "navigationBarTitleText": "区区购",
-  "navigationStyle":"custom",
+  "navigationStyle": "custom",
   "enablePullDownRefresh": true,
-  "usingComponents": { 
+  "usingComponents": {
     "van-row": "/dist/row/index",
     "van-col": "/dist/col/index",
     "van-tab": "/dist/tab/index",
@@ -10,6 +10,8 @@
     "van-card": "/dist/card/index",
     "van-button": "/dist/button/index",
     "van-icon": "/dist/icon/index",
-    "van-search": "/dist/search/index"
+    "van-search": "/dist/search/index",
+    "van-grid": "/dist/grid/index",
+    "van-grid-item": "/dist/grid-item/index"
   }
 }

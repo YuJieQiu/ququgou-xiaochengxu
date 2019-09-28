@@ -4,7 +4,8 @@ App({
     //判断机型(适配iphoneX)
     wx.getSystemInfo({
       success: res => {
-        console.log()
+        const that = this
+        const screenList = new Array("iPhone X", "iPhone 11", "iPhone12")
 
         let custom = wx.getMenuButtonBoundingClientRect()
         this.globalData.statusBar = res.statusBarHeight
@@ -12,8 +13,12 @@ App({
         this.globalData.customBar =
           custom.bottom + custom.top - res.statusBarHeight
 
-        if (res.model.search('iPhone X') != -1) {
-          this.globalData.isIPX = true
+        const model = res.model
+        for (let index = 0; index < screenList.length; index++) {
+          if (model.search(screenList[index]) != -1) {
+            that.globalData.isIPX = true
+            break
+          }
         }
       }
     })
@@ -56,8 +61,8 @@ App({
   },
   mapKey: 'DSXBZ-6AY3U-QLAVO-4H6LL-ZOIT3-ALFUW',
   //baseUrl: 'http://148.70.176.93/user/api/v1/',
-  baseUrl: 'https://ququgo.club/user/api/v1/',
-  //baseUrl: 'http://127.0.0.1:8070/user/api/v1/',
+  //baseUrl: 'https://ququgo.club/user/api/v1/',
+  baseUrl: 'http://127.0.0.1:8070/user/api/v1/',
   httpBase: function (method, url, data, loading) {
     let _this = this
     let requestUrl = this.baseUrl + url

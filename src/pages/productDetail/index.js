@@ -1,6 +1,7 @@
 const app = getApp()
 Page({
   data: {
+    isIPX: app.globalData.isIPX,
     tabs: [],
     product: {},
     guid: '',
@@ -353,12 +354,13 @@ Page({
     })
   },
   onLoad(options) {
+    console.log(app.globalData.isIPX)
     this.setData({
       guid: options.guid
     })
     this.getProductInfo()
   },
-  navigateToOrderSettlement: function() {
+  navigateToOrderSettlement: function () {
     if (this.data.selectSku.id <= 0) {
       return
     }

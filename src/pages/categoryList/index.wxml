@@ -1,13 +1,8 @@
 <view class='cu-custom'>
-	<view class="cu-bar fixed bg-shadeTop" style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
-		<navigator
-		 class='action'
-		 open-type="navigateBack"
-		 delta="1"
-		 hover-class="none"
-		>
-			<text class='cuIcon-back' />
-
+		<view class="cu-bar fixed bg-shadeTop" style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+				<navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+						<!-- <text class='cuIcon-back' /> -->
+						{{'返回'}}
 						<!-- 返回 -->
 				</navigator>
 				<view class='content' style='top:{{statusBar}}px;'>
@@ -37,41 +32,39 @@
 								<view class='action'>
 										<text class='cuIcon-title text-red'>
 												<!-- . -->
-										
-</text>
-			{{item.text}}
-	</view>
-</view>
-<view class="cu-list menu-avatar">
-	<view class="cu-item" wx:for="{{item.children}}" wx:for-item="children">
-		<view class="cu-avatar round lg" style="background-image:url({{children.img}});">
-			<view class="cu-tag badge" wx:if="{{false}}">
-				<!-- 99+ -->
-			</view>
-		</view>
-		<view class="content">
-			<view class="text-grey">
-				<text class="text-cut">{{children.text}}</text>
-				<view class="cu-tag round bg-orange sm" wx:if="{{false}}">
-					<!-- 战士 -->
-				</view>
-			</view>
-			<view class="text-gray text-sm flex">
-				<text class="text-cut">
+										</text>
+										{{item.text}}
+								</view>
+						</view>
+						<view class="cu-list menu-avatar">
+								<view class="cu-item" wx:for="{{item.children}}" wx:for-item="children">
+										<view class="cu-avatar round lg" style="background-image:url({{children.img}});">
+												<view class="cu-tag badge" wx:if="{{false}}">
+														<!-- 99+ -->
+												</view>
+										</view>
+										<view class="content">
+												<view class="text-grey">
+														<text class="text-cut">{{children.text}}</text>
+														<view class="cu-tag round bg-orange sm" wx:if="{{false}}">
+																<!-- 战士 -->
+														</view>
+												</view>
+												<view class="text-gray text-sm flex">
+														<text class="text-cut">
 																<!-- text -->
 														</text>
-			</view>
-		</view>
-		<view class="action">
-			<view class="text-grey text-xs">
-				<!-- 22:20 -->
-			</view>
-			<view class="cuIcon-notice_forbid_fill text-gray" />
-		</view>
-	</view>
+												</view>
+										</view>
+										<view class="action">
+												<view class="text-grey text-xs">
+														<!-- 22:20 -->
+												</view>
+												<view class="cuIcon-notice_forbid_fill text-gray" />
+										</view>
+								</view>
+						</view>
+				</view>
+		</scroll-view>
+		<!-- 右边E -->
 </view>
-</view>
-</scroll-view>
-<!-- 右边E -->
-</view>
-

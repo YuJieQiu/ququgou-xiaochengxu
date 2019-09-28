@@ -41,12 +41,6 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/merchant/index",
-        "iconPath": "assets/images/tab/merchant.png",
-        "selectedIconPath": "assets/images/tab/merchantCur.png",
-        "text": "商户"
-      },
-      {
         "pagePath": "pages/shopCart/index",
         "iconPath": "assets/images/tab/shopcart.png",
         "selectedIconPath": "assets/images/tab/shopcartCur.png",

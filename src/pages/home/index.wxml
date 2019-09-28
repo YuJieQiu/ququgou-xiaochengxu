@@ -1,4 +1,5 @@
 <view class="{{isIPX ? 'main-IPX':'main'}}">
+		<!-- <view class="{{fixTop<scrollTop?'header-page-top-sticky':'header'}}"> -->
 		<view class="header">
 				<van-row>
 						<!-- <van-col span="4">
@@ -36,20 +37,61 @@
         </view> -->
 		</view>
 		<!-- banner S -->
-		<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-				<block wx:for="{{banners}}" wx:key="*this">
-						<swiper-item>
-								<image src="{{item.images.url}}" class="slide-image" />
-						</swiper-item>
-				</block>
-		</swiper>
+		<view class="swiper-image">
+				<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+						<block wx:for="{{banners}}" wx:key="*this">
+								<swiper-item>
+										<image src="{{item.images.url}}" class="slide-image" />
+								</swiper-item>
+						</block>
+				</swiper>
+		</view>
 		<!-- banner E -->
 		<!-- category S -->
-		<view class="section">
+		<view class="category" wx:if="{{confList['home_category'].length>0}}">
+				<van-grid gutter="{{8}}" clickable>
+						<van-grid-item icon="home-o" wx:for="{{confList['home_category']}}" wx:for-item="listItem" text="{{listItem.name}}" url="{{listItem.link_url}}" />
+						<!-- <van-grid-item icon="home-o" text="分类2" />
+								<van-grid-item icon="home-o" text="分类3" />
+								<van-grid-item icon="home-o" text="更多" link-type="navigateTo" url="/pages/categoryList/index" /> wx:for-index="i" -->
+				</van-grid>
+		</view>
+		<!-- category E -->
+		<!-- goods-list S -->
+		<view class="goods-list">
+				<view class="custom-card" wx:for="{{tabProducts}}" data-guid="{{item.guid}}" bindtap="onClickToShowDetail">
+						<view class="custom-card-centre">
+								<view class="custom-card__thumb">
+										<image src="{{ item.image }}" mode="aspectFill" lazy-load="true" class="custom-card__img" />
+								</view>
+								<view class="custom-card__content">
+										<view class="custom-card__title">{{ item.name }}</view>
+										<view class="custom-card-footer">
+												<view class="custom-card__price">
+														<view class="now-price">¥{{ currency }} {{ item.currentPrice }}</view>
+														<view class="original-price" wx:for="{{item.originalPrice>0}}">
+																{{ currency }} {{ item.originalPrice }}
+														</view>
+												</view>
+										</view>
+								</view>
+						</view>
+						<!-- <view class="van-card__footer">暂不添加</view> -->
+				</view>
+		</view>
+		<!-- goods-list E -->
+		<!-- tabs S -->
+		<view class="section" wx:if="{{confList['hometba'].length>0}}">
 				<view class="section__title" />
-				<van-tabs active="{{ active }}" bind:change="onChange">
-						<van-tab title="{{item.text}}" wx:for="{{tabs}}" wx:key="{{item.id}}" wx:for-index="i" data-index="{{i}}">
-								<van-card wx:for="{{item.productSmallInfos}}" wx:key="{{item.guid}}" num="" tag="标签" origin-price="{{item.original_price}}" centered="true" currency="¥" price="{{item.min_price}}" desc="{{item.description}}" title="{{item.name}}" thumb="{{item.image}}" data-guid="{{item.guid}}" bindtap="showDetail">
+				<van-tabs active="{{ active }}" bind:change="onChangeHometba">
+						<van-tab title="{{listItem.text}}" wx:for="{{confList['hometba']}}" wx:for-item="listItem" wx:key="{{listItem.id}}" data-index="{{listItem.id}}">
+								<!-- <view class="hometba-card" wx:for="{{tabProducts}}" wx:key="{{item.guid}}">
+										<view class="hometba-card-left">
+												<image src="{{item.image}}" class="hometba-thumb" />
+										</view>
+										<view class="hometba-card-right">right</view>
+								</view> -->
+								<van-card custom-class="hometba-card" thumb-class="hometba-card-thumb" title-class="hometba-card-title" price-class="hometba-card-price" origin-price-class="hometba-card-origin-price" desc-class="hometba-card-desc" num-class="hometba-card-num" lazy-load="{{true}}" wx:for="{{tabProducts}}" wx:key="{{item.guid}}" num="2" numsymbol="销量" tag="{{listItem.text!='全部'?listItem.text:''}}" origin-price="{{item.originalPrice>0?item.originalPrice:''}}" centered="{{false}}" currency="¥" price="{{item.currentPrice}}" desc="{{item.description}}" title="{{item.name}}" thumb="{{item.image}}" thumb-mode="aspectFill" data-guid="{{item.guid}}" bindtap="showDetail">
 										<view slot="tags" wx:for="{{item.tags}}">{{item}}</view>
 										<view slot="footer">
 												<van-button size="mini" round type="danger">购买</van-button>
@@ -58,7 +100,7 @@
 						</van-tab>
 				</van-tabs>
 		</view>
-		<!-- category S -->
+		<!-- tabs E -->
 		<!-- <view class="list"> 
     <EmptyList requesting="{{requesting}}" end="{{end}}" listData="{{listData}}"></EmptyList>
 </view> -->

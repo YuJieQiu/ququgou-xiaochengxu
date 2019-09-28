@@ -166,32 +166,6 @@ Page .list .listItem .bd .dotInfo .chBd .text {
   display: inline;
 } */
 
-Page {
-  padding-bottom: 1rpx;
-}
-Page .main-IPX {
-  margin-top: 66rpx;
-}
-
-Page .main {
-  margin-top: 20rpx;
-}
-
-Page swiper {
-  height: 366rpx;
-}
-
-Page swiper image {
-  width: 100%;
-  height: 366rpx;
-}
-
-Page .header {
-  /* margin-bottom: 10rpx; */
-  height: 100rpx;
-  line-height: 100rpx;
-  margin-top: 50rpx;
-}
 /* 
 Page .header-left { 
   display: inline-block;
@@ -202,7 +176,45 @@ Page .header-right {
   display: inline-block;
   vertical-align: middle;
 } */
+
+Page swiper {
+  height: 366rpx;
+}
+
+Page swiper image {
+  width: 100%;
+  height: 366rpx;
+}
+
+Page .swiper-image {
+  margin-top: 155rpx;
+}
+/* .news.fix-news {
+  position: fixed;
+  top: 0;
+  left: 0;
+} */
+Page .header {
+  height: 100rpx;
+  line-height: 100rpx;
+  padding-top: 50rpx;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  background-color: rgb(245 245 245);
+  /* background-color: #000; */
+}
+/* Page .header-page-top-sticky {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+} */
+
 Page .header-search {
+  /* position: fixed;
+  z-index: 9999; */
   padding: 0;
   margin: 0;
   border: 0;
@@ -212,8 +224,15 @@ Page .header-search {
   display: inline-block;
   vertical-align: middle;
 }
-
+/* 
+Page .header-search-page-top-sticky {
+  z-index: 9999;
+  position: fixed;
+  width: 100%;
+} */
 Page .header-location {
+  /* position: fixed;
+  z-index: 9999; */
   display: inline-block;
   vertical-align: middle;
   width: 150rpx;
@@ -226,6 +245,7 @@ Page .header-location {
 
 Page .header-search-input {
 }
+
 Page .header-search-field {
 }
 Page .header-search .header-search-van {
@@ -256,4 +276,132 @@ Page .header-icon {
   line-height: 100rpx;
   vertical-align: middle;
   display: inline-block;
+}
+
+Page .category {
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+Page .hometba-card {
+  margin: 20rpx;
+  /* box-shadow: 1px 1px 1px #333; */
+  border-radius: 5px;
+  background-color: #fff;
+  /* min-height: 300rpx; */
+}
+
+/* 
+Page .hometba-card-left {
+  display: inline-block;
+  width: 40%;
+  background-color: aqua;
+  min-height: 300rpx;
+  vertical-align: middle;
+  align-content: center;
+  line-height: 300rpx; 
+}
+
+Page .hometba-card-right {
+  display: inline-block;
+  width: 60%;
+  background-color: blue;
+  min-height: 300rpx;
+  vertical-align: middle; 
+}
+
+Page .hometba-card-left .hometba-thumb {
+  width: 233rpx;
+  height: 150rpx; 
+}
+
+Page .hometba-card-thumb {
+ 
+}
+Page .hometba-card-title {
+}
+Page .hometba-card-price {
+}
+
+Page .hometba-card-origin-price {
+}
+Page .hometba-card-desc {
+}
+*/
+Page .hometba-card-num {
+  color: #7d7e80;
+  font-size: 10px;
+}
+
+Page .goods-list {
+  width: 100%;
+  min-height: 500px;
+  margin-top: 20rpx;
+}
+
+Page .custom-card {
+  border-radius: 10rpx;
+  /* border-top-left-radius: 20px;
+  border-top-right-radius: 20px; */
+  width: 47%;
+  display: inline-block;
+  vertical-align: top;
+  /* margin-left: 10rpx;
+  margin-right: 10rpx;
+  margin-bottom: 10rpx; */
+  margin: 10rpx;
+  background-color: #fff;
+}
+
+Page .custom-card-centre {
+}
+
+Page .custom-card-centre .custom-card__thumb {
+}
+
+Page .custom-card__thumb .custom-card__img {
+  width: 100%;
+  height: 385rpx;
+  /* border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx; */
+}
+
+Page .custom-card__content {
+}
+
+Page .custom-card__title {
+  font-size: 11px;
+  font-weight: 700;
+  word-wrap: break-word;
+  line-height: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin: 8rpx;
+}
+
+Page .custom-card-footer {
+  margin: 8rpx;
+  padding-bottom: 30rpx;
+}
+
+Page .custom-card__price {
+}
+
+Page .custom-card__price .now-price {
+  display: inline-block;
+  /* margin-left: 10rpx; */
+  color: #e93b3d;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15px;
+}
+
+Page .custom-card__price .original-price {
+  display: inline-block;
+  /* margin-left: 15rpx; */
+  font-size: 12px;
+  color: #888;
+  text-decoration: line-through;
 }

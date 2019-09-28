@@ -1,6 +1,6 @@
 <!-- 引入.wxs文件 src为相对路径，module指定当前模块的名称 -->
 <wxs module="wxs" src="../common/index.wxs" />
-<view class="main">
+<view class="{{isIPX ? 'main-IPX':'main'}}">
 		<!-- swiper.wxml -->
 		<swiper indicator-dots="true" autoplay="true" interval="10000" duration="500" circular="true" class='swiper'>
 				<block wx:for="{{ product.resources}}">
@@ -102,6 +102,7 @@
 		<van-goods-action>
 				<van-goods-action-icon icon="chat-o" text="客服" open-type="contact" bind:click="onClickIcon" />
 				<van-goods-action-icon icon="cart-o" text="购物车" info="{{cartCount==0?'':cartCount}}" url="{{'/pages/shopCart/cart'}}" />
+				<van-goods-action-icon icon="shop-o" text="商铺" url="{{'/pages/merchant/index'}}" />
 				<van-goods-action-button text="加入购物车" type="warning" bind:click="onClickAddShopCart" />
 				<van-goods-action-button text="立即购买" bind:click="onClickBuyNow" />
 		</van-goods-action>
