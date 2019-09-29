@@ -35,6 +35,12 @@ Page({
       }
     })
   },
+  onClickMerName(e) {
+    const code = e.currentTarget.dataset.merCode
+    wx.navigateTo({
+      url: '/pages/merchant/index?merCode=' + code
+    })
+  },
   computeOrderProduct() {
     var serlctId = this.data.checkboxData
     var list = this.data.list
@@ -190,7 +196,7 @@ Page({
     })
     this.computeOrderProduct()
   },
-  onLoad(options) {},
+  onLoad(options) { },
   onShow() {
     this.getInfo()
   }

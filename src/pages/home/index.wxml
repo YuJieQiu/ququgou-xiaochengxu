@@ -21,7 +21,7 @@
 										<view class="header-icon">
 												<van-icon name="location-o" />
 										</view>
-										<view class='header-location-name'>{{ad_info.city}}</view>
+										<view class='header-location-name'>{{location.city}}</view>
 										<view class="header-icon">
 												<van-icon name="arrow-down" />
 										</view>
@@ -57,29 +57,6 @@
 				</van-grid>
 		</view>
 		<!-- category E -->
-		<!-- goods-list S -->
-		<view class="goods-list">
-				<view class="custom-card" wx:for="{{tabProducts}}" data-guid="{{item.guid}}" bindtap="onClickToShowDetail">
-						<view class="custom-card-centre">
-								<view class="custom-card__thumb">
-										<image src="{{ item.image }}" mode="aspectFill" lazy-load="true" class="custom-card__img" />
-								</view>
-								<view class="custom-card__content">
-										<view class="custom-card__title">{{ item.name }}</view>
-										<view class="custom-card-footer">
-												<view class="custom-card__price">
-														<view class="now-price">¥{{ currency }} {{ item.currentPrice }}</view>
-														<view class="original-price" wx:for="{{item.originalPrice>0}}">
-																{{ currency }} {{ item.originalPrice }}
-														</view>
-												</view>
-										</view>
-								</view>
-						</view>
-						<!-- <view class="van-card__footer">暂不添加</view> -->
-				</view>
-		</view>
-		<!-- goods-list E -->
 		<!-- tabs S -->
 		<view class="section" wx:if="{{confList['hometba'].length>0}}">
 				<view class="section__title" />
@@ -101,6 +78,33 @@
 				</van-tabs>
 		</view>
 		<!-- tabs E -->
+		<!-- goods-list S -->
+		<view class="goods-list" wx:if="{{goods.length>0&&getHometbaProductPage.pageEnd}}">
+				<view class="goods-list-title">推荐</view>
+				<view class="custom-card" wx:for="{{goods}}" data-guid="{{item.guid}}" bindtap="showDetail">
+						<view class="custom-card-centre">
+								<view class="custom-card__thumb">
+										<image src="{{ item.image }}" mode="aspectFill" lazy-load="true" class="custom-card__img" />
+								</view>
+								<view class="custom-card__content">
+										<view class="custom-card__title">{{ item.name }}</view>
+										<view class="custom-card-footer">
+												<view class="custom-card__price">
+														<view class="now-price">¥{{ currency }} {{ item.currentPrice }}</view>
+														<view class="original-price" wx:for="{{item.originalPrice>0}}">
+																{{ currency }} {{ item.originalPrice }}
+														</view>
+												</view>
+												<view class="custom-card-footer-button">
+														<van-button size="mini" round type="danger">购买</van-button>
+												</view>
+										</view>
+								</view>
+						</view>
+						<!-- <view class="van-card__footer">暂不添加</view> -->
+				</view>
+		</view>
+		<!-- goods-list E -->
 		<!-- <view class="list"> 
     <EmptyList requesting="{{requesting}}" end="{{end}}" listData="{{listData}}"></EmptyList>
 </view> -->

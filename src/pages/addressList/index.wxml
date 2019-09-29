@@ -6,7 +6,6 @@
           <van-cell custom-class="address-cell" border="{{false}}" data-id="{{item.id}}">
             <view slot="title">
               <view class="address-cell-radio" data-index="{{index}}" data-id="{{item.id}}" bindtap="onRadioClick">
-                {{item.id}}
                 <van-radio checked-color="#f44" name="{{item.id}}" custom-class="address-cell-radio" data-id="{{item.id}}" />
               </view>
               <view class="address-cell-text">

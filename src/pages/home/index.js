@@ -2,7 +2,6 @@ const app = getApp()
 const { appUtils, appValidate } = require('../../utils/util.js')
 const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
 const qqmapsdk = new QQMapWX({ key: app.mapKey })
-const pageStart = 1
 
 Page({
   data: {
@@ -14,14 +13,25 @@ Page({
     sticky: false,
     fixTop: '',//区域离顶部的高度
     scrollTop: 0,//滑动条离顶部的距离
+    tabDatas: [],
     tabProducts: [],
     goods: [],
     getHometbaProductPage: {
       page: 1, //默认第一页开始
       limit: 10, //默认每页10条
+      total: 0,
       pageEnd: false,
       appConfigId: 0
     },
+    getProductListPage: {
+      page: 1, //默认第一页开始
+      limit: 10, //默认每页10条
+      total: 0,
+      pageEnd: false,
+    },
+    location: {
+      city: "上海市"
+    }//位置信息
   },
 
   getBannerList() {
@@ -50,22 +60,48 @@ Page({
   },
   getHometbaProductList() {
     const that = this
+    if (that.data.getHometbaProductPage.pageEnd) {
+      return
+    }
+
     app.httpGet('home/config/product/list', that.data.getHometbaProductPage).then(res => {
-      if (res && res.data) {
-        if (res.data.length <= 0) {
-          that.setData({ 'getHometbaProductPage.pageEnd': true })
-          return
-        }
-        let list = this.data.tabProducts
-        if (this.data.getHometbaProductPage.page > 1) {
-          list.push(...res.data)
-        } else {
-          list = res.data
-        }
-        that.setData({
-          tabProducts: list
-        })
+
+      if (res.data == null || res.data.length <= 0) {
+        that.setData({ 'getHometbaProductPage.pageEnd': true })
+        that.getProductList()
+        return
       }
+      let list = this.data.tabProducts
+      if (this.data.getHometbaProductPage.page > 1) {
+        list.push(...res.data)
+      } else {
+        list = res.data
+      }
+      that.setData({
+        tabProducts: list
+      })
+    })
+  },
+  getProductList() {
+    const that = this
+    if (that.data.getProductListPage.pageEnd) {
+      return
+    }
+
+    app.httpGet('shop/product/info/getList', that.data.getProductListPage).then(res => {
+      if (res.data == null || res.data.length <= 0) {
+        that.setData({ 'getProductListPage.pageEnd': true })
+        return
+      }
+      let list = this.data.goods
+      if (this.data.getProductListPage.page > 1) {
+        list.push(...res.data)
+      } else {
+        list = res.data
+      }
+      that.setData({
+        goods: list
+      })
     })
   },
   getHomeData() {
@@ -78,14 +114,7 @@ Page({
     })
   },
   showDetail(e) {
-    console.log(e.currentTarget.dataset.guid)
     let guid = e.currentTarget.dataset.guid
-
-    //console.log(this.data)
-    // let index = e.currentTarget.dataset;
-    // let data = this.data.tabs[index];
-    // console.log(index)
-    // console.log(data)
     wx.navigateTo({
       url: '/pages/productDetail/index?guid=' + guid
     })
@@ -109,6 +138,13 @@ Page({
       this.setData({ 'getHometbaProductPage.page': this.data.getHometbaProductPage.page + 1 })
       this.getHometbaProductList()
     }
+
+    if (this.data.getHometbaProductPage.pageEnd) {
+      if (!this.data.getProductListPage.pageEnd) {
+        this.setData({ 'getProductListPage.page': this.data.getProductListPage.page + 1 })
+        this.getProductList()
+      }
+    }
   },
   onPageScroll(e) {
     // let self = this;
@@ -122,52 +158,15 @@ Page({
   },
 
   onLoad(options) {
-    // wx.getLocation({
-    //     type: 'wgs84', //
-    //     success(res) {
-    //       const latitude = res.latitude
-    //       const longitude = res.longitude
-    //       const speed = res.speed
-    //       const accuracy = res.accuracy
+    let location = wx.getStorageSync('location')
+    console.log(location)
+    if (location != null && location != "") {
+      this.setData({
+        location: location
+      })
+    }
 
-    //       console.log(res)
-    //     }
-    //   })
-    const _this = this
-
-    wx.getLocation({
-      type: 'wgs84',
-      success(res) {
-        const latitude = res.latitude
-        const longitude = res.longitude
-        const speed = res.speed
-        const accuracy = res.accuracy
-
-        qqmapsdk.reverseGeocoder({
-          location: {
-            latitude: latitude,
-            longitude: longitude
-          },
-          success: function (res) {
-            // console.log(JSON.stringify(res));
-            // let province = res.result.ad_info.province
-            // let city = res.result.ad_info.city
-
-            _this.setData({
-              ad_info: res.result.ad_info
-            })
-          },
-          fail: function (res) {
-            console.log(res)
-          },
-          complete: function (res) {
-            // console.log(res);
-          }
-        })
-      }
-    })
     this.getBannerList()
-    //this.getHomeData()
     this.getHomeConfigList()
   }
 })

@@ -14,8 +14,8 @@ Page({
     tabIndex: 0
   },
 
-  onShow: function() {},
-  getOrderListInfo: function() {
+  onShow: function () { },
+  getOrderListInfo: function () {
     let data = {
       page: this.data.page,
       limit: this.data.limit,
@@ -52,7 +52,7 @@ Page({
           that.onClickTab({ detail: { index: that.data.tabIndex } })
         })
       })
-      .catch(() => {})
+      .catch(() => { })
   },
   onClickTab(e) {
     let data = e.detail
@@ -120,7 +120,6 @@ Page({
   onReachBottom() {
     if (!this.data.pageEnd) {
       this.setData({ page: this.data.page + 1 })
-      console.log('onReachBottom')
       this.getOrderListInfo()
     }
     // Do something when page reach bottom.

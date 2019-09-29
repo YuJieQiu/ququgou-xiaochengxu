@@ -113,6 +113,12 @@ Page .content-card {
 
 Page .van-cell-text {
   display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all; /* 不换行 */
+  white-space: nowrap; /* 不换行 */
+  max-width: 400rpx;
 }
 
 Page .van-cell-checkbox {

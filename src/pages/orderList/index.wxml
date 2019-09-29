@@ -5,10 +5,10 @@
 						<view class="order-list" wx:for="{{list}}" wx:for-item="listItem">
 								<van-panel use-footer-slot footer-class="o-footer">
 										<view slot="header">
-												<van-cell value="{{listItem.statusText}}" icon="shop-o" title="{{listItem.merName}}" is-link />
+												<van-cell title-class="van-cell-title" value="{{listItem.statusText}}" icon="shop-o" title="{{listItem.merName}}" is-link />
 										</view>
-										<view>
-												<van-card bindtap="onClickRedirectionDetail" data-no="{{listItem.no}}" custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" lazy-load="{{true}}" wx:for="{{listItem.products}}" wx:for-item="product" thumb="{{product.cover}}" num="{{product.count}}" thumb-mode="aspectFill" centered="{{false}}" price="{{wxs.priceStr(product.unitPrice)}}">
+										<view class="order-list-item-card">
+												<van-card bindtap="onClickRedirectionDetail" data-no="{{listItem.no}}" custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" lazy-load="{{true}}" wx:for="{{listItem.products}}" wx:for-item="product" thumb="{{product.cover}}" num="{{product.count}}" numsymbol="x" thumb-mode="aspectFill" centered="{{false}}" price="{{wxs.priceStr(product.unitPrice)}}">
 														<view slot="title" class="goods-list-card-title">{{product.name}}</view>
 														<view slot="desc" class="goods-list-card-desc">
 																<block wx:if="{{product.skuInfo!=null}}" wx:for="{{product.skuInfo}}">
@@ -33,24 +33,8 @@
 										</view>
 								</van-panel>
 						</view>
-						<!-- <van-card
-        num="2"
-        price="2.00"
-        desc="描述信息"
-        title="商品标题"
-        thumb="https://img14.360buyimg.com/n0/jfs/t3088/268/6366969996/109449/7d1e9e84/58a2a127N7b5041ce.jpg"
-        
-      > 
-      </van-card> -->
-						<!-- <view slot="footer">
-           
-            <van-button size="mini">按钮</van-button>
-            <van-button size="mini">按钮</van-button>
-
-             <text >实际付款 ¥10.00</text>
-          </view> -->
 				</van-tab>
-				<van-tab title="待付款" index="1">
+				<van-tab title="待完成" index="1">
 						<view class="order-list" wx:for="{{list}}" wx:for-item="listItem">
 								<van-panel use-footer-slot footer-class="o-footer">
 										<view slot="header">
@@ -83,7 +67,7 @@
 								</van-panel>
 						</view>
 				</van-tab>
-				<van-tab title="待发货" index="2">
+				<van-tab title="已完成" index="2">
 						<view class="order-list" wx:for="{{list}}" wx:for-item="listItem">
 								<van-panel use-footer-slot footer-class="o-footer">
 										<view slot="header">
@@ -116,7 +100,7 @@
 								</van-panel>
 						</view>
 				</van-tab>
-				<van-tab title="待收货" index="3">
+				<!-- <van-tab title="待收货" index="3">
 						<view class="order-list" wx:for="{{list}}" wx:for-item="listItem">
 								<van-panel use-footer-slot footer-class="o-footer">
 										<view slot="header">
@@ -148,8 +132,8 @@
 										</view>
 								</van-panel>
 						</view>
-				</van-tab>
-				<van-tab title="待评价" index="4">
+				</van-tab> -->
+				<!-- <van-tab title="待评价" index="4">
 						<view class="order-list" wx:for="{{list}}" wx:for-item="listItem">
 								<van-panel use-footer-slot footer-class="o-footer">
 										<view slot="header">
@@ -181,7 +165,7 @@
 										</view>
 								</van-panel>
 						</view>
-				</van-tab>
+				</van-tab> -->
 		</van-tabs>
 		<van-dialog id="van-dialog" />
 </view>

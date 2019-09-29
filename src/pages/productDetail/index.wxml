@@ -102,7 +102,7 @@
 		<van-goods-action>
 				<van-goods-action-icon icon="chat-o" text="客服" open-type="contact" bind:click="onClickIcon" />
 				<van-goods-action-icon icon="cart-o" text="购物车" info="{{cartCount==0?'':cartCount}}" url="{{'/pages/shopCart/cart'}}" />
-				<van-goods-action-icon icon="shop-o" text="商铺" url="{{'/pages/merchant/index'}}" />
+				<van-goods-action-icon icon="shop-o" text="商铺" url="{{'/pages/merchant/index?merId=1'}}" />
 				<van-goods-action-button text="加入购物车" type="warning" bind:click="onClickAddShopCart" />
 				<van-goods-action-button text="立即购买" bind:click="onClickBuyNow" />
 		</van-goods-action>

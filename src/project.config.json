@@ -46,13 +46,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
-					"name": "",
-					"pathName": "",
-					"query": "",
+					"name": "merchant",
+					"pathName": "pages/merchant/index",
+					"query": "merCode=6de79d7d7f764e3981b35d8b9a36fcc3",
 					"scene": null
 				},
 				{
@@ -108,6 +108,7 @@
 					"id": -1,
 					"name": "pages/orderDetail/index",
 					"pathName": "pages/orderDetail/index",
+					"query": "",
 					"scene": null
 				}
 			]

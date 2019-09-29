@@ -22,7 +22,8 @@ Page({
       checkAll: false,
       number: 1
     },
-    attrInfo: []
+    attrInfo: [],
+    refresh: false
   },
   changeIndicatorDots(e) {
     this.setData({
@@ -353,12 +354,24 @@ Page({
       }
     })
   },
+  onShow(o) {
+    console.log(this.data.refresh)
+    if (this.data.refresh) {
+      this.setData({
+        refresh: false
+      })
+      this.getProductInfo()
+    }
+  },
   onLoad(options) {
-    console.log(app.globalData.isIPX)
-    this.setData({
-      guid: options.guid
-    })
-    this.getProductInfo()
+    console.log("onload")
+    if (options != null && options.guid != "") {
+      this.setData({
+        guid: options.guid
+      })
+      this.getProductInfo()
+    }
+    //this.getProductInfo()
   },
   navigateToOrderSettlement: function () {
     if (this.data.selectSku.id <= 0) {

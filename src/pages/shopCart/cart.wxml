@@ -3,12 +3,14 @@
 				<view class="" wx:for="{{list}}" wx:for-item="mer">
 						<van-panel use-footer-slot footer-class="o-footer">
 								<view slot="header">
-										<van-cell value="" is-link url="/pages/merchant/index">
+										<van-cell value="" is-link>
 												<view slot="title">
 														<view class="van-cell-checkbox">
 																<van-checkbox checked-color="#f44" value="{{ allCheckboxData }}" bind:change="onChangeAllCheck" />
 														</view>
-														<view class="van-cell-text">{{mer.merName}}</view>
+														<view class="van-cell-text" data-mer-code="{{mer.merCode}}" bindtap="onClickMerName">
+																{{mer.merName}}
+														</view>
 												</view>
 										</van-cell>
 								</view>

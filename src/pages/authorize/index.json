@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "用户信息授权"
+  "navigationBarTitleText": "用户信息授权",
+  "van-button": "/dist/button/index"
 }

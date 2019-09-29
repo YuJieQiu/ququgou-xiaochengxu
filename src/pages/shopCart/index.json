@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "区区购",
+  "navigationBarTitleText": "",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "van-row": "/dist/row/index",

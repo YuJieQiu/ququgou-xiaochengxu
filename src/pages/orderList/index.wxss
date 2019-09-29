@@ -3,10 +3,6 @@
 }
   */
 
-Page .main {
-  margin-top: 10px;
-}
-
 Page .goods-list-card-title {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -20,7 +16,7 @@ Page .goods-info {
 Page .goods-info-card {
   background-color: #fff;
   box-sizing: border-box;
-  height: 82px;
+  height: 260rpx;
 }
 
 Page .goods-list-card-title {
@@ -91,3 +87,17 @@ Page .o-footer-money-block {
 /* Page .address .address-add .address-add-icon{
     text-align:left;
 } */
+Page .van-cell-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all; /* 不换行 */
+  white-space: nowrap; /* 不换行 */
+  max-width: 400rpx;
+}
+Page .order-list {
+  margin: 10rpx;
+  border-radius: 5px;
+}
+Page .order-list-item-card {
+}

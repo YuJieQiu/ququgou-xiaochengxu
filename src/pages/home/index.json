@@ -12,6 +12,7 @@
     "van-icon": "/dist/icon/index",
     "van-search": "/dist/search/index",
     "van-grid": "/dist/grid/index",
-    "van-grid-item": "/dist/grid-item/index"
+    "van-grid-item": "/dist/grid-item/index",
+    "van-panel": "/dist/panel/index"
   }
 }

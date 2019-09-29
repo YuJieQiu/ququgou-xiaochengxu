@@ -1,7 +1,7 @@
 {
-  "navigationBarTitleText": "商户", 
+  "navigationBarTitleText": "",
   "enablePullDownRefresh": true,
-  "usingComponents": { 
+  "usingComponents": {
     "van-row": "/dist/row/index",
     "van-col": "/dist/col/index",
     "van-tab": "/dist/tab/index",

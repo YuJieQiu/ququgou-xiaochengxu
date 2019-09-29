@@ -212,30 +212,26 @@ Page .header {
   left: 0;
 } */
 
-Page .header-search {
-  /* position: fixed;
-  z-index: 9999; */
-  padding: 0;
-  margin: 0;
-  border: 0;
-  width: 570rpx;
-  height: 100rpx;
-  line-height: 100rpx;
-  display: inline-block;
-  vertical-align: middle;
-}
 /* 
 Page .header-search-page-top-sticky {
   z-index: 9999;
   position: fixed;
   width: 100%;
 } */
-Page .header-location {
-  /* position: fixed;
-  z-index: 9999; */
+Page .header-search {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  width: 560rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   display: inline-block;
   vertical-align: middle;
-  width: 150rpx;
+}
+Page .header-location {
+  display: inline-block;
+  vertical-align: middle;
+  width: 160rpx;
   padding: 0;
   margin: 0;
   border: 0;
@@ -276,6 +272,7 @@ Page .header-icon {
   line-height: 100rpx;
   vertical-align: middle;
   display: inline-block;
+  margin-left: 10rpx;
 }
 
 Page .category {
@@ -335,8 +332,18 @@ Page .hometba-card-num {
 
 Page .goods-list {
   width: 100%;
-  min-height: 500px;
   margin-top: 20rpx;
+}
+Page .goods-list-title {
+  font-size: 14px;
+  color: #888;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-weight: 350;
+  background-color: #fff;
+  padding-left: 30rpx;
+  margin-right: 10rpx;
+  margin-left: 10rpx;
 }
 
 Page .custom-card {
@@ -384,9 +391,13 @@ Page .custom-card__title {
 Page .custom-card-footer {
   margin: 8rpx;
   padding-bottom: 30rpx;
+  /* height: 70rpx; */
 }
 
 Page .custom-card__price {
+  display: inline-block;
+  float: left;
+  line-height: 60rpx;
 }
 
 Page .custom-card__price .now-price {
@@ -404,4 +415,10 @@ Page .custom-card__price .original-price {
   font-size: 12px;
   color: #888;
   text-decoration: line-through;
+}
+
+Page .custom-card-footer-button {
+  display: inline-block;
+  float: right;
+  line-height: 60rpx;
 }
