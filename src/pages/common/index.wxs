@@ -1,12 +1,12 @@
 // 支持es4语法
 var filter = {
-  numberToFixed: function(value) {
+  numberToFixed: function (value) {
     return 1
   },
-  arrayExist: function(array, value) {
+  arrayExist: function (array, value) {
     return array.indexOf(value) !== -1
   },
-  priceStr: function(price) {
+  priceStr: function (price) {
     if (isNaN(price)) {
       return ''
     }
@@ -15,15 +15,17 @@ var filter = {
   },
   enum: {
     orderStatus: {
-      WaitPay: 0, //待付款
-      PaySuccess: 1, //付款成功
-      Ship: 3, //已发货
-      Delivered: 5, //已签收
-      RefundApply: -1, //退货申请
-      Refund: -3, //退货中
-      RefundSuccess: -5, //已退货
-      OrderCancel: -7, //取消交易
-      ApplyCancel: -9 //撤销申请
+      WaitPay: '0000', //待付款
+      WaitProcess: '0001', //待完成
+      PaySuccess: '0910', //付款成功
+      Ship: '0930', //已发货
+      Delivered: '0990', //已签收
+      Finish: '9990',//订单已完成 
+      OrderCancel: '-1000', //取消交易
+      // ApplyCancel: -9 //撤销申请
+      // RefundApply: -1, //退货申请
+      // Refund: -3, //退货中
+      // RefundSuccess: -5, //已退货
     }
   }
 }

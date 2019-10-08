@@ -60,6 +60,7 @@ App({
         ).then(res => {
           wx.setStorageSync('token', res.data)
 
+          //返回授权前页面
           let arrPages = getCurrentPages()
           arrPages[arrPages.length - 2].setData({
             refresh: true

@@ -10,8 +10,26 @@ Page({
     limit: 10, //默认每页10条
     all: true,
     status: 0,
+    active: 0,
     pageEnd: false,
-    tabIndex: 0
+    tabIndex: 0,
+    tabsList: [
+      {
+        title: "全部",
+        name: 0,
+        statusText: ""
+      },
+      {
+        title: "待完成",
+        name: 1,
+        statusText: "待完成"
+      },
+      {
+        title: "已完成",
+        name: 2,
+        statusText: "已完成"
+      }
+    ]
   },
 
   onShow: function () { },
@@ -57,7 +75,7 @@ Page({
   onClickTab(e) {
     let data = e.detail
 
-    switch (data.index) {
+    switch (parseInt(data.name)) {
       case 0: //全部
         this.setData({
           all: true,
@@ -67,44 +85,24 @@ Page({
           tabIndex: 0
         })
         break
-      case 1: //待付款
+      case 1: //待完成
         this.setData({
           all: false,
-          status: 0,
+          status: "0001",
           list: [],
           page: 1,
           pageEnd: false,
           tabIndex: 1
         })
         break
-      case 2: //待发货
+      case 2: //已完成
         this.setData({
           all: false,
-          status: 1,
+          status: "9990",
           list: [],
           page: 1,
           pageEnd: false,
           tabIndex: 2
-        })
-        break
-      case 3: //待收货
-        this.setData({
-          all: false,
-          status: 3,
-          list: [],
-          page: 1,
-          pageEnd: false,
-          tabIndex: 3
-        })
-        break
-      case 4: //待评价
-        this.setData({
-          all: false,
-          status: 5,
-          list: [],
-          page: 1,
-          pageEnd: false,
-          tabIndex: 4
         })
         break
     }

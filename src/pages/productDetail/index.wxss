@@ -171,14 +171,28 @@ Page .select-sku-number {
   font-size: 12px;
   color: #999;
   margin: 0 10px;
-  height: 40px;
-  line-height: 40px;
+  margin-bottom: 10rpx;
+  height: 100rpx;
+}
+Page .select-sku-number-text {
+  display: inline-block;
+  vertical-align: midde;
+  height: 100rpx;
+  line-height: 100rpx;
 }
 
 Page .select-sku-number .select-sku-number-stepper {
   display: inline-block;
-  vertical-align: midde;
+  vertical-align: top;
+  height: 100rpx;
+  line-height: 100rpx;
   margin-left: 20rpx;
+}
+
+Page .cus-sku-number-stepper {
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 Page .sku-pro .h {
@@ -233,13 +247,48 @@ Page .attribute {
   margin-bottom: 10px;
 }
 
+Page .attribute-select-title {
+  display: inline-block;
+  /* color: #333; */
+  margin-right: 20rpx;
+}
+
 Page .attribute .attribute-title {
   text-align: left;
 }
 
 Page .attribute .attribute-title view {
   display: inline-block;
+  margin-left: 5rpx;
 }
 Page .ql-container {
   height: 100%;
+}
+
+Page .cus-goods-action {
+  z-index: 9999;
+}
+
+Page .product .title {
+  padding: 3px 10px 0 !important;
+  background-color: #fff;
+  background: #ffffff;
+  margin-top: 5px;
+  width: 75%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+Page .delivery-info {
+  margin-bottom: 10px;
+}
+
+Page .delivery-info .delivery-info-title {
+  text-align: left;
+}
+
+Page .delivery-info .delivery-info-title view {
+  display: inline-block;
+  margin-left: 5rpx;
+  font-size: 12px;
 }

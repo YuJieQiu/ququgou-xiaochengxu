@@ -7,6 +7,7 @@ Page({
   data: {
     banners: [],
     tabs: [],
+    active: 0,
     confList: [],
     isIPX: app.globalData.isIPX,
     ad_info: {},

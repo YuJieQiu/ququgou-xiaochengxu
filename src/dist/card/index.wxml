@@ -19,7 +19,7 @@
         <view wx:if="{{ originPrice || originPrice === 0 }}" class="van-card__origin-price origin-price-class">
           {{ currency }} {{ originPrice }}
         </view>
-        <view wx:if="{{ num }}" class="van-card__num num-class">{{ numsymbol }}{{ num }}</view>
+        <view wx:if="{{ num }}" class="van-card__num num-class">{{numsymbol}} {{ num }}</view>
         <slot name="bottom" />
       </view>
     </view>
