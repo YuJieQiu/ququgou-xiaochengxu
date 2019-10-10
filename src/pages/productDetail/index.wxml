@@ -1,6 +1,6 @@
 <!-- 引入.wxs文件 src为相对路径，module指定当前模块的名称 -->
 <wxs module="wxs" src="../common/index.wxs" />
-<view class="{{isIPX ? 'main-IPX':'main'}}">
+<view class="main">
 		<!-- swiper.wxml -->
 		<swiper indicator-dots="true" autoplay="true" interval="10000" duration="500" circular="true" class='swiper'>
 				<block wx:for="{{ product.resources}}">

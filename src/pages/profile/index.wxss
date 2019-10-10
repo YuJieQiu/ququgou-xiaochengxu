@@ -39,6 +39,7 @@ map, .mapBox {
 
 Page .main {
   position: relative;
+  margin-top: 0;
 }
 
 Page .shader {
