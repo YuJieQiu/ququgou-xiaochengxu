@@ -131,9 +131,6 @@ Page({
     })
     this.getHometbaProductList()
   },
-  onPullDownRefresh() {
-    //this.getData('refresh', pageStart);
-  },
   onReachBottom() {
     if (!this.data.getHometbaProductPage.pageEnd) {
       this.setData({ 'getHometbaProductPage.page': this.data.getHometbaProductPage.page + 1 })
@@ -157,7 +154,23 @@ Page({
     //   })
     // }).exec()
   },
+  onPullDownRefresh() {
+    this.getHomeInitInfo()
+  },
+  //
+  getHomeInitInfo() {
+    this.setData({
+      'getHometbaProductPage.page': 1,
+      'getHometbaProductPage.limit': 10,
+      'getHometbaProductPage.pageEnd': false,
+      'getProductListPage.page': 1,
+      'getProductListPage.limit': 10,
+      'getProductListPage.pageEnd': false
+    })
 
+    this.getBannerList()
+    this.getHomeConfigList()
+  },
   onLoad(options) {
     let location = wx.getStorageSync('location')
     console.log(location)
@@ -167,7 +180,6 @@ Page({
       })
     }
 
-    this.getBannerList()
-    this.getHomeConfigList()
+    this.getHomeInitInfo()
   }
 })

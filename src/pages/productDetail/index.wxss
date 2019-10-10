@@ -292,3 +292,14 @@ Page .delivery-info .delivery-info-title view {
   margin-left: 5rpx;
   font-size: 12px;
 }
+
+Page .content-show {
+  margin-bottom: 120rpx;
+  margin-top: 120rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  background-color: #fff;
+}
+Page .content-show .ql-container {
+  word-break: break-all;
+}

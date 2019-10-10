@@ -4,6 +4,7 @@ Page({
     isIPX: app.globalData.isIPX,
     tabs: [],
     product: {},
+    active: 0,
     guid: '',
     show: false,
     buyNow: false,
@@ -53,7 +54,6 @@ Page({
       wx.stopPullDownRefresh()
       if (res && res.data) {
         let data = res.data
-
         that.setData({
           product: data
         })
@@ -310,7 +310,7 @@ Page({
       merId: this.data.product.merId,
       productNo: this.data.product.guid,
       productSkuId: this.data.selectSku.id,
-      number: this.data.selectSku.number,
+      number: parseInt(this.data.selectSku.number),
       price: this.data.selectSku.price
     }
 
@@ -318,7 +318,7 @@ Page({
       console.log(res)
       if (res.code == 200) {
         that.setData({
-          cartCount: that.data.cartCount + that.data.selectSku.number
+          cartCount: parseInt(that.data.cartCount) + parseInt(that.data.selectSku.number)
         })
       }
     })
