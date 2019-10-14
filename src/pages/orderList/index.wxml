@@ -5,7 +5,7 @@
 						<view class="order-list" wx:for="{{list}}" wx:for-item="listItem">
 								<van-panel use-footer-slot footer-class="o-footer">
 										<view slot="header">
-												<van-cell title-class="van-cell-title" value="{{tab.statusText==''?listItem.statusText:tab.statusText}}" icon="shop-o" title="{{listItem.merName}}" is-link />
+												<van-cell title-class="van-cell-title" value="{{tab.statusText==''?listItem.statusText:tab.statusText}}" icon="shop-o" title="{{listItem.merName}}" is-link url="{{'/pages/merchant/index?merId='+listItem.merId}}" />
 										</view>
 										<view class="order-list-item-card">
 												<van-card bindtap="onClickRedirectionDetail" data-no="{{listItem.no}}" custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" lazy-load="{{true}}" wx:for="{{listItem.products}}" wx:for-item="product" thumb="{{product.cover}}" num="{{product.count}}" numsymbol="x" thumb-mode="aspectFill" centered="{{false}}" price="{{wxs.priceStr(product.unitPrice)}}">

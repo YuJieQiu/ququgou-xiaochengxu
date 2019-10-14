@@ -1,15 +1,16 @@
 <view class="main">
 		<view class="shop-cart">
-				<view class="" wx:for="{{list}}" wx:for-item="mer">
+				<view class="shop-cart-item" wx:for="{{list}}" wx:for-item="mer">
 						<van-panel use-footer-slot footer-class="o-footer">
 								<view slot="header">
 										<van-cell value="" is-link>
 												<view slot="title">
 														<view class="van-cell-checkbox">
-																<van-checkbox checked-color="#f44" value="{{ allCheckboxData }}" bind:change="onChangeAllCheck" />
+																<van-checkbox custo-class="van-cell-checkbox-item" checked-color="#f44" value="{{ allCheckboxData }}" bind:change="onChangeAllCheck" />
 														</view>
 														<view class="van-cell-text" data-mer-code="{{mer.merCode}}" bindtap="onClickMerName">
-																{{mer.merName}}
+																<van-icon custom-class="van-cell-text-view" name="shop-o" size="20px" />
+																<view class="van-cell-text-view">{{mer.merName}}</view>
 														</view>
 												</view>
 										</van-cell>

@@ -79,7 +79,7 @@
 		</view>
 		<!-- tabs E -->
 		<!-- goods-list S -->
-		<view class="goods-list" wx:if="{{goods.length>0&&getHometbaProductPage.pageEnd}}">
+		<view class="goods-list" wx:if="{{(tabProducts.length<5)||(goods.length>0&&getHometbaProductPage.pageEnd)}}">
 				<view class="goods-list-title">推荐</view>
 				<view class="custom-card" wx:for="{{goods}}" data-guid="{{item.guid}}" bindtap="showDetail">
 						<view class="custom-card-centre">

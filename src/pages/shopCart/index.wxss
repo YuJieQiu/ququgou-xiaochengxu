@@ -119,10 +119,23 @@ Page .van-cell-text {
   word-break: keep-all; /* 不换行 */
   white-space: nowrap; /* 不换行 */
   max-width: 400rpx;
+  vertical-align: middle;
 }
-
+Page .van-cell-text-view {
+  height: 35px;
+  line-height: 35px;
+  display: inline-block;
+  vertical-align: middle;
+}
 Page .van-cell-checkbox {
   display: inline-block;
+  vertical-align: middle;
   width: 70rpx;
   margin-left: -8rpx;
+}
+
+Page .shop-cart-item {
+  margin-right: 20rpx;
+  margin-left: 20rpx;
+  border-radius: 5px;
 }

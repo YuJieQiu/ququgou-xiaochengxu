@@ -183,12 +183,14 @@ Page({
         if (!exist) {
           continue
         }
+
+        let img = that.data.product.resources[0].url
+        if (sku.skuImage != null && sku.skuImage.url != "") {
+          img = sku.skuImage.url
+        }
         that.setData({
           'selectSku.id': sku.id,
-          'selectSku.image':
-            sku.skuImage !== null
-              ? sku.skuImage.url
-              : that.data.product.resources[0].url,
+          'selectSku.image': img,
           'selectSku.price': sku.price,
           'selectSku.name': sku.skuName,
           'selectSku.stock': sku.stock,
@@ -391,7 +393,8 @@ Page({
             image: this.data.selectSku.image,
             number: this.data.selectSku.number,
             attributeInfo: this.data.selectSku.attributeInfo,
-            shopCartId: 0
+            shopCartId: 0,
+            deliveryTypes: this.data.product.deliveryTypes,
           }
         ]
       }

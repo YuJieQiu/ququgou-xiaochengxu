@@ -4,6 +4,8 @@ const pageStart = 1
 import Toast from '../../dist/toast/toast'
 Page({
   data: {
+    active: 5,
+    deliveryId: 5,
     list: [],
     skuList: [
       {
@@ -18,22 +20,43 @@ Page({
         pidNames: [],
         checkAll: false,
         number: 0,
-        attrNames: []
+        attrNames: [],
+        deliveryTypes: []
       }
     ],
     productAmount: 0,
     discountsAmount: 0,
     orderAmount: 0,
     remark: '',
-    address: { id: 0 }
+    address: { id: 0 },
+    merAddress: []
   },
+  //收货地址
   onClickAddress(e) {
     wx.navigateTo({
       url: '/pages/addressList/index'
     })
   },
-  onShow: function() {},
-  getAddressInfo: function() {
+  //商户自提地址
+  onClickMerAddress(e) {
+    const latitude = e.currentTarget.dataset.latitude
+    const longitude = e.currentTarget.dataset.longitude
+    wx.openLocation({
+      latitude,
+      longitude,
+      scale: 18
+    })
+  },
+  //选择收货方式
+  onChangeDeliveryType(e) {
+    const that = this
+    const id = e.detail.name
+    that.setData({
+      deliveryId: id
+    })
+    console.log(this.data.deliveryId)
+  },
+  getAddressInfo: function () {
     app.httpGet('address/user/first', {}).then(res => {
       let address = res.data
       this.setData({
@@ -49,6 +72,22 @@ Page({
       })
     })
   },
+  getMerAddressInfo() {
+    const that = this
+    var merIds = new Array()
+    that.data.list.forEach(item => {
+      merIds.push(item.merId)
+    });
+    let data = {
+      merIds: merIds
+    }
+
+    app.httpPost('mer/addresses', data).then(res => {
+      that.setData({
+        merAddress: res.data
+      })
+    })
+  },
   onSubmitOrderCreate() {
     this.orderCreare()
   },
@@ -56,7 +95,7 @@ Page({
     console.log('onSubmitWait')
     return
   },
-  orderCreare: function() {
+  orderCreare: function () {
     let that = this
     const toast = Toast.loading({
       mask: true,
@@ -79,14 +118,13 @@ Page({
         })
       })
     })
-
     let data = {
       productAmountTotal: this.data.productAmount,
       discountsAmountTotal: this.data.discountsAmount,
       orderAmountTotal: this.data.orderAmount,
       addressId: this.data.address.id,
       remark: this.data.remark,
-      deliveryTypeId: 1,
+      deliveryTypeId: parseInt(this.data.deliveryId),
       deliveryFee: 0,
       deliveryAddressId: 1,
       paymentType: 1,
@@ -99,7 +137,6 @@ Page({
       .httpPost('order/create', data, false)
       .then(res => {
         toast.clear()
-        console.log(res)
         that.removeShopCart()
         // wx.navigateTo({
         //     url: '/pages/orderList/index'
@@ -110,7 +147,6 @@ Page({
       })
       .catch(error => {
         toast.clear()
-        console.log(error)
       })
   },
   //优惠卷选择
@@ -139,8 +175,6 @@ Page({
     list.push(...object)
     this.setData({ list: list })
 
-    console.log(this.data.list)
-
     this.getAddressInfo()
 
     let productAmount = 0
@@ -161,5 +195,7 @@ Page({
       discountsAmount: discountsAmount,
       orderAmount: orderAmount
     })
+
+    this.getMerAddressInfo()
   }
 })

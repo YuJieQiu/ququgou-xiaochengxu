@@ -1,10 +1,19 @@
 <wxs module="wxs" src="../common/index.wxs" />
 <view class="main">
+  <!-- 自提地址 S -->
+  <view class="" wx:if="{{order.deliveryType==10}}">
+    <van-panel title="自提地址">
+      <van-cell custom-class="address-cell" clickable="{{true}}" is-link title="{{merAddress.city}}{{merAddress.region}}{{merAddress.town}}{{merAddress.address}}" label="{{merAddress.merName}} {{merAddress.phones}}" icon="location-o" center="{{true}}" size="large" is-link="{{true}}" border="{{true}}" data-latitude="{{merAddress.latitude}}" data-longitude="{{merAddress.latitude}}" bind:click="onClickMerAddress"></van-cell>
+    </van-panel>
+  </view>
+  <!-- 自提地址 E -->
   <!-- 收货地址 S -->
-  <view class="order-address">
-    <van-cell custom-class="address-cell" clickable="{{true}}" is-link title="{{address.city}}{{address.region}}{{address.town}}{{address.address}}" label="{{address.username}}{{address.phone}}" icon="location-o" center="{{true}}" size="large" border="{{true}}">
-      <view slot="title"></view>
-    </van-cell>
+  <view class="order-address" wx:else>
+    <van-panel title="收货地址">
+      <van-cell custom-class="address-cell" clickable="{{true}}" is-link title="{{address.city}}{{address.region}}{{address.town}}{{address.address}}" label="{{address.username}}{{address.phone}}" icon="location-o" center="{{true}}" size="large" border="{{true}}">
+        <view slot="title"></view>
+      </van-cell>
+    </van-panel>
   </view>
   <!-- 收货地址 E -->
   <!-- 订单信息 S -->
@@ -43,7 +52,7 @@
   <!-- 订单信息 E -->
   <van-panel use-footer-slot footer-class="o-footer">
     <view slot="header">
-      <van-cell value="" icon="shop-o" title="{{order.merName}}" is-link bind:click="" />
+      <van-cell value="" icon="shop-o" title="{{order.merName}}" is-link url="{{'/pages/merchant/index?merId='+order.merId}}" />
     </view>
     <view>
       <!-- origin-price="{{wxs.priceStr(product.unitPrice*product.count)}}" -->
@@ -71,9 +80,9 @@
       </view> -->
     </view>
   </van-panel>
-  <!-- 操作按钮 S -->
+  <!-- 操作按钮 S wx:if="{{order.status==wxs.orderStatus.WaitPay}}" -->
   <view class="footer-option-but">
-    <view class="option-but option-but-left" wx:if="{{order.status==wxs.orderStatus.WaitPay}}">
+    <view class="option-but option-but-left">
       <view class="money">
         合计：
         <view class="o-footer-money-block">¥{{wxs.priceStr(order.orderAmountTotal)}}</view>
@@ -82,8 +91,10 @@
     <view class="option-but option-but-right" wx:if="{{order.status==wxs.orderStatus.WaitPay}}">
       <van-button type="danger" square="{{true}}">立即支付</van-button>
     </view>
-    <view class="option-but option-but-right" wx:if="{{order.status==wxs.orderStatus.WaitPay}}">
-      <van-button type="warning" square="{{true}}" bindtap="onOrderCancel">取消订单</van-button>
+    <view class="option-but option-but-right" wx:if="{{order.status==wxs.orderStatus.WaitPay||order.status==wxs.orderStatus.WaitProcess}}">
+      <van-button type="{{order.status==wxs.orderStatus.WaitPay?'warning':'danger' }}" square="{{true}}" bindtap="onOrderCancel">
+        取消订单
+      </van-button>
     </view>
   </view>
   <!-- 操作按钮 E -->

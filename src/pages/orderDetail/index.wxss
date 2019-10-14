@@ -106,8 +106,8 @@ Page .footer-option-but {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 90rpx;
-  line-height: 90rpx;
+  height: 120rpx;
+  line-height: 120rpx;
   background-color: #fff;
 }
 

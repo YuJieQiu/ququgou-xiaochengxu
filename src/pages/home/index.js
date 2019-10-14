@@ -30,6 +30,7 @@ Page({
       total: 0,
       pageEnd: false,
     },
+    refresh: false,
     location: {
       city: "上海市"
     }//位置信息
@@ -49,13 +50,19 @@ Page({
     app.httpGet('home/config/list').then(res => {
       if (res && res.data) {
         if (res.data["hometba"].length > 0) {
+          if (res.data["hometba"][0].productSmallInfos.length < 5) {
+            that.getProductList()
+          }
           that.setData({
-            tabProducts: res.data["hometba"][0].productSmallInfos
+            tabProducts: res.data["hometba"][0].productSmallInfos,
+            'getHometbaProductPage.pageEnd': true
           })
         }
+
         that.setData({
           confList: res.data
         })
+
       }
     })
   },
@@ -88,7 +95,6 @@ Page({
     if (that.data.getProductListPage.pageEnd) {
       return
     }
-
     app.httpGet('shop/product/info/getList', that.data.getProductListPage).then(res => {
       if (res.data == null || res.data.length <= 0) {
         that.setData({ 'getProductListPage.pageEnd': true })
@@ -121,7 +127,7 @@ Page({
     })
   },
   onChangeHometba(event) {
-    const index = event.detail.index
+    const index = event.detail.name
     const confId = this.data.confList["hometba"][index].id
     this.setData({
       'getHometbaProductPage.appConfigId': confId,
@@ -170,6 +176,14 @@ Page({
 
     this.getBannerList()
     this.getHomeConfigList()
+  },
+  onShow() {
+    if (this.data.refresh) {
+      this.getHomeInitInfo()
+      this.setData({
+        refresh: false
+      })
+    }
   },
   onLoad(options) {
     let location = wx.getStorageSync('location')

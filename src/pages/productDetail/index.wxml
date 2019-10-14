@@ -43,7 +43,7 @@
 				<van-cell clickable="true">
 						<view class='delivery-info-title'>
 								<van-icon name="logistics" />
-								<view wx:for="{{product.deliveryTypes}}">
+								<view wx:for="{{product.deliveryTypes}}" class="delivery-item-text">
 										<!-- {{item}} -->
 										{{item.name}}
 								</view>
@@ -116,7 +116,7 @@
 		<van-goods-action custom-class="cus-goods-action">
 				<van-goods-action-icon icon="chat-o" text="客服" open-type="contact" bind:click="onClickIcon" />
 				<van-goods-action-icon icon="cart-o" text="购物车" info="{{cartCount==0?'':cartCount}}" url="{{'/pages/shopCart/cart'}}" />
-				<van-goods-action-icon icon="shop-o" text="商铺" url="{{'/pages/merchant/index?merId=1'}}" />
+				<van-goods-action-icon icon="shop-o" text="{{'商铺'}}" url="{{'/pages/merchant/index?merId='+product.merId}}" />
 				<van-goods-action-button wx:if="{{product.status==1}}" text="加入购物车" type="warning" bind:click="onClickAddShopCart" />
 				<van-goods-action-button wx:if="{{product.status==1}}" text="立即购买" bind:click="onClickBuyNow" />
 				<van-goods-action-button wx:if="{{product.status!=1}}" text="已下架" />

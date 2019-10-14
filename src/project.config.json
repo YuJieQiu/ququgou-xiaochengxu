@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -46,7 +46,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 9,
 			"list": [
 				{
 					"id": 0,
@@ -108,6 +108,13 @@
 					"id": -1,
 					"name": "pages/orderDetail/index",
 					"pathName": "pages/orderDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/orderSettlement/index",
+					"pathName": "pages/orderSettlement/index",
 					"query": "",
 					"scene": null
 				}

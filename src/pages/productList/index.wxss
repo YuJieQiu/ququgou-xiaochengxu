@@ -156,3 +156,194 @@ Page .header-search-input {
 }
 Page .header-search-field {
 }
+
+/* ?? */
+
+.classification {
+  background: #fff;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.classification .classification-top {
+  height: 80rpx;
+  z-index: 4;
+  position: relative;
+  background: #fff;
+  line-height: 80rpx;
+  border-top: 1px solid #ddd;
+}
+
+.classification .classification-top .classification-tit {
+  display: inline-block;
+  font-size: 28rpx;
+  font-weight: 500;
+  padding-left: 50rpx;
+}
+
+.classification .classification-top .icon-down,
+.classification .classification-top .icon-up {
+  height: 60rpx;
+  line-height: 60rpx;
+  display: inline-block;
+  font-size: 50rpx;
+  position: relative;
+  top: 5rpx;
+  left: -20rpx;
+}
+
+.classification-box {
+  position: fixed;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  height: 100%;
+}
+
+.classification .classification-text .classification-text-list {
+  height: 100rpx;
+  line-height: 100rpx;
+  border-top: 1rpx solid #ddd;
+  box-sizing: border-box;
+  color: #666;
+  padding: 0 20rpx;
+  overflow: hidden;
+}
+
+.product-list-item .classification-box {
+  position: fixed;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 15;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.classification .classification-text {
+  position: absolute;
+  top: 0%;
+  right: -100%;
+  width: 90%;
+  background: #fff;
+  z-index: 4;
+  transition: all 0.3s;
+}
+
+.classification .classification-box .classification-text {
+  display: flex;
+  color: #666;
+  height: 76%;
+  padding-bottom: 90rpx;
+  border-top: 1px solid #ddd;
+}
+
+.classification .classification-box .classification-text .classification-list-l .classification-alists {
+  width: 240rpx;
+  box-sizing: border-box;
+  padding: 30rpx 46rpx;
+  text-align: center;
+  border-bottom: 1rpx solid #ddd;
+  background: #fff;
+}
+
+.classification .classification-box .classification-text .classification-list-l .classification-alists.on {
+  color: #c53f3f;
+}
+
+.classification .classification-box .classification-text .classification-list-l .main {
+  border-right: 1px solid #ddd;
+  width: 100%;
+  height: 100%;
+}
+
+.classification .classification-box .classification-text .classification-list-center {
+  flex: 1;
+}
+
+.classification .classification-box .classification-text .classification-list-center .main,
+.classification .classification-box .classification-text .classification-list-r .main {
+  height: 100%;
+}
+
+.classification .classification-box .classification-text .classification-list-center .main .twolist {
+  box-sizing: border-box;
+  padding: 30rpx 46rpx;
+  border-bottom: 1rpx solid #ddd;
+  /* max-width: 201rpx; */
+  border-right: 1px solid #ddd;
+}
+
+.classification .classification-box .classification-text .classification-list-center .main .twolist.on {
+  color: #c53f3f;
+}
+
+.classification .classification-box .classification-text .classification-list-r .threeList {
+  position: relative;
+  width: 240rpx;
+  box-sizing: border-box;
+  padding: 30rpx 46rpx;
+  text-align: center;
+  border-bottom: 1rpx solid #ddd;
+  background: #fff;
+  word-wrap: break-word;
+  border-left: 1rpx solid #ddd;
+}
+
+.classification .classification-box .classification-text .classification-list-r .threeList.on {
+  color: #c53f3f;
+  background: #f8f8f8;
+}
+
+.classification .classification-box .classification-text .classification-list-r .icon-theselected {
+  position: absolute;
+  right: 10rpx;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size: 20rpx;
+}
+
+.classification .classification-box .classification-text .classification-list-r {
+  position: absolute;
+  right: -240rpx;
+  top: 0;
+  transition: 0.3s;
+  height: 100%;
+}
+
+.classification .classification-box .classification-text .classification-list-r.rightmove {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.3s;
+  height: 100%;
+  padding-bottom: 90rpx;
+}
+
+.classification .classification-box .classification-text .btnbox {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #fff;
+  text-align: center;
+  font-size: 32rpx;
+  display: flex;
+}
+
+.classification-box .classification-text .btnbox .btn {
+  flex: 1;
+  line-height: 90rpx;
+  background: #c53f3f;
+  text-align: center;
+  color: #fff;
+  font-size: 32rpx;
+}
+/* 
+.classification-box .classification-text .btnbox .iconfont {
+  width: 110rpx;
+  font-size: 60rpx;
+  color: #848484;
+} */

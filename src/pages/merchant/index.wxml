@@ -37,9 +37,9 @@
 						</van-col>
 				</van-row>
 		</view>
-		<!-- <view class="ad">广告位置</view> -->
+		<!-- <view class="ad">广告位置</view> bind:change="onChange" -->
 		<view class="tab">
-				<van-tabs active="{{ active }}" bind:change="onChange" sticky="{{true}}" swipeable="{{true}}" lower-threshold="{{100}}" enable-back-to-top="{{true}}" bind:scroll="onTabsScroll" line-width="{{0}}">
+				<van-tabs active="{{ active }}" sticky="{{true}}" swipeable="{{true}}" lower-threshold="{{100}}" enable-back-to-top="{{true}}" bind:scroll="onTabsScroll" line-width="{{0}}">
 						<!-- 商品 S -->
 						<van-tab title="商品">
 								<view class="">

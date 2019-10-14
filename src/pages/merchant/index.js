@@ -4,6 +4,7 @@ const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
 
 Page({
   data: {
+    active: 0,
     merCode: '',
     merId: 0,
     merInfo: {},
@@ -76,6 +77,11 @@ Page({
       .then(res => {
         wx.stopPullDownRefresh()
         let data = res.data
+
+        wx.setNavigationBarTitle({
+          title: data.name//页面标题为路由参数
+        })
+
         //label处理S
         let label = data.label
         let arrayLabel = []
@@ -114,6 +120,7 @@ Page({
   },
   onLoad(options) {
     //undefined
+    console.log(options)
     if (options.merCode != null && options.merCode != "" && options.merCode != "undefined") {
       this.setData({
         merCode: options.merCode
@@ -123,6 +130,7 @@ Page({
         merId: options.merId
       })
     }
+
     //this.data.merId = '6de79d7d7f764e3981b35d8b9a36fcc3'
     this.getMerInfo()
     this.getMerProductList()

@@ -1,24 +1,35 @@
 <view class="main">
-		<!-- 收货地址 S -->
-		<view class="address">
-				<van-cell wx:if="{{address.id===0}}" clickable="{{true}}" bind:click="" is-link url="/pages/addressList/index">
-						<view class='address-add'>
-								<van-icon name="add-o" custom-style="address-add-icon" />
-								添加新的收货地址
-						</view>
-				</van-cell>
-				<van-cell wx:else custom-class="address-cell" clickable="{{true}}" is-link title="{{address.city}}{{address.region}}{{address.town}}{{address.address}}" label="{{address.username}} {{address.phone}}" icon="location-o" center="{{true}}" size="large" is-link="{{true}}" border="{{true}}" bind:click="onClickAddress">
-						<view slot="title">
-								<!-- <view class="address-cell-text">
+		<!-- 配送方式选择 S -->
+		<view class="">
+				<van-tabs type="card" info="info" bind:change="onChangeDeliveryType">
+						<van-tab title="送货上门" name="5">
+								<!-- 收货地址 S -->
+								<view class="address">
+										<van-cell wx:if="{{address.id===0}}" clickable="{{true}}" bind:click="" is-link url="/pages/addressList/index">
+												<view class='address-add'>
+														<van-icon name="add-o" custom-style="address-add-icon" />
+														添加新的收货地址
+												</view>
+										</van-cell>
+										<van-cell wx:else custom-class="address-cell" clickable="{{true}}" is-link title="{{address.city}}{{address.region}}{{address.town}}{{address.address}}" label="{{address.username}} {{address.phone}}" icon="location-o" center="{{true}}" size="large" is-link="{{true}}" border="{{true}}" bind:click="onClickAddress">
+												<view slot="title">
+														<!-- <view class="address-cell-text">
          龙之梦雅士大厦815 address.city address.region address.town address.address
       </view> -->
-								<!-- <view class="address-cell-label">王先生 1347868768</view> -->
-						</view>
-				</van-cell>
+														<!-- <view class="address-cell-label">王先生 1347868768</view> -->
+												</view>
+										</van-cell>
+								</view>
+								<!-- 收货地址 E -->
+						</van-tab>
+						<van-tab title="到店自提" name="10">
+								<!-- 自提地址 S -->
+								<van-cell custom-class="address-cell" wx:for="{{merAddress}}" wx:for-item="address" clickable="{{true}}" is-link title="{{address.city}}{{address.region}}{{address.town}}{{address.address}}" label="{{address.merName}} {{address.phones}}" icon="location-o" center="{{true}}" size="large" is-link="{{true}}" border="{{true}}" data-latitude="{{address.latitude}}" data-longitude="{{address.latitude}}" bind:click="onClickMerAddress"></van-cell>
+								<!-- 自提地址 E -->
+						</van-tab>
+				</van-tabs>
 		</view>
-		<!-- 收货地址 E -->
-		<!-- 自提地址 S -->
-		<!-- 自提地址 E -->
+		<!-- 配送方式选择 S -->
 		<!-- 商品列表 S -->
 		<view class="goods-info">
 				<block wx:for="{{list}}" wx:for-item="listItem">

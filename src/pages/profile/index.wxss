@@ -92,12 +92,14 @@ Page .main .order {
 Page .order .order-cell {
   /* height: 40rpx;
   line-height: 40rpx; */
+  border-radius: 5px;
 }
 
 Page .order .order-tabbar {
   /* height: 40rpx;
   line-height: 40rpx; */
   height: 200rpx;
+  border-radius: 5px;
 }
 
 Page .row-content {

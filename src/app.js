@@ -120,7 +120,6 @@ App({
             longitude: location.lon
           },
           success: function (res) {
-            console.log(res)
             location.city = res.result.ad_info.city
             location.province = res.result.ad_info.province
             location.info = res.result
@@ -130,7 +129,6 @@ App({
             _this.globalData.location = location
 
             wx.setStorageSync('location', location)
-            console.log(location)
           },
           fail: function (res) {
           },
@@ -141,8 +139,8 @@ App({
     })
   },
   //baseUrl: 'http://148.70.176.93/user/api/v1/',
-  baseUrl: 'https://ququgo.club/user/api/v1/',
-  //baseUrl: 'http://127.0.0.1:8070/user/api/v1/',
+  //baseUrl: 'https://ququgo.club/user/api/v1/',
+  baseUrl: 'http://127.0.0.1:8070/user/api/v1/',
   httpBase: function (method, url, data, loading) {
     let _this = this
     let requestUrl = this.baseUrl + url

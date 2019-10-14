@@ -8,18 +8,45 @@ Page({
     orderNo: '',
     order: {},
     address: {},
-    products: []
+    products: [],
+    merAddress: {}
   },
+  getMerAddressInfo() {
+    const that = this
+    let data = {
+      merIds: [that.data.order.merId]
+    }
+    app.httpPost('mer/addresses', data).then(res => {
+      if (res.data != null && res.data.length > 0) {
+        that.setData({
+          merAddress: res.data[0]
+        })
+      }
 
-  onShow: function() {},
-  getDataInfo: function(orderNo) {
+    })
+  },
+  //商户自提地址
+  onClickMerAddress(e) {
+    const latitude = e.currentTarget.dataset.latitude
+    const longitude = e.currentTarget.dataset.longitude
+    wx.openLocation({
+      latitude,
+      longitude,
+      scale: 18
+    })
+  },
+  getDataInfo: function (orderNo) {
+    let that = this
     app.httpGet('order/get/detail', { orderNo: orderNo }).then(res => {
       console.log(res)
-      this.setData({
+      that.setData({
         address: res.data.address,
         products: res.data.products,
         order: res.data
       })
+      if (res.data.deliveryType == 10) {
+        that.getMerAddressInfo()
+      }
     })
   },
   onOrderCancel() {
@@ -35,7 +62,7 @@ Page({
             console.log(res)
           })
       })
-      .catch(() => {})
+      .catch(() => { })
   },
   onLoad(options) {
     let orderNo = options.orderNo
