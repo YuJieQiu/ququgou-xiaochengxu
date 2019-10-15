@@ -1,385 +1,477 @@
 const app = getApp()
 const { appUtils, appValidate } = require('../../utils/util.js')
+const util = require('../../utils/util.js')
 const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
 const qqmapsdk = new QQMapWX({ key: app.mapKey })
-const pageStart = 1
 
 Page({
   data: {
-    isIPX: app.globalData.isIPX,
-    active: 0,
-    sort: 1,//1 默认 
-    page: {
-      page: 1, //默认第一页开始
-      limit: 10, //默认每页10条
-      pageEnd: false
-    },
-    goods: [],
-    isShow: false,
-    goodsShow: false,
-    allColor: true,
-    selectCategoryId: 0,
-    selectCategoryTowId: 0,
-    selectCategoryChildren: [],
-    categoryList: [
+    searchKey: "", //搜索关键词
+    width: 200, //header宽度
+    height: 64, //header高度
+    inputTop: 0, //搜索框距离顶部距离
+    arrowTop: 0, //箭头距离顶部距离
+    dropScreenH: 0, //下拉筛选框距顶部距离
+    attrData: [],
+    attrIndex: -1,
+    dropScreenShow: false,
+    scrollTop: 0,
+    tabIndex: 0, //顶部筛选索引
+    isList: false, //是否以列表展示  | 列表或大图
+    drawer: false,
+    drawerH: 0, //抽屉内部scrollview高度
+    selectedName: "综合",
+    selectH: 0,
+    dropdownList: [//下拉综合搜索
       {
-        "id": 1,
-        "pid": 0,
-        "text": "全部",
-        "sort": 0,
-        "remark": "",
-        "img": "http://qiniu.media.q.dfocuspace.cn/static/images/d3b0531055ed452daac8664d6fdbdab1.jpg",
-        "children": [
-          {
-            "id": 2,
-            "pid": 1,
-            "text": "水果",
-            "sort": 0,
-            "remark": "",
-            "img": "http://qiniu.media.q.dfocuspace.cn/static/images/d3b0531055ed452daac8664d6fdbdab1.jpg",
-            "children": null
-          },
-          {
-            "id": 3,
-            "pid": 1,
-            "text": "汽车",
-            "sort": 0,
-            "remark": "测试",
-            "img": "http://qiniu.media.q.dfocuspace.cn/static/images/d3b0531055ed452daac8664d6fdbdab1.jpg",
-            "children": null
-          }
-        ]
-      },
-      {
-        "id": 4,
-        "pid": 0,
-        "text": "测试1",
-        "sort": 0,
-        "remark": "测试",
-        "img": "http://qiniu.media.q.dfocuspace.cn/static/images/d3b0531055ed452daac8664d6fdbdab1.jpg",
-        "children": [
-          {
-            "id": 7,
-            "pid": 4,
-            "text": "水果",
-            "sort": 0,
-            "remark": "",
-            "img": "http://qiniu.media.q.dfocuspace.cn/static/images/d3b0531055ed452daac8664d6fdbdab1.jpg",
-            "children": null
-          },
-          {
-            "id": 8,
-            "pid": 4,
-            "text": "水果",
-            "sort": 0,
-            "remark": "",
-            "img": "http://qiniu.media.q.dfocuspace.cn/static/images/d3b0531055ed452daac8664d6fdbdab1.jpg",
-            "children": null
-          },
-          {
-            "id": 9,
-            "pid": 4,
-            "text": "水果",
-            "sort": 0,
-            "remark": "",
-            "img": "http://qiniu.media.q.dfocuspace.cn/static/images/d3b0531055ed452daac8664d6fdbdab1.jpg",
-            "children": null
-          }
-        ]
-      },
-      {
-        "id": 5,
-        "pid": 0,
-        "text": "测试2",
-        "sort": 0,
-        "remark": "测试",
-        "img": "http://qiniu.media.q.dfocuspace.cn/static/images/d3b0531055ed452daac8664d6fdbdab1.jpg",
-        "children": [
-          {
-            "id": 10,
-            "pid": 5,
-            "text": "汽车",
-            "sort": 0,
-            "remark": "测试",
-            "img": "http://qiniu.media.q.dfocuspace.cn/static/images/d3b0531055ed452daac8664d6fdbdab1.jpg",
-            "children": null
-          },
-          {
-            "id": 11,
-            "pid": 5,
-            "text": "汽车",
-            "sort": 0,
-            "remark": "测试",
-            "img": "http://qiniu.media.q.dfocuspace.cn/static/images/d3b0531055ed452daac8664d6fdbdab1.jpg",
-            "children": null
-          },
-          {
-            "id": 12,
-            "pid": 5,
-            "text": "汽车",
-            "sort": 0,
-            "remark": "测试",
-            "img": "http://qiniu.media.q.dfocuspace.cn/static/images/d3b0531055ed452daac8664d6fdbdab1.jpg",
-            "children": null
-          }
-        ]
-      },
-      {
-        "id": 6,
-        "pid": 0,
-        "text": "测试3",
-        "sort": 0,
-        "remark": "测试",
-        "img": "http://qiniu.media.q.dfocuspace.cn/static/images/d3b0531055ed452daac8664d6fdbdab1.jpg",
-        "children": null
+        name: "综合",
+        selected: true
+      }, {
+        name: "价格升序",
+        selected: false,
+      }, {
+        name: "价格降序",
+        selected: false,
       }
     ],
-    listtwos: [{
-      "catId": 67,
-      "busiId": 10001,
-      "busiName": "韩妮采旗舰店",
-      "pid": 0,
-      "pidList": [
-
-      ],
-      "catPath": "https://img.love-bears.cn/img/n25/tfs/2018/09/25/80edae5d-19f8-490d-8e78-31769adf5505.jpg",
-      "isLeaf": false,
-      "catName": "品类三",
-      "sort": 2,
-      "statusDesc": "激活",
-      "status": 1,
-      "level": 0
+    attrArr: [{
+      name: "新品",
+      selectedName: "新品",
+      isActive: false,
+      list: []
+    }, {
+      name: "品牌",
+      selectedName: "品牌",
+      isActive: false,
+      list: [{
+        name: "trendsetter",
+        selected: false
+      }, {
+        name: "维肯（Viken）",
+        selected: false
+      }, {
+        name: "AORO",
+        selected: false
+      }, {
+        name: "苏发",
+        selected: false
+      }, {
+        name: "飞花令（FHL）",
+        selected: false
+      }, {
+        name: "叶梦丝",
+        selected: false
+      }, {
+        name: "ITZOOM",
+        selected: false
+      }, {
+        name: "亿魅",
+        selected: false
+      }, {
+        name: "LEIKS",
+        selected: false
+      }, {
+        name: "雷克士",
+        selected: false
+      }, {
+        name: "蕊芬妮",
+        selected: false
+      }, {
+        name: "辉宏达",
+        selected: false
+      }, {
+        name: "英西达",
+        selected: false
+      }, {
+        name: "戴为",
+        selected: false
+      }, {
+        name: "魔风者",
+        selected: false
+      }, {
+        name: "即满",
+        selected: false
+      }, {
+        name: "北比",
+        selected: false
+      }, {
+        name: "娱浪",
+        selected: false
+      }, {
+        name: "搞怪猪",
+        selected: false
+      }]
+    }, {
+      name: "类型",
+      selectedName: "类型",
+      isActive: false,
+      list: [{
+        name: "线充套装",
+        selected: false
+      }, {
+        name: "单条装",
+        selected: false
+      }, {
+        name: "车载充电器",
+        selected: false
+      }, {
+        name: "PD快充",
+        selected: false
+      }, {
+        name: "数据线转换器",
+        selected: false
+      }, {
+        name: "多条装",
+        selected: false
+      }, {
+        name: "充电插头",
+        selected: false
+      }, {
+        name: "无线充电器",
+        selected: false
+      }, {
+        name: "座式充电器",
+        selected: false
+      }, {
+        name: "万能充",
+        selected: false
+      }, {
+        name: "转换器/转接线",
+        selected: false
+      }, {
+        name: "MFI苹果认证",
+        selected: false
+      }, {
+        name: "转换器",
+        selected: false
+      }, {
+        name: "苹果认证",
+        selected: false
+      }]
+    }, {
+      name: "适用手机",
+      selectedName: "适用手机",
+      isActive: false,
+      list: [{
+        name: "通用",
+        selected: false
+      }, {
+        name: "vivo",
+        selected: false
+      }, {
+        name: "OPPO",
+        selected: false
+      }, {
+        name: "魅族",
+        selected: false
+      }, {
+        name: "苹果",
+        selected: false
+      }, {
+        name: "华为",
+        selected: false
+      }, {
+        name: "三星",
+        selected: false
+      }, {
+        name: "荣耀",
+        selected: false
+      }, {
+        name: "诺基亚5",
+        selected: false
+      }, {
+        name: "荣耀4",
+        selected: false
+      }, {
+        name: "诺基",
+        selected: false
+      }, {
+        name: "荣耀",
+        selected: false
+      }, {
+        name: "诺基亚2",
+        selected: false
+      }, {
+        name: "荣耀2",
+        selected: false
+      }, {
+        name: "诺基",
+        selected: false
+      }]
     }],
-    listthrees: [{
-      "catId": 67,
-      "busiId": 10001,
-      "busiName": "韩妮采旗舰店",
-      "pid": 0,
-      "pidList": [
-
-      ],
-      "catPath": "https://img.love-bears.cn/img/n25/tfs/2018/09/25/80edae5d-19f8-490d-8e78-31769adf5505.jpg",
-      "isLeaf": false,
-      "catName": "品类三",
-      "sort": 2,
-      "statusDesc": "激活",
-      "status": 1,
-      "level": 0
-    }],
-    listfirsts: [{
-      "catId": 65,
-      "busiId": 10001,
-      "busiName": "韩妮采旗舰店",
-      "pid": 0,
-      "pidList": [
-        {
-          "catId": 67,
-          "busiId": 10001,
-          "busiName": "韩妮采旗舰店",
-          "pid": 0,
-          "pidList": [
-
-          ],
-          "catPath": "https://img.love-bears.cn/img/n25/tfs/2018/09/25/80edae5d-19f8-490d-8e78-31769adf5505.jpg",
-          "isLeaf": false,
-          "catName": "品类三",
-          "sort": 2,
-          "statusDesc": "激活",
-          "status": 1,
-          "level": 0
-        },
-      ],
-      "catPath": "https://img.love-bears.cn/img/n29/tfs/2018/11/29/8c654fe5-ef60-4e64-b3bf-5046c76d7f75.jpg",
-      "isLeaf": false,
-      "catName": "新客专享",
-      "sort": 1,
-      "statusDesc": "激活",
-      "status": 1,
-      "level": 0
+    productList: [{
+      img: 1,
+      name: "欧莱雅（LOREAL）奇焕光彩粉嫩透亮修颜霜 30ml（欧莱雅彩妆 BB霜 粉BB 遮瑕疵 隔离）",
+      sale: 599,
+      factory: 899,
+      payNum: 2342
     },
     {
-      "catId": 66,
-      "busiId": 10001,
-      "busiName": "韩妮采旗舰店",
-      "pid": 0,
-      "pidList": [
-        {
-          "catId": 67,
-          "busiId": 10001,
-          "busiName": "韩妮采旗舰店",
-          "pid": 0,
-          "pidList": [
-
-          ],
-          "catPath": "https://img.love-bears.cn/img/n25/tfs/2018/09/25/80edae5d-19f8-490d-8e78-31769adf5505.jpg",
-          "isLeaf": false,
-          "catName": "品类三",
-          "sort": 2,
-          "statusDesc": "激活",
-          "status": 1,
-          "level": 0
-        },
-      ],
-      "catPath": "https://img.love-bears.cn/img/n1/tfs/2018/11/01/8c8b5104-1d54-4643-8666-b2016ac6d736.jpg",
-      "isLeaf": false,
-      "catName": "品类二",
-      "sort": 1,
-      "statusDesc": "激活",
-      "status": 1,
-      "level": 0
+      img: 2,
+      name: "德国DMK进口牛奶  欧德堡（Oldenburger）超高温处理全脂纯牛奶1L*12盒",
+      sale: 29,
+      factory: 69,
+      payNum: 999
     },
     {
-      "catId": 67,
-      "busiId": 10001,
-      "busiName": "韩妮采旗舰店",
-      "pid": 0,
-      "pidList": [
-
-      ],
-      "catPath": "https://img.love-bears.cn/img/n25/tfs/2018/09/25/80edae5d-19f8-490d-8e78-31769adf5505.jpg",
-      "isLeaf": false,
-      "catName": "品类三",
-      "sort": 2,
-      "statusDesc": "激活",
-      "status": 1,
-      "level": 0
+      img: 3,
+      name: "【第2支1元】柔色尽情丝柔口红唇膏女士不易掉色保湿滋润防水 珊瑚红",
+      sale: 299,
+      factory: 699,
+      payNum: 666
     },
     {
-      "catId": 68,
-      "busiId": 10001,
-      "busiName": "韩妮采旗舰店",
-      "pid": 0,
-      "pidList": [
-
-      ],
-      "catPath": "https://img.love-bears.cn/img/n25/tfs/2018/09/25/5a2ba1f6-9bf0-47c8-a990-51c935611291.jpg",
-      "isLeaf": false,
-      "catName": "品类四",
-      "sort": 3,
-      "statusDesc": "激活",
-      "status": 1,
-      "level": 0
+      img: 4,
+      name: "百雀羚套装女补水保湿护肤品",
+      sale: 1599,
+      factory: 2899,
+      payNum: 236
     },
     {
-      "catId": 69,
-      "busiId": 10001,
-      "busiName": "韩妮采旗舰店",
-      "pid": 0,
-      "pidList": [
-
-      ],
-      "catPath": "https://img.love-bears.cn/img/n15/tfs/2019/07/15/c1f09d4e-7f4c-474a-bb6f-95cb9e8804ad.jpeg",
-      "isLeaf": false,
-      "catName": "品类五",
-      "sort": 5,
-      "statusDesc": "激活",
-      "status": 1,
-      "level": 0
+      img: 5,
+      name: "百草味 肉干肉脯 休闲零食 靖江精制猪肉脯200g/袋",
+      sale: 599,
+      factory: 899,
+      payNum: 2399
     },
     {
-      "catId": 70,
-      "busiId": 10001,
-      "busiName": "韩妮采旗舰店",
-      "pid": 0,
-      "pidList": [
-
-      ],
-      "catPath": "https://img.love-bears.cn/img/n15/tfs/2019/07/15/6d9ac241-f159-4d5a-966a-9006aaab0f47.jpeg",
-      "isLeaf": false,
-      "catName": "皇家美素佳儿",
-      "sort": 6,
-      "statusDesc": "激活",
-      "status": 1,
-      "level": 0
-    }]
+      img: 6,
+      name: "短袖睡衣女夏季薄款休闲家居服短裤套装女可爱韩版清新学生两件套 短袖粉色长颈鹿 M码75-95斤",
+      sale: 599,
+      factory: 899,
+      payNum: 2399
+    },
+    {
+      img: 1,
+      name: "欧莱雅（LOREAL）奇焕光彩粉嫩透亮修颜霜",
+      sale: 599,
+      factory: 899,
+      payNum: 2342
+    },
+    {
+      img: 2,
+      name: "德国DMK进口牛奶",
+      sale: 29,
+      factory: 69,
+      payNum: 999
+    },
+    {
+      img: 3,
+      name: "【第2支1元】柔色尽情丝柔口红唇膏女士不易掉色保湿滋润防水 珊瑚红",
+      sale: 299,
+      factory: 699,
+      payNum: 666
+    },
+    {
+      img: 4,
+      name: "百雀羚套装女补水保湿护肤品",
+      sale: 1599,
+      factory: 2899,
+      payNum: 236
+    }
+    ],
+    pageIndex: 1,
+    loadding: false,
+    pullUpOn: true
   },
-  cationLeft: function (e) {
-    const that = this,
-      _dataset = e.currentTarget.dataset,
-      _index = _dataset.index,
-      _item = _dataset.item;
-
-    that.setData({
-      selectCategoryId: _item.id,
-      selectCategoryChildren: _item.children
+  onLoad: function (options) {
+    let obj = wx.getMenuButtonBoundingClientRect();
+    this.setData({
+      width: obj.left,
+      height: obj.top + obj.height + 8,
+      inputTop: obj.top + (obj.height - 30) / 2,
+      arrowTop: obj.top + (obj.height - 32) / 2,
+      searchKey: options.searchKey || "关键词"
+    }, () => {
+      wx.getSystemInfo({
+        success: (res) => {
+          this.setData({
+            //略小，避免误差带来的影响
+            dropScreenH: this.data.height * 750 / res.windowWidth + 186,
+            drawerH: res.windowHeight - res.windowWidth / 750 * 100 - this.data.height
+          })
+        }
+      })
     });
   },
-  cationCenter: function (e) {
-    const that = this,
-      _dataset = e.currentTarget.dataset,
-      _index = _dataset.index,
-      _item = _dataset.item;
-
-    that.setData({
-      selectCategoryTowId: _item.id
-    });
+  onPullDownRefresh: function () {
+    let loadData = JSON.parse(JSON.stringify(this.data.productList));
+    loadData = loadData.splice(0, 10)
+    this.setData({
+      productList: loadData,
+      pageIndex: 1,
+      pullUpOn: true,
+      loadding: false
+    })
+    wx.stopPullDownRefresh()
   },
-  classificationBgc: function () {
-    const that = this;
-    that.setData({
-      goodsShow: that.data.goodsShow
-    });
-
-    that.classification();
+  onReachBottom: function () {
+    if (!this.data.pullUpOn) return;
+    this.setData({
+      loadding: true
+    }, () => {
+      if (this.data.pageIndex == 4) {
+        this.setData({
+          loadding: false,
+          pullUpOn: false
+        })
+      } else {
+        let loadData = JSON.parse(JSON.stringify(this.data.productList));
+        loadData = loadData.splice(0, 10)
+        if (this.data.pageIndex == 1) {
+          loadData = loadData.reverse();
+        }
+        this.setData({
+          productList: this.data.productList.concat(loadData),
+          pageIndex: this.data.pageIndex + 1,
+          loadding: false
+        })
+      }
+    })
   },
-  classification: function () {
-    // 分类切换
-    const _self = this;
-    let _goodsShow = !_self.data.goodsShow;
-    if (_goodsShow) {
-      let data = {
-        pid: 0,
-      };
-      // app.request.post('/Front/Cat/GetCat', data).then(function (res) {
-      //   if (_self.data.listfirsts.length === 0) {
-      //     res.data.forEach(function (item) {
-      //       item.cationShow = false;
-      //     });
-      //     _self.setData({
-      //       listfirsts: res.data
-      //     });
-      //   }
-      // });
-      _self.setData({
-        'classification.styleShow': true,
-        cationEdit: true
-      });
-      setTimeout(function () {
-        _self.setData({
-          'classification.styleRight': 0,
-          goodsShow: _goodsShow,
-          noScroll: true
-        });
-      });
+  btnDropChange: function (e) {
+    let index = e.currentTarget.dataset.index;
+    let arr = JSON.parse(JSON.stringify(this.data.attrArr[index].list));
+    if (arr.length === 0) {
+      let isActive = `attrArr[${index}].isActive`;
+      this.setData({
+        [isActive]: !this.data.attrArr[index].isActive
+      })
     } else {
-      _self.setData({
-        'classification.styleRight': '-100%',
-        noScroll: false,
-
-      });
-      setTimeout(function () {
-        _self.setData({
-          'classification.styleShow': false,
-          goodsShow: _goodsShow,
-          cationEdit: false
-        });
-      }, 200);
+      let isActive = `attrArr[${index}].isActive`;
+      this.setData({
+        attrData: arr,
+        attrIndex: index,
+        dropScreenShow: true,
+        [isActive]: false
+      }, () => {
+        this.setData({
+          scrollTop: 0
+        })
+      })
     }
   },
-
-
-
-  // event.detail 的值为当前选中项的索引
-  onChange(event) {
-    console.log(event.detail)
+  btnSelected: function (e) {
+    let index = e.currentTarget.dataset.index;
+    let selected = `attrData[${index}].selected`;
+    this.setData({
+      [selected]: !this.data.attrData[index].selected
+    })
   },
-  getMerProductList() {
+  reset() {
+    let arr = this.data.attrData;
+    for (let item of arr) {
+      item.selected = false;
+    }
+    this.setData({
+      attrData: arr
+    })
+  },
+  btnCloseDrop() {
+    this.setData({
+      scrollTop: 0,
+      dropScreenShow: false,
+      attrIndex: -1
+    })
+  },
+  btnSure: function () {
+    let index = this.data.attrIndex;
+    let arr = this.data.attrData;
+    let active = false;
+    let attrName = "";
+    //这里只是为了展示选中效果,并非实际场景
+    for (let item of arr) {
+      if (item.selected) {
+        active = true;
+        attrName += attrName ? ";" + item.name : item.name
+      }
+    }
+    let isActive = `attrArr[${index}].isActive`;
+    let selectedName = `attrArr[${index}].selectedName`;
+    this.btnCloseDrop();
+    this.setData({
+      [isActive]: active,
+      [selectedName]: attrName
+    })
+  },
+  showDropdownList: function () {
+    this.setData({
+      selectH: 246,
+      tabIndex: 0
+    })
+  },
+  hideDropdownList: function () {
+    this.setData({
+      selectH: 0
+    })
+  },
+  dropdownItem: function (e) {
+    let index = e.currentTarget.dataset.index;
+    let arr = this.data.dropdownList;
+    for (let i = 0; i < arr.length; i++) {
+      if (i === index) {
+        arr[i].selected = true;
+      } else {
+        arr[i].selected = false;
+      }
+    }
+    this.setData({
+      dropdownList: arr,
+      selectedName: index == 0 ? '综合' : '价格',
+      selectH: 0
+    })
+  },
+  screen: function (e) {
+    let index = e.currentTarget.dataset.index;
+    if (index == 0) {
+      this.showDropdownList();
+    } else if (index == 1) {
+      this.setData({
+        tabIndex: 1
+      })
+    } else if (index == 2) {
+      this.setData({
+        isList: !this.data.isList
+      })
+    } else if (index == 3) {
+      this.setData({
+        drawer: true
+      })
+    }
+  },
+  closeDrawer: function () {
+    this.setData({
+      drawer: false
+    })
+  },
+  back: function () {
+    if (this.data.drawer) {
+      this.closeDrawer()
+    } else {
+      wx.navigateBack()
+    }
+  },
+  search: function () {
+    wx.navigateTo({
+      url: '/pages/newsSearch/index'
+    })
+  },
+  detail: function () {
+    wx.navigateTo({
+      url: '../productDetail/productDetail'
+    })
+  },
+  searchProductList() {
     let data = {
       page: this.data.page.page,
       limit: this.data.page.limit,
-      merId: "6de79d7d7f764e3981b35d8b9a36fcc3"
+      text: '',//泛搜索 包括 商品名称 类型名称 商品内容等，只要商品有相关性就显示出来
+      lat: 0,//当前搜索用户所在经纬度
+      lon: 0,//当前搜索用户所在经纬度
+      sortType: 1,//排序类型 1、默认 3、销量 正序 5、销量 倒叙  7、价格 正序 9、价格 倒叙 11、距离 最近
+      categoryId: 0,//商品分类Id
     }
-    app.httpGet('mer/product/get/list', data).then(res => {
+    app.httpPost('product/search', data).then(res => {
       if (res.data.length <= 0) {
         this.setData({ 'page.pageEnd': true })
         return
@@ -395,8 +487,5 @@ Page({
         goods: list
       })
     })
-  },
-  onLoad(options) {
-    //this.getMerProductList()
   }
 })

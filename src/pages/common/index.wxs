@@ -4,6 +4,9 @@ var filter = {
     return 1
   },
   arrayExist: function (array, value) {
+    if (array == null || array.length <= 0) {
+      return false
+    }
     return array.indexOf(value) !== -1
   },
   priceStr: function (price) {
@@ -12,6 +15,24 @@ var filter = {
     }
     var eachPrice = ((price * 100) / 100).toFixed(2)
     return eachPrice //(price *100 / 100).toFixed(2);
+  },
+  //小数点前
+  pricePointBeforeStr: function (price) {
+    if (isNaN(price)) {
+      return ''
+    }
+    var str = filter.priceStr(price)
+    srt = str.substring(0, str.indexOf("."))
+    return srt
+  },
+  //小数点后
+  pricePointLateStr: function (price) {
+    if (isNaN(price)) {
+      return ''
+    }
+    var str = filter.priceStr(price)
+    srt = str.substring(str.indexOf(".") + 1, str.length)
+    return srt
   },
   enum: {
     orderStatus: {
@@ -35,5 +56,7 @@ module.exports = {
   numberToFixed: filter.numberToFixed,
   arrayExist: filter.arrayExist,
   priceStr: filter.priceStr,
+  pricePointBeforeStr: filter.pricePointBeforeStr,
+  pricePointLateStr: filter.pricePointLateStr,
   orderStatus: filter.enum.orderStatus
 }

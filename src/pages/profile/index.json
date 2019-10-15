@@ -1,14 +1,15 @@
 {
+  "navigationBarTitleText": "",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50,
   "navigationStyle": "custom",
   "usingComponents": {
-    "AppImage": "../../components/appImage/index",
-    "cu-custom": "/colorui/components/cu-custom",
-    "i-avatar": "/iview/dist/avatar/index",
-    "van-cell": "/dist/cell/index",
-    "van-cell-group": "/dist/cell-group/index",
-    "van-tabbar": "/dist/tabbar/index",
-    "van-tabbar-item": "/dist/tabbar-item/index",
-    "van-panel": "/dist/panel/index",
-    "van-icon": "/dist/icon/index"
+    "tui-button": "../../components/extend/button/button",
+    "tui-list-cell": "../../components/list-cell/list-cell",
+    "tui-icon": "../../components/icon/icon",
+    "tui-divider": "../../components/divider/divider",
+    "tui-loadmore": "../../components/loadmore/loadmore"
   }
 }

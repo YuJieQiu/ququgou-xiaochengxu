@@ -1,0 +1,22 @@
+<view class="container">
+  <view class="tui-bg"></view>
+  <view class="tui-content">
+    <view class="tui-form">
+      <image src="/assets/images/mall/img_recharge_success.png" class="tui-icon"></image>
+      <view class="tui-title">订单已提交</view>
+      <view class="tui-sub-title">非常感谢您购买我们的产品</view>
+      <view class="tui-btn-box">
+        <tui-button type="danger" width="240rpx" height="70rpx" size="{{28}}" plain="{{true}}" shape="circle" bind:click="goHome" data-page="1">
+          返回首页
+        </tui-button>
+        <tui-button type="danger" shadow="{{true}}" width="240rpx" height="70rpx" size="{{28}}" shape="circle" bind:click="goOrder" data-page="2">
+          查看订单
+        </tui-button>
+      </view>
+    </view>
+  </view>
+  <view class="tui-tips">
+    <view class="tui-grey">温馨提示:</view>
+    <view class="tui-light-grey">订单提交成功！</view>
+  </view>
+</view>

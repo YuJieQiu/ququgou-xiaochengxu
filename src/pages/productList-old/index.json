@@ -1,0 +1,17 @@
+{
+  "navigationBarTitleText": "商品列表",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "van-row": "/dist/row/index",
+    "van-col": "/dist/col/index",
+    "van-tab": "/dist/tab/index",
+    "van-tabs": "/dist/tabs/index",
+    "van-card": "/dist/card/index",
+    "van-button": "/dist/button/index",
+    "van-icon": "/dist/icon/index",
+    "van-search": "/dist/search/index",
+    "van-tabbar": "/dist/tabbar/index",
+    "van-tabbar-item": "/dist/tabbar-item/index"
+  }
+}

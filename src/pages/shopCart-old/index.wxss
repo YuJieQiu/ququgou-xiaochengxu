@@ -1,0 +1,141 @@
+Page .goods-list-card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+Page .goods-info {
+  margin-top: 20px;
+}
+
+Page .goods-info-card {
+  background-color: #fff;
+  box-sizing: border-box;
+  height: 82px;
+}
+
+Page .goods-list-card-title {
+  font-size: 14px;
+  font-weight: 500;
+  /* margin-top: 10px; */
+}
+
+Page .goods-list-card-desc {
+  font-size: 12px;
+  color: #999;
+  /* margin-top: 10px; */
+}
+
+Page .goods-info-card-price {
+  /* margin-top: 10px; */
+}
+
+Page .goods-info-card-number {
+  /* margin-top: 10px; */
+}
+
+Page .goods-list-card-thumb {
+  width: 150rpx;
+  height: 150rpx;
+}
+
+Page .goods-list-card-thumb image {
+  width: 100%;
+  height: 100%;
+}
+Page .van-card__thumb {
+  width: 150rpx !important;
+  height: 150rpx !important;
+}
+
+Page .goods-list-card-footer {
+  position: absolute;
+}
+
+Page .remark {
+  margin-top: 20px;
+  width: 95%;
+  margin-left: 10px;
+}
+
+Page .o-footer {
+  height: 0rpx;
+  padding: 0px;
+}
+
+Page .o-footer-money {
+  display: inline-block;
+  float: left;
+  flex: 1;
+  font-weight: 500;
+  text-align: right;
+  color: #323233;
+  padding-right: 12px;
+}
+
+Page .o-footer-but {
+  display: inline-block;
+  float: right;
+}
+Page .o-footer-money-block {
+  color: #f44;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: right;
+  display: inline-block;
+}
+/* Page .address .address-add .address-add-icon{
+      text-align:left;
+  } */
+Page .i-swipeout-demo-item {
+  padding: 0rpx;
+}
+
+Page .shop-cart {
+  margin-bottom: 120rpx;
+}
+
+/* Page .cus-checkbox {
+  display: inline-block;
+} */
+
+Page .content-checkbox {
+  display: inline-block;
+  width: 6%;
+  vertical-align: middle;
+}
+
+Page .content-card {
+  display: inline-block;
+  width: 88%;
+  vertical-align: middle;
+}
+
+Page .van-cell-text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all; /* 不换行 */
+  white-space: nowrap; /* 不换行 */
+  max-width: 400rpx;
+  vertical-align: middle;
+}
+Page .van-cell-text-view {
+  height: 35px;
+  line-height: 35px;
+  display: inline-block;
+  vertical-align: middle;
+}
+Page .van-cell-checkbox {
+  display: inline-block;
+  vertical-align: middle;
+  width: 70rpx;
+  margin-left: -8rpx;
+}
+
+Page .shop-cart-item {
+  margin-right: 20rpx;
+  margin-left: 20rpx;
+  border-radius: 5px;
+}

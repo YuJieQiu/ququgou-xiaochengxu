@@ -1,0 +1,162 @@
+/* @import "../../colorui/main.wxss";  */
+/* @import "../../colorui/main.wxss"; 
+.UCenter-bg {
+  /* background-image: url(https://image.weilanwl.com/color2.0/index.jpg); 
+  background-size: cover;
+  height: 550rpx;
+  display: flex;
+  justify-content: center;
+  padding-top: 40rpx;
+  overflow: hidden;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-weight: 300;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.UCenter-bg text {
+  opacity: 0.8;
+}
+
+.UCenter-bg image {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+map, .mapBox {
+  left: 0;
+  z-index: 99;
+  mix-blend-mode: screen;
+  height: 100rpx;
+}
+
+map, .mapBox {
+  width: 750rpx;
+  height: 300rpx;
+} */
+
+Page .main {
+  position: relative;
+  margin-top: 0;
+}
+
+Page .shader {
+  height: 256rpx;
+  background-image: linear-gradient(45deg, #ff9700, #ed1c24);
+  color: #fff;
+  padding-top: 120rpx;
+  box-shadow: 0px 0px 10px #ff9700;
+}
+
+Page .havatar {
+  height: 100%;
+  margin-left: 50rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+Page .hnamer {
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 50rpx;
+}
+
+Page .hnamer text {
+  height: 60rpx;
+  line-height: 60rpx;
+  display: inline-block;
+}
+
+Page .havatar-avatar {
+  width: 160rpx;
+  height: 160rpx;
+  line-height: 160rpx;
+  border-radius: 80rpx;
+}
+
+Page .main .order {
+  position: relative;
+  top: -50rpx;
+  /* margin-top: 20rpx; */
+  /* height: 300rpx; */
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+  /* box-shadow:2px 2px 5px #000; */
+  border-radius: 35rpx;
+  background-color: #fff;
+}
+
+Page .order .order-cell {
+  /* height: 40rpx;
+  line-height: 40rpx; */
+  border-radius: 5px;
+}
+
+Page .order .order-tabbar {
+  /* height: 40rpx;
+  line-height: 40rpx; */
+  height: 200rpx;
+  border-radius: 5px;
+}
+
+Page .row-content {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #fff;
+}
+
+/* Page .row-content:active {
+  background-color: #eee;
+} */
+
+Page .row-content .icon {
+  text-align: center;
+  width: 20%;
+  /* margin-left: 50rpx; */
+  display: inline-block;
+}
+Page .row-content .title {
+  /* margin-left: 50rpx; */
+  text-align: left;
+  width: 70%;
+  margin-left: 5%;
+  font-size: 14px;
+  line-height: 24px;
+  display: inline-block;
+}
+/* 
+Page .row-content .title .but {
+  background-color: #fff;
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+  display: inline-block;
+  height: 20rpx;
+  line-height: 20rpx;
+} */
+
+Page .row-but {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+  border-radius: 0px;
+  background-color: #fff;
+}
+
+.row-but:active {
+  border: 0;
+  border-radius: 0;
+  background-color: #eee;
+}
+.row-but:after {
+  border: 0;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+}

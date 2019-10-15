@@ -1,0 +1,21 @@
+{
+  "navigationBarTitleText": "区区购",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "van-row": "/dist/row/index",
+    "van-col": "/dist/col/index",
+    "van-tab": "/dist/tab/index",
+    "van-tabs": "/dist/tabs/index",
+    "van-card": "/dist/card/index",
+    "van-button": "/dist/button/index",
+    "van-tag": "/dist/tag/index",
+    "van-cell": "/dist/cell/index",
+    "van-cell-group": "/dist/cell-group/index",
+    "van-goods-action": "/dist/goods-action/index",
+    "van-stepper": "/dist/stepper/index",
+    "van-goods-action-icon": "/dist/goods-action-icon/index",
+    "van-goods-action-button": "/dist/goods-action-button/index",
+    "van-popup": "/dist/popup/index",
+    "van-icon": "/dist/icon/index"
+  }
+}

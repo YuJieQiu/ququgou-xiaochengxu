@@ -1,0 +1,109 @@
+<view class="{{isIPX ? 'main-IPX':'main'}}">
+		<view class="header">
+				<van-col>
+						<view class="header-search">
+								<van-search value="{{ value }}" placeholder="请输入搜索关键词" custom-class="header-search-van" background="none" field-class="header-search-field" input-class="header-search-input" />
+						</view>
+				</van-col>
+		</view>
+		<!-- <view class="nav">
+		<view class="nav-item">
+			<van-button icon="arrow-up" type="default">默认按钮</van-button>
+		</view>
+		<view class="nav-item">
+			<van-button icon="arrow-up" type="default">默认按钮</van-button>
+		</view>
+		<view class="nav-item">
+			<van-button icon="arrow-up" type="default">默认按钮</van-button>
+		</view>
+	</view> -->
+		<view class="filter-list filter-lists">
+				<view class="filter-item on" bindtap="normalSort">默认</view>
+				<view class="filter-item" bindtap="goodsSales">
+						<view class="item-text on">默认2</view>
+						<view class="item-icon ">
+								<van-icon custom-class="" color="#c53f3f" name="arrow-up" />
+						</view>
+						<!-- <text class="icon-up iconfont">1</text> -->
+						<!-- <van-icon custom-class="icon-up iconfont" name="close" /> -->
+						<!-- <text class="icon-up iconfont on" />
+								<text class="icon-down iconfont on" /> -->
+				</view>
+				<view class="filter-item" bindtap="newProduct">
+						<view class="item-text on">默认3</view>
+						<view class="item-icon ">
+								<van-icon custom-class="" color="#c53f3f" name="arrow-down" />
+						</view>
+				</view>
+				<view class="filter-item " bindtap="goodsPrice">
+						<view class="item-text on">默认5</view>
+						<view class="item-icon ">
+								<van-icon custom-class="" color="#c53f3f" name="arrow-up" />
+						</view>
+				</view>
+				<view class="filter-item" bindtap="classification">
+						<view class="icon_number">筛选</view>
+						<text class="icon-shaixuan iconfont"></text>
+				</view>
+				<view class="show-type-btn" bindtap="goodsToggle">
+						<icon wx:if="{{listStyle === 'list'}}" class="iconfont icon-list" />
+						<icon wx:elif="{{listStyle === 'small' || listStyle == 'big'}}" class="iconfont icon-card" />
+				</view>
+		</view>
+		<!-- 分类 S -->
+		<view class="" hidden="{{isShow}}">
+				<view class="classification">
+						<view class="classification-box" bindtap="classificationBgc" style="{{classification.styleShow ? 'display: block;' : 'display: none;'}}">
+								<view class="classification-text " style="{{'right: '+ classification.styleRight}}" catchtap="layerBuble">
+										<!-- @*第一层*@ -->
+										<view class="classification-list-l">
+												<scroll-view scroll-y class="main">
+														<!-- <view catchtap="allList" class="classification-alists {{allColor ? 'on' : ''}}">
+																全部
+														</view> -->
+														<view wx:for="{{categoryList}}" wx:key="item" data-index="{{index}}" data-item="{{item}}" catchtap="cationLeft" class="classification-alists {{item.id==selectCategoryId ? 'on' : ''}}">
+																{{item.text}}
+														</view>
+												</scroll-view>
+										</view>
+										<!-- @*第二层*@ -->
+										<view class="classification-list-center">
+												<scroll-view scroll-y class="main">
+														<view wx:for="{{selectCategoryChildren}}" class="twolist {{item.id==selectCategoryTowId  ? 'on' : ''}}" catchtap="cationCenter" wx:key="item" data-index="{{index}}" data-item="{{item}}">
+																<text>{{item.text}}</text>
+														</view>
+												</scroll-view>
+										</view>
+										<!-- @*第3层*@ -->
+										<!-- <view class="classification-list-r rightmove{{moveRight?'rightmove':''}}">
+												<scroll-view scroll-y class="main">
+														<view wx:for="{{selectCategoryChildren}}" class="threeList {{item.cationShow ? 'on' : ''}}" wx:key="item" data-index="{{index}}" data-item="{{item}}" catchtap="cationRight">
+																<text>{{item.text}}</text>
+																<text class="icon-theselected iconfont mainicon" wx:if="{{item.cationShow}}"></text>
+														</view>
+												</scroll-view>
+										</view> -->
+										<view class="btnbox">
+												<text class="iconfont icon-shutdown" catchtap="classificationBgc"></text>
+												<view class="btn" catchtap="subCheck">确认</view>
+										</view>
+								</view>
+						</view>
+				</view>
+		</view>
+		<!-- 分类 E -->
+		<view class="goods-list">
+				<van-card wx:for="{{goods}}" wx:key="{{item.guid}}" num="" tag="标签" origin-price="{{item.originalPrice>0?item.originalPrice:''}}" centered="true" currency="¥" price="{{item.currentPrice}}" desc="{{item.description}}" title="{{item.name}}" thumb="{{item.image}}" data-guid="{{item.guid}}" bindtap="showDetail">
+						<view slot="tags" wx:for="{{item.tags}}">{{item}}</view>
+						<view slot="footer">
+								<van-button size="mini" round type="danger">购买</van-button>
+						</view>
+				</van-card>
+		</view>
+		<!-- <van-tabbar active="{{ active }}" fixed="{{false}}" bind:change="onChange">
+		<van-tabbar-item icon="home-o">标签</van-tabbar-item>
+		<van-tabbar-item icon="search">标签</van-tabbar-item>
+		<van-tabbar-item icon="friends-o">标签</van-tabbar-item>
+		<van-tabbar-item icon="setting-o">标签</van-tabbar-item>
+	</van-tabbar> -->
+</view>

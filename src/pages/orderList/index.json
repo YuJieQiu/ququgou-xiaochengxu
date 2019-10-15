@@ -1,20 +1,19 @@
 {
-  "navigationBarTitleText": "区区购",
+  "navigationBarTitleText": "我的订单",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
   "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50,
   "usingComponents": {
-    "van-row": "/dist/row/index",
-    "van-col": "/dist/col/index",
+    "tui-tabs": "../../components/tui-tabs/tui-tabs",
+    "tui-button": "../../components/extend/button/button",
+    "tui-loadmore": "../../components/loadmore/loadmore",
+    "tui-nomore": "../../components/nomore/nomore",
+    "tui-list-cell": "../../components/list-cell/list-cell",
+    "tui-sticky": "../../components/sticky/sticky",
     "van-tab": "/dist/tab/index",
     "van-tabs": "/dist/tabs/index",
-    "van-card": "/dist/card/index",
-    "van-button": "/dist/button/index",
-    "van-cell": "/dist/cell/index",
-    "van-cell-group": "/dist/cell-group/index",
-    "van-icon": "/dist/icon/index",
-    "van-submit-bar": "/dist/submit-bar/index",
-    "van-field": "/dist/field/index",
     "van-toast": "/dist/toast/index",
-    "van-panel": "/dist/panel/index",
     "van-dialog": "/dist/dialog/index"
   }
 }

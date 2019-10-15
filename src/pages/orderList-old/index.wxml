@@ -1,0 +1,39 @@
+<wxs module="wxs" src="../common/index.wxs" />
+<view class="main">
+		<van-tabs active="{{ active }}" swipe-threshold="5" swipeable="{{true}}" bind:change="onClickTab">
+				<van-tab title="{{tab.title}}" name="{{tab.name}}" wx:for="{{tabsList}}" wx:for-item="tab">
+						<view class="order-list" wx:for="{{list}}" wx:for-item="listItem">
+								<van-panel use-footer-slot footer-class="o-footer">
+										<view slot="header">
+												<van-cell title-class="van-cell-title" value="{{tab.statusText==''?listItem.statusText:tab.statusText}}" icon="shop-o" title="{{listItem.merName}}" is-link url="{{'/pages/merchant/index?merId='+listItem.merId}}" />
+										</view>
+										<view class="order-list-item-card">
+												<van-card bindtap="onClickRedirectionDetail" data-no="{{listItem.no}}" custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" lazy-load="{{true}}" wx:for="{{listItem.products}}" wx:for-item="product" thumb="{{product.cover}}" num="{{product.count}}" numsymbol="x" thumb-mode="aspectFill" centered="{{false}}" price="{{wxs.priceStr(product.unitPrice)}}">
+														<view slot="title" class="goods-list-card-title">{{product.name}}</view>
+														<view slot="desc" class="goods-list-card-desc">
+																<block wx:if="{{product.skuInfo!=null}}" wx:for="{{product.skuInfo}}">
+																		{{item.attName}}:{{item.valueName}}
+																</block>
+														</view>
+												</van-card>
+										</view>
+										<view slot="footer">
+												<view class="o-footer-money">
+														合计:
+														<view class="o-footer-money-block">¥{{wxs.priceStr(listItem.orderAmountTotal)}}</view>
+												</view>
+												<view class="o-footer-but">
+														<van-button size="small" data-no="{{listItem.no}}" bindtap="onOrderCancel" wx:if="{{listItem.status=='0001'||listItem.status=='0000'}}">
+																取消订单
+														</van-button>
+														<van-button size="small" type="danger" wx:if="{{listItem.status=='0000'}}">
+																立即支付
+														</van-button>
+												</view>
+										</view>
+								</van-panel>
+						</view>
+				</van-tab>
+		</van-tabs>
+		<van-dialog id="van-dialog" />
+</view>

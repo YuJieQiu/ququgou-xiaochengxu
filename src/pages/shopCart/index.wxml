@@ -1,57 +1,172 @@
-<view class="main">
-		<view class="shop-cart">
-				<view class="shop-cart-item" wx:for="{{list}}" wx:for-item="mer">
-						<van-panel use-footer-slot footer-class="o-footer">
-								<view slot="header">
-										<van-cell value="" is-link>
-												<view slot="title">
-														<view class="van-cell-checkbox">
-																<van-checkbox custo-class="van-cell-checkbox-item" checked-color="#f44" value="{{ allCheckboxData }}" bind:change="onChangeAllCheck" />
+<!-- 引入.wxs文件 src为相对路径，module指定当前模块的名称 -->
+<wxs module="wxs" src="../common/index.wxs" />
+<view class="container">
+		<!-- <view class="tui-edit-goods">
+				<view>
+						购物车共
+						<text class="tui-goods-num">2</text>
+						件商品
+				</view>
+				<view>
+						<tui-button type="gray" plain="{{true}}" shape="circle" width="160rpx" height="60rpx" size="{{24}}" bind:click="editGoods">
+								{{isEdit?"完成":"编辑商品"}}
+						</tui-button>
+				</view>
+		</view> -->
+		<view class="shop-cart-item" wx:for="{{list}}" wx:for-item="mer">
+				<van-cell value="" is-link>
+						<view slot="title">
+								<view class="van-cell-checkbox">
+										<van-checkbox custo-class="van-cell-checkbox-item" checked-color="#f44" value="{{ allCheckboxData }}" bind:change="onChangeAllCheck" />
+								</view>
+								<view class="van-cell-text" data-mer-code="{{mer.merCode}}" bindtap="onClickMerName">
+										<van-icon custom-class="van-cell-text-view" name="shop-o" size="20px" />
+										<view class="van-cell-text-view">{{mer.merName}}</view>
+								</view>
+						</view>
+				</van-cell>
+				<van-checkbox-group value="{{ checkboxData }}" bind:change="onChangeCheckbox">
+						<view class="tui-cart-cell {{index==0?'':'tui-mtop'}} " data-id="{{product.cartId}}" wx:for="{{mer.products}}" wx:for-item="product" wx:key="{{index}}">
+								<view class="tui-activity" wx:if="{{index%2==0}}">
+										<view class="tui-bold">满3件享受优惠</view>
+										<view class="tui-buy">
+												去凑单
+												<tui-icon name="arrowright" size="{{18}}" color="#333"></tui-icon>
+										</view>
+								</view>
+								<tui-swipe-action actions="{{actions}}" bind:change="handlerButton" data-id="{{product.cartId}}" params="{{item}}">
+										<view class="tui-goods-item" slot="content">
+												<label class="tui-checkbox">
+														<!-- <checkbox color="#fff"></checkbox> -->
+														<van-checkbox checked-color="#f44" custom-class="cus-checkbox" name="{{ product.cartId }}" />
+												</label>
+												<image src="{{product.img.url}}" class="tui-goods-img" />
+												<view class="tui-goods-info">
+														<view class="tui-goods-title">{{product.name}}</view>
+														<view class="tui-goods-model">
+																<view class="tui-model-text">
+																		<block wx:if="{{product.attributeInfo!=null}}" wx:for="{{product.attributeInfo}}">
+																				{{item.attName}}:{{item.valueName}}
+																		</block>
+																</view>
+																<!-- <tui-icon name="arrowdown" size="{{16}}" color="#333"></tui-icon> -->
 														</view>
-														<view class="van-cell-text" data-mer-code="{{mer.merCode}}" bindtap="onClickMerName">
-																<van-icon custom-class="van-cell-text-view" name="shop-o" size="20px" />
-																<view class="van-cell-text-view">{{mer.merName}}</view>
+														<view class="tui-price-box">
+																<view class="tui-goods-price">￥{{wxs.priceStr(product.price)}}</view>
+																<tui-numberbox value="{{ product.number }}" height="28" width="56" min="1" max="{{product.stock}}" iconsize="22" iconcolor="#666" index="{{index}}" bind:change="changeNum"></tui-numberbox>
 														</view>
 												</view>
-										</van-cell>
-								</view>
-								<view>
-										<van-checkbox-group value="{{ checkboxData }}" bind:change="onChangeCheckbox">
-												<i-swipeout i-class="i-swipeout-demo-item" actions="{{actions}}" bind:change="handleCancel2" data-id="{{product.cartId}}" wx:for="{{mer.products}}" wx:for-item="product">
-														<view slot="content" operate-width="{{83}}">
-																<view slot="title">
-																		<view class="content-checkbox">
-																				<van-checkbox checked-color="#f44" custom-class="cus-checkbox" name="{{ product.cartId }}" />
-																		</view>
-																		<view class="content-card">
-																				<van-card custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" centered="{{false}}" lazy-load="{{true}}" thumb="{{product.img.url}}" thumb-mode="aspectFill" thumb-link="{{'/pages/productDetail/index?guid='+product.productNo}}" price="{{product.price}}">
-																						<view slot="title" class="goods-list-card-title">{{product.name}}</view>
-																						<view slot="desc" class="goods-list-card-desc">
-																								<block wx:if="{{product.attributeInfo!=null}}" wx:for="{{product.attributeInfo}}">
-																										{{item.attName}}:{{item.valueName}}
-																								</block>
-																						</view>
-																						<view slot="bottom" class="">
-																								<van-stepper value="{{ product.number }}" max="{{product.stock}}" disabled="{{product.stock<1}}" integer="{{true}}" data-id="{{product.cartId}}" bind:change="onChangeNumber" />
-																						</view>
-																				</van-card>
+										</view>
+								</tui-swipe-action>
+								<view class="tui-sub-info" wx:if="{{index%2==0}}">赠品：柔色尽情丝柔口红唇膏1支柔色尽情丝柔口红唇膏1支</view>
+						</view>
+				</van-checkbox-group>
+		</view>
+		<!-- 商品失效 -->
+		<view class="tui-cart-cell  tui-mtop" wx:if="{{isInvalid}}">
+				<view class="tui-activity">
+						<view class="tui-bold">失效商品</view>
+						<view class="tui-buy">
+								<tui-button type="gray" plain="{{true}}" shape="circle" width="200rpx" height="56rpx" size="{{24}}" bind:click="onRemoveInvalidProducts">
+										清空失效商品
+								</tui-button>
+						</view>
+				</view>
+				<block wx:for="{{list}}" wx:for-item="mer" wx:key="{{merIndex}}">
+						<block wx:for="{{mer.invalidProducts}}" wx:for-item="product" wx:key="{{index}}">
+								<view class="{{index!==0?'tui-invalid-ptop':''}}">
+										<tui-swipe-action actions="{{actions2}}">
+												<view class="tui-goods-item" slot="content">
+														<view class="tui-checkbox tui-invalid-pr">
+																<view class="tui-invalid-text">失效</view>
+														</view>
+														<image src="{{product.img.url}}" class="tui-goods-img opcity" />
+														<view class="tui-goods-info">
+																<view class="tui-goods-title tui-gray">{{product.name}}</view>
+																<view class="tui-price-box tui-flex-center">
+																		<view class="tui-goods-invalid">产品失效</view>
+																		<view class="tui-btn-alike">
+																				<tui-button type="white" plain="{{true}}" shape="circle" width="120rpx" height="48rpx" size="{{24}}">
+																						找相似
+																				</tui-button>
 																		</view>
 																</view>
 														</view>
-												</i-swipeout>
-										</van-checkbox-group>
+												</view>
+										</tui-swipe-action>
 								</view>
-								<view slot="footer">
-										<view class="o-footer-money" />
-										<view class="o-footer-but" />
+						</block>
+				</block>
+		</view>
+		<!-- 猜你喜欢 -->
+		<tui-divider size="{{28}}" bold="{{true}}" color="#333" width="50%">
+				<tui-icon name="like" size="{{18}}" color="#e41f19"></tui-icon>
+				<text class="tui-youlike">猜你喜欢</text>
+		</tui-divider>
+		<view class="tui-product-list">
+				<view class="tui-product-container">
+						<block wx:for="{{productList}}" wx:key="{{index}}" wx:if="{{(index+1)%2!=0}}">
+								<!-- 商品列表 -->
+								<view class="tui-pro-item" hover-class="hover" hover-start-time="150" bindtap="detail">
+										<image src="/assets/images/mall/product/{{item.img}}.jpg" class="tui-pro-img" mode="widthFix" />
+										<view class="tui-pro-content">
+												<view class="tui-pro-tit">{{item.name}}</view>
+												<view>
+														<view class="tui-pro-price">
+																<text class="tui-sale-price">￥{{item.sale}}</text>
+																<text class="tui-factory-price">￥{{item.factory}}</text>
+														</view>
+														<view class="tui-pro-pay">{{item.payNum}}人付款</view>
+												</view>
+										</view>
 								</view>
-						</van-panel>
+								<!-- 商品列表 -->
+								<!-- <template is="productItem" data="{{item,index:index}}" /> -->
+						</block>
+				</view>
+				<view class="tui-product-container">
+						<block wx:for="{{productList}}" wx:key="{{index}}" wx:if="{{(index+1)%2==0}}">
+								<!-- 商品列表 -->
+								<view class="tui-pro-item" hover-class="hover" hover-start-time="150" bindtap="detail">
+										<image src="/assets/images/mall/product/{{item.img}}.jpg" class="tui-pro-img" mode="widthFix" />
+										<view class="tui-pro-content">
+												<view class="tui-pro-tit">{{item.name}}</view>
+												<view>
+														<view class="tui-pro-price">
+																<text class="tui-sale-price">￥{{item.sale}}</text>
+																<text class="tui-factory-price">￥{{item.factory}}</text>
+														</view>
+														<view class="tui-pro-pay">{{item.payNum}}人付款</view>
+												</view>
+										</view>
+								</view>
+						</block>
 				</view>
 		</view>
-		<!-- 购买 S -->
-		<van-submit-bar price="{{totalPrice*100}}" button-text="购买" bind:submit="navigateToOrderSettlement" tip="{{ true }}">
-				<!-- <van-tag type="primary">标签</van-tag> -->
-				<!-- <view slot="tip" /> -->
-		</van-submit-bar>
-		<!-- 购买 E -->
+		<!-- tabbar -->
+		<view class="tui-tabbar">
+				<view class="tui-checkAll">
+						<checkbox-group>
+								<label class="tui-checkbox">
+										<!-- <checkbox color="#fff" ></checkbox> -->
+										<van-checkbox custo-class="van-cell-checkbox-item" checked-color="#f44" value="{{ allCheckboxData }}" bind:change="onChangeAllCheck" />
+										<text class="tui-checkbox-pl">全选</text>
+								</label>
+						</checkbox-group>
+						<view class="tui-total-price" wx:if="{{!isEdit}}">
+								合计:
+								<text class="tui-bold">￥{{totalPrice==''?'0.00':wxs.priceStr(totalPrice)}}</text>
+						</view>
+				</view>
+				<view>
+						<tui-button width="200rpx" height="70rpx" size="{{30}}" type="danger" shape="circle" wx:if="{{!isEdit}}" bind:click="navigateToOrderSettlement">
+								购买
+						</tui-button>
+						<tui-button width="200rpx" height="70rpx" size="{{30}}" type="danger" shape="circle" plain="{{true}}" wx:else>
+								删除
+						</tui-button>
+				</view>
+		</view>
+		<!-- 加载loadding -->
+		<tui-loadmore visible="{{loadding}}" index="{{3}}" type="red"></tui-loadmore>
 </view>

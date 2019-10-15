@@ -46,7 +46,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 9,
+			"current": 12,
 			"list": [
 				{
 					"id": 0,
@@ -59,7 +59,7 @@
 					"id": 1,
 					"name": "p detail",
 					"pathName": "pages/productDetail/index",
-					"query": "guid=0a7a296cb6ff4f6795cb7fb4bde83344",
+					"query": "guid =4ccd895d50064bcba5b0de04160ebd66",
 					"scene": null
 				},
 				{
@@ -115,6 +115,27 @@
 					"id": -1,
 					"name": "pages/orderSettlement/index",
 					"pathName": "pages/orderSettlement/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/orderSettlement/index",
+					"pathName": "pages/orderSettlement/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "es/orderSettlement/success/success",
+					"pathName": "pages/orderSettlement/success/success",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/newsSearch/index",
+					"pathName": "pages/newsSearch/index",
 					"query": "",
 					"scene": null
 				}

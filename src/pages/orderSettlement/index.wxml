@@ -1,75 +1,141 @@
-<view class="main">
-		<!-- 配送方式选择 S -->
-		<view class="">
+<!-- 引入.wxs文件 src为相对路径，module指定当前模块的名称 -->
+<wxs module="wxs" src="../common/index.wxs" />
+<view class="container">
+		<view class="tui-box">
 				<van-tabs type="card" info="info" bind:change="onChangeDeliveryType">
 						<van-tab title="送货上门" name="5">
-								<!-- 收货地址 S -->
-								<view class="address">
-										<van-cell wx:if="{{address.id===0}}" clickable="{{true}}" bind:click="" is-link url="/pages/addressList/index">
-												<view class='address-add'>
-														<van-icon name="add-o" custom-style="address-add-icon" />
-														添加新的收货地址
+								<tui-list-cell arrow="{{true}}" last="{{true}}" radius="{{true}}" bind:click="chooseAddr">
+										<view class="tui-address">
+												<view wx:if="{{address.id!=0}}">
+														<view class="tui-userinfo">
+																<text class="tui-name">{{address.username}}</text>
+																{{address.phone}}
+														</view>
+														<view class="tui-addr">
+																<view class="tui-addr-tag">默认</view>
+																<text>{{address.city}}{{address.region}}{{address.town}}{{address.address}}</text>
+														</view>
 												</view>
-										</van-cell>
-										<van-cell wx:else custom-class="address-cell" clickable="{{true}}" is-link title="{{address.city}}{{address.region}}{{address.town}}{{address.address}}" label="{{address.username}} {{address.phone}}" icon="location-o" center="{{true}}" size="large" is-link="{{true}}" border="{{true}}" bind:click="onClickAddress">
-												<view slot="title">
-														<!-- <view class="address-cell-text">
-         龙之梦雅士大厦815 address.city address.region address.town address.address
-      </view> -->
-														<!-- <view class="address-cell-label">王先生 1347868768</view> -->
+												<view class="tui-none-addr" wx:else>
+														<image src="/assets/images/index/map.png" class="tui-addr-img" mode="widthFix"></image>
+														<text>选择收货地址</text>
 												</view>
-										</van-cell>
-								</view>
-								<!-- 收货地址 E -->
+										</view>
+										<view class="tui-bg-img"></view>
+								</tui-list-cell>
 						</van-tab>
 						<van-tab title="到店自提" name="10">
-								<!-- 自提地址 S -->
-								<van-cell custom-class="address-cell" wx:for="{{merAddress}}" wx:for-item="address" clickable="{{true}}" is-link title="{{address.city}}{{address.region}}{{address.town}}{{address.address}}" label="{{address.merName}} {{address.phones}}" icon="location-o" center="{{true}}" size="large" is-link="{{true}}" border="{{true}}" data-latitude="{{address.latitude}}" data-longitude="{{address.latitude}}" bind:click="onClickMerAddress"></van-cell>
-								<!-- 自提地址 E -->
+								<tui-list-cell arrow="{{true}}" last="{{true}}" radius="{{true}}" wx:for="{{merAddress}}" wx:for-item="address" wx:key="{{index}}" data-latitude="{{address.latitude}}" data-longitude="{{address.latitude}}" bind:click="onClickMerAddress">
+										<view class="tui-address">
+												<view wx:if="{{address.id!=0}}">
+														<view class="tui-userinfo">
+																<text class="tui-name">{{address.merName}}</text>
+																{{address.phones}}
+														</view>
+														<view class="tui-addr">
+																<view class="tui-addr-tag">默认</view>
+																<text>{{address.city}}{{address.region}}{{address.town}}{{address.address}}</text>
+														</view>
+												</view>
+												<view class="tui-none-addr" wx:else>
+														<image src="/assets/images/index/map.png" class="tui-addr-img" mode="widthFix"></image>
+														<text>选择收货地址</text>
+												</view>
+										</view>
+										<view class="tui-bg-img"></view>
+								</tui-list-cell>
 						</van-tab>
 				</van-tabs>
-		</view>
-		<!-- 配送方式选择 S -->
-		<!-- 商品列表 S -->
-		<view class="goods-info">
-				<block wx:for="{{list}}" wx:for-item="listItem">
-						<van-card custom-class="goods-info-card" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" centered="{{false}}" lazy-load="{{true}}" wx:for="{{listItem.skuList}}" wx:for-item="sku" thumb="{{sku.image}}" thumb-mode="aspectFill" num="{{sku.number}}" price="{{sku.price}}">
-								<!-- <view slot="thumb" class="goods-list-card-thumb" > 
-              <image  
-            src="http://qiniu.media.q.dfocuspace.cn/static/images/c427dca3e80a4fceb39e415d65f1dea3.jpg"
-            ></image> 
-        </view> -->
-								<view slot="title" class="goods-list-card-title">{{sku.productName}}</view>
-								<view slot="desc" class="goods-list-card-desc">
-										<block wx:if="{{sku.attributeInfo!=null}}" wx:for="{{sku.attributeInfo}}">
-												{{item.attName}}:{{item.valueName}}
-										</block>
+				<view class="tui-top tui-goods-info">
+						<tui-list-cell hover="{{false}}" lineLeft="{{false}}">
+								<view class="tui-goods-title">商品信息</view>
+						</tui-list-cell>
+						<block wx:for="{{list}}" wx:for-item="listItem" wx:key="{{index}}">
+								<tui-list-cell hover="{{false}}" padding="0" wx:for="{{listItem.skuList}}" wx:for-item="sku">
+										<view class="tui-goods-item">
+												<image src="{{sku.image}}" class="tui-goods-img"></image>
+												<view class="tui-goods-center">
+														<view class="tui-goods-name">{{sku.productName}}</view>
+														<view class="tui-goods-attr">
+																<block wx:if="{{sku.attributeInfo!=null}}" wx:for="{{sku.attributeInfo}}">
+																		{{item.attName}}:{{item.valueName}}
+																</block>
+														</view>
+												</view>
+												<view class="tui-price-right">
+														<view>￥{{wxs.priceStr(sku.price)}}</view>
+														<view>x{{sku.number}}</view>
+												</view>
+										</view>
+								</tui-list-cell>
+						</block>
+						<tui-list-cell hover="{{false}}">
+								<view class="tui-padding tui-flex">
+										<view>商品总额</view>
+										<view>￥{{wxs.priceStr(orderAmount)}}</view>
 								</view>
-								<!-- <view slot="footer" class="goods-list-card-footer">footer</view> -->
-						</van-card>
-				</block>
-		</view>
-		<!-- 商品列表 E -->
-		<!-- 优惠卷列表 S -->
-		<!-- TODO: 待完成 -->
-		<!-- 优惠卷列表 E -->
-		<!-- 价格统计 S -->
-		<view />
-		<!-- 价格统计 E -->
-		<!-- <view>优惠卷列表</view>
-  <view>价格统计</view>
-  <view>提交按钮</view> -->
-		<view class="remark">
-				<van-field value="{{ remark }}" label="订单备注" type="textarea" placeholder="可输入备注,最多100字哟～" maxlength="{{100}}" autosize border="{{ false }}" bind:input="" />
-		</view>
-		<!-- 提交订单 S -->
-		<van-submit-bar price="{{ orderAmount*100 }}" button-text="提交订单" bind:submit="onSubmitOrderCreate" tip="{{ true }}">
-				<!-- <van-tag type="primary">标签</van-tag> -->
-				<view slot="tip">
-						限时优惠
-						<!-- <text>修改地址</text> -->
+						</tui-list-cell>
+						<tui-list-cell arrow="{{hasCoupon}}" hover="{{hasCoupon}}">
+								<view class="tui-padding tui-flex">
+										<view>优惠券</view>
+										<view class="{{hasCoupon?'tui-color-red':''}}">{{hasCoupon?"满5减1":'没有可用优惠券'}}</view>
+								</view>
+						</tui-list-cell>
+						<tui-list-cell hover="{{true}}" arrow="{{true}}">
+								<view class="tui-padding tui-flex">
+										<view>发票</view>
+										<view class="tui-invoice-text">不开发票</view>
+								</view>
+						</tui-list-cell>
+						<tui-list-cell hover="{{false}}">
+								<view class="tui-padding tui-flex">
+										<view>配送费</view>
+										<view>￥0.00</view>
+								</view>
+						</tui-list-cell>
+						<tui-list-cell hover="{{false}}" lineLeft="{{false}}" padding="0">
+								<view class="tui-remark-box tui-padding tui-flex">
+										<view>订单备注</view>
+										<input type="text" class="tui-remark" placeholder="选填: 请先和商家协商一致" placeholder-class="tui-phcolor"></input>
+								</view>
+						</tui-list-cell>
+						<tui-list-cell hover="{{false}}" last="{{true}}">
+								<view class="tui-padding tui-flex tui-total-flex">
+										<view class="tui-flex-end tui-color-red">
+												<view class="tui-black">合计：</view>
+												<view class="tui-size-26">￥</view>
+												<view class="tui-price-large">{{wxs.pricePointBeforeStr(orderAmount)}}</view>
+												<view class="tui-size-26">.{{wxs.pricePointLateStr(orderAmount)}}</view>
+										</view>
+								</view>
+						</tui-list-cell>
 				</view>
-		</van-submit-bar>
-		<!-- 提交订单 E -->
+				<!-- <view class="tui-top">
+						<tui-list-cell last="{{true}}" hover="{{insufficient}}" radius="{{true}}" arrow="{{insufficient}}">
+								<view class="tui-flex">
+										<view class="tui-balance">
+												余额支付
+												<text class="tui-gray">(￥2019.00)</text>
+										</view>
+										<switch color="#30CC67" class="tui-scale-small" wx:if="{{!insufficient}}" />
+										<view class="tui-pr-30 tui-light-dark" wx:else>余额不足, 去充值</view>
+								</view>
+						</tui-list-cell>
+				</view> -->
+		</view>
+		<view class="tui-safe-area"></view>
+		<view class="tui-tabbar">
+				<view class="tui-flex-end tui-color-red tui-pr-20">
+						<view class="tui-black">实付金额:</view>
+						<view class="tui-size-26">￥</view>
+						<view class="tui-price-large">{{wxs.pricePointBeforeStr(orderAmount)}}</view>
+						<view class="tui-size-26">.{{wxs.pricePointLateStr(orderAmount)}}</view>
+				</view>
+				<view class="tui-pr25">
+						<tui-button width="200rpx" height="70rpx" type="danger" shape="circle" bind:click="onSubmitOrderCreate">
+								提交订单
+						</tui-button>
+				</view>
+		</view>
+		<van-toast id="van-toast" />
 </view>
-<van-toast id="van-toast" />

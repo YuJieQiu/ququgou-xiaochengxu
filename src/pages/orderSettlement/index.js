@@ -4,6 +4,8 @@ const pageStart = 1
 import Toast from '../../dist/toast/toast'
 Page({
   data: {
+    hasCoupon: true,
+    insufficient: false,
     active: 5,
     deliveryId: 5,
     list: [],
@@ -141,9 +143,12 @@ Page({
         // wx.navigateTo({
         //     url: '/pages/orderList/index'
         // })
-        wx.redirectTo({
-          url: '/pages/orderList/index'
-        })
+        if (res.code == 200) {
+          wx.redirectTo({
+            url: '/pages/orderSettlement/success/success'
+          })
+        }
+
       })
       .catch(error => {
         toast.clear()
@@ -171,6 +176,7 @@ Page({
   onLoad(options) {
     let object = JSON.parse(options.jsonData)
 
+    console.log(object)
     let list = this.data.list
     list.push(...object)
     this.setData({ list: list })
@@ -197,5 +203,15 @@ Page({
     })
 
     this.getMerAddressInfo()
+  },
+  chooseAddr() {
+    wx.navigateTo({
+      url: "/pages/addressList/index"
+    })
+  },
+  btnPay() {
+    wx.navigateTo({
+      url: "../success/success"
+    })
   }
 })

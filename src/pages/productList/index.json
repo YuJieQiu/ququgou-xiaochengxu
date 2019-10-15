@@ -1,17 +1,16 @@
 {
-  "navigationBarTitleText": "商品列表",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "backgroundColorTop": "#F7F7F7",
+  "backgroundColorBottom": "#F7F7F7",
+  "navigationBarTitleText": "商品列表 ",
+  "onReachBottomDistance": 50,
   "navigationStyle": "custom",
-  "enablePullDownRefresh": true,
   "usingComponents": {
-    "van-row": "/dist/row/index",
-    "van-col": "/dist/col/index",
-    "van-tab": "/dist/tab/index",
-    "van-tabs": "/dist/tabs/index",
-    "van-card": "/dist/card/index",
-    "van-button": "/dist/button/index",
-    "van-icon": "/dist/icon/index",
-    "van-search": "/dist/search/index",
-    "van-tabbar": "/dist/tabbar/index",
-    "van-tabbar-item": "/dist/tabbar-item/index"
+    "tui-icon": "../../components/icon/icon",
+    "tui-top-dropdown": "../../components/top-dropdown/top-dropdown",
+    "tui-drawer": "../../components/drawer/drawer",
+    "tui-loadmore": "../../components/loadmore/loadmore",
+    "tui-nomore": "../../components/nomore/nomore"
   }
 }

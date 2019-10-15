@@ -1,15 +1,66 @@
 const app = getApp()
+const { appUtils, appValidate } = require('../../utils/util.js')
+const util = require('../../utils/util.js')
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
+const qqmapsdk = new QQMapWX({ key: app.mapKey })
 Page({
   data: {
-    isIPX: app.globalData.isIPX,
-    tabs: [],
-    product: {},
-    active: 0,
-    guid: '',
-    show: false,
-    buyNow: false,
-    addCart: false,
-    cartCount: 0,
+    height: 64, //header高度
+    top: 0, //标题图标距离顶部距离
+    scrollH: 0, //滚动总高度
+    opcity: 0,
+    iconOpcity: 0.5,
+    banner: [
+      "https://www.thorui.cn/img/product/11.jpg",
+      "https://www.thorui.cn/img/product/2.png",
+      "https://www.thorui.cn/img/product/33.jpg",
+      "https://www.thorui.cn/img/product/4.png",
+      "https://www.thorui.cn/img/product/55.jpg",
+      "https://www.thorui.cn/img/product/6.png",
+      "https://www.thorui.cn/img/product/7.jpg",
+      "https://www.thorui.cn/img/product/8.jpg"
+    ],
+    bannerIndex: 0,
+    topMenu: [{
+      icon: "message",
+      text: "消息",
+      size: 26,
+      badge: 3
+    }, {
+      icon: "home",
+      text: "首页",
+      size: 23,
+      badge: 0
+    }, {
+      icon: "people",
+      text: "我的",
+      size: 26,
+      badge: 0
+    }, {
+      icon: "cart",
+      text: "购物车",
+      size: 23,
+      badge: 2
+    }, {
+      icon: "kefu",
+      text: "客服小蜜",
+      size: 26,
+      badge: 0
+    }, {
+      icon: "feedback",
+      text: "我要反馈",
+      size: 23,
+      badge: 0
+    }, {
+      icon: "share",
+      text: "分享",
+      size: 26,
+      badge: 0
+    }],
+    menuShow: false,
+    popupShow: false,
+    value: 1,
+    collected: false,
     selectSku: {
       id: 0,
       image: '',
@@ -23,30 +74,77 @@ Page({
       checkAll: false,
       number: 1
     },
-    attrInfo: [],
-    refresh: false
-  },
-  changeIndicatorDots(e) {
-    this.setData({
-      indicatorDots: !this.data.indicatorDots
-    })
-  },
-  changeAutoplay(e) {
-    this.setData({
-      autoplay: !this.data.autoplay
-    })
-  },
-  intervalChange(e) {
-    this.setData({
-      interval: e.detail.value
-    })
-  },
-  durationChange(e) {
-    this.setData({
-      duration: e.detail.value
-    })
+    cartCount: 0
   },
 
+  bannerChange: function (e) {
+    this.setData({
+      bannerIndex: e.detail.current
+    })
+  },
+  previewImage: function (e) {
+    let index = e.currentTarget.dataset.index;
+    wx.previewImage({
+      current: this.data.banner[index],
+      urls: this.data.banner
+    })
+  },
+  //页面滚动执行方式
+  onPageScroll(e) {
+    let scroll = e.scrollTop <= 0 ? 0 : e.scrollTop;
+    let opcity = scroll / this.data.scrollH;
+    if (this.data.opcity >= 1 && opcity >= 1) {
+      return;
+    }
+    this.setData({
+      opcity: opcity,
+      iconOpcity: 0.5 * (1 - opcity < 0 ? 0 : 1 - opcity)
+    })
+  },
+  back: function () {
+    wx.navigateBack()
+  },
+  openMenu: function () {
+    this.setData({
+      menuShow: true
+    })
+  },
+  closeMenu: function () {
+    this.setData({
+      menuShow: false
+    })
+  },
+  showPopup: function () {
+    this.setData({
+      popupShow: true
+    })
+  },
+  hidePopup: function () {
+    this.setData({
+      popupShow: false
+    })
+  },
+  change: function (e) {
+    this.setData({
+      value: e.detail.value
+    })
+  },
+  collecting: function () {
+    this.setData({
+      collected: !this.data.collected
+    })
+  },
+  common: function () {
+    util.toast("功能开发中~")
+  },
+  submit() {
+    this.setData({
+      popupShow: false
+    })
+    wx.navigateTo({
+      url: '../mall-extend/submitOrder/submitOrder'
+    })
+  },
   getProductInfo() {
     var that = this
     app.httpGet('shop/product/detail?guid=' + that.data.guid).then(res => {
@@ -69,30 +167,110 @@ Page({
       }
     })
   },
-  onClickIcon() {
-    Toast('点击图标')
+  onSkuNumberChange(e) {
+    this.setData({
+      'selectSku.number': e.detail.value
+    })
   },
-  onClickButton() {
-    this.setData({ show: true })
-  },
-  onClose() {
-    this.setData({ show: false })
-  },
-  onSkuSelectConfirm(e) {
-    this.setData({ show: false })
-    if (this.data.addCart) {
-      this.onClickAddShopCart(e)
-    } else if (this.data.buyNow) {
-      //到结算页面
-      this.navigateToOrderSettlement()
+  //Add cart
+  onClickAddShopCart(e) {
+    let that = this
+    if (this.data.selectSku.id <= 0) {
+      this.setData({
+        popupShow: true,
+        buyNow: false,
+        addCart: true
+      })
+      return
     }
+
+    let data = {
+      merId: this.data.product.merId,
+      productNo: this.data.product.guid,
+      productSkuId: this.data.selectSku.id,
+      number: parseInt(this.data.selectSku.number),
+      price: this.data.selectSku.price
+    }
+
+    app.httpPost('shop/cart/add', data).then(res => {
+      if (res.code == 200) {
+        that.setData({
+          cartCount: parseInt(that.data.cartCount) + parseInt(that.data.selectSku.number)
+        })
+      }
+      that.setData({
+        popupShow: false
+      })
+    })
+  },
+  //nuy now
+  onClickBuyNow(e) {
+    if (this.data.selectSku.id <= 0) {
+      this.setData({
+        popupShow: true,
+        buyNow: true,
+        addCart: false
+      })
+      return
+    }
+    this.setData({
+      popupShow: false
+    })
+    this.navigateToOrderSettlement()
+  },
+  //到结算页面
+  navigateToOrderSettlement: function () {
+    if (this.data.selectSku.id <= 0) {
+      return
+    }
+
+    let data = [
+      {
+        merId: this.data.product.merId,
+        skuList: [
+          {
+            productNo: this.data.product.guid,
+            productName: this.data.product.name,
+            id: this.data.selectSku.id,
+            name: this.data.selectSku.name,
+            price: this.data.selectSku.price,
+            image: this.data.selectSku.image,
+            number: this.data.selectSku.number,
+            attributeInfo: this.data.selectSku.attributeInfo,
+            shopCartId: 0,
+            deliveryTypes: this.data.product.deliveryTypes,
+          }
+        ]
+      }
+    ]
+    let json = JSON.stringify(data)
+    wx.navigateTo({
+      url: '/pages/orderSettlement/index?jsonData=' + json
+    })
+  },
+  //Refresh
+  onPullDownRefresh() {
+    this.getProductInfo()
   },
   //选择规格
   onSelectSku(e) {
     const that = this
 
     if (this.data.selectSku.checkAll) {
-      return
+      that.setData({
+        selectSku: {
+          aids: [],
+          vids: [],
+          anames: [],
+          vnames: [],
+          checkAll: false,
+          name: '',
+          id: 0,
+          image: '',
+          price: 0,
+          stock: 0
+        }
+      })
     }
 
     let aid = e.currentTarget.dataset.aid
@@ -194,13 +372,14 @@ Page({
           'selectSku.price': sku.price,
           'selectSku.name': sku.skuName,
           'selectSku.stock': sku.stock,
-          'selectSku.number': 1
+          'selectSku.number': 1,
+          'selectSku.attributeInfo': sku.attributeInfo
         })
         break
       }
     }
   },
-  //取消选择规格
+  //取消选择规格 暂时无效
   onCancelSku(e) {
     let aid = e.currentTarget.dataset.aid
     let vid = e.currentTarget.dataset.vid
@@ -258,13 +437,6 @@ Page({
           break
         }
       }
-      // for (var key of Object.keys(sku.propPath)) {
-      //   if (key == pid && sku.propPath[key] == vid) {
-      //     existPid = true
-      //     existVid = true
-      //     break
-      //   }
-      // }
 
       if (_exist_vid && _exist_aid) {
         for (var av of sku.attributeInfo) {
@@ -272,12 +444,6 @@ Page({
             _new_vids.push(parseInt(av.aid))
           }
         }
-
-        // for (var key of Object.keys(sku.propPath)) {
-        //   if (this.data.selectSku.pids.indexOf(parseInt(key)) === -1) {
-        //     newVids.push(parseInt(sku.propPath[key]))
-        //   }
-        // }
       }
     }
 
@@ -285,124 +451,27 @@ Page({
       attrInfo: newVids
     })
   },
-  onSkuNumberChange(e) {
-    this.setData({
-      'selectSku.number': e.detail
-    })
-  },
-  onSkuNumberOverlimit(e) {
-    console.log(e.detail)
-  },
-  onReachBottom() {
-    //this.getData('more', this.data.page);
-  },
-  //Add cart
-  onClickAddShopCart(e) {
-    let that = this
-    if (this.data.selectSku.id <= 0) {
-      this.setData({
-        show: true,
-        buyNow: false,
-        addCart: true
-      })
-      return
-    }
-
-    let data = {
-      merId: this.data.product.merId,
-      productNo: this.data.product.guid,
-      productSkuId: this.data.selectSku.id,
-      number: parseInt(this.data.selectSku.number),
-      price: this.data.selectSku.price
-    }
-
-    app.httpPost('shop/cart/add', data).then(res => {
-      console.log(res)
-      if (res.code == 200) {
-        that.setData({
-          cartCount: parseInt(that.data.cartCount) + parseInt(that.data.selectSku.number)
-        })
-      }
-    })
-  },
-  //nuy now
-  onClickBuyNow(e) {
-    if (this.data.selectSku.id <= 0) {
-      this.setData({
-        show: true,
-        buyNow: true,
-        addCart: false
-      })
-      return
-    }
-    this.navigateToOrderSettlement()
-  },
-  //Refresh
-  onPullDownRefresh() {
-    this.getProductInfo()
-  },
-  onShareAppMessage22() {
-    console.log('123')
-    let that = this
-    wx.shareAppMessage({ title: '', imageUrl: '', query: '', imageUrlId: '' })
-  },
-  //分享
-  onShareAppMessage() {
-    let that = this
-    wx.onShareAppMessage(() => {
-      return {
-        title: that.data.product.name,
-        imageUrl: that.data.product.resources[0].url // 图片 URL
-      }
-    })
-  },
-  onShow(o) {
-    console.log(this.data.refresh)
-    if (this.data.refresh) {
-      this.setData({
-        refresh: false
-      })
-      this.getProductInfo()
-    }
-  },
   onLoad(options) {
-    console.log("onload")
+    //options.guid = "e164cd2b42f74af284ec1b258a93bcfd"
     if (options != null && options.guid != "") {
       this.setData({
         guid: options.guid
       })
       this.getProductInfo()
     }
-    //this.getProductInfo()
-  },
-  navigateToOrderSettlement: function () {
-    if (this.data.selectSku.id <= 0) {
-      return
-    }
-    //到结算页面
-    let data = [
-      {
-        merId: this.data.product.merId,
-        skuList: [
-          {
-            productNo: this.data.product.guid,
-            productName: this.data.product.name,
-            id: this.data.selectSku.id,
-            name: this.data.selectSku.name,
-            price: this.data.selectSku.price,
-            image: this.data.selectSku.image,
-            number: this.data.selectSku.number,
-            attributeInfo: this.data.selectSku.attributeInfo,
-            shopCartId: 0,
-            deliveryTypes: this.data.product.deliveryTypes,
-          }
-        ]
-      }
-    ]
-
-    let json = JSON.stringify(data)
-    wx.navigateTo({
-      url: '/pages/orderSettlement/index?jsonData=' + json
-    })
+    let obj = wx.getMenuButtonBoundingClientRect();
+    this.setData({
+      width: obj.left,
+      height: obj.top + obj.height + 8,
+      top: obj.top + (obj.height - 32) / 2
+    }, () => {
+      wx.getSystemInfo({
+        success: (res) => {
+          this.setData({
+            scrollH: res.windowWidth
+          })
+        }
+      })
+    });
   }
 })

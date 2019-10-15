@@ -6,6 +6,7 @@
     "pages/profile/index",
     "pages/orderList/index",
     "pages/orderSettlement/index",
+    "pages/orderSettlement/success/success",
     "pages/addressList/index",
     "pages/address/index",
     "pages/productDetail/index",
@@ -14,7 +15,8 @@
     "pages/shopCart/cart",
     "pages/addressSelect/index",
     "pages/categoryList/index",
-    "pages/productList/index"
+    "pages/productList/index",
+    "pages/newsSearch/index"
   ],
   "permission": {
     "scope.userLocation": {

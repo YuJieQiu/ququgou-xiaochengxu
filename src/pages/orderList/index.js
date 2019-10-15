@@ -5,15 +5,7 @@ import Toast from '../../dist/toast/toast'
 import Dialog from '../../dist/dialog/dialog'
 Page({
   data: {
-    list: [],
-    page: 1, //默认第一页开始
-    limit: 10, //默认每页10条
-    all: true,
-    status: 0,
-    active: 0,
-    pageEnd: false,
-    tabIndex: 0,
-    tabsList: [
+    tabs: [
       {
         title: "全部",
         name: 0,
@@ -29,10 +21,21 @@ Page({
         name: 2,
         statusText: "已完成"
       }
-    ]
+    ],
+    list: [],
+    page: 1, //默认第一页开始
+    limit: 10, //默认每页10条
+    all: true,
+    status: 0,
+    active: 0,
+    pageEnd: false,
+    tabIndex: 0,
+    currentTab: 0,
+    pageIndex: 1,
+    loadding: true,
+    pullUpOn: true,
+    scrollTop: 0
   },
-
-  onShow: function () { },
   getOrderListInfo: function () {
     let data = {
       page: this.data.page,
@@ -43,8 +46,10 @@ Page({
 
     app.httpGet('order/get/list', data).then(res => {
       wx.stopPullDownRefresh()
-      if (res.data.length <= 0) {
-        this.setData({ pageEnd: true })
+      if (res.data == null || res.data.length <= 0) {
+        this.setData({
+          pageEnd: true
+        })
         return
       }
       let list = this.data.list
@@ -117,6 +122,11 @@ Page({
   // },
   onReachBottom() {
     if (!this.data.pageEnd) {
+      // this.setData({
+      //   loadding: true,
+      //   pullUpOn: true
+      // })
+
       this.setData({ page: this.data.page + 1 })
       this.getOrderListInfo()
     }
@@ -135,7 +145,28 @@ Page({
     let no = e.currentTarget.dataset.no
     wx.navigateTo({ url: '/pages/orderDetail/index?orderNo=' + no })
   },
-  onLoad(options) {
+  onLoad: function (options) {
     this.getOrderListInfo()
+  },
+  change(e) {
+    this.setData({
+      currentTab: e.detail.index
+    })
+  },
+  detail() {
+    wx.showToast({
+      title: '功能尚未完善~',
+      icon: 'none'
+    })
+  },
+  onPullDownRefresh() {
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 300);
+  },
+  onPageScroll(e) {
+    this.setData({
+      scrollTop: e.scrollTop
+    })
   }
 })
