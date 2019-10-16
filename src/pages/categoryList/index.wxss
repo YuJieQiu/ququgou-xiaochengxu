@@ -1,5 +1,5 @@
-@import '../../colorui/main.wxss';
-@import '../../colorui/icon.wxss';
+@import "../../colorui/main.wxss";
+@import "../../colorui/icon.wxss";
 
 .VerticalNav.nav {
   width: 200rpx;
@@ -17,10 +17,10 @@
 }
 
 .VerticalNav.nav .cu-item.cur {
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
 }
 .VerticalNav.nav .cu-item.cur::after {
-  content: '';
+  content: "";
   width: 8rpx;
   height: 30rpx;
   border-radius: 10rpx 0 0 10rpx;

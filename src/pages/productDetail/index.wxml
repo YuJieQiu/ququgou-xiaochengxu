@@ -64,7 +64,8 @@
 												<view class="left-5" wx:for="{{product.deliveryTypes}}">{{item.name}}</view>
 										</view>
 										<view>销量{{ product.sales}}</view>
-										<view>浙江杭州</view>
+										<view>库存{{ product.stock}}</view>
+										<view></view>
 								</view>
 						</view>
 				</view>
@@ -121,7 +122,7 @@
 								<view class="tui-bold tui-cell-title">送至</view>
 								<view class="tui-addr-box">
 										<view class="tui-addr-item">北京朝阳区三环到四环之间</view>
-										<view class="tui-addr-item">今日23:59前完成下单，预计6月28日23:30前发货，7月1日24:00前送达</view>
+										<!-- <view class="tui-addr-item"></view> -->
 								</view>
 								<tui-icon name="more-fill" size="20" class="tui-right" color="#666"></tui-icon>
 						</view>
@@ -183,7 +184,7 @@
 								<rich-text class="ql-container" nodes="{{product.content}}" style="word-break:break-all;" bindtap="tap" />
 						</view>
 				</view> -->
-				<view class="content-show tui-radius-all">
+				<view class="content-show tui-radius-all" wx:if="{{product.content!=''}}">
 						<rich-text class="ql-container" nodes="{{product.content}}" style="word-break:break-all;" bindtap="tap" />
 				</view>
 				<tui-nomore text="已经到最底了" visible="{{true}}" bgcolor="#f7f7f7"></tui-nomore>
@@ -220,9 +221,10 @@
 				<van-goods-action-icon icon="chat-o" text="客服" open-type="contact" bind:click="onClickIcon" />
 				<van-goods-action-icon icon="cart-o" text="购物车" info="{{cartCount==0?'':cartCount}}" url="{{'/pages/shopCart/cart'}}" />
 				<van-goods-action-icon icon="shop-o" text="{{'商铺'}}" url="{{'/pages/merchant/index?merId='+product.merId}}" />
-				<van-goods-action-button wx:if="{{product.status==1}}" text="加入购物车" type="warning" bind:click="onClickAddShopCart" />
-				<van-goods-action-button wx:if="{{product.status==1}}" text="立即购买" bind:click="onClickBuyNow" />
-				<van-goods-action-button wx:if="{{product.status!=1}}" text="已下架" />
+				<van-goods-action-button wx:if="{{product.status==1&&product.stock>0}}" text="加入购物车" type="warning" bind:click="onClickAddShopCart" />
+				<van-goods-action-button wx:if="{{product.status==1&&product.stock>0}}" text="立即购买" bind:click="onClickBuyNow" />
+				<van-goods-action-button wx:if="{{product.id>0&&product.status!=1}}" text="已下架" />
+				<van-goods-action-button wx:elif="{{product.stock<1}}" text="库存不足" />
 		</van-goods-action>
 		<!-- GoodsAction D -->
 		<!-- 底部操作栏- -->

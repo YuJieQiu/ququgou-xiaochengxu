@@ -6,38 +6,32 @@ const qqmapsdk = new QQMapWX({ key: app.mapKey })
 
 Page({
   data: {
-    history: [
-      "美洲杯",
-      "D站观点",
-      "C罗",
-      "早安D站",
-      "2019退役球星",
-      "女神大会",
-      "德利赫特",
-      "托雷斯",
-      "自热火锅",
-      "华为手机",
-      "有机酸奶"
-    ],
-    hot: [
-      "德利赫特",
-      "托雷斯",
-      "早安D站",
-      "D站观点",
-      "德利赫特",
-      "美洲杯",
-      "华为手机",
-      "C罗",
-      "自热火锅",
-      "2019退役球星",
-      "女神大会"
-    ],
+    history: [],
+    hot: [],
     key: "",
     showActionSheet: false,
     tips: "确认清空搜索历史吗？"
   },
+  getSearchHotList() {
+    app.httpGet('hot/search/get', {}).then(res => {
+      if (res.code == 200 && res.data.length > 0) {
+        this.setData({
+          hot: res.data
+        })
+      }
+    })
+  },
   onLoad: function (options) {
-
+    this.getSearchHotList()
+  },
+  onShow() {
+    //本地缓存搜索历史
+    let history = wx.getStorageSync('searchHistory')
+    if (history != null && history.length > 0) {
+      this.setData({
+        'history': history
+      })
+    }
   },
   back: function () {
     wx.navigateBack();
@@ -46,6 +40,20 @@ Page({
     let key = util.trim(e.detail.value);
     this.setData({
       key: key
+    })
+  },
+  search(e) {
+    let key = util.trim(e.detail.value);
+    this.setData({
+      key: key
+    })
+    this.addSearchHistory(key)
+    this.goProductList()
+  },
+  goProductList() {
+    const that = this
+    wx.navigateTo({
+      url: '/pages/productList/index?searchKey=' + that.data.key
     })
   },
   cleanKey: function () {
@@ -63,6 +71,30 @@ Page({
       showActionSheet: true
     })
   },
+  onClickItemSearch(e) {
+    let key = e.currentTarget.dataset.text
+    this.setData({
+      key: key
+    })
+    this.addSearchHistory(key)
+    this.goProductList()
+  },
+  addSearchHistory(key) {
+    var history = this.data.history
+    var bl = false
+    history.forEach(element => {
+      if (element == key) {
+        bl = true
+      }
+    });
+    if (!bl) {
+      history.push(key)
+      this.setData({
+        history: history
+      })
+      wx.setStorageSync('searchHistory', history)
+    }
+  },
   itemClick: function (e) {
     let index = e.detail.index;
     if (index == 0) {
@@ -70,6 +102,7 @@ Page({
         showActionSheet: false,
         history: []
       })
+      wx.setStorageSync('searchHistory', [])
     }
   }
 })

@@ -13,7 +13,7 @@
 						</tui-button>
 				</view>
 		</view> -->
-		<view class="shop-cart-item" wx:for="{{list}}" wx:for-item="mer">
+		<view class="shop-cart-item" wx:for="{{list}}" wx:for-item="mer" wx:if="{{mer.products.length>0}}">
 				<van-cell value="" is-link>
 						<view slot="title">
 								<view class="van-cell-checkbox">
@@ -34,7 +34,7 @@
 												<tui-icon name="arrowright" size="{{18}}" color="#333"></tui-icon>
 										</view>
 								</view>
-								<tui-swipe-action actions="{{actions}}" bind:change="handlerButton" data-id="{{product.cartId}}" params="{{item}}">
+								<tui-swipe-action actions="{{actions}}" bind:change="handleCancel" data-id="{{product.cartId}}" params="{{item}}">
 										<view class="tui-goods-item" slot="content">
 												<label class="tui-checkbox">
 														<!-- <checkbox color="#fff"></checkbox> -->
@@ -53,12 +53,12 @@
 														</view>
 														<view class="tui-price-box">
 																<view class="tui-goods-price">￥{{wxs.priceStr(product.price)}}</view>
-																<tui-numberbox value="{{ product.number }}" height="28" width="56" min="1" max="{{product.stock}}" iconsize="22" iconcolor="#666" index="{{index}}" bind:change="changeNum"></tui-numberbox>
+																<tui-numberbox value="{{ product.number>product.stock?product.stock:product.number }}" height="28" width="56" min="1" max="{{product.stock}}" iconsize="22" iconcolor="#666" index="{{index}}" data-id="{{product.cartId}}" bind:change="onChangeNumber"></tui-numberbox>
 														</view>
 												</view>
 										</view>
 								</tui-swipe-action>
-								<view class="tui-sub-info" wx:if="{{index%2==0}}">赠品：柔色尽情丝柔口红唇膏1支柔色尽情丝柔口红唇膏1支</view>
+								<view class="tui-sub-info">库存:{{product.stock}}</view>
 						</view>
 				</van-checkbox-group>
 		</view>
@@ -73,6 +73,7 @@
 						</view>
 				</view>
 				<block wx:for="{{list}}" wx:for-item="mer" wx:key="{{merIndex}}">
+						<van-cell title="{{mer.merName}}" wx:if="{{mer.invalidProducts.length>0}}" icon="shop-o" is-link url="{{'/pages/merchant/index?merId=' +mer.merId }}" />
 						<block wx:for="{{mer.invalidProducts}}" wx:for-item="product" wx:key="{{index}}">
 								<view class="{{index!==0?'tui-invalid-ptop':''}}">
 										<tui-swipe-action actions="{{actions2}}">
@@ -84,7 +85,7 @@
 														<view class="tui-goods-info">
 																<view class="tui-goods-title tui-gray">{{product.name}}</view>
 																<view class="tui-price-box tui-flex-center">
-																		<view class="tui-goods-invalid">产品失效</view>
+																		<view class="tui-goods-invalid">{{product.stock<1?'库存不足':'产品失效'}}</view>
 																		<view class="tui-btn-alike">
 																				<tui-button type="white" plain="{{true}}" shape="circle" width="120rpx" height="48rpx" size="{{24}}">
 																						找相似

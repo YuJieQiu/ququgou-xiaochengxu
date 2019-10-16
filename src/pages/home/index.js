@@ -215,6 +215,7 @@ Page({
       pullUpOn: true,
       loadding: false
     })
+    this.getHomeInitInfo()
     wx.stopPullDownRefresh()
   },
   onReachBottom: function () {
@@ -241,7 +242,7 @@ Page({
       }
     })
   },
-  detail(e) {
+  showDetail(e) {
     let guid = e.currentTarget.dataset.guid
     wx.navigateTo({
       url: '/pages/productDetail/index?guid=' + guid
@@ -262,7 +263,7 @@ Page({
   },
   search: function () {
     wx.navigateTo({
-      url: '../news-search/news-search'
+      url: '/pages/newsSearch/index'
     })
   },
   getBannerList() {
@@ -277,21 +278,23 @@ Page({
   getHomeConfigList() {
     const that = this
     app.httpGet('home/config/list').then(res => {
-      if (res && res.data) {
-        if (res.data["hometba"].length > 0) {
-          if (res.data["hometba"][0].productSmallInfos.length < 5) {
+      console.log(res.data)
+      if (res != null && res.data != null) {
+        let list = res.data.list
+        if (list["hometba"].length > 0) {
+          if (list["hometba"][0].productSmallInfos.length < 5) {
             that.getProductList()
           }
           that.setData({
-            tabProducts: res.data["hometba"][0].productSmallInfos,
+            tabProducts: list["hometba"][0].productSmallInfos,
             'getHometbaProductPage.pageEnd': true
           })
         }
 
         that.setData({
-          confList: res.data
+          confList: list,
+          confTextList: res.data.textList
         })
-
       }
     })
   },
@@ -382,6 +385,24 @@ Page({
         refresh: false
       })
     }
+  },
+  onClickHomeCategory(e) {
+    const item = e.currentTarget.dataset.item
+    console.log(item)
+    if (item.linkUrl != "" && item.linkType == 0) {
+      wx.navigateTo({
+        url: item.linkUrl
+      })
+      return
+    }
+
+    if (item.categoryId > 0) {
+      wx.navigateTo({
+        url: "/pages/productList/index?categoryId=" + item.categoryId
+      })
+      return
+    }
+
   },
   onLoad(options) {
     let location = wx.getStorageSync('location')

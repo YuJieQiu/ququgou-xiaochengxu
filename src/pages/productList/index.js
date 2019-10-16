@@ -6,6 +6,24 @@ const qqmapsdk = new QQMapWX({ key: app.mapKey })
 
 Page({
   data: {
+    queryParam: {
+      page: 1, //默认第一页开始
+      limit: 10, //默认每页10条
+      text: '',//泛搜索 包括 商品名称 类型名称 商品内容等，只要商品有相关性就显示出来
+      lat: 0,//当前搜索用户所在经纬度
+      lon: 0,//当前搜索用户所在经纬度
+      distance: 10,//距离范围 按 KM
+      sortType: 1,//排序类型 1、默认 3、销量 正序 5、销量 倒叙  7、价格 正序 9、价格 倒叙 11、距离 最近
+      categoryId: 0,//商品分类Id
+    },
+    list: [],
+    goods: [],
+    page: 1, //默认第一页开始
+    limit: 10, //默认每页10条
+    all: true,
+    status: 0,
+    active: 0,
+    pageEnd: false,
     searchKey: "", //搜索关键词
     width: 200, //header宽度
     height: 64, //header高度
@@ -25,13 +43,16 @@ Page({
     dropdownList: [//下拉综合搜索
       {
         name: "综合",
-        selected: true
+        selected: true,
+        sortType: 1,
       }, {
         name: "价格升序",
         selected: false,
+        sortType: 9,
       }, {
         name: "价格降序",
         selected: false,
+        sortType: 7,
       }
     ],
     attrArr: [{
@@ -274,26 +295,7 @@ Page({
     loadding: false,
     pullUpOn: true
   },
-  onLoad: function (options) {
-    let obj = wx.getMenuButtonBoundingClientRect();
-    this.setData({
-      width: obj.left,
-      height: obj.top + obj.height + 8,
-      inputTop: obj.top + (obj.height - 30) / 2,
-      arrowTop: obj.top + (obj.height - 32) / 2,
-      searchKey: options.searchKey || "关键词"
-    }, () => {
-      wx.getSystemInfo({
-        success: (res) => {
-          this.setData({
-            //略小，避免误差带来的影响
-            dropScreenH: this.data.height * 750 / res.windowWidth + 186,
-            drawerH: res.windowHeight - res.windowWidth / 750 * 100 - this.data.height
-          })
-        }
-      })
-    });
-  },
+
   onPullDownRefresh: function () {
     let loadData = JSON.parse(JSON.stringify(this.data.productList));
     loadData = loadData.splice(0, 10)
@@ -394,6 +396,13 @@ Page({
       [selectedName]: attrName
     })
   },
+  closeDropdownList: function () {
+    if (this.data.selectH > 0) {
+      this.setData({
+        selectH: 0
+      })
+    }
+  },
   showDropdownList: function () {
     this.setData({
       selectH: 246,
@@ -407,6 +416,7 @@ Page({
   },
   dropdownItem: function (e) {
     let index = e.currentTarget.dataset.index;
+    let sortType = e.currentTarget.dataset.sortType;
     let arr = this.data.dropdownList;
     for (let i = 0; i < arr.length; i++) {
       if (i === index) {
@@ -416,27 +426,66 @@ Page({
       }
     }
     this.setData({
+      'queryParam.sortType': sortType
+    })
+
+    this.setData({
       dropdownList: arr,
       selectedName: index == 0 ? '综合' : '价格',
       selectH: 0
     })
+
+    this.resetSearchQueryParam()
+    this.searchProductList()
   },
   screen: function (e) {
     let index = e.currentTarget.dataset.index;
+
     if (index == 0) {
-      this.showDropdownList();
-    } else if (index == 1) {
+      if (this.data.selectH > 0) {
+        this.closeDropdownList()
+      } else {
+        this.showDropdownList();
+      }
+      return
+    }
+
+    if (index == 1 && this.data.queryParam.sortType != 3) {//按销量排序
+      this.closeDropdownList()
       this.setData({
-        tabIndex: 1
+        tabIndex: 1,
+        'queryParam.sortType': 3
       })
-    } else if (index == 2) {
+      this.resetSearchQueryParam()
+      this.searchProductList()
+      return
+    }
+
+    if (index == 2 && this.data.queryParam.sortType != 11) {//按距离排序
+      this.closeDropdownList()
+      this.setData({
+        tabIndex: 2,
+        'queryParam.sortType': 11
+      })
+      this.resetSearchQueryParam()
+      this.searchProductList()
+      return
+    }
+
+    if (index == 3) {
+      this.closeDropdownList()
       this.setData({
         isList: !this.data.isList
       })
-    } else if (index == 3) {
+      return
+    }
+
+    if (index == 4) {
+      this.closeDropdownList()
       this.setData({
         drawer: true
       })
+      return
     }
   },
   closeDrawer: function () {
@@ -456,36 +505,87 @@ Page({
       url: '/pages/newsSearch/index'
     })
   },
-  detail: function () {
+  showDetail(e) {
+    let guid = e.currentTarget.dataset.guid
     wx.navigateTo({
-      url: '../productDetail/productDetail'
+      url: '/pages/productDetail/index?guid=' + guid
+    })
+  },
+  resetSearchQueryParam() {
+    this.setData({
+      'queryParam.pageEnd': false,
+      'queryParam.page': 1,
+      goods: []
     })
   },
   searchProductList() {
-    let data = {
-      page: this.data.page.page,
-      limit: this.data.page.limit,
-      text: '',//泛搜索 包括 商品名称 类型名称 商品内容等，只要商品有相关性就显示出来
-      lat: 0,//当前搜索用户所在经纬度
-      lon: 0,//当前搜索用户所在经纬度
-      sortType: 1,//排序类型 1、默认 3、销量 正序 5、销量 倒叙  7、价格 正序 9、价格 倒叙 11、距离 最近
-      categoryId: 0,//商品分类Id
+    const that = this
+    // let data = {
+    //   page: this.data.page.page,
+    //   limit: this.data.page.limit,
+    //   text: this.data.searchKey,//泛搜索 包括 商品名称 类型名称 商品内容等，只要商品有相关性就显示出来
+    //   lat: 0,//当前搜索用户所在经纬度
+    //   lon: 0,//当前搜索用户所在经纬度
+    //   sortType: 1,//排序类型 1、默认 3、销量 正序 5、销量 倒叙  7、价格 正序 9、价格 倒叙 11、距离 最近
+    //   categoryId: 0,//商品分类Id
+    // }
+
+    // lat: 0,//当前搜索用户所在经纬度
+    // lon: 0,//当前搜索用户所在经纬度
+    //{ "lat": 31.23037, "lon": 121.4737, "speed": -1, "accuracy": 65, "city": "上海市", "province": "上海市", "info": { "location": { "lat": 31.23037, "lng": 121.4737 }, "address": "上海市黄浦区人民大道200号", "formatted_addresses": { "recommend": "黄浦区上海市人民政府正门(人民大道北)", "rough": "黄浦区上海市人民政府正门(人民大道北)" }, "address_component": { "nation": "中国", "province": "上海市", "city": "上海市", "district": "黄浦区", "street": "人民大道", "street_number": "人民大道200号" }, "ad_info": { "nation_code": "156", "adcode": "310101", "city_code": "156310000", "name": "中国,上海市,上海市,黄浦区", "location": { "lat": 31.23037, "lng": 121.473701 }, "nation": "中国", "province": "上海市", "city": "上海市", "district": "黄浦区" }, "address_reference": { "business_area": { "id": "1609062395067730963", "title": "人民广场", "location": { "lat": 31.23035, "lng": 121.473717 }, "_distance": 0, "_dir_desc": "内" }, "famous_area": { "id": "1609062395067730963", "title": "人民广场", "location": { "lat": 31.23035, "lng": 121.473717 }, "_distance": 0, "_dir_desc": "内" }, "crossroad": { "id": "5640014", "title": "黄陂北路/江阴路(路口)", "location": { "lat": 31.230181, "lng": 121.470581 }, "_distance": 292.3, "_dir_desc": "东" }, "town": { "id": "310101002", "title": "南京东路街道", "location": { "lat": 31.23037, "lng": 121.473701 }, "_distance": 0, "_dir_desc": "内" }, "street_number": { "id": "5146127253741244918", "title": "人民大道200号", "location": { "lat": 31.23035, "lng": 121.473717 }, "_distance": 0, "_dir_desc": "" }, "street": { "id": "8354795883129328337", "title": "人民大道", "location": { "lat": 31.229828, "lng": 121.47403 }, "_distance": 62, "_dir_desc": "北" }, "landmark_l1": { "id": "5146127253741244918", "title": "上海市政府", "location": { "lat": 31.23035, "lng": 121.473717 }, "_distance": 0, "_dir_desc": "内" }, "landmark_l2": { "id": "3280386849120860525", "title": "上海市人民政府-正门", "location": { "lat": 31.230375, "lng": 121.473694 }, "_distance": 0, "_dir_desc": "" } } } }
+    if (that.data.queryParam.lat == 0 || that.data.queryParam.lon == 0) {
+      let location = wx.getStorageSync('location')
+      if (location == null) {
+        app.getLocationInfo()
+      }
+      that.setData({ 'queryParam.lat': location.lat, 'queryParam.lon': location.lon })
     }
-    app.httpPost('product/search', data).then(res => {
-      if (res.data.length <= 0) {
-        this.setData({ 'page.pageEnd': true })
+
+    console.log(location)
+
+    app.httpPost('product/search', that.data.queryParam).then(res => {
+      console.log(res)
+      if (res.data == null || res.data.length <= 0) {
+        that.setData({ 'pageEnd': true })
         return
       }
-
       let list = this.data.goods
-      if (this.data.page.page > 1) {
+      if (res.data.length < that.data.queryParam.limit) {
+        that.setData({ 'pageEnd': true })
+      }
+
+      if (that.data.page.page > 1) {
         list.push(...res.data)
       } else {
         list = res.data
       }
-      this.setData({
+      that.setData({
         goods: list
       })
     })
-  }
+  },
+  onLoad: function (options) {
+
+    let obj = wx.getMenuButtonBoundingClientRect();
+    this.setData({
+      width: obj.left,
+      height: obj.top + obj.height + 8,
+      inputTop: obj.top + (obj.height - 30) / 2,
+      arrowTop: obj.top + (obj.height - 32) / 2,
+      'queryParam.text': options.searchKey || "水果"
+    }, () => {
+      wx.getSystemInfo({
+        success: (res) => {
+          this.setData({
+            //略小，避免误差带来的影响
+            dropScreenH: this.data.height * 750 / res.windowWidth + 186,
+            drawerH: res.windowHeight - res.windowWidth / 750 * 100 - this.data.height
+          })
+        }
+      })
+    });
+
+    this.searchProductList()
+
+  },
 })

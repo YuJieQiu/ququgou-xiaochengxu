@@ -114,12 +114,6 @@ Page({
     app.httpGet('shop/cart/get').then(res => {
       if (res.code == 200 && res.data != null && res.data.length > 0) {
         console.log(res.data)
-        // var totalPrice = 0
-        // res.data.forEach(item => {
-        //   item.products.forEach(p => {
-        //     totalPrice += p.number * p.price
-        //   })
-        //})
         res.data.forEach(mer => {
           if (mer.invalidProducts != null && mer.invalidProducts.length > 0) {
             that.setData({
@@ -131,11 +125,10 @@ Page({
             })
           }
         });
-        that.setData({
-          list: res.data
-          //totalPrice: totalPrice
-        })
       }
+      that.setData({
+        list: res.data
+      })
     })
   },
   onClickMerName(e) {
@@ -146,54 +139,60 @@ Page({
   },
   computeOrderProduct() {
     var serlctId = this.data.checkboxData
+    if (serlctId == null) {
+      return
+    }
     var list = this.data.list
     var data = []
     var totalPrice = 0
 
     list.forEach(element => {
-      element.products.forEach(p => {
-        serlctId.forEach(e => {
-          if (p.cartId == parseInt(e)) {
-            let d = {
-              productNo: p.productNo,
-              productName: p.name,
-              id: p.productSkuId,
-              name: '',
-              price: p.price,
-              image: p.img.url,
-              number: p.number,
-              shopCartId: p.cartId,
-              attributeInfo: p.attributeInfo
-            }
-
-            if (data.length > 0) {
-              var b = false
-              for (let index = 0; index < data.length; index++) {
-                if (data[index].merId == element.merId) {
-                  data[index].skuList.push(d)
-                  b = true
-                  break
-                }
+      if (element.products != null && element.products.length > 0) {
+        element.products.forEach(p => {
+          serlctId.forEach(e => {
+            if (p.cartId == parseInt(e)) {
+              let d = {
+                productNo: p.productNo,
+                productName: p.name,
+                id: p.productSkuId,
+                name: '',
+                price: p.price,
+                image: p.img.url,
+                number: p.number,
+                shopCartId: p.cartId,
+                attributeInfo: p.attributeInfo
               }
-              if (!b) {
+
+              if (data.length > 0) {
+                var b = false
+                for (let index = 0; index < data.length; index++) {
+                  if (data[index].merId == element.merId) {
+                    data[index].skuList.push(d)
+                    b = true
+                    break
+                  }
+                }
+                if (!b) {
+                  data.push({
+                    merId: element.merId,
+                    merName: element.merName,
+                    skuList: [d]
+                  })
+                }
+              } else {
                 data.push({
                   merId: element.merId,
                   merName: element.merName,
                   skuList: [d]
                 })
               }
-            } else {
-              data.push({
-                merId: element.merId,
-                merName: element.merName,
-                skuList: [d]
-              })
-            }
 
-            totalPrice += p.number * p.price
-          }
+              totalPrice += p.number * p.price
+            }
+          })
         })
-      })
+      }
+
     })
     this.setData({
       totalPrice: totalPrice,
@@ -210,14 +209,8 @@ Page({
       url: '/pages/orderSettlement/index?jsonData=' + json
     })
   },
-  handleCancel2(event) {
-    const that = this
-    const id = event.currentTarget.dataset.id
-    var ids = [id]
-    this.removeCart(ids)
-  },
-  onRemoveInvalidProducts() {
 
+  onRemoveInvalidProducts() {
     const that = this
     var ids = new Array()
     that.data.list.forEach(mer => {
@@ -235,33 +228,12 @@ Page({
   },
   removeCart(ids, isRefresh) {
     const that = this
-    var list = this.data.list
-
     app.httpPost('shop/cart/remove', { ids: ids }).then(res => {
       if (res.code != 200) {
         console.log(res)
         return
       }
-
-      if (isRefresh) {
-        that.getInfo()
-      }
-
-      for (let index = 0; index < list.length; index++) {
-        list[index].products.splice(
-          list[index].products.findIndex(item => item.cartId === id),
-          1
-        )
-        if (list[index].products.length == 0) {
-          list.splice(
-            list.findIndex(item => item.merId === list[index].merId),
-            1
-          )
-        }
-      }
-      that.setData({
-        list: list
-      })
+      that.getInfo()
     })
   },
   onChangeCheckbox(event) {
@@ -276,20 +248,14 @@ Page({
     var list = this.data.list
     var newData = []
     list.forEach(element => {
-      element.products.forEach(p => {
-        if (event.detail) {
-          newData.push(p.cartId.toString())
-        }
-        // if (data.length > 0) {
-        //   data.forEach(d => {
-        //     if (p.cartId != parseInt(d) && event.detail) {
-        //       newData.push(p.cartId.toString())
-        //     }
-        //   })
-        // } else {
-
-        // }
-      })
+      console.log(element)
+      if (element.products != null && element.products.length > 0) {
+        element.products.forEach(p => {
+          if (event.detail) {
+            newData.push(p.cartId.toString())
+          }
+        })
+      }
     })
     this.setData({
       allCheckboxData: event.detail,
@@ -299,15 +265,22 @@ Page({
   },
   //修改数量
   onChangeNumber(e) {
-    let number = e.detail
+    console.log(e)
+
+    let number = e.detail.value
     let cartId = e.currentTarget.dataset.id
     var list = this.data.list
     for (let i = 0; i < list.length; i++) {
       var b = false
+      if (list[i].products == null || list[i].products.length < 1) {
+        break
+      }
+
       for (let j = 0; j < list[i].products.length; j++) {
         var element = list[i].products[j]
         if (element.cartId == cartId) {
           list[i].products[j].number = number
+          console.log(list[i].products[j].number)
           b = true
           break
         }
@@ -332,11 +305,13 @@ Page({
       [value]: e.detail.value
     })
   },
-  handlerButton: function (e) {
-    console.log(e)
+  handleCancel(event) {
     const that = this
-    const id = e.currentTarget.dataset.id
-    this.removeCart(id)
+    const id = event.currentTarget.dataset.id
+    var ids = new Array()
+    ids.push(id)
+    console.log(ids)
+    this.removeCart(ids)
   },
   editGoods: function () {
     this.setData({

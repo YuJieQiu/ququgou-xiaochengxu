@@ -1,3 +1,4 @@
+<wxs module="wxs" src="../common/index.wxs" />
 <view class="container">
   <!-- tabbar 底部tabbar 菜单，暂时隐藏 -->
   <!-- <view class="tui-tabbar">
@@ -27,11 +28,10 @@
   <!-- header -->
   <view class="tui-header-banner">
     <view class="tui-hot-search">
-      <view>热搜</view>
-      <view class="tui-hot-tag" bindtap="search">自热火锅</view>
-      <view class="tui-hot-tag" bindtap="search">华为手机</view>
-      <view class="tui-hot-tag" bindtap="search">有机酸奶</view>
-      <view class="tui-hot-tag" bindtap="search">苹果手机</view>
+      <view>{{confTextList['hot_search_text']}}</view>
+      <view class="tui-hot-tag" bindtap="search" wx:for="{{confList['hot_search_text']}}" wx:key="{{index}}" data-item="{{item}}">
+        {{item}}
+      </view>
     </view>
     <view class="tui-banner-bg">
       <view class="tui-primary-bg tui-route-left"></view>
@@ -46,45 +46,46 @@
       </view>
     </view>
   </view>
-  <view class="tui-product-category">
-    <view class="tui-category-item" wx:for="{{confList['home_category']}}" wx:key="{{index}}" data-key="{{item.name}}" bindtap="more">
+  <view class="tui-product-category" wx:if="{{confList['home_category']!=null&&confList['home_category'].length>0}}">
+    <view class="tui-category-item" wx:for="{{confList['home_category']}}" wx:key="{{index}}" data-key="{{item.name}}" data-item="{{item}}" bindtap="onClickHomeCategory">
       <image src="{{item.images.url}}" class="tui-category-img" mode="scaleToFill"></image>
       <view class="tui-category-name">{{item.name}}</view>
     </view>
   </view>
-  <view class="tui-product-box tui-pb-20 tui-bg-white">
-    <view class="tui-group-name" bindtap="more">
-      <text>新人专享</text>
+  <view class="tui-product-box tui-pb-20 tui-bg-white" wx:if="{{confList['new_use_exclusive']!=null&&confList['new_use_exclusive'].length>0}}">
+    <view class="tui-group-name">
+      <!-- bindtap="more" -->
+      <text>{{confTextList['new_use_exclusive']}}</text>
       <tui-icon name="arrowright" size="20" color="#555"></tui-icon>
     </view>
-    <view class="tui-activity-box" bindtap="detail">
+    <view class="tui-activity-box">
       <!-- 点击事件 -->
-      <image src="../../assets/images/mall/activity/activity_1.jpg" class="tui-activity-img" mode="widthFix"></image>
-      <image src="../../assets/images/mall/activity/activity_2.jpg" class="tui-activity-img" mode="widthFix"></image>
+      <image wx:for="{{confList['new_use_exclusive']}}" wx:key="{{index}}" src="{{item.images.url}}" class="tui-activity-img" mode="widthFix" data-item="{{item}}" bindtap="onClickHomeCategory"></image>
     </view>
   </view>
-  <view class="tui-product-box tui-pb-20 tui-bg-white">
-    <view class="tui-group-name" bindtap="more">
-      <text>新品推荐</text>
+  <view class="tui-product-box tui-pb-20 tui-bg-white" wx:if="{{confList['new_product_recommend']!=null&&confList['new_product_recommend'].length>0}}">
+    <view class="tui-group-name">
+      <!-- bindtap="more" -->
+      <text>{{confTextList['new_product_recommend']}}</text>
       <tui-icon name="arrowright" size="20" color="#555"></tui-icon>
     </view>
     <view class="tui-new-box">
-      <view class="tui-new-item {{index!=0 && index!=1 ?'tui-new-mtop':''}}" wx:for="{{newProduct}}" wx:key="{{index}}" bindtap="detail">
-        <image src="../../assets/images/mall/new/{{item.type==1?'new':'discount'}}.png" class="tui-new-label" wx:if="{{item.isLabel}}"></image>
+      <view class="tui-new-item {{index!=0 && index!=1 ?'tui-new-mtop':''}}" wx:for="{{confList['new_product_recommend']}}" wx:key="{{index}}" data-guid="{{wxs.jsonpParseData(item.code,'code')}}" bindtap="showDetail">
+        <image src="../../assets/images/mall/new/{{wxs.jsonpParseData(item.code,'type')==1?'new':'discount'}}.png" class="tui-new-label" wx:if="{{item.isLabel}}"></image>
         <view class="tui-title-box">
           <view class="tui-new-title">{{item.name}}</view>
           <view class="tui-new-price">
-            <text class="tui-new-present">￥{{item.present}}</text>
-            <text class="tui-new-original">￥{{item.original}}</text>
+            <text class="tui-new-present">￥{{wxs.jsonpParseData(item.code,'present')}}</text>
+            <text class="tui-new-original">￥{{wxs.jsonpParseData(item.code,'original')}}</text>
           </view>
         </view>
-        <image src="../../assets/images/mall/new/{{item.pic}}" class="tui-new-img"></image>
+        <image src="{{item.images.url}}" class="tui-new-img"></image>
       </view>
     </view>
   </view>
   <view class="tui-product-box">
     <view class="tui-group-name">
-      <text>热门推荐</text>
+      <text>{{confTextList['hot_recommend']}}</text>
     </view>
     <view class="tui-product-list">
       <view class="tui-product-container">

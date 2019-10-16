@@ -10,16 +10,7 @@ Page({
     scrollH: 0, //滚动总高度
     opcity: 0,
     iconOpcity: 0.5,
-    banner: [
-      "https://www.thorui.cn/img/product/11.jpg",
-      "https://www.thorui.cn/img/product/2.png",
-      "https://www.thorui.cn/img/product/33.jpg",
-      "https://www.thorui.cn/img/product/4.png",
-      "https://www.thorui.cn/img/product/55.jpg",
-      "https://www.thorui.cn/img/product/6.png",
-      "https://www.thorui.cn/img/product/7.jpg",
-      "https://www.thorui.cn/img/product/8.jpg"
-    ],
+    banner: [],
     bannerIndex: 0,
     topMenu: [{
       icon: "message",
@@ -152,17 +143,32 @@ Page({
       wx.stopPullDownRefresh()
       if (res && res.data) {
         let data = res.data
+        let banner = that.data.banner
+        data.resources.forEach(element => {
+          banner.push(element.url)
+        });
+
         that.setData({
-          product: data
+          product: data,
+          banner: banner
         })
 
         if (data.isSingle) {
-          let selectSku = data.skuInfo[0]
+
+          let sku = data.skuInfo[0]
+          let selectSku = {
+            id: sku.id,
+            number: 1,
+            price: sku.price,
+            stock: sku.stock,
+            attributeInfo: sku.attributeInfo
+          }
+
           selectSku.image = data.resources[0].url
-          selectSku.number = 1
           that.setData({
-            selectSku: selectSku
+            'selectSku': selectSku
           })
+          console.log(selectSku)
         }
       }
     })
@@ -227,6 +233,7 @@ Page({
     let data = [
       {
         merId: this.data.product.merId,
+        merName: this.data.product.merName,
         skuList: [
           {
             productNo: this.data.product.guid,

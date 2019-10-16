@@ -51,6 +51,7 @@
 								<view class="tui-goods-title">商品信息</view>
 						</tui-list-cell>
 						<block wx:for="{{list}}" wx:for-item="listItem" wx:key="{{index}}">
+								<van-cell title="{{listItem.merName}}" icon="shop-o" is-link url="{{'/pages/merchant/index?merId=' +listItem.merId }}" />
 								<tui-list-cell hover="{{false}}" padding="0" wx:for="{{listItem.skuList}}" wx:for-item="sku">
 										<view class="tui-goods-item">
 												<image src="{{sku.image}}" class="tui-goods-img"></image>

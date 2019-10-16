@@ -62,12 +62,13 @@ page {
   line-height: 30rpx;
 }
 
+/* 背景颜色 */
 .tui-item-active {
   color: #e41f19 !important;
 }
 
 /*tabbar*/
-
+/* 背景颜色 */
 .tui-header {
   width: 100%;
   height: 100rpx;
@@ -137,6 +138,7 @@ page {
   text-overflow: ellipsis;
 }
 
+/* 背景颜色 */
 .tui-header-banner {
   padding-top: 100rpx;
   box-sizing: border-box;
@@ -165,14 +167,14 @@ page {
   line-height: 24rpx;
   /* margin-left: 20rpx; */
 }
-
+/* 背景颜色 */
 .tui-banner-bg {
   display: flex;
   height: 180rpx;
   background: #e41f19;
   position: relative;
 }
-
+/* 背景颜色 */
 .tui-primary-bg {
   width: 50%;
   display: inline-block;

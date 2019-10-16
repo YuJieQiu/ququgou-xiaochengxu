@@ -1,5 +1,9 @@
 // 支持es4语法
 var filter = {
+  jsonpParseData: function (data, field) {
+    var dd = JSON.parse(data)
+    return dd[field]
+  },
   numberToFixed: function (value) {
     return 1
   },
@@ -53,6 +57,7 @@ var filter = {
 
 // 导出对外暴露的属性
 module.exports = {
+  jsonpParseData: filter.jsonpParseData,
   numberToFixed: filter.numberToFixed,
   arrayExist: filter.arrayExist,
   priceStr: filter.priceStr,

@@ -1,3 +1,5 @@
+<!-- 引入.wxs文件 src为相对路径，module指定当前模块的名称 -->
+<wxs module="wxs" src="../common/index.wxs" />
 <view class="container">
 		<!-- header -->
 		<view class="tui-header-box">
@@ -5,9 +7,9 @@
 						<tui-icon name="arrowleft" color="#000" tui-icon-class="tui-back" style="margin-top:{{arrowTop}}px" bindtap="back"></tui-icon>
 						<view class="tui-searchbox" style="margin-top:{{inputTop}}px" bindtap="search">
 								<icon type="search" size='13' color='#999'></icon>
-								<text class="tui-search-text" wx:if="{{!searchKey}}">搜索商品</text>
-								<view class="tui-search-key" wx:if="{{searchKey}}">
-										<view class="tui-key-text">{{searchKey}}</view>
+								<text class="tui-search-text" wx:if="{{!queryParam.text}}">搜索商品</text>
+								<view class="tui-search-key" wx:if="{{queryParam.text}}">
+										<view class="tui-key-text">{{queryParam.text}}</view>
 										<tui-icon name="shut" size='12' color='#fff'></tui-icon>
 								</view>
 						</view>
@@ -24,19 +26,19 @@
 						<view class="tui-top-item {{tabIndex==1?'tui-active tui-bold':''}}" bindtap="screen" data-index="1">
 								销量
 						</view>
-						<view class="tui-top-item {{tabIndex==1?'tui-active tui-bold':''}}" bindtap="screen" data-index="1">
+						<view class="tui-top-item {{tabIndex==2?'tui-active tui-bold':''}}" bindtap="screen" data-index="2">
 								距离最近
 						</view>
-						<view class="tui-top-item" bindtap="screen" data-index="2">
+						<view class="tui-top-item" bindtap="screen" data-index="3">
 								<tui-icon name="{{isList?'manage':'listview'}}" size="{{isList?22:18}}" bold="{{isList?false:true}}" color="#333"></tui-icon>
 						</view>
-						<view class="tui-top-item" bindtap="screen" data-index="3">
+						<view class="tui-top-item" bindtap="screen" data-index="4">
 								<text>筛选</text>
 								<tui-icon name="screen" size="12" color="#333" tui-icon-class="tui-ml" bold="{{true}}"></tui-icon>
 						</view>
 						<!-- 下拉选择列表-综合 -->
 						<view class="tui-dropdownlist {{selectH>0?'tui-dropdownlist-show':''}}" style="height:{{selectH}}rpx">
-								<view class="tui-dropdownlist-item {{item.selected?'tui-bold':''}}" wx:for="{{dropdownList}}" wx:key="{{index}}" catchtap="dropdownItem" data-index="{{index}}">
+								<view class="tui-dropdownlist-item {{item.selected?'tui-bold':''}}" wx:for="{{dropdownList}}" wx:key="{{index}}" catchtap="dropdownItem" data-index="{{index}}" data-sortType="{{sortType}}">
 										<text class="tui-ml tui-middle">{{item.name}}</text>
 										<tui-icon name="check" size="16" color="#e41f19" bold="{{true}}" visible="{{item.selected}}" tui-icon-class="tui-middle"></tui-icon>
 								</view>
@@ -59,12 +61,12 @@
 		<!-- list -->
 		<view class="tui-product-list" style="margin-top:{{dropScreenH+18}}rpx">
 				<view class="tui-product-container">
-						<block wx:for="{{productList}}" wx:key="{{index}}" wx:if="{{(index+1)%2!=0 || isList}}">
+						<block wx:for="{{goods}}" wx:key="{{index}}" wx:if="{{(index+1)%2!=0 || isList}}">
 								<template is="productItem" data="{{item,index:index,isList:isList}}" />
 						</block>
 				</view>
 				<view class="tui-product-container" wx:if="{{!isList}}">
-						<block wx:for="{{productList}}" wx:key="{{index}}" wx:if="{{(index+1)%2==0}}">
+						<block wx:for="{{goods}}" wx:key="{{index}}" wx:if="{{(index+1)%2==0}}">
 								<template is="productItem" data="{{item,index:index}}" />
 						</block>
 				</view>
@@ -238,23 +240,25 @@
 		<!-- 模板 -->
 		<template name="productItem">
 				<!-- 商品列表 -->
-				<view class="tui-pro-item {{isList?'tui-flex-list':''}}" hover-class="hover" hover-start-time="150" bindtap="detail">
-						<image src="../../assets/images/mall/product/{{item.img}}.jpg" class="tui-pro-img {{isList?'tui-proimg-list':''}}" mode="widthFix" />
+				<view class="tui-pro-item {{isList?'tui-flex-list':''}}" hover-class="hover" hover-start-time="150" data-guid="{{item.guid}}" bindtap="showDetail">
+						<image src="{{item.image}}" class="tui-pro-img {{isList?'tui-proimg-list':''}}" mode="widthFix" />
 						<view class="tui-pro-content">
 								<view class="tui-pro-tit">{{item.name}}</view>
 								<view>
 										<view class="tui-pro-price">
-												<text class="tui-sale-price">￥{{item.sale}}</text>
-												<text class="tui-factory-price">￥{{item.factory}}</text>
+												<text class="tui-sale-price">￥{{wxs.priceStr(item.currentPrice)}}</text>
+												<text class="tui-factory-price" wx:if="{{item.originalPrice>0}}">
+														￥{{wxs.priceStr(item.originalPrice)}}
+												</text>
 										</view>
-										<view class="tui-pro-pay">{{item.payNum}}人付款</view>
+										<view class="tui-pro-pay">{{item.sales}}人购买</view>
 								</view>
 						</view>
 				</view>
 				<!-- 商品列表 -->
 		</template>
 		<!-- 加载loadding -->
-		<tui-loadmore visible="{{loadding}}" index="3" type="red"></tui-loadmore>
-		<tui-nomore visible="{{!pullUpOn && isList}}" bgcolor="#f7f7f7"></tui-nomore>
+		<tui-loadmore visible="{{!pageEnd}}" index="3" type="red"></tui-loadmore>
+		<tui-nomore visible="{{pageEnd }}" bgcolor="#f7f7f7"></tui-nomore>
 		<!-- 加载loadding -->
 </view>
