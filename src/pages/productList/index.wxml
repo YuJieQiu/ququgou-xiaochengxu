@@ -39,7 +39,7 @@
 						</view> -->
 						<!-- 下拉选择列表-综合 -->
 						<view class="tui-dropdownlist {{selectH>0?'tui-dropdownlist-show':''}}" style="height:{{selectH}}rpx">
-								<view class="tui-dropdownlist-item {{item.selected?'tui-bold':''}}" wx:for="{{dropdownList}}" wx:key="{{index}}" catchtap="dropdownItem" data-index="{{index}}" data-sortType="{{sortType}}">
+								<view class="tui-dropdownlist-item {{item.selected?'tui-bold':''}}" wx:for="{{dropdownList}}" wx:key="{{index}}" catchtap="dropdownItem" data-index="{{index}}" data-sorttype="{{item.sortType}}">
 										<text class="tui-ml tui-middle">{{item.name}}</text>
 										<tui-icon name="check" size="16" color="#e41f19" bold="{{true}}" visible="{{item.selected}}" tui-icon-class="tui-middle"></tui-icon>
 								</view>
@@ -49,9 +49,13 @@
 				</view>
 				<view class="tui-screen-bottom">
 						<block wx:for="{{attrArr}}" wx:key="{{index}}">
-								<view class="tui-bottom-item {{item.isActive?'tui-btmItem-active':''}} {{attrIndex==index?'tui-btmItem-tap':''}}" data-index="{{index}}" bindtap="btnDropChange">
+								<view class="tui-bottom-item {{(item.isActive)?'tui-btmItem-active':''}} " data-index="{{index}}" bindtap="btnDropChange">
 										<view class="tui-bottom-text {{attrIndex==index?'tui-active':''}}">
-												{{item.isActive?item.selectedName:item.name}}
+												<!-- {{item.isActive}}
+												{{attrIndex}}
+												{{index}} -->
+												{{item.selectedName!=''?item.selectedName:item.name}}
+												<!-- {{attrIndex==index&&item.list.length>0?'tui-btmItem-tap':''}} -->
 										</view>
 										<tui-icon name="{{attrIndex==index?'arrowup':'arrowdown'}}" size="14" color="{{attrIndex==index || item.isActive?'#e41f19':'#444'}}" tui-icon-class="tui-ml" wx:if="{{item.list.length>0}}"></tui-icon>
 								</view>
@@ -77,7 +81,7 @@
 		<tui-top-dropdown bgcolor="#f7f7f7" show="{{dropScreenShow}}" paddingbtm="110" translatey="{{dropScreenH}}" bind:close="btnCloseDrop">
 				<scroll-view class="tui-scroll-box" scroll-y scroll-top="{{scrollTop}}">
 						<view class="tui-seizeaseat-20"></view>
-						<view class="tui-drop-item {{item.selected?'tui-bold':''}}" wx:for="{{attrData}}" wx:key="{{index}}" catchtap="btnSelected" data-index="{{index}}">
+						<view class="tui-drop-item {{item.selected?'tui-bold':''}}" wx:for="{{attrArr[attrIndex].list}}" wx:key="{{index}}" catchtap="btnSelected" data-index="{{index}}">
 								<tui-icon name="check" size="16" color="#e41f19" bold="{{true}}" visible="{{item.selected}}" tui-icon-class="tui-middle"></tui-icon>
 								<text class="tui-ml tui-middle">{{item.name}}</text>
 						</view>

@@ -46,7 +46,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 12,
+			"current": 7,
 			"list": [
 				{
 					"id": 0,
@@ -98,10 +98,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 7,
 					"name": "pages/productList/index",
 					"pathName": "pages/productList/index",
-					"query": "",
+					"query": "searchKey =水果&&categoryId=0",
 					"scene": null
 				},
 				{

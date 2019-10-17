@@ -16,14 +16,12 @@ Page({
       sortType: 1,//排序类型 1、默认 3、销量 正序 5、销量 倒叙  7、价格 正序 9、价格 倒叙 11、距离 最近
       categoryId: 0,//商品分类Id
     },
+    pageEnd: false,
     list: [],
     goods: [],
-    page: 1, //默认第一页开始
-    limit: 10, //默认每页10条
     all: true,
     status: 0,
     active: 0,
-    pageEnd: false,
     searchKey: "", //搜索关键词
     width: 200, //header宽度
     height: 64, //header高度
@@ -55,6 +53,7 @@ Page({
         sortType: 7,
       }
     ],
+
     attrArr: [{
       name: "新品",
       selectedName: "新品",
@@ -300,68 +299,159 @@ Page({
   },
 
   onPullDownRefresh: function () {
-    let loadData = JSON.parse(JSON.stringify(this.data.productList));
-    loadData = loadData.splice(0, 10)
-    this.setData({
-      productList: loadData,
-      pageIndex: 1,
-      pullUpOn: true,
-      loadding: false
-    })
+    this.resetSearchQueryParam()
+    this.searchProductList()
     wx.stopPullDownRefresh()
   },
   onReachBottom: function () {
-    if (!this.data.pullUpOn) return;
-    this.setData({
-      loadding: true
-    }, () => {
-      if (this.data.pageIndex == 4) {
-        this.setData({
-          loadding: false,
-          pullUpOn: false
-        })
-      } else {
-        let loadData = JSON.parse(JSON.stringify(this.data.productList));
-        loadData = loadData.splice(0, 10)
-        if (this.data.pageIndex == 1) {
-          loadData = loadData.reverse();
-        }
-        this.setData({
-          productList: this.data.productList.concat(loadData),
-          pageIndex: this.data.pageIndex + 1,
-          loadding: false
-        })
-      }
-    })
+    if (!this.data.pageEnd) {
+      this.setData({
+        'queryParam.page': this.data.queryParam.page + 1,
+        loadding: true
+      })
+      this.searchProductList()
+    }
   },
+  //点击 下拉
   btnDropChange: function (e) {
     let index = e.currentTarget.dataset.index;
-    let arr = JSON.parse(JSON.stringify(this.data.attrArr[index].list));
+    let arr = this.data.attrArr[index].list;
+    let attrArr = this.data.attrArr
+    let isActive = this.data.attrArr[index].isActive
+    let attrIndex = this.data.attrIndex
+    let isActiveObj = `attrArr[${index}].isActive`;
+
+
+    // console.log(this.data.dropScreenShow) 
+    //console.log(this.data.attrArr[index].isActive)
+
+    // for (let i = 0; i < attrArr.length; i++) {
+    //  if(i!=index){
+    //   attrArr[i].
+    //  }
+
+    // }
+
     if (arr == null || arr.length === 0) {
-      let isActive = `attrArr[${index}].isActive`;
       this.setData({
-        [isActive]: !this.data.attrArr[index].isActive
+        attrIndex: attrArr[index].isActive ? -1 : index,
+        [isActiveObj]: !attrArr[index].isActive
       })
     } else {
-      let isActive = `attrArr[${index}].isActive`;
       this.setData({
-        attrData: arr,
-        attrIndex: index,
-        dropScreenShow: true,
-        [isActive]: false
+        attrIndex: attrArr[index].isActive ? -1 : index,
+        [isActiveObj]: !attrArr[index].isActive,
+        dropScreenShow: !this.data.dropScreenShow
       }, () => {
         this.setData({
           scrollTop: 0
         })
       })
+
+      // if (attrData == null || attrData.length <= 0) {
+      //   this.setData({
+      //     attrData: arr
+      //   })
+      // }
+
+      // var bl = false
+      // for (let i = 0; i < attrData.length; i++) {
+      //   if (attrData[i].selected) {
+      //     bl = true
+      //     break
+      //   }
+      // }
+      // this.setData({
+      //   attrIndex: (this.data.dropScreenShow == true && bl == false) ? -1 : index,
+      //   dropScreenShow: !this.data.dropScreenShow,
+      //   [isActive]: bl
+      // }, () => {
+      //   this.setData({
+      //     scrollTop: 0
+      //   })
+      // })
     }
   },
   btnSelected: function (e) {
     let index = e.currentTarget.dataset.index;
     let selected = `attrData[${index}].selected`;
+    let attrArr = this.data.attrArr
+    let attrIndex = this.data.attrIndex
+    let attrData = attrArr[attrIndex].list
+
+    for (let i = 0; i < attrData.length; i++) {
+      if (i != index) {
+        attrData[i].selected = false
+      } else {
+        attrData[i].selected = !attrData[i].selected
+      }
+    }
+
     this.setData({
-      [selected]: !this.data.attrData[index].selected
+      attrArr: attrArr
+      //[selected]: !this.data.attrData[index].selected
     })
+    // console.log(this.data.attrData[index].selected)
+  },
+  //确定
+  btnSure: function () {
+    let attrArr = this.data.attrArr
+    let attrIndex = this.data.attrIndex
+    let attrData = attrArr[attrIndex].list
+
+    let isActive = `attrArr[${attrIndex}].isActive`;
+    let selectedName = `attrArr[${attrIndex}].selectedName`;
+
+    let active = false;
+    let attrName = "";
+    let categoryId = 0
+
+    for (let item of attrData) {
+      if (item.selected) {
+        active = true;
+        attrName += attrName ? ";" + item.name : item.name
+        categoryId = item.id
+      }
+    }
+
+    attrArr[attrIndex].isActive = false
+    attrArr[attrIndex].selectedName = attrName
+    if (!active) {
+      attrArr[attrIndex].selectedName = ""
+      attrIndex = -1
+    }
+    this.btnCloseDrop();
+    this.setData({
+      attrArr: attrArr,
+      attrIndex: attrIndex,
+      //[selectedName]: attrName,
+      'queryParam.categoryId': categoryId
+    })
+
+    //[isActive]: active,
+    // if (attrIndex != -1) {
+    //   let attrData = this.data.attrData
+    //   var bl = true
+    //   for (let i = 0; i < attrData.length; i++) {
+    //     if (attrData[i].selected) {
+    //       bl = false
+    //       break
+    //     }
+    //   }
+    //   console.log(bl)
+    //   if (bl) {
+    //     this.setData({
+    //       [isActive]: false
+    //     })
+    //   }
+    //   // let isActive = `attrArr[${index}].isActive`;
+    // }
+
+    //let isActive = `attrArr[${index}].isActive`;
+
+
+    this.resetSearchQueryParam()
+    this.searchProductList()
   },
   reset() {
     let arr = this.data.attrData;
@@ -376,27 +466,7 @@ Page({
     this.setData({
       scrollTop: 0,
       dropScreenShow: false,
-      attrIndex: -1
-    })
-  },
-  btnSure: function () {
-    let index = this.data.attrIndex;
-    let arr = this.data.attrData;
-    let active = false;
-    let attrName = "";
-    //这里只是为了展示选中效果,并非实际场景
-    for (let item of arr) {
-      if (item.selected) {
-        active = true;
-        attrName += attrName ? ";" + item.name : item.name
-      }
-    }
-    let isActive = `attrArr[${index}].isActive`;
-    let selectedName = `attrArr[${index}].selectedName`;
-    this.btnCloseDrop();
-    this.setData({
-      [isActive]: active,
-      [selectedName]: attrName
+      // attrIndex: -1
     })
   },
   closeDropdownList: function () {
@@ -419,7 +489,7 @@ Page({
   },
   dropdownItem: function (e) {
     let index = e.currentTarget.dataset.index;
-    let sortType = e.currentTarget.dataset.sortType;
+    let sortType = e.currentTarget.dataset.sorttype;
     let arr = this.data.dropdownList;
     for (let i = 0; i < arr.length; i++) {
       if (i === index) {
@@ -428,10 +498,11 @@ Page({
         arr[i].selected = false;
       }
     }
+
+    console.log(sortType)
     this.setData({
       'queryParam.sortType': sortType
     })
-
     this.setData({
       dropdownList: arr,
       selectedName: index == 0 ? '综合' : '价格',
@@ -523,7 +594,7 @@ Page({
   },
   resetSearchQueryParam() {
     this.setData({
-      'queryParam.pageEnd': false,
+      'pageEnd': false,
       'queryParam.page': 1,
       goods: []
     })
@@ -559,7 +630,7 @@ Page({
         that.setData({ 'pageEnd': true })
       }
 
-      if (that.data.page.page > 1) {
+      if (that.data.queryParam.page > 1) {
         list.push(...res.data)
       } else {
         list = res.data
@@ -569,45 +640,9 @@ Page({
       })
     })
   },
-  getCategoryDataList: function () {
-    const that = this
-    app.httpGet('category/get/list').then(res => {
-      if (res && res.data) {
-        let attrArr = that.data.attrArr
-        let list = []
-        res.data.forEach(element => {
-          list.push({
-            id: element.id,
-            name: element.text,
-            selected: false,
-          })
-          if (element.children != null && element.children.length > 0) {
-            element.children.forEach(child => {
-              list.push({
-                id: child.id,
-                name: child.text,
-                selected: false,
-              })
-            });
-          }
-        });
-
-        attrArr.push({
-          name: "类别",
-          selectedName: "类别",
-          isActive: false,
-          list: list
-        })
-        that.setData({
-          attrArr: attrArr
-        })
-      }
-      console.log(res)
-    })
-  },
   getConfigDataList: function () {
     const that = this
-    app.httpGet('product/list/config').then(res => {
+    app.httpGet('product/list/config', that.data.queryParam).then(res => {
       if (res && res.data) {
         that.setData({
           attrArr: res.data.attrArr
@@ -616,14 +651,14 @@ Page({
     })
   },
   onLoad: function (options) {
-
     let obj = wx.getMenuButtonBoundingClientRect();
     this.setData({
       width: obj.left,
       height: obj.top + obj.height + 8,
       inputTop: obj.top + (obj.height - 30) / 2,
       arrowTop: obj.top + (obj.height - 32) / 2,
-      'queryParam.text': options.searchKey || "水果"
+      'queryParam.text': options.searchKey || "",
+      'queryParam.categoryId': parseInt(options.categoryId) || 0,
     }, () => {
       wx.getSystemInfo({
         success: (res) => {
