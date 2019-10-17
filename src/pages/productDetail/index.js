@@ -93,7 +93,14 @@ Page({
     })
   },
   back: function () {
-    wx.navigateBack()
+    let arrPages = getCurrentPages()
+    if (arrPages.length == 1) {
+      wx.switchTab({
+        url: "/pages/home/index"
+      })
+    } else {
+      wx.navigateBack()
+    }
   },
   openMenu: function () {
     this.setData({

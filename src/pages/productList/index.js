@@ -60,166 +60,169 @@ Page({
       selectedName: "新品",
       isActive: false,
       list: []
-    }, {
-      name: "品牌",
-      selectedName: "品牌",
-      isActive: false,
-      list: [{
-        name: "trendsetter",
-        selected: false
-      }, {
-        name: "维肯（Viken）",
-        selected: false
-      }, {
-        name: "AORO",
-        selected: false
-      }, {
-        name: "苏发",
-        selected: false
-      }, {
-        name: "飞花令（FHL）",
-        selected: false
-      }, {
-        name: "叶梦丝",
-        selected: false
-      }, {
-        name: "ITZOOM",
-        selected: false
-      }, {
-        name: "亿魅",
-        selected: false
-      }, {
-        name: "LEIKS",
-        selected: false
-      }, {
-        name: "雷克士",
-        selected: false
-      }, {
-        name: "蕊芬妮",
-        selected: false
-      }, {
-        name: "辉宏达",
-        selected: false
-      }, {
-        name: "英西达",
-        selected: false
-      }, {
-        name: "戴为",
-        selected: false
-      }, {
-        name: "魔风者",
-        selected: false
-      }, {
-        name: "即满",
-        selected: false
-      }, {
-        name: "北比",
-        selected: false
-      }, {
-        name: "娱浪",
-        selected: false
-      }, {
-        name: "搞怪猪",
-        selected: false
-      }]
-    }, {
-      name: "类型",
-      selectedName: "类型",
-      isActive: false,
-      list: [{
-        name: "线充套装",
-        selected: false
-      }, {
-        name: "单条装",
-        selected: false
-      }, {
-        name: "车载充电器",
-        selected: false
-      }, {
-        name: "PD快充",
-        selected: false
-      }, {
-        name: "数据线转换器",
-        selected: false
-      }, {
-        name: "多条装",
-        selected: false
-      }, {
-        name: "充电插头",
-        selected: false
-      }, {
-        name: "无线充电器",
-        selected: false
-      }, {
-        name: "座式充电器",
-        selected: false
-      }, {
-        name: "万能充",
-        selected: false
-      }, {
-        name: "转换器/转接线",
-        selected: false
-      }, {
-        name: "MFI苹果认证",
-        selected: false
-      }, {
-        name: "转换器",
-        selected: false
-      }, {
-        name: "苹果认证",
-        selected: false
-      }]
-    }, {
-      name: "适用手机",
-      selectedName: "适用手机",
-      isActive: false,
-      list: [{
-        name: "通用",
-        selected: false
-      }, {
-        name: "vivo",
-        selected: false
-      }, {
-        name: "OPPO",
-        selected: false
-      }, {
-        name: "魅族",
-        selected: false
-      }, {
-        name: "苹果",
-        selected: false
-      }, {
-        name: "华为",
-        selected: false
-      }, {
-        name: "三星",
-        selected: false
-      }, {
-        name: "荣耀",
-        selected: false
-      }, {
-        name: "诺基亚5",
-        selected: false
-      }, {
-        name: "荣耀4",
-        selected: false
-      }, {
-        name: "诺基",
-        selected: false
-      }, {
-        name: "荣耀",
-        selected: false
-      }, {
-        name: "诺基亚2",
-        selected: false
-      }, {
-        name: "荣耀2",
-        selected: false
-      }, {
-        name: "诺基",
-        selected: false
-      }]
-    }],
+    }
+      // ,
+      // {
+      //   name: "品牌",
+      //   selectedName: "品牌",
+      //   isActive: false,
+      //   list: [{
+      //     name: "trendsetter",
+      //     selected: false
+      //   }, {
+      //     name: "维肯（Viken）",
+      //     selected: false
+      //   }, {
+      //     name: "AORO",
+      //     selected: false
+      //   }, {
+      //     name: "苏发",
+      //     selected: false
+      //   }, {
+      //     name: "飞花令（FHL）",
+      //     selected: false
+      //   }, {
+      //     name: "叶梦丝",
+      //     selected: false
+      //   }, {
+      //     name: "ITZOOM",
+      //     selected: false
+      //   }, {
+      //     name: "亿魅",
+      //     selected: false
+      //   }, {
+      //     name: "LEIKS",
+      //     selected: false
+      //   }, {
+      //     name: "雷克士",
+      //     selected: false
+      //   }, {
+      //     name: "蕊芬妮",
+      //     selected: false
+      //   }, {
+      //     name: "辉宏达",
+      //     selected: false
+      //   }, {
+      //     name: "英西达",
+      //     selected: false
+      //   }, {
+      //     name: "戴为",
+      //     selected: false
+      //   }, {
+      //     name: "魔风者",
+      //     selected: false
+      //   }, {
+      //     name: "即满",
+      //     selected: false
+      //   }, {
+      //     name: "北比",
+      //     selected: false
+      //   }, {
+      //     name: "娱浪",
+      //     selected: false
+      //   }, {
+      //     name: "搞怪猪",
+      //     selected: false
+      //   }]
+      // }, {
+      //   name: "类型",
+      //   selectedName: "类型",
+      //   isActive: false,
+      //   list: [{
+      //     name: "线充套装",
+      //     selected: false
+      //   }, {
+      //     name: "单条装",
+      //     selected: false
+      //   }, {
+      //     name: "车载充电器",
+      //     selected: false
+      //   }, {
+      //     name: "PD快充",
+      //     selected: false
+      //   }, {
+      //     name: "数据线转换器",
+      //     selected: false
+      //   }, {
+      //     name: "多条装",
+      //     selected: false
+      //   }, {
+      //     name: "充电插头",
+      //     selected: false
+      //   }, {
+      //     name: "无线充电器",
+      //     selected: false
+      //   }, {
+      //     name: "座式充电器",
+      //     selected: false
+      //   }, {
+      //     name: "万能充",
+      //     selected: false
+      //   }, {
+      //     name: "转换器/转接线",
+      //     selected: false
+      //   }, {
+      //     name: "MFI苹果认证",
+      //     selected: false
+      //   }, {
+      //     name: "转换器",
+      //     selected: false
+      //   }, {
+      //     name: "苹果认证",
+      //     selected: false
+      //   }]
+      // }, {
+      //   name: "适用手机",
+      //   selectedName: "适用手机",
+      //   isActive: false,
+      //   list: [{
+      //     name: "通用",
+      //     selected: false
+      //   }, {
+      //     name: "vivo",
+      //     selected: false
+      //   }, {
+      //     name: "OPPO",
+      //     selected: false
+      //   }, {
+      //     name: "魅族",
+      //     selected: false
+      //   }, {
+      //     name: "苹果",
+      //     selected: false
+      //   }, {
+      //     name: "华为",
+      //     selected: false
+      //   }, {
+      //     name: "三星",
+      //     selected: false
+      //   }, {
+      //     name: "荣耀",
+      //     selected: false
+      //   }, {
+      //     name: "诺基亚5",
+      //     selected: false
+      //   }, {
+      //     name: "荣耀4",
+      //     selected: false
+      //   }, {
+      //     name: "诺基",
+      //     selected: false
+      //   }, {
+      //     name: "荣耀",
+      //     selected: false
+      //   }, {
+      //     name: "诺基亚2",
+      //     selected: false
+      //   }, {
+      //     name: "荣耀2",
+      //     selected: false
+      //   }, {
+      //     name: "诺基",
+      //     selected: false
+      //   }]
+      // }
+    ],
     productList: [{
       img: 1,
       name: "欧莱雅（LOREAL）奇焕光彩粉嫩透亮修颜霜 30ml（欧莱雅彩妆 BB霜 粉BB 遮瑕疵 隔离）",
@@ -334,7 +337,7 @@ Page({
   btnDropChange: function (e) {
     let index = e.currentTarget.dataset.index;
     let arr = JSON.parse(JSON.stringify(this.data.attrArr[index].list));
-    if (arr.length === 0) {
+    if (arr == null || arr.length === 0) {
       let isActive = `attrArr[${index}].isActive`;
       this.setData({
         [isActive]: !this.data.attrArr[index].isActive
@@ -497,7 +500,14 @@ Page({
     if (this.data.drawer) {
       this.closeDrawer()
     } else {
-      wx.navigateBack()
+      let arrPages = getCurrentPages()
+      if (arrPages.length == 1) {
+        wx.switchTab({
+          url: "/pages/home/index"
+        })
+      } else {
+        wx.navigateBack()
+      }
     }
   },
   search: function () {
@@ -530,9 +540,6 @@ Page({
     //   categoryId: 0,//商品分类Id
     // }
 
-    // lat: 0,//当前搜索用户所在经纬度
-    // lon: 0,//当前搜索用户所在经纬度
-    //{ "lat": 31.23037, "lon": 121.4737, "speed": -1, "accuracy": 65, "city": "上海市", "province": "上海市", "info": { "location": { "lat": 31.23037, "lng": 121.4737 }, "address": "上海市黄浦区人民大道200号", "formatted_addresses": { "recommend": "黄浦区上海市人民政府正门(人民大道北)", "rough": "黄浦区上海市人民政府正门(人民大道北)" }, "address_component": { "nation": "中国", "province": "上海市", "city": "上海市", "district": "黄浦区", "street": "人民大道", "street_number": "人民大道200号" }, "ad_info": { "nation_code": "156", "adcode": "310101", "city_code": "156310000", "name": "中国,上海市,上海市,黄浦区", "location": { "lat": 31.23037, "lng": 121.473701 }, "nation": "中国", "province": "上海市", "city": "上海市", "district": "黄浦区" }, "address_reference": { "business_area": { "id": "1609062395067730963", "title": "人民广场", "location": { "lat": 31.23035, "lng": 121.473717 }, "_distance": 0, "_dir_desc": "内" }, "famous_area": { "id": "1609062395067730963", "title": "人民广场", "location": { "lat": 31.23035, "lng": 121.473717 }, "_distance": 0, "_dir_desc": "内" }, "crossroad": { "id": "5640014", "title": "黄陂北路/江阴路(路口)", "location": { "lat": 31.230181, "lng": 121.470581 }, "_distance": 292.3, "_dir_desc": "东" }, "town": { "id": "310101002", "title": "南京东路街道", "location": { "lat": 31.23037, "lng": 121.473701 }, "_distance": 0, "_dir_desc": "内" }, "street_number": { "id": "5146127253741244918", "title": "人民大道200号", "location": { "lat": 31.23035, "lng": 121.473717 }, "_distance": 0, "_dir_desc": "" }, "street": { "id": "8354795883129328337", "title": "人民大道", "location": { "lat": 31.229828, "lng": 121.47403 }, "_distance": 62, "_dir_desc": "北" }, "landmark_l1": { "id": "5146127253741244918", "title": "上海市政府", "location": { "lat": 31.23035, "lng": 121.473717 }, "_distance": 0, "_dir_desc": "内" }, "landmark_l2": { "id": "3280386849120860525", "title": "上海市人民政府-正门", "location": { "lat": 31.230375, "lng": 121.473694 }, "_distance": 0, "_dir_desc": "" } } } }
     if (that.data.queryParam.lat == 0 || that.data.queryParam.lon == 0) {
       let location = wx.getStorageSync('location')
       if (location == null) {
@@ -540,8 +547,6 @@ Page({
       }
       that.setData({ 'queryParam.lat': location.lat, 'queryParam.lon': location.lon })
     }
-
-    console.log(location)
 
     app.httpPost('product/search', that.data.queryParam).then(res => {
       console.log(res)
@@ -562,6 +567,52 @@ Page({
       that.setData({
         goods: list
       })
+    })
+  },
+  getCategoryDataList: function () {
+    const that = this
+    app.httpGet('category/get/list').then(res => {
+      if (res && res.data) {
+        let attrArr = that.data.attrArr
+        let list = []
+        res.data.forEach(element => {
+          list.push({
+            id: element.id,
+            name: element.text,
+            selected: false,
+          })
+          if (element.children != null && element.children.length > 0) {
+            element.children.forEach(child => {
+              list.push({
+                id: child.id,
+                name: child.text,
+                selected: false,
+              })
+            });
+          }
+        });
+
+        attrArr.push({
+          name: "类别",
+          selectedName: "类别",
+          isActive: false,
+          list: list
+        })
+        that.setData({
+          attrArr: attrArr
+        })
+      }
+      console.log(res)
+    })
+  },
+  getConfigDataList: function () {
+    const that = this
+    app.httpGet('product/list/config').then(res => {
+      if (res && res.data) {
+        that.setData({
+          attrArr: res.data.attrArr
+        })
+      }
     })
   },
   onLoad: function (options) {
@@ -586,6 +637,6 @@ Page({
     });
 
     this.searchProductList()
-
+    this.getConfigDataList()
   },
 })

@@ -29,13 +29,14 @@
 						<view class="tui-top-item {{tabIndex==2?'tui-active tui-bold':''}}" bindtap="screen" data-index="2">
 								距离最近
 						</view>
-						<view class="tui-top-item" bindtap="screen" data-index="3">
+						<!-- TODO:筛选 暂时隐藏 -->
+						<!-- <view class="tui-top-item" bindtap="screen" data-index="3">
 								<tui-icon name="{{isList?'manage':'listview'}}" size="{{isList?22:18}}" bold="{{isList?false:true}}" color="#333"></tui-icon>
 						</view>
 						<view class="tui-top-item" bindtap="screen" data-index="4">
 								<text>筛选</text>
 								<tui-icon name="screen" size="12" color="#333" tui-icon-class="tui-ml" bold="{{true}}"></tui-icon>
-						</view>
+						</view> -->
 						<!-- 下拉选择列表-综合 -->
 						<view class="tui-dropdownlist {{selectH>0?'tui-dropdownlist-show':''}}" style="height:{{selectH}}rpx">
 								<view class="tui-dropdownlist-item {{item.selected?'tui-bold':''}}" wx:for="{{dropdownList}}" wx:key="{{index}}" catchtap="dropdownItem" data-index="{{index}}" data-sortType="{{sortType}}">
