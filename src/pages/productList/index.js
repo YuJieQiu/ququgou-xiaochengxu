@@ -136,7 +136,7 @@ Page({
     this.btnCloseDrop();
     this.setData({
       attrArr: attrArr,
-      'queryParam.categoryId': categoryId
+      'queryParam.categoryId': parseInt(categoryId)
     })
 
     this.resetSearchQueryParam()
@@ -296,7 +296,7 @@ Page({
       if (location == null) {
         app.getLocationInfo()
       }
-      that.setData({ 'queryParam.lat': location.lat, 'queryParam.lon': location.lon })
+      that.setData({ 'queryParam.lat': parseFloat(location.lat), 'queryParam.lon': parseFloat(location.lon) })
     }
     app.httpPost('product/search', that.data.queryParam).then(res => {
       if (res.data == null || res.data.length <= 0) {
