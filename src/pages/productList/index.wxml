@@ -49,15 +49,15 @@
 				</view>
 				<view class="tui-screen-bottom">
 						<block wx:for="{{attrArr}}" wx:key="{{index}}">
-								<view class="tui-bottom-item {{(item.isActive)?'tui-btmItem-active':''}} " data-index="{{index}}" bindtap="btnDropChange">
-										<view class="tui-bottom-text {{attrIndex==index?'tui-active':''}}">
-												<!-- {{item.isActive}}
-												{{attrIndex}}
-												{{index}} -->
-												{{item.selectedName!=''?item.selectedName:item.name}}
+								<view class="tui-bottom-item {{item.isActive?'tui-btmItem-active':''}}" data-index="{{index}}" data-attr-index="{{index}}" data-attr-select-item-index="{{item.attrSelectItemIndex}}" data-items="{{item.list}}" bindtap="btnDropChange">
+										<view class="tui-bottom-text {{item.isActive?'tui-active':''}}">
+												{{item.attrSelectItemIndex!=-1?item.list[item.attrSelectItemIndex].name:item.name}}
+												<!-- {{index}}
+												{{item.selectedName}}
+												{{item.selectedName!=''?item.selectedName:item.name}} -->
 												<!-- {{attrIndex==index&&item.list.length>0?'tui-btmItem-tap':''}} -->
 										</view>
-										<tui-icon name="{{attrIndex==index?'arrowup':'arrowdown'}}" size="14" color="{{attrIndex==index || item.isActive?'#e41f19':'#444'}}" tui-icon-class="tui-ml" wx:if="{{item.list.length>0}}"></tui-icon>
+										<tui-icon name="{{attrIndex==index?'arrowup':'arrowdown'}}" size="14" color="{{ item.isActive?'#e41f19':'#444'}}" tui-icon-class="tui-ml" wx:if="{{item.list.length>0}}"></tui-icon>
 								</view>
 						</block>
 				</view>
@@ -79,22 +79,26 @@
 		<!-- list -->
 		<!-- 顶部下拉筛选弹层 属性 -->
 		<tui-top-dropdown bgcolor="#f7f7f7" show="{{dropScreenShow}}" paddingbtm="110" translatey="{{dropScreenH}}" bind:close="btnCloseDrop">
-				<scroll-view class="tui-scroll-box" scroll-y scroll-top="{{scrollTop}}">
-						<view class="tui-seizeaseat-20"></view>
-						<view class="tui-drop-item {{item.selected?'tui-bold':''}}" wx:for="{{attrArr[attrIndex].list}}" wx:key="{{index}}" catchtap="btnSelected" data-index="{{index}}">
-								<tui-icon name="check" size="16" color="#e41f19" bold="{{true}}" visible="{{item.selected}}" tui-icon-class="tui-middle"></tui-icon>
-								<text class="tui-ml tui-middle">{{item.name}}</text>
-						</view>
-						<view class="tui-seizeaseat-30"></view>
-				</scroll-view>
-				<view class="tui-drop-btnbox">
-						<view class="tui-drop-btn tui-btn-white" hover-class="tui-white-hover" hover-stay-time="150" bindtap="reset">
-								重置
-						</view>
-						<view class="tui-drop-btn tui-btn-red" hover-class="tui-red-hover" hover-stay-time="150" bindtap="btnSure">
-								确定
-						</view>
-				</view>
+				<block wx:for="{{attrArr}}" wx:for-item="att" wx:for-index="idx" wx:key="{{index}}">
+						<block wx:if="{{att.isActive}}">
+								<scroll-view class="tui-scroll-box" scroll-y scroll-top="{{scrollTop}}">
+										<view class="tui-seizeaseat-20"></view>
+										<view class="tui-drop-item {{item.selected?'tui-bold':''}}" wx:for="{{att.list}}" wx:key="{{index}}" catchtap="btnSelected" data-arrindex="{{idx}}" data-index="{{index}}">
+												<tui-icon name="check" size="16" color="#e41f19" bold="{{true}}" visible="{{item.selected}}" tui-icon-class="tui-middle"></tui-icon>
+												<text class="tui-ml tui-middle">{{item.name}}{{idx}}</text>
+										</view>
+										<view class="tui-seizeaseat-30"></view>
+								</scroll-view>
+								<view class="tui-drop-btnbox">
+										<view class="tui-drop-btn tui-btn-white" hover-class="tui-white-hover" hover-stay-time="150" data-index="{{idx}}" bindtap="onClickDropBtnReset">
+												重置
+										</view>
+										<view class="tui-drop-btn tui-btn-red" hover-class="tui-red-hover" hover-stay-time="150" data-index="{{idx}}" bindtap="onClickDropBtnSure">
+												确定
+										</view>
+								</view>
+						</block>
+				</block>
 		</tui-top-dropdown>
 		<!-- -顶部下拉筛选弹层 属性 -->
 		<!-- 左抽屉弹层 筛选 -->

@@ -11,12 +11,12 @@
   </view> -->
   <!-- tabbar -->
   <!-- header -->
-  <view class="tui-header">
+  <view class="tui-header" style="{{'background:'+headerBackgroundColor}}">
     <view class="tui-category" hover-class="opcity" hover-stay-time="150" bindtap="classify">
-      <tui-icon name="manage-fill" color="#fff" size="22" tui-icon-class="tui-icon-category"></tui-icon>
-      <view class="tui-category-scale">分类</view>
+      <tui-icon name="manage-fill" color="{{headerFontColor}}" size="22" tui-icon-class="tui-icon-category"></tui-icon>
+      <view class="tui-category-scale" style="color:{{headerFontColor}}">分类</view>
     </view>
-    <view class="tui-rolling-search">
+    <view class="tui-rolling-search" style="{{headerBackgroundColor=='#fff'?'border: 1px solid #d9d9d9':''}}">
       <icon type="search" size='13' color='#999'></icon>
       <swiper vertical="{{true}}" autoplay="{{true}}" circular="{{true}}" interval="8000" class="tui-swiper">
         <swiper-item wx:for="{{hotSearch}}" wx:key="{{index}}" class="tui-swiper-item" bindtap="search">
@@ -26,19 +26,19 @@
     </view>
   </view>
   <!-- header -->
-  <view class="tui-header-banner">
-    <view class="tui-hot-search">
+  <view class="tui-header-banner" style="{{'background:'+headerBackgroundColor}}">
+    <view class="tui-hot-search" style="color:{{headerFontColor}}">
       <view>{{confTextList['hot_search_text']}}</view>
       <view class="tui-hot-tag" bindtap="search" wx:for="{{confList['hot_search_text']}}" wx:key="{{index}}" data-item="{{item}}">
         {{item}}
       </view>
     </view>
-    <view class="tui-banner-bg">
-      <view class="tui-primary-bg tui-route-left"></view>
-      <view class="tui-primary-bg tui-route-right"></view>
+    <view class="tui-banner-bg" style="{{'background:'+headerBackgroundColor}}">
+      <view class="tui-primary-bg tui-route-left" style="{{'background:'+headerBackgroundColor}}"></view>
+      <view class="tui-primary-bg tui-route-right" style="{{'background:'+headerBackgroundColor}}"></view>
       <!-- banner -->
       <view class="tui-banner-box">
-        <swiper indicator-dots="true" autoplay="true" interval="5000" duration="150" class="tui-banner-swiper" circular="{{true}}">
+        <swiper indicator-dots="true" autoplay="true" interval="5000" duration="150" class="tui-banner-swiper" circular="{{true}}" bindchange="onChangeBanner">
           <swiper-item wx:for="{{banners}}" wx:key="{{index}}" catchtap="detail">
             <image src="{{item.images.url}}" class="tui-slide-image" mode="scaleToFill" />
           </swiper-item>

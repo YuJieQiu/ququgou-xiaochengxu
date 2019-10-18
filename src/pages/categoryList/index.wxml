@@ -1,70 +1,35 @@
-<view class='cu-custom'>
-		<view class="cu-bar fixed bg-shadeTop" style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
-				<navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
-						<!-- <text class='cuIcon-back' /> -->
-						{{'返回'}}
-						<!-- 返回 -->
-				</navigator>
-				<view class='content' style='top:{{statusBar}}px;'>
-						<!-- 分类 -->
+<view class="container">
+		<view class="tui-searchbox">
+				<view class="tui-search-input" bindtap="search">
+						<icon type="search" size='13' color='#999'></icon>
+						<text class="tui-search-text">搜索商品</text>
 				</view>
 		</view>
-</view>
-<!-- 图片S -->
-<swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-		<swiper-item wx:for="{{4}}" wx:key>
-				<image src="https://image.weilanwl.com/img/4x3-{{index+1}}.jpg" mode='aspectFill' />
-		</swiper-item>
-</swiper>
-<!-- 图片E -->
-<view class="VerticalBox">
-		<!-- 左边S -->
-		<scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{verticalNavTop}}" style="height:calc(100vh - 375rpx)">
-				<view class="cu-item {{item.id==tabCur?'text-red cur':''}}" wx:for="{{list}}" wx:key bindtap='tabSelect' data-id="{{item.id}}">
+		<scroll-view scroll-y scroll-with-animation class="tab-view" scroll-top="{{scrollTop}}" style="height:{{menuHeight}}px">
+				<view wx:for="{{list}}" wx:key="{{index}}" class="tab-bar-item {{index==tabCurIndex? 'active' : ''}}" data-current="{{index}}" catchtap="swichNav">
 						{{item.text}}
 				</view>
 		</scroll-view>
-		<!-- 左边E -->
-		<!-- 右边S -->
-		<scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx)" scroll-into-view="main-{{mainCur}}" bindscroll="verticalMain">
-				<view class="padding-top padding-lr" wx:for="{{list}}" wx:key id="main-{{item.id}}">
-						<view class='cu-bar solid-bottom bg-white'>
-								<view class='action'>
-										<text class='cuIcon-title text-red'>
-												<!-- . -->
-										</text>
-										{{item.text}}
-								</view>
-						</view>
-						<view class="cu-list menu-avatar">
-								<view class="cu-item" wx:for="{{item.children}}" wx:for-item="children">
-										<view class="cu-avatar round lg" style="background-image:url({{children.img}});">
-												<view class="cu-tag badge" wx:if="{{false}}">
-														<!-- 99+ -->
-												</view>
-										</view>
-										<view class="content">
-												<view class="text-grey">
-														<text class="text-cut">{{children.text}}</text>
-														<view class="cu-tag round bg-orange sm" wx:if="{{false}}">
-																<!-- 战士 -->
+		<view class="right-box">
+				<view class="page-view">
+						<swiper indicator-dots autoplay circular interval="5000" duration="150" class="swiper">
+								<swiper-item catchtap="productList" data-id="{{list[tabCurIndex].id}}">
+										<image src="{{list[tabCurIndex].img}}" class="slide-image" />
+								</swiper-item>
+						</swiper>
+						<view class="class-box">
+								<block wx:for="{{list}}" wx:key="{{index}}">
+										<view class="class-item" wx:if="{{index>=tabCurIndex}}">
+												<view class="class-name">{{item.text}}</view>
+												<view class="g-container">
+														<view class="g-box" wx:for="{{item.children}}" wx:for-item="children" catchtap="productList" data-id="{{children.id}}">
+																<image src="{{children.img}}" class="g-image" />
+																<view class="g-title">{{children.text}}</view>
 														</view>
 												</view>
-												<view class="text-gray text-sm flex">
-														<text class="text-cut">
-																<!-- text -->
-														</text>
-												</view>
 										</view>
-										<view class="action">
-												<view class="text-grey text-xs">
-														<!-- 22:20 -->
-												</view>
-												<view class="cuIcon-notice_forbid_fill text-gray" />
-										</view>
-								</view>
+								</block>
 						</view>
 				</view>
-		</scroll-view>
-		<!-- 右边E -->
+		</view>
 </view>

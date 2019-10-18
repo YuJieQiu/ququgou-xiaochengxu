@@ -1,17 +1,7 @@
 {
-  "navigationBarTitleText": "",
-  "navigationStyle": "custom",
-  "enablePullDownRefresh": true,
-  "usingComponents": {
-    "van-row": "/dist/row/index",
-    "van-col": "/dist/col/index",
-    "van-tab": "/dist/tab/index",
-    "van-tabs": "/dist/tabs/index",
-    "van-card": "/dist/card/index",
-    "van-button": "/dist/button/index",
-    "van-icon": "/dist/icon/index",
-    "van-search": "/dist/search/index",
-    "van-tree-select": "/dist/tree-select/index",
-    "cu-custom": "/colorui/components/cu-custom"
-  }
+  "navigationBarTitleText": "商品分类",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "backgroundColorTop": "#fcfcfc",
+  "backgroundColorBottom": "#fcfcfc"
 }

@@ -31,28 +31,33 @@
     "backgroundColor": "#f7f7f7"
   },
   "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#8b9099",
+    "color": "#707070",
+    "selectedColor": "#d81e06",
     "borderStyle": "white",
     "backgroundColor": "#fff",
     "list": [
       {
         "pagePath": "pages/home/index",
-        "iconPath": "assets/images/tab/home.png",
-        "selectedIconPath": "assets/images/tab/homeCur.png",
+        "iconPath": "assets/images/tab/iconfont-home.png",
+        "selectedIconPath": "assets/images/tab/iconfont-homeCur.png",
         "text": "首页"
       },
       {
+        "pagePath": "pages/categoryList/index",
+        "iconPath": "assets/images/tab/iconfont-category.png",
+        "selectedIconPath": "assets/images/tab/iconfont-categoryfill.png",
+        "text": "查找"
+      },
+      {
         "pagePath": "pages/shopCart/index",
-        "iconPath": "assets/images/tab/shopcart.png",
-        "selectedIconPath": "assets/images/tab/shopcartCur.png",
+        "iconPath": "assets/images/tab/cart2.png",
+        "selectedIconPath": "assets/images/tab/cart2Cur.png",
         "text": "购物车"
       },
-
       {
         "pagePath": "pages/profile/index",
-        "iconPath": "assets/images/tab/avatar.png",
-        "selectedIconPath": "assets/images/tab/avatarCur.png",
+        "iconPath": "assets/images/tab/my2.png",
+        "selectedIconPath": "assets/images/tab/my2Cur.png",
         "text": "个人"
       }
     ]

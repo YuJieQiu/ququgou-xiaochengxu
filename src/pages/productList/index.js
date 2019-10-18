@@ -53,246 +53,8 @@ Page({
         sortType: 7,
       }
     ],
-
-    attrArr: [{
-      name: "新品",
-      selectedName: "新品",
-      isActive: false,
-      list: []
-    }
-      // ,
-      // {
-      //   name: "品牌",
-      //   selectedName: "品牌",
-      //   isActive: false,
-      //   list: [{
-      //     name: "trendsetter",
-      //     selected: false
-      //   }, {
-      //     name: "维肯（Viken）",
-      //     selected: false
-      //   }, {
-      //     name: "AORO",
-      //     selected: false
-      //   }, {
-      //     name: "苏发",
-      //     selected: false
-      //   }, {
-      //     name: "飞花令（FHL）",
-      //     selected: false
-      //   }, {
-      //     name: "叶梦丝",
-      //     selected: false
-      //   }, {
-      //     name: "ITZOOM",
-      //     selected: false
-      //   }, {
-      //     name: "亿魅",
-      //     selected: false
-      //   }, {
-      //     name: "LEIKS",
-      //     selected: false
-      //   }, {
-      //     name: "雷克士",
-      //     selected: false
-      //   }, {
-      //     name: "蕊芬妮",
-      //     selected: false
-      //   }, {
-      //     name: "辉宏达",
-      //     selected: false
-      //   }, {
-      //     name: "英西达",
-      //     selected: false
-      //   }, {
-      //     name: "戴为",
-      //     selected: false
-      //   }, {
-      //     name: "魔风者",
-      //     selected: false
-      //   }, {
-      //     name: "即满",
-      //     selected: false
-      //   }, {
-      //     name: "北比",
-      //     selected: false
-      //   }, {
-      //     name: "娱浪",
-      //     selected: false
-      //   }, {
-      //     name: "搞怪猪",
-      //     selected: false
-      //   }]
-      // }, {
-      //   name: "类型",
-      //   selectedName: "类型",
-      //   isActive: false,
-      //   list: [{
-      //     name: "线充套装",
-      //     selected: false
-      //   }, {
-      //     name: "单条装",
-      //     selected: false
-      //   }, {
-      //     name: "车载充电器",
-      //     selected: false
-      //   }, {
-      //     name: "PD快充",
-      //     selected: false
-      //   }, {
-      //     name: "数据线转换器",
-      //     selected: false
-      //   }, {
-      //     name: "多条装",
-      //     selected: false
-      //   }, {
-      //     name: "充电插头",
-      //     selected: false
-      //   }, {
-      //     name: "无线充电器",
-      //     selected: false
-      //   }, {
-      //     name: "座式充电器",
-      //     selected: false
-      //   }, {
-      //     name: "万能充",
-      //     selected: false
-      //   }, {
-      //     name: "转换器/转接线",
-      //     selected: false
-      //   }, {
-      //     name: "MFI苹果认证",
-      //     selected: false
-      //   }, {
-      //     name: "转换器",
-      //     selected: false
-      //   }, {
-      //     name: "苹果认证",
-      //     selected: false
-      //   }]
-      // }, {
-      //   name: "适用手机",
-      //   selectedName: "适用手机",
-      //   isActive: false,
-      //   list: [{
-      //     name: "通用",
-      //     selected: false
-      //   }, {
-      //     name: "vivo",
-      //     selected: false
-      //   }, {
-      //     name: "OPPO",
-      //     selected: false
-      //   }, {
-      //     name: "魅族",
-      //     selected: false
-      //   }, {
-      //     name: "苹果",
-      //     selected: false
-      //   }, {
-      //     name: "华为",
-      //     selected: false
-      //   }, {
-      //     name: "三星",
-      //     selected: false
-      //   }, {
-      //     name: "荣耀",
-      //     selected: false
-      //   }, {
-      //     name: "诺基亚5",
-      //     selected: false
-      //   }, {
-      //     name: "荣耀4",
-      //     selected: false
-      //   }, {
-      //     name: "诺基",
-      //     selected: false
-      //   }, {
-      //     name: "荣耀",
-      //     selected: false
-      //   }, {
-      //     name: "诺基亚2",
-      //     selected: false
-      //   }, {
-      //     name: "荣耀2",
-      //     selected: false
-      //   }, {
-      //     name: "诺基",
-      //     selected: false
-      //   }]
-      // }
-    ],
-    productList: [{
-      img: 1,
-      name: "欧莱雅（LOREAL）奇焕光彩粉嫩透亮修颜霜 30ml（欧莱雅彩妆 BB霜 粉BB 遮瑕疵 隔离）",
-      sale: 599,
-      factory: 899,
-      payNum: 2342
-    },
-    {
-      img: 2,
-      name: "德国DMK进口牛奶  欧德堡（Oldenburger）超高温处理全脂纯牛奶1L*12盒",
-      sale: 29,
-      factory: 69,
-      payNum: 999
-    },
-    {
-      img: 3,
-      name: "【第2支1元】柔色尽情丝柔口红唇膏女士不易掉色保湿滋润防水 珊瑚红",
-      sale: 299,
-      factory: 699,
-      payNum: 666
-    },
-    {
-      img: 4,
-      name: "百雀羚套装女补水保湿护肤品",
-      sale: 1599,
-      factory: 2899,
-      payNum: 236
-    },
-    {
-      img: 5,
-      name: "百草味 肉干肉脯 休闲零食 靖江精制猪肉脯200g/袋",
-      sale: 599,
-      factory: 899,
-      payNum: 2399
-    },
-    {
-      img: 6,
-      name: "短袖睡衣女夏季薄款休闲家居服短裤套装女可爱韩版清新学生两件套 短袖粉色长颈鹿 M码75-95斤",
-      sale: 599,
-      factory: 899,
-      payNum: 2399
-    },
-    {
-      img: 1,
-      name: "欧莱雅（LOREAL）奇焕光彩粉嫩透亮修颜霜",
-      sale: 599,
-      factory: 899,
-      payNum: 2342
-    },
-    {
-      img: 2,
-      name: "德国DMK进口牛奶",
-      sale: 29,
-      factory: 69,
-      payNum: 999
-    },
-    {
-      img: 3,
-      name: "【第2支1元】柔色尽情丝柔口红唇膏女士不易掉色保湿滋润防水 珊瑚红",
-      sale: 299,
-      factory: 699,
-      payNum: 666
-    },
-    {
-      img: 4,
-      name: "百雀羚套装女补水保湿护肤品",
-      sale: 1599,
-      factory: 2899,
-      payNum: 236
-    }
-    ],
+    attrArr: [],
+    productList: [],
     pageIndex: 1,
     loadding: false,
     pullUpOn: true
@@ -312,161 +74,90 @@ Page({
       this.searchProductList()
     }
   },
-  //点击 下拉
+  //第二级筛选 更改事件
   btnDropChange: function (e) {
-    let index = e.currentTarget.dataset.index;
-    let arr = this.data.attrArr[index].list;
     let attrArr = this.data.attrArr
-    let isActive = this.data.attrArr[index].isActive
-    let attrIndex = this.data.attrIndex
+    let index = e.currentTarget.dataset.index;
+    let arrItems = e.currentTarget.dataset.items;
+    let attrSelectItemIndex = attrArr[index].attrSelectItemIndex;
     let isActiveObj = `attrArr[${index}].isActive`;
-
-
-    // console.log(this.data.dropScreenShow) 
-    //console.log(this.data.attrArr[index].isActive)
-
-    // for (let i = 0; i < attrArr.length; i++) {
-    //  if(i!=index){
-    //   attrArr[i].
-    //  }
-
-    // }
-
-    if (arr == null || arr.length === 0) {
+    if (attrSelectItemIndex == -1) {
       this.setData({
-        attrIndex: attrArr[index].isActive ? -1 : index,
         [isActiveObj]: !attrArr[index].isActive
       })
-    } else {
-      this.setData({
-        attrIndex: attrArr[index].isActive ? -1 : index,
-        [isActiveObj]: !attrArr[index].isActive,
-        dropScreenShow: !this.data.dropScreenShow
-      }, () => {
-        this.setData({
-          scrollTop: 0
-        })
-      })
-
-      // if (attrData == null || attrData.length <= 0) {
-      //   this.setData({
-      //     attrData: arr
-      //   })
-      // }
-
-      // var bl = false
-      // for (let i = 0; i < attrData.length; i++) {
-      //   if (attrData[i].selected) {
-      //     bl = true
-      //     break
-      //   }
-      // }
-      // this.setData({
-      //   attrIndex: (this.data.dropScreenShow == true && bl == false) ? -1 : index,
-      //   dropScreenShow: !this.data.dropScreenShow,
-      //   [isActive]: bl
-      // }, () => {
-      //   this.setData({
-      //     scrollTop: 0
-      //   })
-      // })
     }
+    if (arrItems != null && arrItems.length > 0) {
+      this.setData({
+        dropScreenShow: !this.data.dropScreenShow
+      })
+    }
+    this.setData({
+      scrollTop: 0
+    })
   },
+
+  //arr item 选择
   btnSelected: function (e) {
     let index = e.currentTarget.dataset.index;
+    let arrIndex = e.currentTarget.dataset.arrindex;
     let selected = `attrData[${index}].selected`;
     let attrArr = this.data.attrArr
-    let attrIndex = this.data.attrIndex
-    let attrData = attrArr[attrIndex].list
 
-    for (let i = 0; i < attrData.length; i++) {
+    for (let i = 0; i < attrArr[arrIndex].list.length; i++) {
       if (i != index) {
-        attrData[i].selected = false
+        attrArr[arrIndex].list[i].selected = false
       } else {
-        attrData[i].selected = !attrData[i].selected
+        attrArr[arrIndex].list[i].selected = !attrArr[arrIndex].list[i].selected
       }
     }
-
     this.setData({
       attrArr: attrArr
-      //[selected]: !this.data.attrData[index].selected
     })
-    // console.log(this.data.attrData[index].selected)
   },
-  //确定
-  btnSure: function () {
+  // 下拉列表点击确定
+  onClickDropBtnSure: function (e) {
+    let index = e.currentTarget.dataset.index;
     let attrArr = this.data.attrArr
-    let attrIndex = this.data.attrIndex
-    let attrData = attrArr[attrIndex].list
-
-    let isActive = `attrArr[${attrIndex}].isActive`;
-    let selectedName = `attrArr[${attrIndex}].selectedName`;
-
-    let active = false;
-    let attrName = "";
     let categoryId = 0
 
-    for (let item of attrData) {
+    let attrSelectItemIndex = -1
+
+    for (let item of attrArr[index].list) {
       if (item.selected) {
-        active = true;
-        attrName += attrName ? ";" + item.name : item.name
         categoryId = item.id
+        attrSelectItemIndex = attrArr[index].list.indexOf(item)
       }
     }
+    attrArr[index].attrSelectItemIndex = attrSelectItemIndex
 
-    attrArr[attrIndex].isActive = false
-    attrArr[attrIndex].selectedName = attrName
-    if (!active) {
-      attrArr[attrIndex].selectedName = ""
-      attrIndex = -1
+    if (attrSelectItemIndex == -1) {
+      attrArr[index].isActive = false
     }
     this.btnCloseDrop();
     this.setData({
       attrArr: attrArr,
-      attrIndex: attrIndex,
-      //[selectedName]: attrName,
       'queryParam.categoryId': categoryId
     })
-
-    //[isActive]: active,
-    // if (attrIndex != -1) {
-    //   let attrData = this.data.attrData
-    //   var bl = true
-    //   for (let i = 0; i < attrData.length; i++) {
-    //     if (attrData[i].selected) {
-    //       bl = false
-    //       break
-    //     }
-    //   }
-    //   console.log(bl)
-    //   if (bl) {
-    //     this.setData({
-    //       [isActive]: false
-    //     })
-    //   }
-    //   // let isActive = `attrArr[${index}].isActive`;
-    // }
-
-    //let isActive = `attrArr[${index}].isActive`;
-
 
     this.resetSearchQueryParam()
     this.searchProductList()
   },
-  reset() {
-    let arr = this.data.attrData;
-    for (let item of arr) {
-      item.selected = false;
+  //下拉列表点击重置
+  onClickDropBtnReset(e) {
+    let attrArr = this.data.attrArr
+    let attrIndex = e.currentTarget.dataset.index;
+
+    for (let i = 0; i < attrArr[attrIndex].list.length; i++) {
+      attrArr[attrIndex].list[i].selected = false
     }
     this.setData({
-      attrData: arr
+      attrArr: attrArr
     })
   },
   btnCloseDrop() {
     this.setData({
       scrollTop: 0,
-      dropScreenShow: false,
-      // attrIndex: -1
+      dropScreenShow: false
     })
   },
   closeDropdownList: function () {
@@ -499,7 +190,6 @@ Page({
       }
     }
 
-    console.log(sortType)
     this.setData({
       'queryParam.sortType': sortType
     })
@@ -601,16 +291,6 @@ Page({
   },
   searchProductList() {
     const that = this
-    // let data = {
-    //   page: this.data.page.page,
-    //   limit: this.data.page.limit,
-    //   text: this.data.searchKey,//泛搜索 包括 商品名称 类型名称 商品内容等，只要商品有相关性就显示出来
-    //   lat: 0,//当前搜索用户所在经纬度
-    //   lon: 0,//当前搜索用户所在经纬度
-    //   sortType: 1,//排序类型 1、默认 3、销量 正序 5、销量 倒叙  7、价格 正序 9、价格 倒叙 11、距离 最近
-    //   categoryId: 0,//商品分类Id
-    // }
-
     if (that.data.queryParam.lat == 0 || that.data.queryParam.lon == 0) {
       let location = wx.getStorageSync('location')
       if (location == null) {
@@ -618,9 +298,7 @@ Page({
       }
       that.setData({ 'queryParam.lat': location.lat, 'queryParam.lon': location.lon })
     }
-
     app.httpPost('product/search', that.data.queryParam).then(res => {
-      console.log(res)
       if (res.data == null || res.data.length <= 0) {
         that.setData({ 'pageEnd': true })
         return

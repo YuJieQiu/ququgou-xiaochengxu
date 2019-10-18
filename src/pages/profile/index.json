@@ -10,6 +10,7 @@
     "tui-list-cell": "../../components/list-cell/list-cell",
     "tui-icon": "../../components/icon/icon",
     "tui-divider": "../../components/divider/divider",
-    "tui-loadmore": "../../components/loadmore/loadmore"
+    "tui-loadmore": "../../components/loadmore/loadmore",
+    "van-icon": "/dist/icon/index"
   }
 }

@@ -13,33 +13,39 @@
                     <text>{{name}}</text>
                     <image src="/assets/images/mall/my/icon_vip_3x.png" class="tui-img-vip"></image>
                 </view>
-                <view class="tui-explain">这家伙很懒…</view>
+                <view class="tui-explain">
+                    <!-- 用户描述 这家伙很懒… -->
+                </view>
             </view>
             <view class="tui-set-box">
-                <view class="tui-icon-box tui-icon-message" bindtap="href" data-type="1">
+                <view class="tui-icon-box tui-icon-message" data-type="1">
                     <tui-icon name="message" color="#fff" size="{{26}}"></tui-icon>
-                    <view class="tui-badge tui-badge-white">1</view>
+                    <!-- 消息条数
+                   <view class="tui-badge tui-badge-white">
+                       1
+                    </view> -->
                 </view>
-                <view class="tui-icon-box tui-icon-setup" bindtap="href" data-type="2">
+                <!-- 设置 -->
+                <view class="tui-icon-box tui-icon-setup" data-type="2">
                     <tui-icon name="setup" color="#fff" size="{{26}}"></tui-icon>
                 </view>
             </view>
         </view>
-        <view class="tui-header-btm" bindtap="href" data-type="5">
+        <view class="tui-header-btm" data-type="5">
             <view class="tui-btm-item">
-                <view class="tui-btm-num">25</view>
+                <view class="tui-btm-num">0</view>
                 <view class="tui-btm-text">收藏夹</view>
             </view>
             <view class="tui-btm-item">
-                <view class="tui-btm-num">22</view>
+                <view class="tui-btm-num">0</view>
                 <view class="tui-btm-text">店铺关注</view>
             </view>
             <view class="tui-btm-item">
-                <view class="tui-btm-num">3</view>
+                <view class="tui-btm-num">0</view>
                 <view class="tui-btm-text">喜欢的内容</view>
             </view>
             <view class="tui-btm-item">
-                <view class="tui-btm-num">44</view>
+                <view class="tui-btm-num">0</view>
                 <view class="tui-btm-text">足迹</view>
             </view>
         </view>
@@ -54,6 +60,30 @@
             </tui-list-cell>
             <view class="tui-order-list">
                 <view class="tui-order-item" bindtap="href" data-type="4">
+                    <view class="tui-icon-box">
+                        <van-icon name="underway-o" size="30" />
+                        <!-- <image src="/assets/images/mall/my/icon_daifukuan_3x.png" class="tui-order-icon"></image> -->
+                        <view class="tui-badge tui-badge-red">5</view>
+                    </view>
+                    <view class="tui-order-text">待完成</view>
+                </view>
+                <view class="tui-order-item" bindtap="href" data-type="4">
+                    <view class="tui-icon-box">
+                        <van-icon name="passed" size="30" />
+                        <!-- <image src="/assets/images/mall/my/icon_daifukuan_3x.png" class="tui-order-icon"></image> -->
+                        <view class="tui-badge tui-badge-red">5</view>
+                    </view>
+                    <view class="tui-order-text">已完成</view>
+                </view>
+                <view class="tui-order-item" bindtap="href" data-type="4">
+                    <view class="tui-icon-box">
+                        <van-icon name="close" size="30" />
+                        <!-- <image src="/assets/images/mall/my/icon_daifukuan_3x.png" class="tui-order-icon"></image> -->
+                        <view class="tui-badge tui-badge-red">5</view>
+                    </view>
+                    <view class="tui-order-text">已取消</view>
+                </view>
+                <!-- <view class="tui-order-item" bindtap="href" data-type="4">
                     <view class="tui-icon-box">
                         <image src="/assets/images/mall/my/icon_daifukuan_3x.png" class="tui-order-icon"></image>
                         <view class="tui-badge tui-badge-red">1</view>
@@ -86,10 +116,10 @@
                         <view class="tui-badge tui-badge-red">2</view>
                     </view>
                     <view class="tui-order-text">退款/售后</view>
-                </view>
+                </view> -->
             </view>
         </view>
-        <view class="tui-box tui-assets-box" bindtap="href" data-type="6">
+        <view class="tui-box tui-assets-box" data-type="6">
             <tui-list-cell padding="0" last="{{true}}" hover="{{false}}">
                 <view class="tui-cell-header">
                     <view class="tui-cell-title">我的资产</view>
@@ -98,14 +128,14 @@
             <view class="tui-order-list tui-assets-list">
                 <view class="tui-order-item">
                     <view class="tui-assets-num">
-                        <text>3</text>
+                        <text>0</text>
                         <view class="tui-badge-dot"></view>
                     </view>
                     <view class="tui-assets-text">优惠券</view>
                 </view>
                 <view class="tui-order-item">
                     <view class="tui-assets-num">
-                        <text>7</text>
+                        <text>0</text>
                         <view class="tui-badge-dot"></view>
                     </view>
                     <view class="tui-assets-text">积分</view>
@@ -118,19 +148,13 @@
                 </view>
                 <view class="tui-order-item">
                     <view class="tui-assets-num">
-                        <text>1</text>
+                        <text>0</text>
                     </view>
                     <view class="tui-assets-text">礼品卡</view>
                 </view>
-                <view class="tui-order-item">
-                    <view class="tui-assets-num">
-                        <text>20</text>
-                    </view>
-                    <view class="tui-assets-text">津贴</view>
-                </view>
             </view>
         </view>
-        <view class="tui-box tui-tool-box" bindtap="href" data-type="7">
+        <view class="tui-box tui-tool-box" data-type="7">
             <tui-list-cell arrow="{{true}}" padding="0" lineLeft="{{false}}">
                 <view class="tui-cell-header">
                     <view class="tui-cell-title">常用工具</view>
@@ -157,7 +181,7 @@
                     </view>
                     <view class="tui-tool-text">领券中心</view>
                 </view>
-                <view class=" tui-tool-item">
+                <view class="tui-tool-item">
                     <view class="tui-icon-box">
                         <image src="/assets/images/mall/my/icon_kefu_3x.png" class="tui-tool-icon"></image>
                     </view>

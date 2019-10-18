@@ -6,6 +6,8 @@ const qqmapsdk = new QQMapWX({ key: app.mapKey })
 Page({
   data: {
     current: 0,
+    headerBackgroundColor: '',
+    headerFontColor: '',
     tabbar: [{
       icon: "home",
       text: "首页",
@@ -250,7 +252,7 @@ Page({
   },
   classify: function () {
     wx.navigateTo({
-      url: '/pages/navbar-2/navbar-2'
+      url: '/pages/categoryList/index'
     })
 
   },
@@ -266,11 +268,23 @@ Page({
       url: '/pages/newsSearch/index'
     })
   },
+  onChangeBanner(e) {
+    let index = e.detail.current
+    let banner = this.data.banners[index]
+
+    this.setData({
+      headerBackgroundColor: banner.backgroundColor,
+      headerFontColor: banner.fontColor
+    })
+  },
   getBannerList() {
     app.httpGet('home/banner/getList').then(res => {
       if (res && res.data) {
+        let banner = res.data[0]
         this.setData({
-          banners: res.data
+          banners: res.data,
+          headerBackgroundColor: banner.backgroundColor,
+          headerFontColor: banner.fontColor
         })
       }
     })
