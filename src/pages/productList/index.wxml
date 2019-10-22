@@ -85,7 +85,7 @@
 										<view class="tui-seizeaseat-20"></view>
 										<view class="tui-drop-item {{item.selected?'tui-bold':''}}" wx:for="{{att.list}}" wx:key="{{index}}" catchtap="btnSelected" data-arrindex="{{idx}}" data-index="{{index}}">
 												<tui-icon name="check" size="16" color="#e41f19" bold="{{true}}" visible="{{item.selected}}" tui-icon-class="tui-middle"></tui-icon>
-												<text class="tui-ml tui-middle">{{item.name}}{{idx}}</text>
+												<text class="tui-ml tui-middle">{{item.name}}</text>
 										</view>
 										<view class="tui-seizeaseat-30"></view>
 								</scroll-view>

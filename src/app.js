@@ -2,10 +2,12 @@ const QQMapWX = require('utils/qqmap-wx-jssdk.min.js')
 //app.js
 App({
   onHide() {
-    // Do something when hide.
+    // Do something when hide. 
     console.log("onHide")
   },
   onLaunch: function () {
+    console.log("onLaunch")
+    this.getLocationInfo()
     //判断机型(适配iphoneX)
     wx.getSystemInfo({
       success: res => {
@@ -45,7 +47,9 @@ App({
             }
           })
         } else {
-          wx.navigateTo({ url: '/pages/authorize/index' })
+          let arrPages = getCurrentPages()
+          console.log(arrPages)
+          //wx.navigateTo({ url: '/pages/authorize/index' })
         }
       }
     })
@@ -86,7 +90,7 @@ App({
     })
   },
   mapKey: 'DSXBZ-6AY3U-QLAVO-4H6LL-ZOIT3-ALFUW',
-  getLocationInfo: function () {//获取位置信息   
+  getLocationInfo: function (func) {//获取位置信息   
     let _this = this
     const qqmapsdk = new QQMapWX({ key: _this.mapKey })
     let location = {}
@@ -148,8 +152,8 @@ App({
     })
   },
   //baseUrl: 'http://148.70.176.93/user/api/v1/',
-  baseUrl: 'https://ququgo.club/user/api/v1/',
-  //baseUrl: 'http://127.0.0.1:8070/user/api/v1/',
+  //baseUrl: 'https://ququgo.club/user/api/v1/',
+  baseUrl: 'http://127.0.0.1:8070/user/api/v1/',
   httpBase: function (method, url, data, loading) {
     let _this = this
     let requestUrl = this.baseUrl + url

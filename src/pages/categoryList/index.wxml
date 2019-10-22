@@ -7,24 +7,24 @@
 		</view>
 		<scroll-view scroll-y scroll-with-animation class="tab-view" scroll-top="{{scrollTop}}" style="height:{{menuHeight}}px">
 				<view wx:for="{{list}}" wx:key="{{index}}" class="tab-bar-item {{index==tabCurIndex? 'active' : ''}}" data-current="{{index}}" catchtap="swichNav">
-						{{item.text}}
+						{{item.name}}
 				</view>
 		</scroll-view>
 		<view class="right-box">
 				<view class="page-view">
 						<swiper indicator-dots autoplay circular interval="5000" duration="150" class="swiper">
-								<swiper-item catchtap="productList" data-id="{{list[tabCurIndex].id}}">
-										<image src="{{list[tabCurIndex].img}}" class="slide-image" />
+								<swiper-item wx:for="{{banners}}" wx:key="{{index}}"  catchtap="productList" data-id="{{list[tabCurIndex].id}}"> 
+										<image src="{{item.images.url}}"class="slide-image" /> 
 								</swiper-item>
 						</swiper>
 						<view class="class-box">
 								<block wx:for="{{list}}" wx:key="{{index}}">
 										<view class="class-item" wx:if="{{index>=tabCurIndex}}">
-												<view class="class-name">{{item.text}}</view>
-												<view class="g-container">
-														<view class="g-box" wx:for="{{item.children}}" wx:for-item="children" catchtap="productList" data-id="{{children.id}}">
-																<image src="{{children.img}}" class="g-image" />
-																<view class="g-title">{{children.text}}</view>
+												<view class="class-name">{{item.name}}</view>
+												<view class="g-container"> 
+														<view class="g-box" wx:for="{{item.child}}" wx:for-item="children" catchtap="productList" data-id="{{children.id}}">
+																<image src="{{children.images.url}}" class="g-image" />
+																<view class="g-title">{{children.name}}</view>
 														</view>
 												</view>
 										</view>

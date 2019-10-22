@@ -2,11 +2,9 @@ Page {
   background: #f7f7f7;
   font-size: 28rpx;
   color: #333333;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Liberation Sans',
-    'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Wenquanyi Micro Hei',
-    'WenQuanYi Zen Hei', 'ST Heiti', SimHei, 'WenQuanYi Zen Hei Sharp',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Liberation Sans", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Wenquanyi Micro Hei",
+    "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
 }
 
 Page {
@@ -20,6 +18,10 @@ Page .main-IPX {
 
 Page .main {
   margin-top: 20rpx;
+}
+
+button::after {
+  border: none;
 }
 
 /* 

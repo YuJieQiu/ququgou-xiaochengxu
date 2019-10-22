@@ -32,82 +32,20 @@ Page({
       }
     ],
     isEdit: false,
-    productList: [{
-      img: 1,
-      name: "欧莱雅（LOREAL）奇焕光彩粉嫩透亮修颜霜 30ml（欧莱雅彩妆 BB霜 粉BB 遮瑕疵 隔离）",
-      sale: 599,
-      factory: 899,
-      payNum: 2342
-    },
-    {
-      img: 2,
-      name: "德国DMK进口牛奶  欧德堡（Oldenburger）超高温处理全脂纯牛奶1L*12盒",
-      sale: 29,
-      factory: 69,
-      payNum: 999
-    },
-    {
-      img: 3,
-      name: "【第2支1元】柔色尽情丝柔口红唇膏女士不易掉色保湿滋润防水 珊瑚红",
-      sale: 299,
-      factory: 699,
-      payNum: 666
-    },
-    {
-      img: 4,
-      name: "百雀羚套装女补水保湿护肤品",
-      sale: 1599,
-      factory: 2899,
-      payNum: 236
-    },
-    {
-      img: 5,
-      name: "百草味 肉干肉脯 休闲零食 靖江精制猪肉脯200g/袋",
-      sale: 599,
-      factory: 899,
-      payNum: 2399
-    },
-    {
-      img: 6,
-      name: "短袖睡衣女夏季薄款休闲家居服短裤套装女可爱韩版清新学生两件套 短袖粉色长颈鹿 M码75-95斤",
-      sale: 599,
-      factory: 899,
-      payNum: 2399
-    },
-    {
-      img: 1,
-      name: "欧莱雅（LOREAL）奇焕光彩粉嫩透亮修颜霜",
-      sale: 599,
-      factory: 899,
-      payNum: 2342
-    },
-    {
-      img: 2,
-      name: "德国DMK进口牛奶",
-      sale: 29,
-      factory: 69,
-      payNum: 999
-    },
-    {
-      img: 3,
-      name: "【第2支1元】柔色尽情丝柔口红唇膏女士不易掉色保湿滋润防水 珊瑚红",
-      sale: 299,
-      factory: 699,
-      payNum: 666
-    },
-    {
-      img: 4,
-      name: "百雀羚套装女补水保湿护肤品",
-      sale: 1599,
-      factory: 2899,
-      payNum: 236
-    }
-    ],
+    productList: [],
     isInvalid: false,
     pageIndex: 1,
     loadding: false,
     pullUpOn: true,
-    totalPrice: ''
+    totalPrice: '',
+    getProductListPage:{
+      page:1,
+      limit:10,
+      pageEnd:false
+    },
+    goods:[],
+    lat:0,
+    lon:0,
   },
   getInfo() {
     var that = this
@@ -294,7 +232,9 @@ Page({
     })
     this.computeOrderProduct()
   },
-  onLoad(options) { },
+  onLoad(options) {
+    this.getProductList()
+   },
   onShow() {
     this.getInfo()
   },
@@ -344,27 +284,62 @@ Page({
     })
     wx.stopPullDownRefresh()
   },
-  onReachBottom: function () {
-    if (!this.data.pullUpOn) return;
-    this.setData({
-      loadding: true
+  onReachBottom: function () { 
+      if (!this.data.getProductListPage.pageEnd) {
+        this.setData({ 'getProductListPage.page': this.data.getProductListPage.page + 1 })
+        this.getProductList()
+      } 
+  },
+  showDetail(e) {
+    let guid = e.currentTarget.dataset.guid
+    wx.navigateTo({
+      url: '/pages/productDetail/index?guid=' + guid
     })
-    if (this.data.pageIndex == 4) {
-      this.setData({
-        loadding: false,
-        pullUpOn: false
-      })
-    } else {
-      let loadData = JSON.parse(JSON.stringify(this.data.productList));
-      loadData = loadData.splice(0, 10)
-      if (this.data.pageIndex == 1) {
-        loadData = loadData.reverse();
-      }
-      this.setData({
-        pageIndex: this.data.pageIndex + 1,
-        loadding: false,
-        productList: this.data.productList.concat(loadData)
-      })
+  },
+  //获取推荐列表
+  getProductList() {
+    const that = this
+    if (that.data.getProductListPage.pageEnd) {
+      return
     }
-  }
+
+    if (that.data.lat == 0 || that.data.lon == 0) {
+      let location = wx.getStorageSync('location')
+      if (location == null) {
+        app.getLocationInfo()
+      }
+      if(location==null){
+        location={
+          lat: 0,
+          lon:0,
+        }
+      }
+      that.setData({ 'lat': parseFloat(location.lat), 'lon': parseFloat(location.lon) })
+    }
+
+    let data={
+      page:that.data.getProductListPage.page,
+      limit:that.data.getProductListPage.limit,
+      lat:that.data.lat,
+      lon:that.data.lon,
+      source:parseInt(2)
+    }
+    console.log(data)
+
+    app.httpPost('recommend/product/list', data).then(res => {
+      if (res.data == null || res.data.length <= 0|| res.data.length <that.data.getProductListPage.limit) {
+        that.setData({ 'getProductListPage.pageEnd': true })
+        return
+      }
+      let list = this.data.goods
+      if (that.data.getProductListPage.page > 1) {
+        list.push(...res.data)
+      } else {
+        list = res.data
+      }
+      that.setData({
+        goods: list
+      })
+    })
+  },
 })

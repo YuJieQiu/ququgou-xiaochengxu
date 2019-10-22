@@ -37,13 +37,13 @@
 						</van-col>
 				</van-row>
 		</view>
-		<!-- <view class="ad">广告位置</view> bind:change="onChange" -->
+		<!-- <view class="ad">广告位置</view> bind:change="onChange" line-width="{{0}}"-->
 		<view class="tab">
-				<van-tabs active="{{ active }}" sticky="{{true}}" swipeable="{{true}}" lower-threshold="{{100}}" enable-back-to-top="{{true}}" bind:scroll="onTabsScroll" line-width="{{0}}">
+				<van-tabs active="{{ active }}" sticky="{{true}}" swipeable="{{true}}" lower-threshold="{{100}}" enable-back-to-top="{{true}}" bind:scroll="onTabsScroll" >
 						<!-- 商品 S -->
-						<van-tab title="商品">
+						<van-tab title="商品"  name="0">
 								<view class="">
-										<view class="custom-card" wx:for="{{goods}}" data-guid="{{item.guid}}" bindtap="onClickToShowDetail">
+										<view class="custom-card" wx:for="{{goods}}" wx:key="{{index}}" data-guid="{{item.guid}}" bindtap="onClickToShowDetail">
 												<view class="custom-card-centre">
 														<view class="custom-card__thumb">
 																<image src="{{ item.image }}" mode="aspectFill" lazy-load="true" class="custom-card__img" />
@@ -87,7 +87,7 @@
 						</van-tab>
 						<!-- 商品 E -->
 						<!-- 服务 S -->
-						<!-- <van-tab title="服务">
+						<van-tab title="服务" name="1">
 								<scroll-view class="tab-card-list" scroll-y="{{ifScrollY}}">
                     <view class="custom-card" wx:for="{{tlist}}" data-guid="123" bindtap="onClickToShowDetail">
                         <view class="custom-card-centre">
@@ -109,7 +109,7 @@
                         </view>
                     </view>
                 </scroll-view>
-						</van-tab> -->
+						</van-tab>
 						<!-- 服务 E -->
 						<!-- <van-tab title="评论">内容 3</van-tab> -->
 				</van-tabs>

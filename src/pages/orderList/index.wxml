@@ -13,7 +13,8 @@
 								</view>
 						</tui-list-cell>
 						<block wx:for="{{listItem.products}}" wx:for-item="product" wx:key="{{index}}">
-								<tui-list-cell padding="0" bindclick="detail">
+							<!-- bindclick="detail" -->
+								<tui-list-cell padding="0" >
 										<view class="tui-goods-item">
 												<image src="{{product.cover}}" class="tui-goods-img"></image>
 												<view class="tui-goods-center">

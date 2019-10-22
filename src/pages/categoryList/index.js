@@ -19,6 +19,18 @@ Page({
       }
     })
   },
+  getBannerList() {
+    app.httpGet('home/banner/getList').then(res => {
+      if (res && res.data) {
+        let banner = res.data[0]
+        this.setData({
+          banners: res.data,
+          headerBackgroundColor: banner.backgroundColor,
+          headerFontColor: banner.fontColor
+        })
+      }
+    })
+  },
   onLoad: function (options) {
     wx.getSystemInfo({
       success: (res) => {
@@ -30,7 +42,8 @@ Page({
       }
     });
 
-    this.getDataList()
+    this.getDataList() 
+    this.getBannerList()
   },
   // 点击标题切换当前页时改变样式
   swichNav: function (e) {

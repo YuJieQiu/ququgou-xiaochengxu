@@ -19,7 +19,7 @@
     <view class="tui-rolling-search" style="{{headerBackgroundColor=='#fff'?'border: 1px solid #d9d9d9':''}}">
       <icon type="search" size='13' color='#999'></icon>
       <swiper vertical="{{true}}" autoplay="{{true}}" circular="{{true}}" interval="8000" class="tui-swiper">
-        <swiper-item wx:for="{{hotSearch}}" wx:key="{{index}}" class="tui-swiper-item" bindtap="search">
+        <swiper-item wx:for="{{confList['hot_search_text']}}" wx:key="{{index}}" class="tui-swiper-item" bindtap="search">
           <view class="tui-hot-item">{{item}}</view>
         </swiper-item>
       </swiper>
@@ -46,6 +46,7 @@
       </view>
     </view>
   </view>
+  <!--分类-->
   <view class="tui-product-category" wx:if="{{confList['home_category']!=null&&confList['home_category'].length>0}}">
     <view class="tui-category-item" wx:for="{{confList['home_category']}}" wx:key="{{index}}" data-key="{{item.name}}" data-item="{{item}}" bindtap="onClickHomeCategory">
       <image src="{{item.images.url}}" class="tui-category-img" mode="scaleToFill"></image>
@@ -114,7 +115,7 @@
               ￥{{item.originalPrice}}
             </text>
           </view>
-          <view class="tui-pro-pay">{{1000}}人付款</view>
+          <view class="tui-pro-pay">销量{{item.sales}}</view>
         </view>
       </view>
     </view>

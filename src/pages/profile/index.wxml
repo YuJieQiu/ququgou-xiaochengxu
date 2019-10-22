@@ -1,7 +1,7 @@
 <view>
     <!-- header -->
     <view class="tui-header-box" style="height:{{height}}px;background:rgba(255,255,255,{{opcity}})">
-        <view class="tui-header" style="padding-top:{{top}}px;opacity:{{opcity}}">我的</view>
+        <view class="tui-header" style="padding-top:{{top}}px;opacity:{{opcity}}"></view>
     </view>
     <!-- header -->
     <view class="tui-mybg-box">
@@ -63,7 +63,7 @@
                     <view class="tui-icon-box">
                         <van-icon name="underway-o" size="30" />
                         <!-- <image src="/assets/images/mall/my/icon_daifukuan_3x.png" class="tui-order-icon"></image> -->
-                        <view class="tui-badge tui-badge-red">5</view>
+                        <view class="tui-badge tui-badge-red">{{userInfo.orderWaitCount}}</view>
                     </view>
                     <view class="tui-order-text">待完成</view>
                 </view>
@@ -71,7 +71,7 @@
                     <view class="tui-icon-box">
                         <van-icon name="passed" size="30" />
                         <!-- <image src="/assets/images/mall/my/icon_daifukuan_3x.png" class="tui-order-icon"></image> -->
-                        <view class="tui-badge tui-badge-red">5</view>
+                        <!-- <view class="tui-badge tui-badge-red">5</view> -->
                     </view>
                     <view class="tui-order-text">已完成</view>
                 </view>
@@ -79,7 +79,7 @@
                     <view class="tui-icon-box">
                         <van-icon name="close" size="30" />
                         <!-- <image src="/assets/images/mall/my/icon_daifukuan_3x.png" class="tui-order-icon"></image> -->
-                        <view class="tui-badge tui-badge-red">5</view>
+                        <!-- <view class="tui-badge tui-badge-red">5</view> -->
                     </view>
                     <view class="tui-order-text">已取消</view>
                 </view>
@@ -214,21 +214,21 @@
             </view>
         </view>
         <!-- 为你推荐 -->
-        <tui-divider size="{{28}}" bold="{{true}}" color="#333" width="50%">为你推荐</tui-divider>
+        <tui-divider size="{{28}}" bold="{{true}}" color="#333" width="50%" wx:if="{{goods!=null&&goods.length>0}}">为你推荐</tui-divider>
         <view class="tui-product-list">
             <view class="tui-product-container">
-                <block wx:for="{{productList}}" wx:key="{{index}}" wx:if="{{(index+1)%2!=0}}">
+                <block wx:for="{{goods}}" wx:key="{{index}}" wx:if="{{(index+1)%2!=0}}">
                     <!-- 商品列表 -->
-                    <view class="tui-pro-item" hover-class="hover" hover-start-time="150" bindtap="detail">
-                        <image src="/assets/images/mall/product/{{item.img}}.jpg" class="tui-pro-img" mode="widthFix" />
+                    <view class="tui-pro-item" hover-class="hover" hover-start-time="150"data-guid="{{item.guid}}" bindtap="showDetail">
+                        <image src="{{item.image}}" class="tui-pro-img" mode="widthFix" />
                         <view class="tui-pro-content">
                             <view class="tui-pro-tit">{{item.name}}</view>
                             <view>
                                 <view class="tui-pro-price">
-                                    <text class="tui-sale-price">￥{{item.sale}}</text>
-                                    <text class="tui-factory-price">￥{{item.factory}}</text>
+                                    <text class="tui-sale-price">￥{{item.currentPrice}}</text>
+                                    <text class="tui-factory-price"wx:if="{{item.originalPrice>0}}">￥{{item.originalPrice}}</text>
                                 </view>
-                                <view class="tui-pro-pay">{{item.payNum}}人付款</view>
+                                <view class="tui-pro-pay">销量{{item.sales}}</view>
                             </view>
                         </view>
                     </view>
@@ -237,18 +237,18 @@
                 </block>
             </view>
             <view class="tui-product-container">
-                <block wx:for="{{productList}}" wx:key="{{index}}" wx:if="{{(index+1)%2==0}}">
+                <block wx:for="{{goods}}" wx:key="{{index}}" wx:if="{{(index+1)%2==0}}">
                     <!-- 商品列表 -->
-                    <view class="tui-pro-item" hover-class="hover" hover-start-time="150" bindtap="detail">
-                        <image src="/assets/images/mall/product/{{item.img}}.jpg" class="tui-pro-img" mode="widthFix" />
+                    <view class="tui-pro-item" hover-class="hover" hover-start-time="150" data-guid="{{item.guid}}" bindtap="showDetail">
+                        <image src="{{item.image}}" class="tui-pro-img" mode="widthFix" />
                         <view class="tui-pro-content">
                             <view class="tui-pro-tit">{{item.name}}</view>
                             <view>
                                 <view class="tui-pro-price">
-                                    <text class="tui-sale-price">￥{{item.sale}}</text>
-                                    <text class="tui-factory-price">￥{{item.factory}}</text>
+                                    <text class="tui-sale-price">￥{{item.currentPrice}}</text>
+                                    <text class="tui-factory-price"wx:if="{{item.originalPrice>0}}">￥{{item.originalPrice}}</text>
                                 </view>
-                                <view class="tui-pro-pay">{{item.payNum}}人付款</view>
+                                <view class="tui-pro-pay">销量{{item.sales}}</view>
                             </view>
                         </view>
                     </view>
