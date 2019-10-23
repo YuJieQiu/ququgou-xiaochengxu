@@ -1,7 +1,7 @@
 <wxs module="wxs" src="../common/index.wxs" />
 <view class="container">
 		<van-tabs active="{{ active }}" swipe-threshold="5" swipeable="{{true}}" bind:change="onClickTab">
-				<van-tab title="{{tab.title}}" name="{{tab.name}}" wx:for="{{tabs}}" wx:for-item="tab"></van-tab>
+				<van-tab title="{{tab.title}}" name="{{tab.name}}" wx:for="{{tabs}}" wx:key="{{index}}" wx:for-item="tab"></van-tab>
 		</van-tabs>
 		<!-- 选项卡逻辑自己实现即可，此处未做处理 tui-order-list -->
 		<view class="{{scrollTop>=0?'':''}}">
@@ -13,14 +13,14 @@
 								</view>
 						</tui-list-cell>
 						<block wx:for="{{listItem.products}}" wx:for-item="product" wx:key="{{index}}">
-							<!-- bindclick="detail" -->
-								<tui-list-cell padding="0" >
+								<!-- bindclick="detail" -->
+								<tui-list-cell padding="0">
 										<view class="tui-goods-item">
 												<image src="{{product.cover}}" class="tui-goods-img"></image>
 												<view class="tui-goods-center">
 														<view class="tui-goods-name">{{product.name}}</view>
 														<view class="tui-goods-attr">
-																<block wx:if="{{product.skuInfo!=null}}" wx:for="{{product.skuInfo}}">
+																<block wx:if="{{product.skuInfo!=null}}" wx:for="{{product.skuInfo}}" wx:key="{{index}}">
 																		{{item.attName}}:{{item.valueName}}
 																</block>
 														</view>

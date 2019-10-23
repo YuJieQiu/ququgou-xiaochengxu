@@ -38,7 +38,7 @@ Page({
   getDataInfo: function (orderNo) {
     let that = this
     app.httpGet('order/get/detail', { orderNo: orderNo }).then(res => {
-      console.log(res)
+
       that.setData({
         address: res.data.address,
         products: res.data.products,
@@ -59,7 +59,6 @@ Page({
         app
           .httpPost('order/cancel', { orderNo: that.data.orderNo })
           .then(res => {
-            console.log(res)
           })
       })
       .catch(() => { })

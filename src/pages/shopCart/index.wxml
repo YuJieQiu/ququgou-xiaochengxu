@@ -13,7 +13,7 @@
 						</tui-button>
 				</view>
 		</view> -->
-		<view class="shop-cart-item" wx:for="{{list}}" wx:for-item="mer" wx:if="{{mer.products.length>0}}">
+		<view class="shop-cart-item" wx:for="{{list}}" wx:key="{{index}}" wx:for-item="mer" wx:if="{{mer.products.length>0}}">
 				<van-cell value="" is-link>
 						<view slot="title">
 								<view class="van-cell-checkbox">
@@ -45,7 +45,7 @@
 														<view class="tui-goods-title">{{product.name}}</view>
 														<view class="tui-goods-model">
 																<view class="tui-model-text">
-																		<block wx:if="{{product.attributeInfo!=null}}" wx:for="{{product.attributeInfo}}">
+																		<block wx:if="{{product.attributeInfo!=null}}" wx:for="{{product.attributeInfo}}" wx:key="{{index}}">
 																				{{item.attName}}:{{item.valueName}}
 																		</block>
 																</view>
@@ -99,7 +99,6 @@
 						</block>
 				</block>
 		</view>
- 
 		<!-- 猜你喜欢 -->
 		<tui-divider size="{{28}}" bold="{{true}}" color="#333" width="50%" wx:if="{{goods!=null&&goods.length>0}}">
 				<tui-icon name="like" size="{{18}}" color="#e41f19"></tui-icon>
@@ -116,7 +115,9 @@
 												<view>
 														<view class="tui-pro-price">
 																<text class="tui-sale-price">￥{{item.currentPrice}}</text>
-																<text class="tui-factory-price" wx:if="{{item.originalPrice>0}}">￥{{item.originalPrice}}</text>
+																<text class="tui-factory-price" wx:if="{{item.originalPrice>0}}">
+																		￥{{item.originalPrice}}
+																</text>
 														</view>
 														<view class="tui-pro-pay">销量{{item.sales}}</view>
 												</view>
@@ -136,7 +137,9 @@
 												<view>
 														<view class="tui-pro-price">
 																<text class="tui-sale-price">￥{{item.currentPrice}}</text>
-																<text class="tui-factory-price"wx:if="{{item.originalPrice>0}}">￥{{item.originalPrice}}</text>
+																<text class="tui-factory-price" wx:if="{{item.originalPrice>0}}">
+																		￥{{item.originalPrice}}
+																</text>
 														</view>
 														<view class="tui-pro-pay">销量{{item.sales}}</view>
 												</view>

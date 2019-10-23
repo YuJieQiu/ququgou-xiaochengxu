@@ -52,13 +52,13 @@
 						</tui-list-cell>
 						<block wx:for="{{list}}" wx:for-item="listItem" wx:key="{{index}}">
 								<van-cell title="{{listItem.merName}}" icon="shop-o" is-link url="{{'/pages/merchant/index?merId=' +listItem.merId }}" />
-								<tui-list-cell hover="{{false}}" padding="0" wx:for="{{listItem.skuList}}" wx:for-item="sku">
+								<tui-list-cell hover="{{false}}" padding="0" wx:for="{{listItem.skuList}}" wx:for-item="sku" wx:key="{{index}}">
 										<view class="tui-goods-item">
 												<image src="{{sku.image}}" class="tui-goods-img"></image>
 												<view class="tui-goods-center">
 														<view class="tui-goods-name">{{sku.productName}}</view>
 														<view class="tui-goods-attr">
-																<block wx:if="{{sku.attributeInfo!=null}}" wx:for="{{sku.attributeInfo}}">
+																<block wx:if="{{sku.attributeInfo!=null}}" wx:for="{{sku.attributeInfo}}" wx:key="{{index}}">
 																		{{item.attName}}:{{item.valueName}}
 																</block>
 														</view>
@@ -76,24 +76,27 @@
 										<view>￥{{wxs.priceStr(orderAmount)}}</view>
 								</view>
 						</tui-list-cell>
-						<tui-list-cell arrow="{{hasCoupon}}" hover="{{hasCoupon}}">
+						<!-- 优惠券 暂无
+							 <tui-list-cell arrow="{{hasCoupon}}" hover="{{hasCoupon}}">
 								<view class="tui-padding tui-flex">
 										<view>优惠券</view>
 										<view class="{{hasCoupon?'tui-color-red':''}}">{{hasCoupon?"满5减1":'没有可用优惠券'}}</view>
 								</view>
-						</tui-list-cell>
-						<tui-list-cell hover="{{true}}" arrow="{{true}}">
+						</tui-list-cell> -->
+						<!-- 发票 暂无
+							<tui-list-cell hover="{{true}}" arrow="{{true}}">
 								<view class="tui-padding tui-flex">
 										<view>发票</view>
 										<view class="tui-invoice-text">不开发票</view>
 								</view>
-						</tui-list-cell>
-						<tui-list-cell hover="{{false}}">
+						</tui-list-cell> -->
+						<!-- 配送费 暂无
+							<tui-list-cell hover="{{false}}">
 								<view class="tui-padding tui-flex">
 										<view>配送费</view>
 										<view>￥0.00</view>
 								</view>
-						</tui-list-cell>
+						</tui-list-cell> -->
 						<tui-list-cell hover="{{false}}" lineLeft="{{false}}" padding="0">
 								<view class="tui-remark-box tui-padding tui-flex">
 										<view>订单备注</view>

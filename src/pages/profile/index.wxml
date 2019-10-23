@@ -18,17 +18,17 @@
                 </view>
             </view>
             <view class="tui-set-box">
-                <view class="tui-icon-box tui-icon-message" data-type="1">
+                <!-- <view class="tui-icon-box tui-icon-message" data-type="1">
                     <tui-icon name="message" color="#fff" size="{{26}}"></tui-icon>
-                    <!-- 消息条数
+                    消息条数
                    <view class="tui-badge tui-badge-white">
                        1
-                    </view> -->
-                </view>
-                <!-- 设置 -->
+                    </view>
+                </view> -->
+                <!-- 设置 
                 <view class="tui-icon-box tui-icon-setup" data-type="2">
                     <tui-icon name="setup" color="#fff" size="{{26}}"></tui-icon>
-                </view>
+                </view> -->
             </view>
         </view>
         <view class="tui-header-btm" data-type="5">
@@ -38,16 +38,20 @@
             </view>
             <view class="tui-btm-item">
                 <view class="tui-btm-num">0</view>
+                <view class="tui-btm-text">足迹</view>
+            </view>
+            <!-- <view class="tui-btm-item">
+                <view class="tui-btm-num">0</view>
                 <view class="tui-btm-text">店铺关注</view>
             </view>
-            <view class="tui-btm-item">
+          <view class="tui-btm-item">
                 <view class="tui-btm-num">0</view>
                 <view class="tui-btm-text">喜欢的内容</view>
             </view>
             <view class="tui-btm-item">
                 <view class="tui-btm-num">0</view>
                 <view class="tui-btm-text">足迹</view>
-            </view>
+            </view> -->
         </view>
     </view>
     <view class="tui-content-box">
@@ -119,7 +123,8 @@
                 </view> -->
             </view>
         </view>
-        <view class="tui-box tui-assets-box" data-type="6">
+        <!-- 我的资产 暂无 -->
+        <view class="tui-box tui-assets-box" data-type="6" wx:if="{{false}}">
             <tui-list-cell padding="0" last="{{true}}" hover="{{false}}">
                 <view class="tui-cell-header">
                     <view class="tui-cell-title">我的资产</view>
@@ -154,7 +159,20 @@
                 </view>
             </view>
         </view>
-        <view class="tui-box tui-tool-box" data-type="7">
+        <view class="row-content">
+            <button class="row-but" open-type="contact">
+                <van-icon name="service-o" />
+                <view class="title">联系客服</view>
+            </button>
+        </view>
+        <view class="row-content">
+            <button class="row-but">
+                <van-icon name="manager-o" />
+                <view class="title">关于我们</view>
+            </button>
+        </view>
+        <!-- 常用工具 暂无 -->
+        <view class="tui-box tui-tool-box" data-type="7" wx:if="{{false}}">
             <tui-list-cell arrow="{{true}}" padding="0" lineLeft="{{false}}">
                 <view class="tui-cell-header">
                     <view class="tui-cell-title">常用工具</view>
@@ -214,19 +232,23 @@
             </view>
         </view>
         <!-- 为你推荐 -->
-        <tui-divider size="{{28}}" bold="{{true}}" color="#333" width="50%" wx:if="{{goods!=null&&goods.length>0}}">为你推荐</tui-divider>
+        <tui-divider size="{{28}}" bold="{{true}}" color="#333" width="50%" wx:if="{{goods!=null&&goods.length>0}}">
+            为你推荐
+        </tui-divider>
         <view class="tui-product-list">
             <view class="tui-product-container">
                 <block wx:for="{{goods}}" wx:key="{{index}}" wx:if="{{(index+1)%2!=0}}">
                     <!-- 商品列表 -->
-                    <view class="tui-pro-item" hover-class="hover" hover-start-time="150"data-guid="{{item.guid}}" bindtap="showDetail">
+                    <view class="tui-pro-item" hover-class="hover" hover-start-time="150" data-guid="{{item.guid}}" bindtap="showDetail">
                         <image src="{{item.image}}" class="tui-pro-img" mode="widthFix" />
                         <view class="tui-pro-content">
                             <view class="tui-pro-tit">{{item.name}}</view>
                             <view>
                                 <view class="tui-pro-price">
                                     <text class="tui-sale-price">￥{{item.currentPrice}}</text>
-                                    <text class="tui-factory-price"wx:if="{{item.originalPrice>0}}">￥{{item.originalPrice}}</text>
+                                    <text class="tui-factory-price" wx:if="{{item.originalPrice>0}}">
+                                        ￥{{item.originalPrice}}
+                                    </text>
                                 </view>
                                 <view class="tui-pro-pay">销量{{item.sales}}</view>
                             </view>
@@ -246,7 +268,9 @@
                             <view>
                                 <view class="tui-pro-price">
                                     <text class="tui-sale-price">￥{{item.currentPrice}}</text>
-                                    <text class="tui-factory-price"wx:if="{{item.originalPrice>0}}">￥{{item.originalPrice}}</text>
+                                    <text class="tui-factory-price" wx:if="{{item.originalPrice>0}}">
+                                        ￥{{item.originalPrice}}
+                                    </text>
                                 </view>
                                 <view class="tui-pro-pay">销量{{item.sales}}</view>
                             </view>

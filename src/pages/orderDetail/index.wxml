@@ -56,10 +56,10 @@
     </view>
     <view>
       <!-- origin-price="{{wxs.priceStr(product.unitPrice*product.count)}}" -->
-      <van-card custom-class="goods-info-card" thumb-mode="aspectFill" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" centered="{{false}}" lazy-load="{{true}}" wx:for="{{products}}" wx:for-item="product" thumb="{{product.cover}}" num="{{product.count}}" price="{{wxs.priceStr(product.unitPrice)}}">
+      <van-card custom-class="goods-info-card" thumb-mode="aspectFill" price-class="goods-info-card-price" num-class="goods-info-card-number" thumb-class="goods-list-card-thumb" view-thumb-class="goods-list-card-thumb" centered="{{false}}" lazy-load="{{true}}" wx:for="{{products}}" wx:key="{{index}}" wx:for-item="product" thumb="{{product.cover}}" num="{{product.count}}" price="{{wxs.priceStr(product.unitPrice)}}">
         <view slot="title" class="goods-list-card-title">{{product.name}}</view>
         <view slot="desc" class="goods-list-card-desc">
-          <block wx:if="{{product.skuInfo!=null}}" wx:for="{{product.skuInfo}}">
+          <block wx:if="{{product.skuInfo!=null}}" wx:for="{{product.skuInfo}}" wx:key="{{index}}">
             {{item.attName}}:{{item.valueName}}
           </block>
         </view>

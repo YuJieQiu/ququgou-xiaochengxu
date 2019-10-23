@@ -38,20 +38,20 @@ Page({
     loadding: false,
     pullUpOn: true,
     totalPrice: '',
-    getProductListPage:{
-      page:1,
-      limit:10,
-      pageEnd:false
+    getProductListPage: {
+      page: 1,
+      limit: 10,
+      pageEnd: false
     },
-    goods:[],
-    lat:0,
-    lon:0,
+    goods: [],
+    lat: 0,
+    lon: 0,
   },
   getInfo() {
     var that = this
     app.httpGet('shop/cart/get').then(res => {
       if (res.code == 200 && res.data != null && res.data.length > 0) {
-        console.log(res.data)
+
         res.data.forEach(mer => {
           if (mer.invalidProducts != null && mer.invalidProducts.length > 0) {
             that.setData({
@@ -186,7 +186,6 @@ Page({
     var list = this.data.list
     var newData = []
     list.forEach(element => {
-      console.log(element)
       if (element.products != null && element.products.length > 0) {
         element.products.forEach(p => {
           if (event.detail) {
@@ -234,7 +233,7 @@ Page({
   },
   onLoad(options) {
     this.getProductList()
-   },
+  },
   onShow() {
     this.getInfo()
   },
@@ -284,11 +283,11 @@ Page({
     })
     wx.stopPullDownRefresh()
   },
-  onReachBottom: function () { 
-      if (!this.data.getProductListPage.pageEnd) {
-        this.setData({ 'getProductListPage.page': this.data.getProductListPage.page + 1 })
-        this.getProductList()
-      } 
+  onReachBottom: function () {
+    if (!this.data.getProductListPage.pageEnd) {
+      this.setData({ 'getProductListPage.page': this.data.getProductListPage.page + 1 })
+      this.getProductList()
+    }
   },
   showDetail(e) {
     let guid = e.currentTarget.dataset.guid
@@ -308,26 +307,25 @@ Page({
       if (location == null) {
         app.getLocationInfo()
       }
-      if(location==null){
-        location={
+      if (location == null) {
+        location = {
           lat: 0,
-          lon:0,
+          lon: 0,
         }
       }
       that.setData({ 'lat': parseFloat(location.lat), 'lon': parseFloat(location.lon) })
     }
 
-    let data={
-      page:that.data.getProductListPage.page,
-      limit:that.data.getProductListPage.limit,
-      lat:that.data.lat,
-      lon:that.data.lon,
-      source:parseInt(2)
+    let data = {
+      page: that.data.getProductListPage.page,
+      limit: that.data.getProductListPage.limit,
+      lat: that.data.lat,
+      lon: that.data.lon,
+      source: parseInt(2)
     }
-    console.log(data)
 
     app.httpPost('recommend/product/list', data).then(res => {
-      if (res.data == null || res.data.length <= 0|| res.data.length <that.data.getProductListPage.limit) {
+      if (res.data == null || res.data.length <= 0 || res.data.length < that.data.getProductListPage.limit) {
         that.setData({ 'getProductListPage.pageEnd': true })
         return
       }

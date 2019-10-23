@@ -120,7 +120,6 @@ Page({
   },
   onLoad(options) {
     //undefined
-    console.log(options)
     if (options.merCode != null && options.merCode != "" && options.merCode != "undefined") {
       this.setData({
         merCode: options.merCode
@@ -131,7 +130,6 @@ Page({
       })
     }
 
-    //this.data.merId = '6de79d7d7f764e3981b35d8b9a36fcc3'
     this.getMerInfo()
     this.getMerProductList()
   }

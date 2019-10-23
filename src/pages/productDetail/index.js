@@ -13,40 +13,33 @@ Page({
     banner: [],
     bannerIndex: 0,
     topMenu: [{
-      icon: "message",
-      text: "消息",
-      size: 26,
-      badge: 3
-    }, {
       icon: "home",
       text: "首页",
       size: 23,
-      badge: 0
+      badge: 0,
+      type: 'switchTab',
+      url: "/pages/home/index",
     }, {
       icon: "people",
       text: "我的",
       size: 26,
-      badge: 0
+      badge: 0,
+      type: 'switchTab',
+      url: "/pages/profile/index",
     }, {
       icon: "cart",
       text: "购物车",
       size: 23,
-      badge: 2
+      badge: 0,
+      type: 'switchTab',
+      url: "/pages/shopCart/index",
     }, {
-      icon: "kefu",
-      text: "客服小蜜",
+      icon: "order",
+      text: "订单",
       size: 26,
-      badge: 0
-    }, {
-      icon: "feedback",
-      text: "我要反馈",
-      size: 23,
-      badge: 0
-    }, {
-      icon: "share",
-      text: "分享",
-      size: 26,
-      badge: 0
+      badge: 0,
+      type: '',
+      url: "/pages/orderList/index",
     }],
     menuShow: false,
     popupShow: false,
@@ -65,7 +58,8 @@ Page({
       checkAll: false,
       number: 1
     },
-    cartCount: 0
+    cartCount: 0,
+    refresh: false
   },
 
   bannerChange: function (e) {
@@ -132,21 +126,28 @@ Page({
       collected: !this.data.collected
     })
   },
-  common: function () {
-    util.toast("功能开发中~")
+  common: function (e) {
+    let item = e.currentTarget.dataset.item
+    if (item.url != "") {
+      if (item.type == "switchTab") {
+        wx.switchTab({
+          url: item.url
+        })
+      } else {
+        wx.navigateTo({
+          url: item.url
+        })
+      }
+    }
   },
   submit() {
     this.setData({
       popupShow: false
     })
-    wx.navigateTo({
-      url: '../mall-extend/submitOrder/submitOrder'
-    })
   },
   getProductInfo() {
     var that = this
     app.httpGet('shop/product/detail?guid=' + that.data.guid).then(res => {
-      console.log(res)
       wx.stopPullDownRefresh()
       if (res && res.data) {
         let data = res.data
@@ -465,8 +466,15 @@ Page({
       attrInfo: newVids
     })
   },
+  onShow() {
+    if (this.data.refresh) {
+      this.getProductInfo()
+      this.setData({
+        refresh: false
+      })
+    }
+  },
   onLoad(options) {
-    //options.guid = "e164cd2b42f74af284ec1b258a93bcfd"
     if (options != null && options.guid != "") {
       this.setData({
         guid: options.guid

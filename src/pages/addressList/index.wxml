@@ -1,7 +1,7 @@
 <view class="main">
-  <view class="content">
+  <view class="content" wx:if="{{list.length>0}}">
     <van-radio-group value="{{ selectId }}">
-      <i-swipeout i-class="i-swipeout-demo-item" actions="{{actions}}" wx:for="{{list}}">
+      <i-swipeout i-class="i-swipeout-demo-item" actions="{{actions}}" wx:for="{{list}}" wx:key="{{index}}" data-id="{{item.id}}" bind:change="onChangeSwipeout">
         <view slot="content" operate-width="83" i-class="i-swipeout-demo-item-slot">
           <van-cell custom-class="address-cell" border="{{false}}" data-id="{{item.id}}">
             <view slot="title">
@@ -14,7 +14,7 @@
               <view class="address-cell-label">{{item.username}}   {{item.phone}}</view>
             </view>
             <view>
-              <van-icon name="edit" size="25px" bind:click="onEditClick" />
+              <van-icon name="edit" size="25px" bind:click="onEditClick" data-id="{{item.id}}" />
             </view>
           </van-cell>
         </view>

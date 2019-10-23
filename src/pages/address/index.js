@@ -8,6 +8,7 @@ const pageStart = 1;
 
 Page({
   data: {
+    id: 0,
     radio: "1",
     areaList: {},
     region: [],
@@ -41,12 +42,10 @@ Page({
     this.setData({ 'detailInfo': e.detail });
   },
   onChangeRegion(e) {
-    console.log(e);
     if (e.detail.code.length != 3) {
       return
     }
     this.setData({ 'region': e.detail.value });
-    //his.setData({ 'username':e.detail}); 
   },
   popupMessageShow: function (message) {
     this.setData({
@@ -80,6 +79,7 @@ Page({
     }
 
     let reqData = {
+      id: this.data.id,
       city: this.data.region[0],
       region: this.data.region[1],
       town: this.data.region[2],
@@ -90,44 +90,60 @@ Page({
       is_default: this.data.defult,
     }
 
-
     this.setData({ 'butSaveDisabled': true });
 
     let arrPages = getCurrentPages()
 
-
-
-    app.httpPost("address/create", reqData, true).then((res) => {
+    app.httpPost("address/save", reqData, true).then((res) => {
       let address = res.data;
-      let addressList = arrPages[arrPages.length - 2].data.list;
-      addressList.push({
-        id: address.id,
-        city: address.city,
-        region: address.region,
-        town: address.town,
-        address: address.address,
-        username: address.name,
-        phone: address.phone
-      })
+      wx.navigateBack()
+      // let addressList = arrPages[arrPages.length - 2].data.list;
+      // addressList.push({
+      //   id: address.id,
+      //   city: address.city,
+      //   region: address.region,
+      //   town: address.town,
+      //   address: address.address,
+      //   username: address.name,
+      //   phone: address.phone
+      // })
 
-      wx.navigateBack({
-        delta: arrPages.length - (arrPages.length - 1),
-        success: res => {
-          arrPages[arrPages.length - 2].setData({
-            'list': addressList
-          })
-        },
-        fail: function (res) {
+      // wx.navigateBack({
+      //   delta: arrPages.length - (arrPages.length - 1),
+      //   success: res => {
+      //     arrPages[arrPages.length - 2].setData({
+      //       'list': addressList
+      //     })
+      //   },
+      //   fail: function (res) {
 
-        },
-        complete: function (res) {
+      //   },
+      //   complete: function (res) {
 
-        }
-      }) 
+      //   }
+      // })
     });
 
     this.setData({ 'butSaveDisabled': false });
 
+  },
+  getData: function (id) {
+    const that = this
+    app.httpGet('address/user/get', { id: id }).then(res => {
+      let data = res.data
+
+      that.setData({
+        'id': data.id,
+        'region[0]': data.city,
+        'region[1]': data.region,
+        'region[2]': data.town,
+        'detailInfo': data.address,
+        'phone': data.phone,
+        'username': data.name,
+        'sex': data.remark,
+        'defult': data.is_default,
+      })
+    })
   },
   onClosePopup() {
     this.setData({
@@ -174,6 +190,11 @@ Page({
     })
   },
   onLoad(options) {
+    let id = options.id
+    if (id != null && id > 0) {
+      this.getData(id)
+    }
+
     let areaList = area.areaList();
 
     this.setData({

@@ -25,11 +25,7 @@ Page({
       text: "我的",
       size: 24
     }],
-    hotSearch: [
-      "休闲零食",
-      "自热火锅",
-      "小冰箱迷你"
-    ],
+    hotSearch: [],
     banner: [],
     category: [],
     newProduct: [],
@@ -37,8 +33,8 @@ Page({
     pageIndex: 1,
     loadding: false,
     pullUpOn: true,
-    lat:0,
-    lon:0,
+    lat: 0,
+    lon: 0,
   },
   onLoad: function (options) {
 
@@ -110,17 +106,17 @@ Page({
     })
 
   },
-  more: function (e) {
-    let key = e.currentTarget.dataset.key || "";
-    wx.navigateTo({
-      url: '../productList/productList?searchKey=' + key
-    })
-
-  },
-  search: function () {
-    wx.navigateTo({
-      url: '/pages/newsSearch/index'
-    })
+  search: function (e) {
+    let key = e.currentTarget.dataset.key || ""
+    if (key != null && key != "") {
+      wx.navigateTo({
+        url: '/pages/productList/index?searchKey=' + key
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/newsSearch/index'
+      })
+    }
   },
   onChangeBanner(e) {
     let index = e.detail.current
@@ -154,23 +150,22 @@ Page({
   getHomeConfigList() {
     const that = this
     app.httpGet('home/config/list').then(res => {
-      console.log(res.data)
       if (res != null && res.data != null) {
         let list = res.data.list
-          if (list["hometba"]==null||list["hometba"].length < 0||list["hometba"][0].productSmallInfos==null||
-          list["hometba"][0].productSmallInfos.length<10) {
-            that.getProductList()
-          }
+        if (list["hometba"] == null || list["hometba"].length < 0 || list["hometba"][0].productSmallInfos == null ||
+          list["hometba"][0].productSmallInfos.length < 10) {
+          that.getProductList()
+        }
 
-          that.setData({
-            tabProducts: list["hometba"][0].productSmallInfos,
-            'getHometbaProductPage.pageEnd': true
-          })
-          that.setData({
-            confList: list,
-            confTextList: res.data.textList
-          })
-        }  
+        that.setData({
+          tabProducts: list["hometba"][0].productSmallInfos,
+          'getHometbaProductPage.pageEnd': true
+        })
+        that.setData({
+          confList: list,
+          confTextList: res.data.textList
+        })
+      }
     })
   },
   //获取首页tab配置 产品列表
@@ -210,25 +205,25 @@ Page({
       if (location == null) {
         app.getLocationInfo()
       }
-      if(location==null){
-        location={
+      if (location == null) {
+        location = {
           lat: 0,
-          lon:0,
+          lon: 0,
         }
       }
       that.setData({ 'lat': parseFloat(location.lat), 'lon': parseFloat(location.lon) })
     }
 
-    let data={
-      page:that.data.getProductListPage.page,
-      limit:that.data.getProductListPage.limit,
-      lat:that.data.lat,
-      lon:that.data.lon,
-      source:parseInt(1)
+    let data = {
+      page: that.data.getProductListPage.page,
+      limit: that.data.getProductListPage.limit,
+      lat: that.data.lat,
+      lon: that.data.lon,
+      source: parseInt(1)
     }
 
     app.httpPost('recommend/product/list', data).then(res => {
-      if (res.data == null || res.data.length <= 0|| res.data.length <that.data.getProductListPage.limit) {
+      if (res.data == null || res.data.length <= 0 || res.data.length < that.data.getProductListPage.limit) {
         that.setData({ 'getProductListPage.pageEnd': true })
         return
       }
@@ -288,30 +283,28 @@ Page({
   },
   onClickHomeCategory(e) {
     const item = e.currentTarget.dataset.item
-    console.log(item)
     if (item.linkUrl != "" && item.linkType == 0) {
       wx.navigateTo({
         url: item.linkUrl
       })
       return
     }
-     
+
     if (item.categoryId > 0) {
       wx.navigateTo({
         url: "/pages/productList/index?categoryId=" + item.categoryId
       })
       return
     }
-
   },
   onLoad(options) {
-    let location = wx.getStorageSync('location')
-    console.log(location)
-    if (location != null && location != "") {
-      this.setData({
-        location: location
-      })
-    }
+    // let location = wx.getStorageSync('location')
+    // console.log(location)
+    // if (location != null && location != "") {
+    //   this.setData({
+    //     location: location
+    //   })
+    // }
 
     this.getHomeInitInfo()
   }

@@ -7,7 +7,7 @@
 				<view class="tui-header-icon" style="margin-top:{{top}}px">
 						<tui-icon name="arrowleft" color="{{opcity>=1?'#000':'#fff'}}" bindtap="back" tui-icon-class="tui-icon-back" class="tui-icon" style="background:rgba(0, 0, 0, {{iconOpcity}});"></tui-icon>
 						<tui-icon name="more-fill" color="{{opcity>=1?'#000':'#fff'}}" size="20" tui-icon-class="tui-icon-more" class="tui-icon tui-icon-ml" style="background:rgba(0, 0, 0, {{iconOpcity}});" catchtap="openMenu"></tui-icon>
-						<tui-badge type="red" tui-badge-class="tui-badge" size="small">5</tui-badge>
+						<!-- <tui-badge type="red" tui-badge-class="tui-badge" size="small">5</tui-badge> -->
 				</view>
 		</view>
 		<!-- header -->
@@ -61,7 +61,9 @@
 								<view class="tui-sale-info tui-size tui-gray">
 										<!-- <view>快递：0.00</view> -->
 										<view class="">
-												<view class="left-5" wx:for="{{product.deliveryTypes}}">{{item.name}}</view>
+												<view class="left-5" wx:for="{{product.deliveryTypes}}" wx:key="{{index}}">
+														{{item.name}}
+												</view>
 										</view>
 										<view>销量{{ product.sales}}</view>
 										<view>库存{{ product.stock}}</view>
@@ -70,8 +72,8 @@
 						</view>
 				</view>
 				<!-- 优惠卷 领券S -->
-				<view class="tui-discount-box tui-radius-all tui-mtop">
-						<view class="tui-list-cell" bindtap="showPopup">
+				<view class="tui-discount-box tui-radius-all tui-mtop" wx:if="{{false}}">
+						<!-- <view class="tui-list-cell" bindtap="showPopup">
 								<view class="tui-bold tui-cell-title">领券</view>
 								<view class="tui-tag-coupon-box">
 										<tui-tag size="small" type="red" shape="circle" tui-tag-class="tui-tag-coupon">
@@ -82,9 +84,9 @@
 										</tui-tag>
 								</view>
 								<tui-icon name="more-fill" size="20" class="tui-right tui-top40" color="#666"></tui-icon>
-						</view>
+						</view> -->
 						<!-- 优惠卷 领券E -->
-						<view class="tui-list-cell tui-last" bindtap="showPopup">
+						<!-- <view class="tui-list-cell tui-last" bindtap="showPopup">
 								<view class="tui-bold tui-cell-title">促销</view>
 								<view>
 										<view class="tui-promotion-box">
@@ -107,18 +109,21 @@
 										</view>
 								</view>
 								<tui-icon name="more-fill" size="20" class="tui-right tui-top40" color="#666"></tui-icon>
-						</view>
+						</view> -->
 				</view>
 				<view class="tui-basic-info tui-mtop tui-radius-all">
 						<view class="tui-list-cell" bindtap="showPopup">
 								<view class="tui-bold tui-cell-title">已选</view>
 								<view class="tui-selected-box">
-										<block wx:for="{{selectSku.anames}}">{{selectSku.vnames[index]}}</block>
+										<block wx:for="{{selectSku.anames}}" wx:key="{{index}}">
+												{{selectSku.vnames[index]}}
+										</block>
 										<block wx:if="{{selectSku.anames.length>0}}">x {{selectSku.number}}</block>
 								</view>
 								<tui-icon name="more-fill" size="20" class="tui-right" color="#666"></tui-icon>
 						</view>
-						<view class="tui-list-cell" bindtap="showPopup">
+						<!-- 暂无 -->
+						<view class="tui-list-cell" bindtap="showPopup" wx:if="{{false}}">
 								<view class="tui-bold tui-cell-title">送至</view>
 								<view class="tui-addr-box">
 										<view class="tui-addr-item">北京朝阳区三环到四环之间</view>
@@ -128,33 +133,22 @@
 						</view>
 						<view class="tui-list-cell tui-last">
 								<view class="tui-bold tui-cell-title">运费</view>
-								<view class="tui-selected-box">线下自提</view>
+								<view class="tui-selected-box">0.00</view>
 						</view>
 						<view class="tui-guarantee">
 								<view class="tui-guarantee-item">
 										<tui-icon name="circle-selected" size="14" color="#999"></tui-icon>
-										<text class="tui-pl">可配送海外</text>
+										<text class="tui-pl">送货上门</text>
 								</view>
 								<view class="tui-guarantee-item">
 										<tui-icon name="circle-selected" size="14" color="#999"></tui-icon>
-										<text class="tui-pl">店铺发货&售后</text>
-								</view>
-								<view class="tui-guarantee-item">
-										<tui-icon name="circle-selected" size="14" color="#999"></tui-icon>
-										<text class="tui-pl">7天无理由退货</text>
-								</view>
-								<view class="tui-guarantee-item">
-										<tui-icon name="circle-selected" size="14" color="#999"></tui-icon>
-										<text class="tui-pl">闪电退款</text>
-								</view>
-								<view class="tui-guarantee-item">
-										<tui-icon name="circle-selected" size="14" color="#999"></tui-icon>
-										<text class="tui-pl">极速审核</text>
+										<text class="tui-pl">在线预约</text>
 								</view>
 						</view>
 				</view>
-				<view class="tui-cmt-box tui-mtop tui-radius-all">
-						<view class="tui-list-cell tui-last tui-between">
+				<!-- 评论暂无 -->
+				<view class="tui-cmt-box tui-mtop tui-radius-all" wx:if="{{false}}">
+						<!-- <view class="tui-list-cell tui-last tui-between">
 								<view class="tui-bold tui-cell-title">评价</view>
 								<view bindtap="common">
 										<text class="tui-cmt-all">查看全部</text>
@@ -173,7 +167,7 @@
 								<tui-tag type="black" plain="{{true}}" tui-tag-class="tui-tag-cmt" bindtap="common">
 										查看全部评价
 								</tui-tag>
-						</view>
+						</view> -->
 				</view>
 				<view class="tui-nomore-box">
 						<tui-nomore text="宝贝详情" visible="{{true}}" bgcolor="#f7f7f7"></tui-nomore>
@@ -234,7 +228,7 @@
 						<view class="tui-menu-header" style="padding-top:{{top}}px;">功能直达</view>
 						<view class="tui-menu-itembox">
 								<block wx:for="{{topMenu}}" wx:key="{{index}}">
-										<view class="tui-menu-item" hover-class="tui-opcity" hover-stay-time="150" bindtap="common">
+										<view class="tui-menu-item" hover-class="tui-opcity" hover-stay-time="150" data-item="{{item}}" bindtap="common">
 												<view class="tui-badge-box">
 														<tui-icon name="{{item.icon}}" color="#fff" size="{{item.size}}"></tui-icon>
 														<tui-badge type="red" tui-badge-class="tui-menu-badge" size="small" wx:if="{{item.badge}}">
@@ -262,10 +256,10 @@
 								</view>
 						</view>
 						<scroll-view scroll-y class="tui-popup-scroll">
-								<view class="tui-scrollview-box" wx:for="{{ product.attributes}}" wx:for-item="attributes">
+								<view class="tui-scrollview-box" wx:for="{{ product.attributes}}" wx:key="{{index}}" wx:for-item="attributes">
 										<view class="tui-bold tui-attr-title">{{attributes.name}}</view>
 										<view class="tui-attr-box">
-												<view class="tui-attr-item {{wxs.arrayExist( selectSku.vids,item.vid)?'tui-attr-active':''}}" data-vid="{{item.vid}}" data-vname="{{item.name}}" data-aid="{{attributes.aid}}" data-aname="{{attributes.name}}" wx:for="{{attributes.options}}" bindtap="onSelectSku">
+												<view class="tui-attr-item {{wxs.arrayExist( selectSku.vids,item.vid)?'tui-attr-active':''}}" data-vid="{{item.vid}}" data-vname="{{item.name}}" data-aid="{{attributes.aid}}" data-aname="{{attributes.name}}" wx:for="{{attributes.options}}" wx:key="{{index}}" bindtap="onSelectSku">
 														{{item.name}}
 												</view>
 										</view>

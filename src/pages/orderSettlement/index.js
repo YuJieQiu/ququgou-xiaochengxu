@@ -176,7 +176,6 @@ Page({
   onLoad(options) {
     let object = JSON.parse(options.jsonData)
 
-    console.log(object)
     let list = this.data.list
     list.push(...object)
     this.setData({ list: list })
@@ -210,8 +209,6 @@ Page({
     })
   },
   btnPay() {
-    wx.navigateTo({
-      url: "../success/success"
-    })
+
   }
 })

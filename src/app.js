@@ -2,11 +2,9 @@ const QQMapWX = require('utils/qqmap-wx-jssdk.min.js')
 //app.js
 App({
   onHide() {
-    // Do something when hide. 
-    console.log("onHide")
+
   },
   onLaunch: function () {
-    console.log("onLaunch")
     this.getLocationInfo()
     //判断机型(适配iphoneX)
     wx.getSystemInfo({
@@ -29,8 +27,6 @@ App({
         }
       }
     })
-
-    //this.getLocationInfo()
   },
   beforeLogin() {
     wx.getSetting({
@@ -48,8 +44,13 @@ App({
           })
         } else {
           let arrPages = getCurrentPages()
-          console.log(arrPages)
-          //wx.navigateTo({ url: '/pages/authorize/index' })
+
+          if (arrPages.length > 1) {
+            if (arrPages[arrPages.length - 1].route == "pages/authorize/index") {
+              return
+            }
+          }
+          wx.navigateTo({ url: '/pages/authorize/index' })
         }
       }
     })
@@ -94,38 +95,14 @@ App({
     let _this = this
     const qqmapsdk = new QQMapWX({ key: _this.mapKey })
     let location = {}
-    //let location = wx.getStorage('location')
-    // if (location == null) {
-
-    // }
-
-    // wx.setStorageSync('token', res.data)
-    //
-    //用户是否给予权限
-
-    //没有权限默认一个
-
-    //获取缓存信息
-
-    //判断缓存是否过期
-
-    //过期重新获取
-
     //微信接口获取坐标
     wx.getLocation({
       type: 'wgs84',
       success(res) {
-        // const latitude = res.latitude
-        // const longitude = res.longitude
-        // const speed = res.speed
-        // const accuracy = res.accuracy
-
         location.lat = res.latitude
         location.lon = res.longitude
         location.speed = res.speed
         location.accuracy = res.accuracy
-
-        console.log(res)
         //通过腾讯地图接口获取详细信息
         qqmapsdk.reverseGeocoder({
           location: {
@@ -136,9 +113,6 @@ App({
             location.city = res.result.ad_info.city
             location.province = res.result.ad_info.province
             location.info = res.result
-            // console.log(JSON.stringify(res));
-            // let province = res.result.ad_info.province
-            // let city = res.result.ad_info.city
             _this.globalData.location = location
 
             wx.setStorageSync('location', location)

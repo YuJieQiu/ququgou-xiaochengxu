@@ -29,7 +29,7 @@
   <view class="tui-header-banner" style="{{'background:'+headerBackgroundColor}}">
     <view class="tui-hot-search" style="color:{{headerFontColor}}">
       <view>{{confTextList['hot_search_text']}}</view>
-      <view class="tui-hot-tag" bindtap="search" wx:for="{{confList['hot_search_text']}}" wx:key="{{index}}" data-item="{{item}}">
+      <view class="tui-hot-tag" bindtap="search" wx:for="{{confList['hot_search_text']}}" wx:key="{{index}}" data-key="{{item}}" data-item="{{item}}">
         {{item}}
       </view>
     </view>
@@ -46,7 +46,7 @@
       </view>
     </view>
   </view>
-  <!--分类-->
+  <!-- 分类 -->
   <view class="tui-product-category" wx:if="{{confList['home_category']!=null&&confList['home_category'].length>0}}">
     <view class="tui-category-item" wx:for="{{confList['home_category']}}" wx:key="{{index}}" data-key="{{item.name}}" data-item="{{item}}" bindtap="onClickHomeCategory">
       <image src="{{item.images.url}}" class="tui-category-img" mode="scaleToFill"></image>

@@ -1,7 +1,7 @@
 <view class="main">
 		<view class="swiper">
 				<swiper indicator-dots="true" autoplay="true" interval="10000" duration="500" circular="true" class='swiper'>
-						<swiper-item wx:for="{{merInfo.resources}}">
+						<swiper-item wx:for="{{merInfo.resources}}" wx:key="{{index}}">
 								<image mode="aspectFill" src="{{item.url}}" />
 						</swiper-item>
 				</swiper>
@@ -31,17 +31,17 @@
 				</van-row>
 				<van-row>
 						<van-col span="" custom-class="centre-row-tag">
-								<van-tag custom-class="centre-row-tag-item" size="medium" mark color="#f2826a" wx:for="{{merInfo.label}}">
+								<van-tag custom-class="centre-row-tag-item" size="medium" mark color="#f2826a" wx:for="{{merInfo.label}}" wx:key="{{index}}">
 										{{item.text}}
 								</van-tag>
 						</van-col>
 				</van-row>
 		</view>
-		<!-- <view class="ad">广告位置</view> bind:change="onChange" line-width="{{0}}"-->
+		<!-- <view class="ad">广告位置</view> bind:change="onChange" line-width="{{0}}" -->
 		<view class="tab">
-				<van-tabs active="{{ active }}" sticky="{{true}}" swipeable="{{true}}" lower-threshold="{{100}}" enable-back-to-top="{{true}}" bind:scroll="onTabsScroll" >
+				<van-tabs active="{{ active }}" sticky="{{true}}" swipeable="{{true}}" lower-threshold="{{100}}" enable-back-to-top="{{true}}">
 						<!-- 商品 S -->
-						<van-tab title="商品"  name="0">
+						<van-tab title="商品" name="0">
 								<view class="">
 										<view class="custom-card" wx:for="{{goods}}" wx:key="{{index}}" data-guid="{{item.guid}}" bindtap="onClickToShowDetail">
 												<view class="custom-card-centre">
@@ -52,7 +52,7 @@
 																<view class="custom-card__title">{{ item.name }}</view>
 																<view class="custom-card__price">
 																		<view class="now-price">{{ currency }} {{ item.currentPrice }}</view>
-																		<view class="original-price" wx:for="{{item.originalPrice>0}}">
+																		<view class="original-price" wx:if="{{item.originalPrice>0}}">
 																				{{ currency }} {{ item.originalPrice }}
 																		</view>
 																</view>
@@ -88,27 +88,7 @@
 						<!-- 商品 E -->
 						<!-- 服务 S -->
 						<van-tab title="服务" name="1">
-								<scroll-view class="tab-card-list" scroll-y="{{ifScrollY}}">
-                    <view class="custom-card" wx:for="{{tlist}}" data-guid="123" bindtap="onClickToShowDetail">
-                        <view class="custom-card-centre">
-                            <view class="custom-card__thumb">
-                                <image src="http://m.360buyimg.com/mobilecms/s750x750_jfs/t1/10624/29/2428/127225/5be16155E6b55486f/9c7909f505afc930.jpg!q80.dpg.webp" mode="aspectFit" lazy-load="true" class="custom-card__img" />
-                            </view>
-                            <view class="custom-card__content">
-                                <view class="custom-card__title">花洒、喷头、软管、底座 安装维修</view>
-                                <view class="custom-card__price">
-                                    <view class="now-price">{{ currency }} {{ price }}</view>
-                                    <view class="original-price">
-                                        {{ currency }} {{ originPrice }}
-                                    </view>
-                                </view>
-                            </view>
-                        </view>
-                        <view class="van-card__footer">
-                         暂不添加 
-                        </view>
-                    </view>
-                </scroll-view>
+								<scroll-view class="tab-card-list" scroll-y="{{ifScrollY}}"></scroll-view>
 						</van-tab>
 						<!-- 服务 E -->
 						<!-- <van-tab title="评论">内容 3</van-tab> -->

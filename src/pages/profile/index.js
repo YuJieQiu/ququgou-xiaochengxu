@@ -15,14 +15,14 @@ Page({
     pageIndex: 1,
     loadding: false,
     pullUpOn: true,
-    getProductListPage:{
-      page:1,
-      limit:10,
-      pageEnd:false
+    getProductListPage: {
+      page: 1,
+      limit: 10,
+      pageEnd: false
     },
-    goods:[],
-    lat:0,
-    lon:0,
+    goods: [],
+    lat: 0,
+    lon: 0,
   },
   onLoad: function (options) {
     let obj = wx.getMenuButtonBoundingClientRect();
@@ -60,16 +60,16 @@ Page({
         url: url
       })
     } else {
-      wx.showToast({
-        title: "功能尚未完善~",
-        icon: "none"
-      })
+      // wx.showToast({
+      //   title: "功能尚未完善~",
+      //   icon: "none"
+      // })
     }
   },
   detail: function () {
-    wx.navigateTo({
-      url: '../../productDetail/productDetail'
-    })
+    // wx.navigateTo({
+    //   url: '../../productDetail/productDetail'
+    // })
   },
   onPageScroll(e) {
     let scroll = e.scrollTop <= 0 ? 0 : e.scrollTop;
@@ -103,12 +103,12 @@ Page({
       url: '/pages/productDetail/index?guid=' + guid
     })
   },
-  onReachBottom: function () { 
+  onReachBottom: function () {
     if (!this.data.getProductListPage.pageEnd) {
       this.setData({ 'getProductListPage.page': this.data.getProductListPage.page + 1 })
       this.getProductList()
-    } 
-},
+    }
+  },
   //获取推荐列表
   getProductList() {
     const that = this
@@ -121,24 +121,24 @@ Page({
       if (location == null) {
         app.getLocationInfo()
       }
-      if(location==null){
-        location={
+      if (location == null) {
+        location = {
           lat: 0,
-          lon:0,
+          lon: 0,
         }
       }
       that.setData({ 'lat': parseFloat(location.lat), 'lon': parseFloat(location.lon) })
     }
 
-    let data={
-      page:that.data.getProductListPage.page,
-      limit:that.data.getProductListPage.limit,
-      lat:that.data.lat,
-      lon:that.data.lon,
-      source:parseInt(3)
-    } 
+    let data = {
+      page: that.data.getProductListPage.page,
+      limit: that.data.getProductListPage.limit,
+      lat: that.data.lat,
+      lon: that.data.lon,
+      source: parseInt(3)
+    }
     app.httpPost('recommend/product/list', data).then(res => {
-      if (res.data == null || res.data.length <= 0|| res.data.length <that.data.getProductListPage.limit) {
+      if (res.data == null || res.data.length <= 0 || res.data.length < that.data.getProductListPage.limit) {
         that.setData({ 'getProductListPage.pageEnd': true })
         return
       }
@@ -153,7 +153,7 @@ Page({
       })
     })
   },
-  onShow(){
+  onShow() {
     this.getUserCenterInfo()
   },
   onLoad() {
@@ -174,7 +174,7 @@ Page({
       avatar: userInfo.avatarUrl,
       name: userInfo.nickName
     })
-    
+
     this.getProductList()
   }
 })

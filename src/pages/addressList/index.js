@@ -31,7 +31,7 @@ Page({
       }
     ]
   },
-  getDataList: function() {
+  getDataList: function () {
     app.httpGet('address/user/getList', {}).then(res => {
       let list = []
 
@@ -46,7 +46,10 @@ Page({
           phone: v.phone
         })
       }
-      this.setData({ selectId: list[0].id.toString() })
+
+      if (list.length > 0) {
+        this.setData({ selectId: list[0].id.toString() })
+      }
       this.setData({ list: list })
     })
   },
@@ -71,8 +74,8 @@ Page({
           address: address
         })
       },
-      fail: function(res) {},
-      complete: function(res) {}
+      fail: function (res) { },
+      complete: function (res) { }
     })
 
     // arrPages[arrPages.length-2].setData({
@@ -86,15 +89,26 @@ Page({
     //console.log(arrPages[arrPages.length-2].data.address)
   },
   onEditClick(e) {
-    console.log('wait edit')
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/address/index?id=' + id
+    })
   },
   onAddClick(e) {
     wx.navigateTo({
       url: '/pages/address/index'
     })
   },
-
-  onLoad(options) {
+  onChangeSwipeout(e) {
+    let id = e.currentTarget.dataset.id
+    app.httpPost('address/user/delete', { id: id }).then(res => {
+      this.getDataList()
+    })
+  },
+  onShow() {
     this.getDataList()
+  },
+  onLoad(options) {
+
   }
 })
