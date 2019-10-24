@@ -2,7 +2,7 @@
 		<view class="tui-searchbox">
 				<view class="tui-search-input" bindtap="search">
 						<icon type="search" size='13' color='#999'></icon>
-						<text class="tui-search-text">搜索商品</text>
+						<text class="tui-search-text">杜索商哝</text>
 				</view>
 		</view>
 		<scroll-view scroll-y scroll-with-animation class="tab-view" scroll-top="{{scrollTop}}" style="height:{{menuHeight}}px">
@@ -22,7 +22,7 @@
 										<view class="class-item" wx:if="{{index>=tabCurIndex}}">
 												<view class="class-name">{{item.name}}</view>
 												<view class="g-container"> 
-														<view class="g-box" wx:for="{{item.child}}" wx:for-item="children" catchtap="productList" data-id="{{children.id}}">
+														<view class="g-box" wx:for="{{item.child}}" wx:key="{{index}}" wx:for-item="children" catchtap="productList" data-id="{{children.id}}">
 																<image src="{{children.images.url}}" class="g-image" />
 																<view class="g-title">{{children.name}}</view>
 														</view>
