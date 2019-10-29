@@ -316,6 +316,9 @@ Page({
       that.setData({
         goods: list
       })
+      if (res.data.length < 10) {
+        that.setData({ 'pageEnd': true })
+      }
     })
   },
   getConfigDataList: function () {

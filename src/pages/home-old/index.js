@@ -88,6 +88,9 @@ Page({
       that.setData({
         tabProducts: list
       })
+      if (res.data.length < 10) {
+        that.setData({ 'getHometbaProductPage.pageEnd': true })
+      }
     })
   },
   getProductList() {
@@ -109,6 +112,9 @@ Page({
       that.setData({
         goods: list
       })
+      if (res.data.length < 10) {
+        that.setData({ 'getProductListPage.pageEnd': true })
+      }
     })
   },
   getHomeData() {

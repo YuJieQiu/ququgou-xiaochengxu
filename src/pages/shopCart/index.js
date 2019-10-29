@@ -325,7 +325,7 @@ Page({
     }
 
     app.httpPost('recommend/product/list', data).then(res => {
-      if (res.data == null || res.data.length <= 0 || res.data.length < that.data.getProductListPage.limit) {
+      if (res.data == null || res.data.length <= 0) {
         that.setData({ 'getProductListPage.pageEnd': true })
         return
       }
@@ -338,6 +338,9 @@ Page({
       that.setData({
         goods: list
       })
+      if (res.data.length < that.data.getProductListPage.limit) {
+        that.setData({ 'getProductListPage.pageEnd': true })
+      }
     })
   },
 })

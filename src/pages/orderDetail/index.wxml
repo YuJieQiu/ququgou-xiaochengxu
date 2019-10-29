@@ -26,27 +26,37 @@
     </van-row>
     <van-row>
       <van-col span="6">订单编号:</van-col>
-      <van-col span="10">{{order.no}}</van-col>
+      <van-col span="">{{order.no}}</van-col>
+    </van-row>
+    <van-row>
+      <van-col span="6">二维码:</van-col>
+      <van-col span="">
+        <!-- <van-button icon="qr" size="mini" data-no="{{order.no}}" bind:click="generateQrcode"></van-button> -->
+        <view data-no="{{order.no}}" bindtap="generateQrcode">
+          <van-icon name="qr" />
+          展示二维码
+        </view>
+      </van-col>
     </van-row>
     <van-row>
       <van-col span="6">下单时间:</van-col>
-      <van-col span="10">{{order.createdTime}}</van-col>
+      <van-col span="">{{order.createdTime}}</van-col>
     </van-row>
     <van-row wx:if="{{order.payTypeText!=''}}">
       <van-col span="6">支付方式</van-col>
-      <van-col span="10">{{order.payTypeText}}</van-col>
+      <van-col span="">{{order.payTypeText}}</van-col>
     </van-row>
     <van-row wx:if="{{order.paymentTime!=''}}">
       <van-col span="6">支付时间:</van-col>
-      <van-col span="10">{{order.paymentTime}}</van-col>
+      <van-col span="">{{order.paymentTime}}</van-col>
     </van-row>
     <van-row wx:if="{{order.cancelTime!=''}}">
       <van-col span="6">取消时间:</van-col>
-      <van-col span="10">{{order.cancelTime}}</van-col>
+      <van-col span="">{{order.cancelTime}}</van-col>
     </van-row>
     <van-row wx:if="{{order.remark!=''}}">
       <van-col span="6">备注:</van-col>
-      <van-col span="10">{{order.remark}}</van-col>
+      <van-col span="">{{order.remark}}</van-col>
     </van-row>
   </view>
   <!-- 订单信息 E -->
@@ -106,4 +116,9 @@
   </view>
 </van-panel> -->
   <van-dialog id="van-dialog" />
+  <van-dialog use-slot title="" custom-style="width: 200px; height: 200px;" show="{{ showQrcode }}" showCancelButton="{{false}}" closeOnClickOverlay="{{true}}" showConfirmButton="{{false}}">
+    <view>
+      <canvas style="width: 200px; height: 200px;" canvas-id="myQrcode"></canvas>
+    </view>
+  </van-dialog>
 </view>

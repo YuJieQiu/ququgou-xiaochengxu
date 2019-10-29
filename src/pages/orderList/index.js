@@ -3,8 +3,10 @@ const { appUtils, appValidate } = require('../../utils/util.js')
 const pageStart = 1
 import Toast from '../../dist/toast/toast'
 import Dialog from '../../dist/dialog/dialog'
+import drawQrcode from '../../utils/weapp.qrcode.esm.js' //生成二维码js
 Page({
   data: {
+    showQrcode: false,
     tabs: [
       {
         title: "全部",
@@ -46,17 +48,23 @@ Page({
 
     app.httpGet('order/get/list', data).then(res => {
       wx.stopPullDownRefresh()
-      if (res.data == null || res.data.length <= 0||res.data.length<10) {
+      if (res.data == null || res.data.length <= 0) {
         this.setData({
           pageEnd: true
         })
         return
       }
+
       let list = this.data.list
       if (this.data.page > 1) {
         list.push(...res.data)
       } else {
         list = res.data
+      }
+      if (res.data.length < 10) {
+        this.setData({
+          pageEnd: true
+        })
       }
       this.setData({
         list: list
@@ -167,6 +175,25 @@ Page({
   onPageScroll(e) {
     this.setData({
       scrollTop: e.scrollTop
+    })
+  },
+  //生成二维码
+  generateQrcode(e) {
+    let no = e.currentTarget.dataset.no
+    let data = {
+      type: 'order',
+      code: no
+    }
+
+    drawQrcode({
+      width: 200,
+      height: 200,
+      canvasId: 'myQrcode',
+      text: JSON.stringify(data)
+    })
+
+    this.setData({
+      showQrcode: true
     })
   }
 })
