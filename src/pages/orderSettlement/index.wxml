@@ -25,7 +25,7 @@
 								</tui-list-cell>
 						</van-tab>
 						<van-tab title="到店自提" name="10">
-								<tui-list-cell arrow="{{true}}" last="{{true}}" radius="{{true}}" wx:for="{{merAddress}}" wx:for-item="address" wx:key="{{index}}" data-latitude="{{address.latitude}}" data-longitude="{{address.latitude}}" bind:click="onClickMerAddress">
+								<tui-list-cell arrow="{{true}}" last="{{true}}" radius="{{true}}" wx:for="{{merAddress}}" wx:for-item="address" wx:key="{{index}}" data-latitude="{{address.latitude}}" data-longitude="{{address.longitude}}" bind:click="onClickMerAddress">
 										<view class="tui-address">
 												<view wx:if="{{address.id!=0}}">
 														<view class="tui-userinfo">
