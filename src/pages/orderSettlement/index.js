@@ -178,6 +178,9 @@ Page({
       }
     }
   },
+  onShow() {
+
+  },
   onLoad(options) {
     let object = JSON.parse(options.jsonData)
 
@@ -210,7 +213,7 @@ Page({
   },
   chooseAddr() {
     wx.navigateTo({
-      url: "/pages/addressList/index"
+      url: "/pages/addressList/index?id=" + this.data.address.id
     })
   },
   btnPay() {
