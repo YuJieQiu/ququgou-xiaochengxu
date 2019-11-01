@@ -47,7 +47,7 @@ Page({
         })
       }
 
-      if (list.length > 0) {
+      if (list.length > 0 && this.data.selectId <= 0) {
         this.setData({ selectId: list[0].id.toString() })
       }
       this.setData({ list: list })
@@ -60,7 +60,6 @@ Page({
 
     let arrPages = getCurrentPages()
     let address = this.data.list[index]
-
     // arrPages.forEach(v => {
     //   console.log(v)
     // });
@@ -100,15 +99,26 @@ Page({
     })
   },
   onChangeSwipeout(e) {
+    const that = this
     let id = e.currentTarget.dataset.id
     app.httpPost('address/user/delete', { id: id }).then(res => {
       this.getDataList()
+      if (id == that.data.selectId) {
+        let arrPages = getCurrentPages()
+        let address = { id: 0 }
+        arrPages[arrPages.length - 2].setData({
+          address: address
+        })
+      }
     })
   },
   onShow() {
     this.getDataList()
   },
   onLoad(options) {
-
+    let id = options.id
+    if (id != null && id > 0) {
+      this.setData({ selectId: id.toString() })
+    }
   }
 })
