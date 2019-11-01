@@ -91,6 +91,11 @@ Page({
     })
   },
   onSubmitOrderCreate() {
+    //创建订单数据校验
+    if (this.data.deliveryId == 5 && this.data.address.id == 0) {
+      Toast('请选择收货地址~');
+      return
+    }
     this.orderCreare()
   },
   onSubmitWait() {
