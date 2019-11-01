@@ -3,7 +3,7 @@
   <!-- 自提地址 S -->
   <view class="" wx:if="{{order.deliveryType==10}}">
     <van-panel title="自提地址">
-      <van-cell custom-class="address-cell" clickable="{{true}}" is-link title="{{merAddress.city}}{{merAddress.region}}{{merAddress.town}}{{merAddress.address}}" label="{{merAddress.merName}} {{merAddress.phones}}" icon="location-o" center="{{true}}" size="large" is-link="{{true}}" border="{{true}}" data-latitude="{{merAddress.latitude}}" data-longitude="{{merAddress.latitude}}" bind:click="onClickMerAddress"></van-cell>
+      <van-cell custom-class="address-cell" clickable="{{true}}" is-link title="{{merAddress.city}}{{merAddress.region}}{{merAddress.town}}{{merAddress.address}}" label="{{merAddress.merName}} {{merAddress.phones}}" icon="location-o" center="{{true}}" size="large" is-link="{{true}}" border="{{true}}" data-latitude="{{merAddress.latitude}}" data-longitude="{{merAddress.longitude}}" bind:click="onClickMerAddress"></van-cell>
     </van-panel>
   </view>
   <!-- 自提地址 E -->
