@@ -1,0 +1,20 @@
+{
+  "navigationBarTitleText": "收藏夹",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50,
+  "usingComponents": {
+    "tui-swipe-action": "../../components/swipe-action/swipe-action",
+    "tui-button": "../../components/extend/button/button",
+    "tui-numberbox": "../../components/numberbox/numberbox",
+    "tui-icon": "../../components/icon/icon",
+    "tui-divider": "../../components/divider/divider",
+    "tui-loadmore": "../../components/loadmore/loadmore",
+    "van-cell": "/dist/cell/index",
+    "van-cell-group": "/dist/cell-group/index",
+    "van-icon": "/dist/icon/index",
+    "van-checkbox": "/dist/checkbox/index",
+    "van-checkbox-group": "/dist/checkbox-group/index"
+  }
+}

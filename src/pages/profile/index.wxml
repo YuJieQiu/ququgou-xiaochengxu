@@ -32,8 +32,8 @@
             </view>
         </view>
         <view class="tui-header-btm" data-type="5">
-            <view class="tui-btm-item">
-                <view class="tui-btm-num">0</view>
+            <view class="tui-btm-item" bindtap="onClickProductCollection">
+                <view class="tui-btm-num">{{userInfo.productCollectionCount}}</view>
                 <view class="tui-btm-text">收藏夹</view>
             </view>
             <view class="tui-btm-item">

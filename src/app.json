@@ -16,7 +16,8 @@
     "pages/addressSelect/index",
     "pages/categoryList/index",
     "pages/productList/index",
-    "pages/newsSearch/index"
+    "pages/newsSearch/index",
+    "pages/productCollection/index"
   ],
   "permission": {
     "scope.userLocation": {

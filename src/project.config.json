@@ -138,6 +138,12 @@
 					"pathName": "pages/newsSearch/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/productCollection/index",
+					"pathName": "pages/productCollection/index",
+					"scene": null
 				}
 			]
 		}

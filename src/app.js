@@ -125,8 +125,8 @@ App({
       }
     })
   },
-  baseUrl: 'https://ququgo.club/user/api/v1/',
-  //baseUrl: 'http://127.0.0.1:8070/user/api/v1/',
+  //baseUrl: 'https://ququgo.club/user/api/v1/',
+  baseUrl: 'http://127.0.0.1:8070/user/api/v1/',
   httpBase: function (method, url, data, loading) {
     let _this = this
     let requestUrl = this.baseUrl + url

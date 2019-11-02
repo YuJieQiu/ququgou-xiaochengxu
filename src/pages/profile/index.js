@@ -109,6 +109,11 @@ Page({
       this.getProductList()
     }
   },
+  onClickProductCollection(){
+    wx.navigateTo({
+      url: '/pages/productCollection/index'
+    })
+  },
   //获取推荐列表
   getProductList() {
     const that = this
@@ -159,6 +164,7 @@ Page({
   onShow() {
     this.getUserCenterInfo()
   },
+ 
   onLoad() {
     let userInfoStr = wx.getStorageSync('userInfo')
     let userInfo = null
