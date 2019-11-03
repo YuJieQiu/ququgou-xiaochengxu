@@ -91,7 +91,7 @@ App({
     })
   },
   mapKey: 'DSXBZ-6AY3U-QLAVO-4H6LL-ZOIT3-ALFUW',
-  getLocationInfo: function (func) {//获取位置信息   
+  getLocationInfo: function (func) {//获取位置信息 
     let _this = this
     const qqmapsdk = new QQMapWX({ key: _this.mapKey })
     let location = {}
@@ -118,8 +118,10 @@ App({
             wx.setStorageSync('location', location)
           },
           fail: function (res) {
+
           },
           complete: function (res) {
+
           }
         })
       }

@@ -7,9 +7,12 @@
     <view class="tui-mybg-box">
         <image src="/assets/images/mall/my/img_bg_3x.png" class="tui-my-bg" mode="widthFix"></image>
         <view class="tui-header-center">
-            <image src="{{avatar}}" class="tui-avatar" bindtap="href" data-type="3"></image>
+            <image src="{{avatar}}" class="tui-avatar" bindtap="href" data-type="3" wx:if="{{!showGetUserInfoBut}}"></image>
             <view class="tui-info">
-                <view class="tui-nickname">
+                <view class="tui-nickname" wx:if="{{showGetUserInfoBut}}" bindtap="authorize">
+                    <text>授权登录</text>
+                </view>
+                <view class="tui-nickname" wx:else>
                     <text>{{name}}</text>
                     <image src="/assets/images/mall/my/icon_vip_3x.png" class="tui-img-vip"></image>
                 </view>

@@ -3,7 +3,9 @@ const { appValidate } = require('../../utils/util.js')
 
 Page({
   data: {
-    userInfo: {},
+    userInfo: {
+      productCollectionCount: 0
+    },
     avatar: '',
     name: '',
     height: 64, //header高度
@@ -23,6 +25,7 @@ Page({
     goods: [],
     lat: 0,
     lon: 0,
+    showGetUserInfoBut: false
   },
   onLoad: function (options) {
     let obj = wx.getMenuButtonBoundingClientRect();
@@ -36,6 +39,9 @@ Page({
         })
       }
     })
+  },
+  authorize() {
+    wx.navigateTo({ url: '/pages/authorize/index' })
   },
   href(e) {
     let page = Number(e.currentTarget.dataset.type)
@@ -109,7 +115,7 @@ Page({
       this.getProductList()
     }
   },
-  onClickProductCollection(){
+  onClickProductCollection() {
     wx.navigateTo({
       url: '/pages/productCollection/index'
     })
@@ -162,28 +168,33 @@ Page({
     })
   },
   onShow() {
-    this.getUserCenterInfo()
+    let userInfoStr = wx.getStorageSync('userInfo')
+    if (userInfoStr != null && userInfoStr != "") {
+      this.getUserCenterInfo()
+    }
   },
- 
   onLoad() {
     let userInfoStr = wx.getStorageSync('userInfo')
     let userInfo = null
     if (appValidate.isNullOrEmpty(userInfoStr)) {
-      wx.getUserInfo({
-        success: res => {
-          userInfo = res.userInfo
-          wx.setStorageSync('userInfo', JSON.stringify(userInfo))
-        }
+      this.setData({
+        showGetUserInfoBut: true,
       })
+      // wx.getUserInfo({
+      //   success: res => {
+      //     userInfo = res.userInfo
+      //     wx.setStorageSync('userInfo', JSON.stringify(userInfo))
+      //   }
+      // })
     } else {
       userInfo = JSON.parse(userInfoStr)
     }
-
-    this.setData({
-      avatar: userInfo.avatarUrl,
-      name: userInfo.nickName
-    })
-
+    if (userInfo != null) {
+      this.setData({
+        avatar: userInfo.avatarUrl,
+        name: userInfo.nickName
+      })
+    }
     this.getProductList()
   }
 })
