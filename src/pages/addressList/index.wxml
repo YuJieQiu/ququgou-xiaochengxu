@@ -3,9 +3,9 @@
     <van-radio-group value="{{ selectId }}">
       <i-swipeout i-class="i-swipeout-demo-item" actions="{{actions}}" wx:for="{{list}}" wx:key="{{index}}" data-id="{{item.id}}" bind:change="onChangeSwipeout">
         <view slot="content" operate-width="83" i-class="i-swipeout-demo-item-slot">
-          <van-cell custom-class="address-cell" border="{{false}}" data-id="{{item.id}}" bind:click="onRadioClick">
+          <van-cell custom-class="address-cell" border="{{false}}" data-id="{{item.id}}" data-index="{{index}}" bind:click="onRadioClick">
             <view slot="title">
-              <view class="address-cell-radio" data-index="{{index}}" data-id="{{item.id}}" bindtap="onRadioClick">
+              <view class="address-cell-radio" data-index="{{index}}" data-id="{{item.id}}">
                 <van-radio checked-color="#f44" name="{{item.id}}" custom-class="address-cell-radio" data-id="{{item.id}}" />
               </view>
               <view class="address-cell-text">

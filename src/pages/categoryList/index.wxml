@@ -2,7 +2,7 @@
 		<view class="tui-searchbox">
 				<view class="tui-search-input" bindtap="search">
 						<icon type="search" size='13' color='#999'></icon>
-						<text class="tui-search-text">杜索商哝</text>
+						<text class="tui-search-text">请输入搜索关键字</text>
 				</view>
 		</view>
 		<scroll-view scroll-y scroll-with-animation class="tab-view" scroll-top="{{scrollTop}}" style="height:{{menuHeight}}px">

@@ -46,12 +46,13 @@ Page({
     goods: [],
     lat: 0,
     lon: 0,
+    isOnLoadPage: true
   },
   getInfo() {
     var that = this
     app.httpGet('shop/cart/get').then(res => {
+      wx.stopPullDownRefresh()
       if (res.code == 200 && res.data != null && res.data.length > 0) {
-
         res.data.forEach(mer => {
           if (mer.invalidProducts != null && mer.invalidProducts.length > 0) {
             that.setData({
@@ -233,9 +234,20 @@ Page({
   },
   onLoad(options) {
     this.getProductList()
+    this.getInfo()
+    this.setData({
+      isOnLoadPage: false
+    })
+  },
+  //Refresh
+  onPullDownRefresh() {
+    this.getInfo()
   },
   onShow() {
-    this.getInfo()
+    let userInfoStr = wx.getStorageSync('userInfo')
+    if (userInfoStr != null && userInfoStr != "" && !this.data.isOnLoadPage) {
+      this.getInfo()
+    }
   },
   changeNum: function (e) {
     console.log(e)

@@ -39,8 +39,8 @@
 										</tui-tag>
 								</view>
 								<view class="tui-collection tui-size" bindtap="collecting">
-										<tui-icon name="{{collected?'like-fill':'like'}}" color="{{collected?'#ff201f':'#333'}}" size="20" tui-icon-class="tui-icon-collection"></tui-icon>
-										<view class="tui-scale {{collected?'tui-red':''}}">收藏</view>
+										<tui-icon name="{{product.collected?'like-fill':'like'}}" color="{{product.collected?'#ff201f':'#333'}}" size="20" tui-icon-class="tui-icon-collection"></tui-icon>
+										<view class="tui-scale {{product.collected?'tui-red':''}}">收藏</view>
 								</view>
 						</view>
 						<view class="tui-original-price tui-gray" wx:if="{{product.originalPrice>0}}">

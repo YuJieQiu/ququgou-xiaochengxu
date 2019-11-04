@@ -122,9 +122,27 @@ Page({
     })
   },
   collecting: function () {
-    this.setData({
-      collected: !this.data.collected
+    var that = this
+    let data={
+      productCode:that.data.guid
+    }
+    if(!this.data.product.collected){
+        app.httpPost('shop/collection/add',data).then(res => {
+          if(res.code==200){
+            this.setData({
+              'product.collected': true
+            })
+          }
+      })
+    }else{
+      app.httpPost('shop/collection/remove',data).then(res => {
+        if(res.code==200){
+          this.setData({
+            'product.collected': false
+          })
+        }
     })
+    }
   },
   common: function (e) {
     let item = e.currentTarget.dataset.item

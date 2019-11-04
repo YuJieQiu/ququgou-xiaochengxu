@@ -1,0 +1,26 @@
+<!-- 引入.wxs文件 src为相对路径，module指定当前模块的名称 -->
+<wxs module="wxs" src="../common/index.wxs" />
+<view class="container"> 
+		<view class="shop-cart-item" wx:for="{{list}}" wx:key="{{index}}" wx:for-item="product" >
+						<view class="tui-cart-cell tui-mtop"> 
+								<tui-swipe-action actions="{{actions}}" data-guid="{{product.guid}}"  bind:change="handleCancel" >
+										<view class="tui-goods-item" slot="content" data-guid="{{product.guid}}" catchtap="showDetail"> 
+												<image src="{{product.image}}" class="tui-goods-img" />
+												<view class="tui-goods-info">
+														<view class="tui-goods-title">{{product.name}}</view>
+														<view class="tui-goods-model">
+																<view class="tui-model-text">
+																 {{product.description}}
+																</view> 
+														</view>
+														<view class="tui-price-box">
+																<view class="tui-goods-price">￥{{wxs.priceStr(product.currentPrice)}}</view>
+														</view>
+												</view>
+										</view>
+								</tui-swipe-action> 
+						</view> 
+		</view>  
+		<!-- 加载loadding -->
+		<tui-loadmore visible="{{loadding}}" index="{{3}}" type="red"></tui-loadmore>
+</view>
