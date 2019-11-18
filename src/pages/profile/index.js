@@ -25,7 +25,8 @@ Page({
     goods: [],
     lat: 0,
     lon: 0,
-    showGetUserInfoBut: false
+    showGetUserInfoBut: false,
+    refresh: false
   },
   onLoad: function (options) {
     let obj = wx.getMenuButtonBoundingClientRect();
@@ -87,11 +88,6 @@ Page({
       opcity: opcity,
       iconOpcity: 0.5 * (1 - opcity < 0 ? 0 : 1 - opcity)
     })
-  },
-  onPullDownRefresh() {
-    setTimeout(() => {
-      wx.stopPullDownRefresh()
-    }, 200)
   },
   getUserCenterInfo() {
     const that = this
@@ -167,25 +163,44 @@ Page({
       }
     })
   },
+  onPullDownRefresh() {
+    const that = this
+    console.log("onPullDownRefresh")
+    setTimeout(() => {
+      that.setData({
+        showGetUserInfoBut: false,
+      })
+      that.getUserInfo()
+      that.getUserCenterInfo()
+      that.getProductList()
+      wx.stopPullDownRefresh()
+    }, 200)
+
+  },
   onShow() {
+    if (this.data.refresh) {
+      wx.startPullDownRefresh()
+      this.setData({
+        refresh: false,
+      })
+    }
     let userInfoStr = wx.getStorageSync('userInfo')
     if (userInfoStr != null && userInfoStr != "") {
+      if (this.data.showGetUserInfoBut) {
+        this.setData({
+          showGetUserInfoBut: false,
+        })
+      }
       this.getUserCenterInfo()
     }
   },
-  onLoad() {
+  getUserInfo() {
     let userInfoStr = wx.getStorageSync('userInfo')
     let userInfo = null
     if (appValidate.isNullOrEmpty(userInfoStr)) {
       this.setData({
         showGetUserInfoBut: true,
       })
-      // wx.getUserInfo({
-      //   success: res => {
-      //     userInfo = res.userInfo
-      //     wx.setStorageSync('userInfo', JSON.stringify(userInfo))
-      //   }
-      // })
     } else {
       userInfo = JSON.parse(userInfoStr)
     }
@@ -195,6 +210,9 @@ Page({
         name: userInfo.nickName
       })
     }
+  },
+  onLoad() {
+    this.getUserInfo()
     this.getProductList()
   }
 })

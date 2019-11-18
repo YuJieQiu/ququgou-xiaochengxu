@@ -103,7 +103,7 @@ page {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   margin: 0;
   margin-right: 22rpx;
   flex-shrink: 0;
@@ -450,4 +450,10 @@ page {
   padding-top: 10rpx;
   font-size: 24rpx;
   color: #656565;
+}
+
+/* 新加 */
+.tui-category-view {
+  display: inline-block;
+  vertical-align: middle;
 }

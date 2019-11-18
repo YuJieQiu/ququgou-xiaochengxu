@@ -1,6 +1,9 @@
 // 支持es4语法
 var filter = {
   jsonpParseData: function (data, field) {
+    if (data == null || data == "") {
+      return null
+    }
     var dd = JSON.parse(data)
     return dd[field]
   },

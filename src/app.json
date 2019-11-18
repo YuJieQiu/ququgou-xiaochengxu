@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/index",
     "pages/merchant/index",
+    "pages/merchantList/index",
     "pages/orderDetail/index",
     "pages/profile/index",
     "pages/orderList/index",
@@ -42,6 +43,12 @@
         "iconPath": "assets/images/tab/iconfont-home.png",
         "selectedIconPath": "assets/images/tab/iconfont-homeCur.png",
         "text": "首页"
+      },
+      {
+        "pagePath": "pages/merchantList/index",
+        "iconPath": "assets/images/tab/merchant3.png",
+        "selectedIconPath": "assets/images/tab/merchant3Cur.png",
+        "text": "商户"
       },
       {
         "pagePath": "pages/categoryList/index",

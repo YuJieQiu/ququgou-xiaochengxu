@@ -6,25 +6,8 @@ const qqmapsdk = new QQMapWX({ key: app.mapKey })
 Page({
   data: {
     current: 0,
-    headerBackgroundColor: '',
-    headerFontColor: '',
-    tabbar: [{
-      icon: "home",
-      text: "首页",
-      size: 21
-    }, {
-      icon: "category",
-      text: "分类",
-      size: 24
-    }, {
-      icon: "cart",
-      text: "购物车",
-      size: 22
-    }, {
-      icon: "people",
-      text: "我的",
-      size: 24
-    }],
+    headerBackgroundColor: '#F78421',
+    headerFontColor: 'white',
     hotSearch: [],
     banner: [],
     category: [],
@@ -35,77 +18,25 @@ Page({
     pullUpOn: true,
     lat: 0,
     lon: 0,
+    swiperAutoplay: true,
+    refresh: false,
+    location: null
   },
-  onLoad: function (options) {
-
-  },
-  tabbarSwitch: function (e) {
-    let index = e.currentTarget.dataset.index;
-    this.setData({
-      current: index
-    })
-    if (index != 0) {
-      if (index == 1) {
-        this.classify();
-      } else if (index == 2) {
-        wx.navigateTo({
-          url: '../mall-extend/shopcart/shopcart'
-        })
-      } else {
-        wx.navigateTo({
-          url: '../mall-extend/my/my'
-        })
-      }
-    }
-  },
-  onPullDownRefresh: function () {
-    let loadData = JSON.parse(JSON.stringify(this.data.productList));
-    loadData = loadData.splice(0, 10)
-    this.setData({
-      productList: loadData,
-      pageIndex: 1,
-      pullUpOn: true,
-      loadding: false
-    })
-    this.getHomeInitInfo()
-    wx.stopPullDownRefresh()
-  },
-  onReachBottom: function () {
-    if (!this.data.pullUpOn) return;
-    this.setData({
-      loadding: true
-    }, () => {
-      if (this.data.pageIndex == 4) {
-        this.setData({
-          loadding: false,
-          pullUpOn: false
-        })
-      } else {
-        let loadData = JSON.parse(JSON.stringify(this.data.productList));
-        loadData = loadData.splice(0, 10)
-        if (this.data.pageIndex == 1) {
-          loadData = loadData.reverse();
-        }
-        this.setData({
-          productList: this.data.productList.concat(loadData),
-          pageIndex: this.data.pageIndex + 1,
-          loadding: false
-        })
-      }
-    })
-  },
+  //产品详情
   showDetail(e) {
     let guid = e.currentTarget.dataset.guid
     wx.navigateTo({
       url: '/pages/productDetail/index?guid=' + guid
     })
   },
+  //分类 
   classify: function () {
-    wx.navigateTo({
-      url: '/pages/categoryList/index'
-    })
-
+    wx.openSetting()
+    // wx.navigateTo({
+    //   url: '/pages/categoryList/index'
+    // })
   },
+  //搜索
   search: function (e) {
     let key = e.currentTarget.dataset.key || ""
     if (key != null && key != "") {
@@ -118,6 +49,7 @@ Page({
       })
     }
   },
+  //banner change 事件
   onChangeBanner(e) {
     let index = e.detail.current
     let banner = this.data.banners[index]
@@ -126,11 +58,17 @@ Page({
       headerBackgroundColor: banner.backgroundColor,
       headerFontColor: banner.fontColor
     })
-    // wx.setNavigationBarColor({
-    //   frontColor: banner.fontColor ,
-    //   backgroundColor: banner.backgroundColor,
-    // })
+
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: banner.backgroundColor,
+      animation: {
+        duration: 200,
+        timingFunc: 'easeIn'
+      }
+    })
   },
+  //获取banner 列表
   getBannerList() {
     app.httpGet('home/banner/getList').then(res => {
       if (res && res.data) {
@@ -140,13 +78,10 @@ Page({
           headerBackgroundColor: banner.backgroundColor,
           headerFontColor: banner.fontColor
         })
-        // wx.setNavigationBarColor({
-        //   frontColor: banner.fontColor,
-        //   backgroundColor: banner.backgroundColor,
-        // })
       }
     })
   },
+  //获取首页配置列表
   getHomeConfigList() {
     const that = this
     app.httpGet('home/config/list').then(res => {
@@ -169,33 +104,31 @@ Page({
     })
   },
   //获取首页tab配置 产品列表
-  getHometbaProductList() {
-    const that = this
-    if (that.data.getHometbaProductPage.pageEnd) {
-      return
-    }
-
-    app.httpGet('home/config/product/list', that.data.getHometbaProductPage).then(res => {
-
-      if (res.data == null || res.data.length <= 0) {
-        that.setData({ 'getHometbaProductPage.pageEnd': true })
-        that.getProductList()
-        return
-      }
-      let list = this.data.tabProducts
-      if (this.data.getHometbaProductPage.page > 1) {
-        list.push(...res.data)
-      } else {
-        list = res.data
-      }
-      that.setData({
-        tabProducts: list
-      })
-      if (res.data.length < 10) {
-        that.setData({ 'getHometbaProductPage.pageEnd': true })
-      }
-    })
-  },
+  // getHometbaProductList() {
+  //   const that = this
+  //   if (that.data.getHometbaProductPage.pageEnd) {
+  //     return
+  //   }
+  //   app.httpGet('home/config/product/list', that.data.getHometbaProductPage).then(res => {
+  //     if (res.data == null || res.data.length <= 0) {
+  //       that.setData({ 'getHometbaProductPage.pageEnd': true })
+  //       that.getProductList()
+  //       return
+  //     }
+  //     let list = this.data.tabProducts
+  //     if (this.data.getHometbaProductPage.page > 1) {
+  //       list.push(...res.data)
+  //     } else {
+  //       list = res.data
+  //     }
+  //     that.setData({
+  //       tabProducts: list
+  //     })
+  //     if (res.data.length < 10) {
+  //       that.setData({ 'getHometbaProductPage.pageEnd': true })
+  //     }
+  //   })
+  // },
   //获取推荐列表
   getProductList() {
     const that = this
@@ -205,16 +138,19 @@ Page({
 
     if (that.data.lat == 0 || that.data.lon == 0) {
       let location = wx.getStorageSync('location')
-      if (location == null) {
+      if (!location) {
         app.getLocationInfo()
       }
-      if (location == null) {
+      if (!location) {
         location = {
           lat: 0,
           lon: 0,
         }
       }
-      that.setData({ 'lat': parseFloat(location.lat), 'lon': parseFloat(location.lon) })
+      that.setData({
+        'lat': parseFloat(location.lat),
+        'lon': parseFloat(location.lon),
+      })
     }
 
     let data = {
@@ -244,15 +180,15 @@ Page({
       }
     })
   },
-  getHomeData() {
-    app.httpGet('home/productConfig/getConfigProductList').then(res => {
-      if (res && res.data) {
-        this.setData({
-          tabs: res.data
-        })
-      }
-    })
-  },
+  // getHomeData() {
+  //   app.httpGet('home/productConfig/getConfigProductList').then(res => {
+  //     if (res && res.data) {
+  //       this.setData({
+  //         tabs: res.data
+  //       })
+  //     }
+  //   })
+  // },
   getHomeInitInfo() {
     this.setData({
       'getHometbaProductPage.page': 1,
@@ -262,15 +198,38 @@ Page({
       'getProductListPage.limit': 10,
       'getProductListPage.pageEnd': false
     })
-
-    this.getBannerList()
     this.getHomeConfigList()
   },
+  onReachBottom: function () {
+    // if (!this.data.pullUpOn) return;
+    // this.setData({
+    //   loadding: true
+    // }, () => {
+    //   if (this.data.pageIndex == 4) {
+    //     this.setData({
+    //       loadding: false,
+    //       pullUpOn: false
+    //     })
+    //   } else {
+    //     let loadData = JSON.parse(JSON.stringify(this.data.productList));
+    //     loadData = loadData.splice(0, 10)
+    //     if (this.data.pageIndex == 1) {
+    //       loadData = loadData.reverse();
+    //     }
+    //     this.setData({
+    //       productList: this.data.productList.concat(loadData),
+    //       pageIndex: this.data.pageIndex + 1,
+    //       loadding: false
+    //     })
+    //   }
+    // })
+  },
+  //下拉加载
   onReachBottom() {
-    if (!this.data.getHometbaProductPage.pageEnd) {
-      this.setData({ 'getHometbaProductPage.page': this.data.getHometbaProductPage.page + 1 })
-      this.getHometbaProductList()
-    }
+    // if (!this.data.getHometbaProductPage.pageEnd) {
+    //   this.setData({ 'getHometbaProductPage.page': this.data.getHometbaProductPage.page + 1 })
+    //   this.getHometbaProductList()
+    // }
 
     if (this.data.getHometbaProductPage.pageEnd) {
       if (!this.data.getProductListPage.pageEnd) {
@@ -279,9 +238,43 @@ Page({
       }
     }
   },
+  //上拉刷新
+  onPullDownRefresh: function () {
+    let loadData = JSON.parse(JSON.stringify(this.data.productList));
+    loadData = loadData.splice(0, 10)
+    this.setData({
+      productList: loadData,
+      pageIndex: 1,
+      pullUpOn: true,
+      loadding: false
+    })
+    if (this.data.banner.length <= 0) {
+      this.getBannerList()
+    }
+    this.getHomeInitInfo()
+    this.onLocationInit()
+    wx.stopPullDownRefresh()
+  },
+  onLocationInit() {
+    let location = this.data.location
+    if (!location) {
+      location = wx.getStorageSync('location')
+      if (!location) {
+        app.getLocationInfo()
+        setTimeout(function () {
+          location = wx.getStorageSync('location')
+        }, 1000);
+      }
+      this.setData({
+        location: location
+      })
+    }
+  },
   onShow() {
+    this.onLocationInit()
     if (this.data.refresh) {
       this.getHomeInitInfo()
+      this.getBannerList()
       this.setData({
         refresh: false
       })
@@ -304,14 +297,37 @@ Page({
     }
   },
   onLoad(options) {
-    // let location = wx.getStorageSync('location')
-    // console.log(location)
-    // if (location != null && location != "") {
-    //   this.setData({
-    //     location: location
-    //   })
-    // }
-
+    wx.getSystemInfo({
+      success: (res) => {
+        this.setData({
+          menuHeight: res.windowHeight - res.windowWidth / 750 * 92,
+          windowHeight: res.windowHeight,
+          pixelRatio: res.pixelRatio
+        });
+      }
+    });
+    this.getBannerList()
     this.getHomeInitInfo()
+    this.onLocationInit()
+  },
+  //  
+  onHide() {
+    this.setData({
+      swiperAutoplay: false
+    });
+  },
+  /**
+  * 页面滚动距离
+  */
+  onPageScroll: function (e) {
+    if (e.scrollTop > 0) {
+      this.setData({
+        swiperAutoplay: false
+      });
+    } else if (e.scrollTop == 0) {
+      this.setData({
+        swiperAutoplay: true
+      });
+    }
   }
 })

@@ -5,7 +5,7 @@ App({
 
   },
   onLaunch: function () {
-    this.getLocationInfo()
+    //this.getLocationInfo()
     //判断机型(适配iphoneX)
     wx.getSystemInfo({
       success: res => {
@@ -114,8 +114,10 @@ App({
             location.province = res.result.ad_info.province
             location.info = res.result
             _this.globalData.location = location
-
             wx.setStorageSync('location', location)
+
+            wx.startPullDownRefresh()
+            wx.stopPullDownRefresh()
           },
           fail: function (res) {
 
@@ -127,8 +129,8 @@ App({
       }
     })
   },
-  baseUrl: 'https://main.ququgo.club/user/main/api/v1/',
-  //baseUrl: 'http://127.0.0.1:7001/user/main/api/v1/',
+  //baseUrl: 'https://main.ququgo.club/user/main/api/v1/',
+  baseUrl: 'http://127.0.0.1:7001/user/main/api/v1/',
   httpBase: function (method, url, data, loading) {
     let _this = this
     let requestUrl = this.baseUrl + url
@@ -211,10 +213,3 @@ App({
     }//位置信息
   }
 })
-
-// {
-//   "pagePath": "pages/merchant/index",
-//   "iconPath": "assets/images/tab/merchant.png",
-//   "selectedIconPath": "assets/images/tab/merchantCur.png",
-//   "text": "商户"
-// },

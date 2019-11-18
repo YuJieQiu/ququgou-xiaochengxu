@@ -233,8 +233,8 @@ Page({
     this.computeOrderProduct()
   },
   onLoad(options) {
-    this.getProductList()
     this.getInfo()
+    this.getProductList()
     this.setData({
       isOnLoadPage: false
     })

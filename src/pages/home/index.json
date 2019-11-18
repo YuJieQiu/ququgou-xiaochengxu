@@ -3,13 +3,14 @@
   "navigationBarTextStyle": "white",
   "backgroundColorTop": "#F7F7F7",
   "backgroundColorBottom": "#F7F7F7",
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "区区购",
   "enablePullDownRefresh": true,
   "onReachBottomDistance": 50,
   "usingComponents": {
     "tui-icon": "../../../components/icon/icon",
     "tui-tag": "../../../components/tag/tag",
     "tui-loadmore": "../../../components/loadmore/loadmore",
-    "tui-nomore": "../../../components/nomore/nomore"
+    "tui-nomore": "../../../components/nomore/nomore",
+    "van-icon": "../../../dist/icon/index"
   }
 }

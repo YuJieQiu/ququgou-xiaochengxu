@@ -1,20 +1,17 @@
 <wxs module="wxs" src="../common/index.wxs" />
 <view class="container">
-  <!-- tabbar 底部tabbar 菜单，暂时隐藏 -->
-  <!-- <view class="tui-tabbar">
-    <block wx:for="{{tabbar}}" wx:key="{{index}}">
-      <view class="tui-tabbar-item {{current==index?'tui-item-active':''}}" data-index="{{index}}" bindtap="tabbarSwitch">
-        <tui-icon name="{{current==index?item.icon+'-fill':item.icon}}" color="{{current==index?'#E41F19':'#666'}}" size="{{item.size}}" class="{{index==0?'tui-ptop-4':''}}"></tui-icon>
-        <view class="tui-scale">{{item.text}}</view>
-      </view>
-    </block>
-  </view> -->
-  <!-- tabbar -->
   <!-- header -->
   <view class="tui-header" style="{{'background:'+headerBackgroundColor}}">
-    <view class="tui-category" hover-class="opcity" hover-stay-time="150" bindtap="classify">
-      <tui-icon name="manage-fill" color="{{headerFontColor}}" size="22" tui-icon-class="tui-icon-category"></tui-icon>
-      <view class="tui-category-scale" style="color:{{headerFontColor}}">分类</view>
+    <view class="tui-category" hover-class="opcity" hover-stay-time="150">
+      <view class="" size="22">
+        <van-icon name="location-o" />
+      </view>
+      <view wx:if="{{location==null || location==''}}" bindtap="classify">获取当前位置</view>
+      <view class="" style="color:{{headerFontColor}}" wx:else>
+        {{location.info.address_component.street_number}}
+      </view>
+      <!-- <tui-icon name="manage-fill" color="{{headerFontC  olor}}" size="22" tui-icon-class="tui-icon-category"></tui-icon>
+      <view class="tui-category-scale" style="color:{{headerFontColor}}">浦东新区12356</view> -->
     </view>
     <view class="tui-rolling-search" style="{{headerBackgroundColor=='#fff'?'border: 1px solid #d9d9d9':''}}">
       <icon type="search" size='13' color='#999'></icon>
@@ -38,7 +35,7 @@
       <view class="tui-primary-bg tui-route-right" style="{{'background:'+headerBackgroundColor}}"></view>
       <!-- banner -->
       <view class="tui-banner-box">
-        <swiper indicator-dots="true" autoplay="true" interval="5000" duration="150" class="tui-banner-swiper" circular="{{true}}" bindchange="onChangeBanner">
+        <swiper indicator-dots="true" autoplay="{{swiperAutoplay}}" interval="5000" duration="150" class="tui-banner-swiper" circular="{{true}}" bindchange="onChangeBanner">
           <swiper-item wx:for="{{banners}}" wx:key="{{index}}" catchtap="detail">
             <image src="{{item.images.url}}" class="tui-slide-image" mode="scaleToFill" />
           </swiper-item>

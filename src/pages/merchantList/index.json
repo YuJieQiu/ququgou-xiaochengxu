@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "tui-icon": "../../components/icon/icon",
+    "tui-top-dropdown": "../../components/top-dropdown/top-dropdown",
+    "tui-drawer": "../../components/drawer/drawer",
+    "tui-loadmore": "../../components/loadmore/loadmore",
+    "tui-nomore": "../../components/nomore/nomore"
+  }
+}

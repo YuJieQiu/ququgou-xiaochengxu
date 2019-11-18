@@ -1,145 +1,151 @@
 {
-  "description": "项目配置文件。",
-  "setting": {
-    "urlCheck": false,
-    "es6": true,
-    "postcss": true,
-    "minified": true,
-    "newFeature": true,
-    "coverView": true,
-    "nodeModules": true,
-    "autoAudits": false,
-    "uglifyFileName": true,
-    "checkInvalidKey": true,
-    "checkSiteMap": true,
-    "uploadWithSourceMap": true,
-    "babelSetting": {
-      "ignore": [],
-      "disablePlugins": [],
-      "outputPath": ""
-    }
-  },
-  "compileType": "miniprogram",
-  "libVersion": "2.8.3",
-  "appid": "wxe0e073c7992c2856",
-  "projectname": "ququgou",
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
-  "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
-    "plugin": {
-      "current": -1,
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "current": -1,
-      "list": []
-    },
-    "miniprogram": {
-      "current": 1,
-      "list": [
-        {
-          "id": 0,
-          "name": "merchant",
-          "pathName": "pages/merchant/index",
-          "query": "merCode=6de79d7d7f764e3981b35d8b9a36fcc3",
-          "scene": null
-        },
-        {
-          "id": 1,
-          "name": "p detail",
-          "pathName": "pages/productDetail/index",
-          "query": "guid=fd03779348d3426f86f11e801a0859f1",
-          "scene": null
-        },
-        {
-          "id": 2,
-          "name": "个人中心",
-          "pathName": "pages/profile/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "orderList",
-          "pathName": "pages/orderList/index",
-          "query": "guid=0a7a296cb6ff4f6795cb7fb4bde83344",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "shopCart",
-          "pathName": "pages/shopCart/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/addressList/index",
-          "pathName": "pages/addressList/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/categoryList/index",
-          "pathName": "pages/categoryList/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": 7,
-          "name": "pages/productList/index",
-          "pathName": "pages/productList/index",
-          "query": "searchKey =水果&&categoryId=0",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/orderDetail/index",
-          "pathName": "pages/orderDetail/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/orderSettlement/index",
-          "pathName": "pages/orderSettlement/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/orderSettlement/index",
-          "pathName": "pages/orderSettlement/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "es/orderSettlement/success/success",
-          "pathName": "pages/orderSettlement/success/success",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/newsSearch/index",
-          "pathName": "pages/newsSearch/index",
-          "query": "",
-          "scene": null
-        }
-      ]
-    }
-  }
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"nodeModules": true,
+		"autoAudits": false,
+		"uglifyFileName": true,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.8.3",
+	"appid": "wxe0e073c7992c2856",
+	"projectname": "ququgou",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 1,
+			"list": [
+				{
+					"id": 0,
+					"name": "merchant",
+					"pathName": "pages/merchant/index",
+					"query": "merCode=6de79d7d7f764e3981b35d8b9a36fcc3",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "p detail",
+					"pathName": "pages/productDetail/index",
+					"query": "guid=fd03779348d3426f86f11e801a0859f1",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "个人中心",
+					"pathName": "pages/profile/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "orderList",
+					"pathName": "pages/orderList/index",
+					"query": "guid=0a7a296cb6ff4f6795cb7fb4bde83344",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "shopCart",
+					"pathName": "pages/shopCart/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/addressList/index",
+					"pathName": "pages/addressList/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/categoryList/index",
+					"pathName": "pages/categoryList/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "pages/productList/index",
+					"pathName": "pages/productList/index",
+					"query": "searchKey =水果&&categoryId=0",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/orderDetail/index",
+					"pathName": "pages/orderDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/orderSettlement/index",
+					"pathName": "pages/orderSettlement/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/orderSettlement/index",
+					"pathName": "pages/orderSettlement/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "es/orderSettlement/success/success",
+					"pathName": "pages/orderSettlement/success/success",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/newsSearch/index",
+					"pathName": "pages/newsSearch/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/merchantList/index",
+					"pathName": "pages/merchantList/index",
+					"scene": null
+				}
+			]
+		}
+	}
 }

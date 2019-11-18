@@ -248,19 +248,17 @@
 		<!-- 左抽屉弹层 筛选 -->
 		<!-- 模板 -->
 		<template name="productItem">
-				<!-- 商品列表 -->
+				<!-- 商家列表 -->
 				<view class="tui-pro-item {{isList?'tui-flex-list':''}}" hover-class="hover" hover-start-time="150" data-guid="{{item.guid}}" bindtap="showDetail">
 						<image src="{{item.image}}" class="tui-pro-img {{isList?'tui-proimg-list':''}}" mode="widthFix" />
 						<view class="tui-pro-content">
 								<view class="tui-pro-tit">{{item.name}}</view>
 								<view>
 										<view class="tui-pro-price">
-												<text class="tui-sale-price">￥{{wxs.priceStr(item.currentPrice)}}</text>
-												<text class="tui-factory-price">
-														<block wx:if="{{item.originalPrice>0}}">￥{{wxs.priceStr(item.originalPrice)}}</block>
-												</text>
+												<text class="tui-sale-price"></text>
+												<text class="tui-factory-price"></text>
 										</view>
-										<view class="tui-pro-pay">{{item.sales}}人购买</view>
+										<view class="tui-pro-pay">距离 10MKM</view>
 								</view>
 						</view>
 				</view>
