@@ -15,11 +15,10 @@ Page({
       distance: 10,//距离范围 按 KM
       sortType: 1,//排序类型 1、默认 3、销量 正序 5、销量 倒叙  7、价格 正序 9、价格 倒叙 11、距离 最近
       categoryId: 0,//商品分类Id
+      computeDistance: true
     },
     pageEnd: false,
     list: [],
-    goods: [],
-    all: true,
     status: 0,
     active: 0,
     searchKey: "", //搜索关键词
@@ -28,42 +27,16 @@ Page({
     inputTop: 0, //搜索框距离顶部距离
     arrowTop: 0, //箭头距离顶部距离
     dropScreenH: 0, //下拉筛选框距顶部距离
-    attrData: [],
-    attrIndex: -1,
     dropScreenShow: false,
     scrollTop: 0,
     tabIndex: 0, //顶部筛选索引
-    isList: false, //是否以列表展示  | 列表或大图
+    isList: true, //是否以列表展示  | 列表或大图
     drawer: false,
-    drawerH: 0, //抽屉内部scrollview高度
-    selectedName: "综合",
+    drawerH: 0, //抽屉内部scrollview高度 
     selectH: 0,
-    dropdownList: [//下拉综合搜索
-      {
-        name: "综合",
-        selected: true,
-        sortType: 1,
-      }, {
-        name: "价格升序",
-        selected: false,
-        sortType: 9,
-      }, {
-        name: "价格降序",
-        selected: false,
-        sortType: 7,
-      }
-    ],
-    attrArr: [],
-    productList: [],
     pageIndex: 1,
     loadding: false,
     pullUpOn: true
-  },
-
-  onPullDownRefresh: function () {
-    this.resetSearchQueryParam()
-    this.searchProductList()
-    wx.stopPullDownRefresh()
   },
   onReachBottom: function () {
     if (!this.data.pageEnd) {
@@ -73,134 +46,6 @@ Page({
       })
       this.searchProductList()
     }
-  },
-  //第二级筛选 更改事件
-  btnDropChange: function (e) {
-    let attrArr = this.data.attrArr
-    let index = e.currentTarget.dataset.index;
-    let arrItems = e.currentTarget.dataset.items;
-    let attrSelectItemIndex = attrArr[index].attrSelectItemIndex;
-    let isActiveObj = `attrArr[${index}].isActive`;
-    if (attrSelectItemIndex == -1) {
-      this.setData({
-        [isActiveObj]: !attrArr[index].isActive
-      })
-    }
-    if (arrItems != null && arrItems.length > 0) {
-      this.setData({
-        dropScreenShow: !this.data.dropScreenShow
-      })
-    }
-    this.setData({
-      scrollTop: 0
-    })
-  },
-
-  //arr item 选择
-  btnSelected: function (e) {
-    let index = e.currentTarget.dataset.index;
-    let arrIndex = e.currentTarget.dataset.arrindex;
-    let selected = `attrData[${index}].selected`;
-    let attrArr = this.data.attrArr
-
-    for (let i = 0; i < attrArr[arrIndex].list.length; i++) {
-      if (i != index) {
-        attrArr[arrIndex].list[i].selected = false
-      } else {
-        attrArr[arrIndex].list[i].selected = !attrArr[arrIndex].list[i].selected
-      }
-    }
-    this.setData({
-      attrArr: attrArr
-    })
-  },
-  // 下拉列表点击确定
-  onClickDropBtnSure: function (e) {
-    let index = e.currentTarget.dataset.index;
-    let attrArr = this.data.attrArr
-    let categoryId = 0
-
-    let attrSelectItemIndex = -1
-
-    for (let item of attrArr[index].list) {
-      if (item.selected) {
-        categoryId = item.id
-        attrSelectItemIndex = attrArr[index].list.indexOf(item)
-      }
-    }
-    attrArr[index].attrSelectItemIndex = attrSelectItemIndex
-
-    if (attrSelectItemIndex == -1) {
-      attrArr[index].isActive = false
-    }
-    this.btnCloseDrop();
-    this.setData({
-      attrArr: attrArr,
-      'queryParam.categoryId': parseInt(categoryId)
-    })
-
-    this.resetSearchQueryParam()
-    this.searchProductList()
-  },
-  //下拉列表点击重置
-  onClickDropBtnReset(e) {
-    let attrArr = this.data.attrArr
-    let attrIndex = e.currentTarget.dataset.index;
-
-    for (let i = 0; i < attrArr[attrIndex].list.length; i++) {
-      attrArr[attrIndex].list[i].selected = false
-    }
-    this.setData({
-      attrArr: attrArr
-    })
-  },
-  btnCloseDrop() {
-    this.setData({
-      scrollTop: 0,
-      dropScreenShow: false
-    })
-  },
-  closeDropdownList: function () {
-    if (this.data.selectH > 0) {
-      this.setData({
-        selectH: 0
-      })
-    }
-  },
-  showDropdownList: function () {
-    this.setData({
-      selectH: 246,
-      tabIndex: 0
-    })
-  },
-  hideDropdownList: function () {
-    this.setData({
-      selectH: 0
-    })
-  },
-  dropdownItem: function (e) {
-    let index = e.currentTarget.dataset.index;
-    let sortType = e.currentTarget.dataset.sorttype;
-    let arr = this.data.dropdownList;
-    for (let i = 0; i < arr.length; i++) {
-      if (i === index) {
-        arr[i].selected = true;
-      } else {
-        arr[i].selected = false;
-      }
-    }
-
-    this.setData({
-      'queryParam.sortType': sortType
-    })
-    this.setData({
-      dropdownList: arr,
-      selectedName: index == 0 ? '综合' : '价格',
-      selectH: 0
-    })
-
-    this.resetSearchQueryParam()
-    this.searchProductList()
   },
   screen: function (e) {
     let index = e.currentTarget.dataset.index;
@@ -252,23 +97,14 @@ Page({
       return
     }
   },
-  closeDrawer: function () {
-    this.setData({
-      drawer: false
-    })
-  },
   back: function () {
-    if (this.data.drawer) {
-      this.closeDrawer()
+    let arrPages = getCurrentPages()
+    if (arrPages.length == 1) {
+      wx.switchTab({
+        url: "/pages/home/index"
+      })
     } else {
-      let arrPages = getCurrentPages()
-      if (arrPages.length == 1) {
-        wx.switchTab({
-          url: "/pages/home/index"
-        })
-      } else {
-        wx.navigateBack()
-      }
+      wx.navigateBack()
     }
   },
   search: function () {
@@ -277,9 +113,9 @@ Page({
     })
   },
   showDetail(e) {
-    let guid = e.currentTarget.dataset.guid
+    let merId = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/productDetail/index?guid=' + guid
+      url: '/pages/merchant/index?merId=' + merId
     })
   },
   resetSearchQueryParam() {
@@ -303,7 +139,7 @@ Page({
         that.setData({ 'pageEnd': true })
         return
       }
-      let list = this.data.goods
+      let list = this.data.list
       if (res.data.length < that.data.queryParam.limit) {
         that.setData({ 'pageEnd': true })
       }
@@ -314,20 +150,10 @@ Page({
         list = res.data
       }
       that.setData({
-        goods: list
+        list: list
       })
       if (res.data.length < 10) {
         that.setData({ 'pageEnd': true })
-      }
-    })
-  },
-  getConfigDataList: function () {
-    const that = this
-    app.httpGet('product/list/config', that.data.queryParam).then(res => {
-      if (res && res.data) {
-        that.setData({
-          attrArr: res.data.attrArr
-        })
       }
     })
   },
@@ -345,14 +171,12 @@ Page({
         success: (res) => {
           this.setData({
             //略小，避免误差带来的影响
-            dropScreenH: this.data.height * 750 / res.windowWidth + 186,
+            dropScreenH: this.data.height * 750 / res.windowWidth + 90,
             drawerH: res.windowHeight - res.windowWidth / 750 * 100 - this.data.height
           })
         }
       })
     });
-
     this.searchProductList()
-    this.getConfigDataList()
   },
 })
