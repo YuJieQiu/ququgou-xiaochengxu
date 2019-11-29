@@ -114,6 +114,18 @@
 								</view>
 						</tui-list-cell>
 				</view>
+				<view class="tui-top tui-goods-info">
+						<tui-list-cell hover="{{false}}" lineLeft="{{false}}">
+								<view class="tui-goods-title">支付方式</view>
+						</tui-list-cell>
+						<van-radio-group value="{{ selectPaymentTypeId }}" bind:change="onPayTypeChange">
+								<van-cell-group>
+										<van-cell wx:for="{{paymentTypeList}}" wx:key="{{index}}" title="{{item.name}}" clickable data-name="{{item.id}}" bind:click="onPayTypeClick">
+												<van-radio slot="right-icon" name="{{item.id}}" />
+										</van-cell>
+								</van-cell-group>
+						</van-radio-group>
+				</view>
 				<!-- <view class="tui-top">
 						<tui-list-cell last="{{true}}" hover="{{insufficient}}" radius="{{true}}" arrow="{{insufficient}}">
 								<view class="tui-flex">

@@ -250,7 +250,7 @@
 								<image src="{{selectSku.id>0?selectSku.image:product.resources[0].url}}" class="tui-popup-img"></image>
 								<view class="tui-popup-price">
 										<view class="tui-amount tui-bold">
-												￥	{{selectSku.price==0?wxs.priceStr( product.minPrice):wxs.priceStr(selectSku.price)}}
+												￥	{{selectSku.price==0?wxs.priceStr( product.currentPrice):wxs.priceStr(selectSku.price)}}
 										</view>
 										<view class="tui-number">编号:{{'4373299399393'}}</view>
 								</view>

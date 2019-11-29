@@ -26,9 +26,9 @@
     </van-row>
     <van-row>
       <van-col span="6">订单编号:</van-col>
-      <van-col span="">{{order.no}}</van-col>
+      <van-col span="">{{order.status}}</van-col>
     </van-row>
-    <van-row>
+    <van-row wx:if="{{order.status==wxs.orderStatus.PaySuccess||order.status==wxs.orderStatus.WaitProcess}}">
       <van-col span="6">二维码:</van-col>
       <van-col span="">
         <!-- <van-button icon="qr" size="mini" data-no="{{order.no}}" bind:click="generateQrcode"></van-button> -->
@@ -99,7 +99,7 @@
       </view>
     </view>
     <view class="option-but option-but-right" wx:if="{{order.status==wxs.orderStatus.WaitPay}}">
-      <van-button type="danger" square="{{true}}">立即支付</van-button>
+      <van-button type="danger" square="{{true}}" bindtap="onOrderPay">立即支付</van-button>
     </view>
     <view class="option-but option-but-right" wx:if="{{order.status==wxs.orderStatus.WaitPay||order.status==wxs.orderStatus.WaitProcess}}">
       <van-button type="{{order.status==wxs.orderStatus.WaitPay?'warning':'danger' }}" square="{{true}}" bindtap="onOrderCancel">
@@ -121,4 +121,5 @@
       <canvas style="width: 200px; height: 200px;" canvas-id="myQrcode"></canvas>
     </view>
   </van-dialog>
+  <van-toast id="van-toast" />
 </view>

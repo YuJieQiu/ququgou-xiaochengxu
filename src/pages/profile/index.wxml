@@ -68,6 +68,14 @@
             <view class="tui-order-list">
                 <view class="tui-order-item" bindtap="href" data-type="4">
                     <view class="tui-icon-box">
+                        <van-icon name="peer-pay" size="30" />
+                        <!-- <image src="/assets/images/mall/my/icon_daifukuan_3x.png" class="tui-order-icon"></image> -->
+                        <view class="tui-badge tui-badge-red">{{userInfo.orderWaitPayCount}}</view>
+                    </view>
+                    <view class="tui-order-text">待支付</view>
+                </view>
+                <view class="tui-order-item" bindtap="href" data-type="4">
+                    <view class="tui-icon-box">
                         <van-icon name="underway-o" size="30" />
                         <!-- <image src="/assets/images/mall/my/icon_daifukuan_3x.png" class="tui-order-icon"></image> -->
                         <view class="tui-badge tui-badge-red">{{userInfo.orderWaitCount}}</view>

@@ -14,13 +14,23 @@ Page({
         statusText: ""
       },
       {
-        title: "待完成",
+        title: "待支付",
         name: 1,
+        statusText: "待支付"
+      },
+      {
+        title: "已支付",
+        name: 2,
+        statusText: "已支付"
+      },
+      {
+        title: "待完成",
+        name: 3,
         statusText: "待完成"
       },
       {
         title: "已完成",
-        name: 2,
+        name: 4,
         statusText: "已完成"
       }
     ],
@@ -71,6 +81,37 @@ Page({
       })
     })
   },
+  //立即支付
+  onOrderPay(e) {
+    let no = e.currentTarget.dataset.no
+    let that = this
+    app
+      .httpPost('order/pay', { orderNo: no }, true)
+      .then(res => {
+        if (res.code == 200) {
+          let data = res.data
+          wx.requestPayment(
+            {
+              'timeStamp': data.timestamp,
+              'nonceStr': data.nonceStr,
+              'package': data.package,
+              'signType': data.signType,
+              'paySign': data.paySign,
+              'success': function (res) {
+                wx.redirectTo({
+                  url: '/pages/orderSettlement/success/success'
+                })
+              },
+              'fail': function (res) {
+                Toast('支付失败~');
+              },
+              'complete': function (res) {
+                console.log(res)
+              }
+            })
+        }
+      })
+  },
   onOrderCancel(e) {
     let that = this
     let no = e.currentTarget.dataset.no
@@ -98,7 +139,27 @@ Page({
           tabIndex: 0
         })
         break
-      case 1: //待完成
+      case 1: //待支付
+        this.setData({
+          all: false,
+          status: "0000",
+          list: [],
+          page: 1,
+          pageEnd: false,
+          tabIndex: 1
+        })
+        break
+      case 2: //已支付
+        this.setData({
+          all: false,
+          status: "0910",
+          list: [],
+          page: 1,
+          pageEnd: false,
+          tabIndex: 1
+        })
+        break
+      case 3: //待完成
         this.setData({
           all: false,
           status: "0001",
@@ -108,7 +169,7 @@ Page({
           tabIndex: 1
         })
         break
-      case 2: //已完成
+      case 4: //已完成
         this.setData({
           all: false,
           status: "9990",
@@ -121,27 +182,19 @@ Page({
     }
     this.getOrderListInfo()
   },
-  // onScrollTab(e){
-  //     console.log(e)
-  // },
-  // onPageScroll(e){ // 获取滚动条当前位置
-  //     console.log(e)
-  //     //console.log(e.scrollTop)//获取滚动条当前位置的值
-  // },
   onReachBottom() {
     if (!this.data.pageEnd) {
-      // this.setData({
-      //   loadding: true,
-      //   pullUpOn: true
-      // })
 
       this.setData({ page: this.data.page + 1 })
       this.getOrderListInfo()
     }
-    // Do something when page reach bottom.
   },
   //上拉刷新
   onPullDownRefresh() {
+    // setTimeout(() => {
+    //   wx.stopPullDownRefresh()
+    // }, 300);
+    this.setData({ page: 1, pageEnd: false })
     this.getOrderListInfo()
   },
   onInputRemark(e) {
@@ -166,11 +219,6 @@ Page({
       title: '功能尚未完善~',
       icon: 'none'
     })
-  },
-  onPullDownRefresh() {
-    setTimeout(() => {
-      wx.stopPullDownRefresh()
-    }, 300);
   },
   onPageScroll(e) {
     this.setData({

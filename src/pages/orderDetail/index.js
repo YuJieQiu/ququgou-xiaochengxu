@@ -52,6 +52,36 @@ Page({
       }
     })
   },
+  //订单支付
+  onOrderPay() {
+    let that = this
+    app
+      .httpPost('order/pay', { orderNo: that.data.orderNo }, true)
+      .then(res => {
+        if (res.code == 200) {
+          let data = res.data
+          wx.requestPayment(
+            {
+              'timeStamp': data.timestamp,
+              'nonceStr': data.nonceStr,
+              'package': data.package,
+              'signType': data.signType,
+              'paySign': data.paySign,
+              'success': function (res) {
+                wx.redirectTo({
+                  url: '/pages/orderSettlement/success/success'
+                })
+              },
+              'fail': function (res) {
+                Toast('支付失败~');
+              },
+              'complete': function (res) {
+                console.log(res)
+              }
+            })
+        }
+      })
+  },
   onOrderCancel() {
     let that = this
     Dialog.confirm({
@@ -62,6 +92,8 @@ Page({
         app
           .httpPost('order/cancel', { orderNo: that.data.orderNo })
           .then(res => {
+            Toast('已取消~');
+            this.getDataInfo(that.data.orderNo)
           })
       })
       .catch(() => { })

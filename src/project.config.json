@@ -143,6 +143,13 @@
 					"id": -1,
 					"name": "pages/merchantList/index",
 					"pathName": "pages/merchantList/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/orderSettlement/index",
+					"pathName": "pages/orderSettlement/index",
 					"scene": null
 				}
 			]

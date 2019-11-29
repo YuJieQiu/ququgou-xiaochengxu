@@ -43,17 +43,17 @@
 								</view>
 						</tui-list-cell>
 						<view class="tui-order-btn">
-								<view class="tui-btn-ml" data-no="{{listItem.no}}" bindtap="onOrderCancel" wx:if="{{listItem.status=='0001'||listItem.status=='0000'}}">
+								<view class="tui-btn-ml" data-no="{{listItem.no}}" bindtap="onOrderCancel" wx:if="{{listItem.status==wxs.orderStatus.WaitProcess||listItem.status==wxs.orderStatus.WaitPay||listItem.status==wxs.orderStatus.PaySuccess}}">
 										<tui-button type="black" plain="{{true}}" width="148rpx" height="56rpx" size="{{26}}" shape="circle">
 												取消订单
 										</tui-button>
 								</view>
-								<view class="tui-btn-ml" wx:if="{{listItem.status=='0000'}}">
+								<view class="tui-btn-ml" data-no="{{listItem.no}}" wx:if="{{listItem.status==wxs.orderStatus.WaitPay}}" bindtap="onOrderPay">
 										<tui-button type="danger" plain="{{true}}" width="148rpx" height="56rpx" size="{{26}}" shape="circle">
 												立即支付
 										</tui-button>
 								</view>
-								<view class="tui-btn-ml" data-no="{{listItem.no}}" bindtap="generateQrcode">
+								<view class="tui-btn-ml" data-no="{{listItem.no}}" bindtap="generateQrcode" wx:if="{{listItem.status==wxs.orderStatus.WaitProcess||listItem.status==wxs.orderStatus.PaySuccess}}">
 										<tui-button type="black" plain="{{true}}" width="148rpx" height="56rpx" size="{{26}}" shape="circle">
 												二维码
 										</tui-button>

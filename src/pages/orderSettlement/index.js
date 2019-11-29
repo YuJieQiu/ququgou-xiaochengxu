@@ -31,7 +31,9 @@ Page({
     orderAmount: 0,
     remark: '',
     address: { id: 0 },
-    merAddress: []
+    merAddress: [],
+    paymentTypeList: [],//支付方式
+    selectPaymentTypeId: 0//选择的支付方式
   },
   //收货地址
   onClickAddress(e) {
@@ -56,7 +58,6 @@ Page({
     that.setData({
       deliveryId: id
     })
-    console.log(this.data.deliveryId)
   },
   getAddressInfo: function () {
     app.httpGet('address/user/first', {}).then(res => {
@@ -73,6 +74,28 @@ Page({
         }
       })
     })
+  },
+  //支付方式获取
+  getPaymentTypeList() {
+    const that = this
+    let data = {}
+    app.httpGet('shop/payment/type/list', data).then(res => {
+      that.setData({
+        paymentTypeList: res.data
+      })
+    })
+  },
+  //支付方式选择 
+  onPayTypeChange(event) {
+    // this.setData({
+    //   selectPaymentTypeId: event.detail
+    // });
+  },
+  onPayTypeClick(event) {
+    const { name } = event.currentTarget.dataset;
+    this.setData({
+      selectPaymentTypeId: name.toString()
+    });
   },
   getMerAddressInfo() {
     const that = this
@@ -96,10 +119,13 @@ Page({
       Toast('请选择收货地址~');
       return
     }
+    if (this.data.selectPaymentTypeId == 0 || this.data.selectPaymentTypeId == "0") {
+      Toast('请选择支付方式~');
+      return
+    }
     this.orderCreare()
   },
   onSubmitWait() {
-    console.log('onSubmitWait')
     return
   },
   orderCreare: function () {
@@ -132,9 +158,8 @@ Page({
       addressId: this.data.address.id,
       remark: this.data.remark,
       deliveryTypeId: parseInt(this.data.deliveryId),
-      deliveryFee: 0,
-      deliveryAddressId: 1,
-      paymentType: 1,
+      deliveryFee: 0,//配送费用
+      paymentTypeId: parseInt(that.data.selectPaymentTypeId),
       discounts: [],
       products: products
     }
@@ -145,13 +170,42 @@ Page({
       .then(res => {
         toast.clear()
         that.removeShopCart()
-        // wx.navigateTo({
-        //     url: '/pages/orderList/index'
-        // })
         if (res.code == 200) {
-          wx.redirectTo({
-            url: '/pages/orderSettlement/success/success'
-          })
+          let data = res.data
+          let paymentType = null
+          that.data.paymentTypeList.forEach(element => {
+            if (element.id == that.data.selectPaymentTypeId) {
+              paymentType = element
+            }
+          });
+          if (paymentType != null && paymentType.code == "WeChatPay") {//如果是在线支付订单，调用支付接口
+            wx.requestPayment(
+              {
+                'timeStamp': data.timestamp,
+                'nonceStr': data.nonceStr,
+                'package': data.package,
+                'signType': data.signType,
+                'paySign': data.paySign,
+                'success': function (res) {
+                  wx.redirectTo({
+                    url: '/pages/orderSettlement/success/success'
+                  })
+                },
+                'fail': function (res) {
+                  Toast('支付失败~');
+                },
+                'complete': function (res) {
+                  console.log(res)
+                }
+              })
+          } else {
+            wx.redirectTo({
+              url: '/pages/orderSettlement/success/success'
+            })
+          }
+        } else {
+          Toast('创建订单失败~');
+          console.log(res)
         }
 
       })
@@ -179,7 +233,6 @@ Page({
     }
   },
   onShow() {
-
   },
   onLoad(options) {
     let object = JSON.parse(options.jsonData)
@@ -210,6 +263,7 @@ Page({
     })
 
     this.getMerAddressInfo()
+    this.getPaymentTypeList()
   },
   chooseAddr() {
     wx.navigateTo({
@@ -217,6 +271,5 @@ Page({
     })
   },
   btnPay() {
-
   }
 })
