@@ -81,7 +81,8 @@ Page({
     let data = {}
     app.httpGet('shop/payment/type/list', data).then(res => {
       that.setData({
-        paymentTypeList: res.data
+        paymentTypeList: res.data,
+        selectPaymentTypeId: res.data[0].id.toString(),
       })
     })
   },
@@ -92,7 +93,7 @@ Page({
     // });
   },
   onPayTypeClick(event) {
-    const { name } = event.currentTarget.dataset;
+    const { name, code } = event.currentTarget.dataset;
     this.setData({
       selectPaymentTypeId: name.toString()
     });

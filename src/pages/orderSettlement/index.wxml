@@ -120,8 +120,10 @@
 						</tui-list-cell>
 						<van-radio-group value="{{ selectPaymentTypeId }}" bind:change="onPayTypeChange">
 								<van-cell-group>
-										<van-cell wx:for="{{paymentTypeList}}" wx:key="{{index}}" title="{{item.name}}" clickable data-name="{{item.id}}" bind:click="onPayTypeClick">
-												<van-radio slot="right-icon" name="{{item.id}}" />
+										<van-cell wx:for="{{paymentTypeList}}" icon="{{item.code==wxs.paymentType.WeChatPay?'wechat':'balance-pay'}}" wx:key="{{index}}" title="{{item.name}}" clickable data-name="{{item.id}}" data-code="{{item.code}}" bind:click="onPayTypeClick">
+												<!-- <view wx:if="{{item.code==wxs.paymentType.WeChatPay}}"></view> -->
+												<!-- <van-icon name="wechat" wx:if="{{item.code==wxs.paymentType.WeChatPay}}" /> -->
+												<van-radio slot="right-icon" checked-color="#f44" name="{{item.id}}" index="{{index}}" />
 										</van-cell>
 								</van-cell-group>
 						</van-radio-group>

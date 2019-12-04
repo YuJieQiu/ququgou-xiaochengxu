@@ -32,6 +32,11 @@ Page({
         title: "已完成",
         name: 4,
         statusText: "已完成"
+      },
+      {
+        title: "已取消",
+        name: 5,
+        statusText: "已取消"
       }
     ],
     list: [],
@@ -156,7 +161,7 @@ Page({
           list: [],
           page: 1,
           pageEnd: false,
-          tabIndex: 1
+          tabIndex: 2
         })
         break
       case 3: //待完成
@@ -166,7 +171,7 @@ Page({
           list: [],
           page: 1,
           pageEnd: false,
-          tabIndex: 1
+          tabIndex: 3
         })
         break
       case 4: //已完成
@@ -176,7 +181,17 @@ Page({
           list: [],
           page: 1,
           pageEnd: false,
-          tabIndex: 2
+          tabIndex: 4
+        })
+        break
+      case 5: //已取消
+        this.setData({
+          all: false,
+          status: "-1000",
+          list: [],
+          page: 1,
+          pageEnd: false,
+          tabIndex: 5
         })
         break
     }

@@ -54,7 +54,11 @@ var filter = {
       // RefundApply: -1, //退货申请
       // Refund: -3, //退货中
       // RefundSuccess: -5, //已退货
-    }
+    },
+    paymentType: {//支付方式
+      WeChatPay: 'WeChatPay',//微信支付
+      OfflinePay: 'OfflinePay'//线下支付
+    },
   }
 }
 
@@ -66,5 +70,6 @@ module.exports = {
   priceStr: filter.priceStr,
   pricePointBeforeStr: filter.pricePointBeforeStr,
   pricePointLateStr: filter.pricePointLateStr,
-  orderStatus: filter.enum.orderStatus
+  orderStatus: filter.enum.orderStatus,
+  paymentType: filter.enum.paymentType
 }
