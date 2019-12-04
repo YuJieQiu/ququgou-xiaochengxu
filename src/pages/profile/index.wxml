@@ -70,7 +70,9 @@
                     <view class="tui-icon-box">
                         <van-icon name="peer-pay" size="30" />
                         <!-- <image src="/assets/images/mall/my/icon_daifukuan_3x.png" class="tui-order-icon"></image> -->
-                        <view class="tui-badge tui-badge-red">{{userInfo.orderWaitPayCount}}</view>
+                        <view class="tui-badge tui-badge-red" wx:if="{{userInfo.orderWaitPayCount>0}}">
+                            {{userInfo.orderWaitPayCount}}
+                        </view>
                     </view>
                     <view class="tui-order-text">待支付</view>
                 </view>
@@ -78,7 +80,9 @@
                     <view class="tui-icon-box">
                         <van-icon name="underway-o" size="30" />
                         <!-- <image src="/assets/images/mall/my/icon_daifukuan_3x.png" class="tui-order-icon"></image> -->
-                        <view class="tui-badge tui-badge-red">{{userInfo.orderWaitCount}}</view>
+                        <view class="tui-badge tui-badge-red" wx:if="{{userInfo.orderWaitCount>0}}">
+                            {{userInfo.orderWaitCount}}
+                        </view>
                     </view>
                     <view class="tui-order-text">待完成</view>
                 </view>

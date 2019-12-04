@@ -26,7 +26,7 @@
     </van-row>
     <van-row>
       <van-col span="6">订单编号:</van-col>
-      <van-col span="">{{order.status}}</van-col>
+      <van-col span="">{{order.no}}</van-col>
     </van-row>
     <van-row wx:if="{{order.status==wxs.orderStatus.PaySuccess||order.status==wxs.orderStatus.WaitProcess}}">
       <van-col span="6">二维码:</van-col>

@@ -193,10 +193,12 @@ Page({
                   })
                 },
                 'fail': function (res) {
-                  Toast('支付失败~');
+                  wx.redirectTo({
+                    url: '/pages/orderList/index'
+                  })
                 },
                 'complete': function (res) {
-                  console.log(res)
+                  //console.log(res)
                 }
               })
           } else {

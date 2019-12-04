@@ -5,7 +5,8 @@ App({
 
   },
   onLaunch: function () {
-    //this.getLocationInfo()
+
+    this.getLocationInfo()
     //判断机型(适配iphoneX)
     wx.getSystemInfo({
       success: res => {
@@ -91,7 +92,7 @@ App({
     })
   },
   mapKey: 'DSXBZ-6AY3U-QLAVO-4H6LL-ZOIT3-ALFUW',
-  getLocationInfo: function (func) {//获取位置信息 
+  getLocationInfo: function (func) {//获取位置信息
     let _this = this
     const qqmapsdk = new QQMapWX({ key: _this.mapKey })
     let location = {}

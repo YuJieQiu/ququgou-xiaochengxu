@@ -33,8 +33,11 @@
 								</tui-list-cell>
 						</block>
 						<tui-list-cell hover="{{false}}" last="{{true}}">
+								<!-- <view class="tui-goods-time">
+										<view>创建时间{{listItem.createdTime}}</view>
+								</view> -->
 								<view class="tui-goods-price">
-										<view>共{{listItem.products.lenght}}件商品 合计：</view>
+										<view>共{{listItem.products.length}}件商品 合计：</view>
 										<view class="tui-size-24">￥</view>
 										<view class="tui-price-large">
 												{{wxs.pricePointBeforeStr(listItem.orderAmountTotal)}}
