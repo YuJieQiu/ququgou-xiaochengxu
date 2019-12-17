@@ -13,7 +13,6 @@ VantComponent({
     props: {
         tag: String,
         num: String,
-        numsymbol: String,
         desc: String,
         thumb: String,
         title: String,

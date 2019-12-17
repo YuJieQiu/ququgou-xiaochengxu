@@ -1,6 +1,4 @@
 const app = getApp()
-const { appUtils, appValidate } = require('../../utils/util.js')
-const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
 
 Page({
   data: {
@@ -98,6 +96,11 @@ Page({
         })
       })
   },
+  onHeaderSearchFocus(e) {
+    wx.navigateTo({
+      url: "/pages/merchant/search/index?merId=" + this.data.merId
+    })
+  },
   onReachBottom() {
     if (!this.data.page.pageEnd) {
       this.setData({ 'page.page': this.data.page.page + 1 })
@@ -118,7 +121,31 @@ Page({
       this.getMerProductList()
     }
   },
+  onTabClick(e) {
+    if (e.detail.name == "1") {
+      wx.navigateTo({
+        url: "/pages/productList/index?merId=" + this.data.merId
+      })
+    }
+  },
   onLoad(options) {
+    let obj = wx.getMenuButtonBoundingClientRect();
+    this.setData({
+      width: obj.left,
+      height: obj.top + obj.height + 8,
+      inputTop: obj.top + (obj.height - 30) / 2,
+      arrowTop: obj.top + (obj.height - 32) / 2
+    }, () => {
+      wx.getSystemInfo({
+        success: (res) => {
+          this.setData({
+            //略小，避免误差带来的影响
+            dropScreenH: this.data.height * 750 / res.windowWidth + 90,
+            drawerH: res.windowHeight - res.windowWidth / 750 * 100 - this.data.height
+          })
+        }
+      })
+    });
     //undefined
     if (options.merCode != null && options.merCode != "" && options.merCode != "undefined") {
       this.setData({

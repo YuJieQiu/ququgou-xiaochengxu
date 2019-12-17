@@ -1,19 +1,25 @@
-<view class="main">
+<!-- 引入.wxs文件 src为相对路径，module指定当前模块的名称 -->
+<wxs module="wxs" src="../common/index.wxs" />
+<view class="container">
+		<!-- header -->
+		<view class="header-search">
+				<van-search value="" placeholder="搜索店铺商品" bind:focus="onHeaderSearchFocus" />
+		</view>
+		<!-- header -->
 		<view class="swiper">
 				<swiper indicator-dots="true" autoplay="true" interval="10000" duration="500" circular="true" class='swiper'>
-						<swiper-item wx:for="{{merInfo.resources}}" wx:key="{{index}}">
+						<swiper-item wx:for="{{merInfo.resources}}" wx:key="index">
 								<image mode="aspectFill" src="{{item.url}}" />
 						</swiper-item>
 				</swiper>
 		</view>
 		<view class="centre">
 				<!-- <i-row>
-            
-            <i-col span="1" i-class="centre-row1-icon"><van-icon name="location-o" /></i-col>
-
-            <i-col span="15" i-class="centre-row1-location">控江路2068号恺瑞居国际服务公寓1214室(鞍山新村地铁8号线4号口进)</i-col>
-
-        </i-row> -->
+						<i-col span="1" i-class="centre-row1-icon">
+								<van-icon name="location-o" />
+						</i-col>
+						<i-col span="15" i-class="centre-row1-location">控江路2068号恺瑞居国际服务公寓1214室(鞍山新村地铁8号线4号口进)</i-col>
+				</i-row> -->
 				<van-row>
 						<van-col span="" custom-class="centre-row1-location">
 								<van-cell icon="location-o" title="{{merInfo.address.address}}" custom-class="centre-row1-location-cell" is-link bind:click="onAddressClick" />
@@ -31,19 +37,37 @@
 				</van-row>
 				<van-row>
 						<van-col span="" custom-class="centre-row-tag">
-								<van-tag custom-class="centre-row-tag-item" size="medium" mark color="#f2826a" wx:for="{{merInfo.label}}" wx:key="{{index}}">
+								<van-tag custom-class="centre-row-tag-item" size="medium" mark color="#f2826a" wx:for="{{merInfo.label}}" wx:key="index">
 										{{item.text}}
 								</van-tag>
 						</van-col>
 				</van-row>
 		</view>
 		<!-- <view class="ad">广告位置</view> bind:change="onChange" line-width="{{0}}" -->
+		<!-- 分类 S -->
+		<!-- 分类 E -->
 		<view class="tab">
-				<van-tabs active="{{ active }}" sticky="{{true}}" swipeable="{{true}}" lower-threshold="{{100}}" enable-back-to-top="{{true}}">
+				<van-tabs active="{{ active }}" sticky="{{true}}" swipeable="{{true}}" line-width="{{0}}" lower-threshold="{{100}}" enable-back-to-top="{{true}}" bind:click="onTabClick">
 						<!-- 商品 S -->
-						<van-tab title="商品" name="0">
-								<view class="">
-										<view class="custom-card" wx:for="{{goods}}" wx:key="{{index}}" data-guid="{{item.guid}}" bindtap="onClickToShowDetail">
+						<van-tab title="热销" name="0"></van-tab>
+						<!-- 商品 E -->
+						<van-tab title="全部" name="1">
+								<!-- <scroll-view class="tab-card-list" scroll-y="{{ifScrollY}}"></scroll-view> -->
+						</van-tab>
+						<view class="tui-product-list">
+								<view class="tui-product-container">
+										<block wx:for="{{goods}}" wx:key="index" wx:if="{{(index+1)%2!=0}}">
+												<template is="productItem" data="{{item,index:index}}" />
+										</block>
+								</view>
+								<view class="tui-product-container">
+										<block wx:for="{{goods}}" wx:key="index" wx:if="{{(index+1)%2==0}}">
+												<template is="productItem" data="{{item,index:index}}" />
+										</block>
+								</view>
+						</view>
+						<!-- <view class="">
+										<view class="custom-card" wx:for="{{goods}}" wx:key="index" data-guid="{{item.guid}}" bindtap="onClickToShowDetail">
 												<view class="custom-card-centre">
 														<view class="custom-card__thumb">
 																<image src="{{ item.image }}" mode="aspectFill" lazy-load="true" class="custom-card__img" />
@@ -58,48 +82,29 @@
 																</view>
 														</view>
 												</view>
-												<!-- <view class="van-card__footer">暂不添加</view> -->
+												<view class="van-card__footer">暂不添加</view>
 										</view>
-								</view>
-								<!-- <scroll-view scroll-y="{{ifScrollY}}">
-                    <view class="custom-card" wx:for="{{goods}}" data-guid="{{item.guid}}" bindtap="onClickToShowDetail">
-                        <view class="custom-card-centre">
-                            <view class="custom-card__thumb">
-                                <image src="{{ item.image }}" mode="aspectFill" lazy-load="true" class="custom-card__img" />
-                            </view>
-                            <view class="custom-card__content">
-                                <view class="custom-card__title">{{ item.name }}</view>
-                                <view class="custom-card__price">
-                                    <view class="now-price">
-                                        {{ currency }} {{ item.currentPrice }}
-                                    </view>
-                                    <view class="original-price" wx:for="{{item.originalPrice>0}}">
-                                        {{ currency }} {{ item.originalPrice }}
-                                    </view>
-                                </view>
-                            </view>
-                        </view>
-                        <view class="van-card__footer">
-                              暂不添加  
-                        </view>
-                    </view>
-                </scroll-view> -->
-						</van-tab>
-						<!-- 商品 E -->
-						<!-- 服务 S -->
-						<van-tab title="服务" name="1">
-								<scroll-view class="tab-card-list" scroll-y="{{ifScrollY}}"></scroll-view>
-						</van-tab>
-						<!-- 服务 E -->
-						<!-- <van-tab title="评论">内容 3</van-tab> -->
+								</view> -->
 				</van-tabs>
 		</view>
-		<!-- <view class="foot">
-        <van-goods-action>
-              <van-goods-action-icon icon="chat-o" text="联系商家" open-type="contact" bind:click="onClickIcon" />  
-            <van-goods-action-icon icon="cart-o" text="购物车" bind:click="onClickIcon" />  
-             <van-goods-action-button text="" type="warning" bind:click="onClickButton" />  
-             <van-goods-action-button text="" bind:click="onClickButton" /> 
-        </van-goods-action>
-    </view> -->
+		<!-- 模板 -->
+		<template name="productItem">
+				<!-- 商品列表 -->
+				<view class="tui-pro-item" hover-class="hover" hover-start-time="150" data-guid="{{item.guid}}" bindtap="showDetail">
+						<image src="{{item.image}}" class="tui-pro-img" mode="widthFix" />
+						<view class="tui-pro-content">
+								<view class="tui-pro-tit">{{item.name}}</view>
+								<view>
+										<view class="tui-pro-price">
+												<text class="tui-sale-price">￥{{item.currentPrice}}</text>
+												<text class="tui-factory-price" wx:if="{{item.originalPrice>0}}">
+														￥{{item.originalPrice}}
+												</text>
+										</view>
+										<view class="tui-pro-pay">销量{{item.sales}}</view>
+								</view>
+						</view>
+				</view>
+				<!-- 商品列表 -->
+		</template>
 </view>

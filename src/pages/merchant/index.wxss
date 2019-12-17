@@ -1,187 +1,143 @@
-Page .main {
-  margin-top: 20rpx;
-  /* margin-bottom: 20rpx; */
+page {
+  background: #f7f7f7;
 }
-
-Page swiper {
+.container {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.swiper {
   height: 582rpx;
 }
 
-Page swiper image {
+.swiper image {
   width: 100%;
   height: 582rpx;
 }
 
-Page .main .centre {
+.header-search {
+  margin: 0;
+  padding: 0;
+}
+
+.centre {
   padding-top: 20rpx;
   background-color: #fff;
   /* padding: 10rpx; */
 }
 
-Page .centre-row-tag {
+.centre-row-tag {
   height: 80rpx;
   padding-left: 10rpx;
   line-height: 80rpx;
 }
 
-Page .centre-row-tag-item {
+.centre-row-tag-item {
   margin-left: 10rpx;
 }
-
-Page .centre .centre-row-phone {
-  /* display: inline-block;
-    vertical-align: middle;
-    height: 100%;
-    line-height: 100%; */
-}
-
-Page .tab-card-list {
-  height: 800px;
-  margin-top: 10rpx;
-}
-/* 
-Page .custom-card {
-  width: 47%;
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10rpx;
-  margin-right: 10rpx;
-  margin-bottom: 10rpx;
-  background-color: #fff;
-}
-
-Page .custom-card-centre {
-}
-
-Page .custom-card-centre .custom-card__thumb {
-}
-
-Page .custom-card__thumb .custom-card__img {
+.centre-row1-location {
   width: 100%;
-  height: 385rpx;
 }
 
-Page .custom-card__content {
+.centre-row1-location-cell {
 }
 
-Page .custom-card__title {
-  font-size: 14px;
+.centre-row-tag {
+  height: 80rpx;
+  padding-left: 10rpx;
+  line-height: 80rpx;
+}
+
+.centre-row-tag-item {
+  margin-left: 10rpx;
+}
+
+.tui-product-category {
+  background: #fff;
+  padding: 80rpx 20rpx 30rpx 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 24rpx;
+  color: #555;
+  margin-bottom: 20rpx;
+}
+
+.tui-product-box {
+  margin-top: 20rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+.tui-product-list {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  /* padding-top: 20rpx; */
+}
+
+.tui-product-container {
+  flex: 1;
+  margin-right: 2%;
+}
+
+.tui-product-container:last-child {
+  margin-right: 0;
+}
+
+.tui-pro-item {
+  width: 100%;
+  margin-bottom: 4%;
+  background: #fff;
+  box-sizing: border-box;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.tui-pro-img {
+  width: 100%;
+  display: block;
+}
+
+.tui-pro-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 20rpx;
+}
+
+.tui-pro-tit {
+  color: #2e2e2e;
+  font-size: 26rpx;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.tui-pro-price {
+  padding-top: 18rpx;
+}
+
+.tui-sale-price {
+  font-size: 34rpx;
   font-weight: 500;
-  word-wrap: break-word;
-  line-height: 30rpx;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  margin-bottom: 8rpm;
+  color: #e41f19;
 }
 
-Page .custom-card__price {
-}
-
-Page .custom-card__price .now-price {
-  display: inline-block;
-  margin-left: 10rpx;
-  color: #e93b3d;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 15px;
-}
-
-Page .custom-card__price .original-price {
-  display: inline-block;
-  margin-left: 15rpx;
-  font-size: 12px;
-  color: #888;
+.tui-factory-price {
+  font-size: 24rpx;
+  color: #a0a0a0;
   text-decoration: line-through;
-} */
-/*  
-Page .centre-row1-icon{
-  display: inline-block;
-  vertical-align: middle;
-  height: 170rpx;
-  line-height: 170rpx;
-  margin-left: 5rpx;
+  padding-left: 12rpx;
 }
 
-Page .centre-row1-location{
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 5rpx;
-  height: 170rpx;
-  line-height: 170rpx;
-} */
-Page .centre-row1-location {
-  width: 100%;
-}
-
-Page .centre-row1-location-cell {
-}
-
-Page .custom-card {
-  border-radius: 10rpx;
-  width: 47%;
-  display: inline-block;
-  vertical-align: top;
-  margin: 10rpx;
-  background-color: #fff;
-}
-
-Page .custom-card-centre {
-}
-
-Page .custom-card-centre .custom-card__thumb {
-}
-
-Page .custom-card__thumb .custom-card__img {
-  width: 100%;
-  height: 385rpx;
-}
-
-Page .custom-card__content {
-}
-
-Page .custom-card__title {
-  font-size: 11px;
-  font-weight: 700;
-  word-wrap: break-word;
-  line-height: 30rpx;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  margin: 8rpx;
-}
-
-Page .custom-card-footer {
-  margin: 8rpx;
-  padding-bottom: 30rpx;
-  /* height: 70rpx; */
-}
-
-Page .custom-card__price {
-  display: inline-block;
-  float: left;
-  line-height: 60rpx;
-}
-
-Page .custom-card__price .now-price {
-  display: inline-block;
-  color: #e93b3d;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 15px;
-}
-
-Page .custom-card__price .original-price {
-  display: inline-block;
-  font-size: 12px;
-  color: #888;
-  text-decoration: line-through;
-}
-
-Page .custom-card-footer-button {
-  display: inline-block;
-  float: right;
-  line-height: 60rpx;
+.tui-pro-pay {
+  padding-top: 10rpx;
+  font-size: 24rpx;
+  color: #656565;
 }

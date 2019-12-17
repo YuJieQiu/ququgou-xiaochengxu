@@ -47,37 +47,30 @@ Page({
       this.searchProductList()
     }
   },
+  closeDropdownList: function () {
+    if (this.data.selectH > 0) {
+      this.setData({
+        selectH: 0
+      })
+    }
+  },
   screen: function (e) {
     let index = e.currentTarget.dataset.index;
 
     if (index == 0) {
       if (this.data.selectH > 0) {
         this.closeDropdownList()
-      } else {
-        this.showDropdownList();
       }
       return
     }
 
     if (index == 1 && this.data.queryParam.sortType != 3) {//按销量排序
-      this.closeDropdownList()
-      this.setData({
-        tabIndex: 1,
-        'queryParam.sortType': 3
-      })
-      this.resetSearchQueryParam()
-      this.searchProductList()
+
       return
     }
 
     if (index == 2 && this.data.queryParam.sortType != 11) {//按距离排序
-      this.closeDropdownList()
-      this.setData({
-        tabIndex: 2,
-        'queryParam.sortType': 11
-      })
-      this.resetSearchQueryParam()
-      this.searchProductList()
+
       return
     }
 
@@ -109,7 +102,7 @@ Page({
   },
   search: function () {
     wx.navigateTo({
-      url: '/pages/newsSearch/index'
+      url: '/pages/merchantList/search/index'
     })
   },
   showDetail(e) {

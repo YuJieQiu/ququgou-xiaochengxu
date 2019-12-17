@@ -67,6 +67,11 @@ Page({
         this.setData({
           pageEnd: true
         })
+        if (this.data.page == 1) {
+          this.setData({
+            list: []
+          })
+        }
         return
       }
 

@@ -2,7 +2,9 @@
   "pages": [
     "pages/home/index",
     "pages/merchant/index",
+    "pages/merchant/search/index",
     "pages/merchantList/index",
+    "pages/merchantList/search/index",
     "pages/orderDetail/index",
     "pages/profile/index",
     "pages/orderList/index",

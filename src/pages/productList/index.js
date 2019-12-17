@@ -15,6 +15,7 @@ Page({
       distance: 10,//距离范围 按 KM
       sortType: 1,//排序类型 1、默认 3、销量 正序 5、销量 倒叙  7、价格 正序 9、价格 倒叙 11、距离 最近
       categoryId: 0,//商品分类Id
+      merId:0,
     },
     pageEnd: false,
     list: [],
@@ -332,6 +333,7 @@ Page({
     })
   },
   onLoad: function (options) {
+    console.log(options)
     let obj = wx.getMenuButtonBoundingClientRect();
     this.setData({
       width: obj.left,
@@ -340,6 +342,7 @@ Page({
       arrowTop: obj.top + (obj.height - 32) / 2,
       'queryParam.text': options.searchKey || "",
       'queryParam.categoryId': parseInt(options.categoryId) || 0,
+      'queryParam.merId': parseInt(options.merId) || 0,
     }, () => {
       wx.getSystemInfo({
         success: (res) => {
