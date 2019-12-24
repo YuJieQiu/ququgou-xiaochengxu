@@ -12,3 +12,9 @@ Page .app-btn {
   color: #fff;
   background: #ee0a24;
 }
+
+Page .app-refuse-btn {
+  margin-top: 20rpx;
+  color: #fff;
+  background: #666666;
+}

@@ -5,8 +5,6 @@ App({
 
   },
   onLaunch: function () {
-
-    this.getLocationInfo()
     //判断机型(适配iphoneX)
     wx.getSystemInfo({
       success: res => {
@@ -28,6 +26,8 @@ App({
         }
       }
     })
+
+    this.getLocationInfo()
   },
   beforeLogin() {
     wx.getSetting({
