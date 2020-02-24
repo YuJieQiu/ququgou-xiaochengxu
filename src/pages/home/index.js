@@ -29,11 +29,16 @@ Page({
       url: '/pages/productDetail/index?guid=' + guid
     })
   },
-  //分类 
-  classify: function () {
+  //打开位置信息
+  onOpenLocation: function () {
     wx.openSetting()
-    // wx.navigateTo({
-    //   url: '/pages/categoryList/index'
+  },
+  //刷新位置信息
+  onRefreshLocation() {
+    app.getLocationInfo()
+    // location = wx.getStorageSync('location')
+    // this.setData({
+    //   location: location
     // })
   },
   //搜索

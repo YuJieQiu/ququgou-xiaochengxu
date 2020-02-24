@@ -92,13 +92,14 @@ App({
     })
   },
   mapKey: 'DSXBZ-6AY3U-QLAVO-4H6LL-ZOIT3-ALFUW',
-  getLocationInfo: function (func) {//获取位置信息
+  getLocationInfo: function () {//获取位置信息
     let _this = this
     const qqmapsdk = new QQMapWX({ key: _this.mapKey })
     let location = {}
     //微信接口获取坐标
     wx.getLocation({
       type: 'wgs84',
+      isHighAccuracy: true,
       success(res) {
         location.lat = res.latitude
         location.lon = res.longitude
@@ -116,7 +117,6 @@ App({
             location.info = res.result
             _this.globalData.location = location
             wx.setStorageSync('location', location)
-
             wx.startPullDownRefresh()
             wx.stopPullDownRefresh()
           },
@@ -130,8 +130,8 @@ App({
       }
     })
   },
-  baseUrl: 'https://main.ququgo.club/user/main/api/v1/',
-  //baseUrl: 'http://127.0.0.1:7001/user/main/api/v1/',
+  //baseUrl: 'https://main.ququgo.club/user/main/api/v1/',
+  baseUrl: 'http://127.0.0.1:7001/user/main/api/v1/',
   httpBase: function (method, url, data, loading) {
     let _this = this
     let requestUrl = this.baseUrl + url

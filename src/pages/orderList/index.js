@@ -15,27 +15,22 @@ Page({
       },
       {
         title: "待支付",
-        name: 1,
+        name: 3,
         statusText: "待支付"
       },
       {
-        title: "已支付",
-        name: 2,
-        statusText: "已支付"
-      },
-      {
         title: "待完成",
-        name: 3,
+        name: 5,
         statusText: "待完成"
       },
       {
         title: "已完成",
-        name: 4,
+        name: 7,
         statusText: "已完成"
       },
       {
         title: "已取消",
-        name: 5,
+        name: 9,
         statusText: "已取消"
       }
     ],
@@ -58,7 +53,7 @@ Page({
       page: this.data.page,
       limit: this.data.limit,
       all: this.data.all,
-      status: this.data.status
+      displayStatus: parseInt(this.data.status)
     }
 
     app.httpGet('order/get/list', data).then(res => {
@@ -149,50 +144,40 @@ Page({
           tabIndex: 0
         })
         break
-      case 1: //待支付
+      case 3: //待支付
         this.setData({
           all: false,
-          status: "0000",
+          status: 3,
           list: [],
           page: 1,
           pageEnd: false,
           tabIndex: 1
         })
         break
-      case 2: //已支付
+      case 5: //待完成
         this.setData({
           all: false,
-          status: "0910",
-          list: [],
-          page: 1,
-          pageEnd: false,
-          tabIndex: 2
-        })
-        break
-      case 3: //待完成
-        this.setData({
-          all: false,
-          status: "0001",
+          status: 5,
           list: [],
           page: 1,
           pageEnd: false,
           tabIndex: 3
         })
         break
-      case 4: //已完成
+      case 7: //已完成
         this.setData({
           all: false,
-          status: "9990",
+          status: 7,
           list: [],
           page: 1,
           pageEnd: false,
           tabIndex: 4
         })
         break
-      case 5: //已取消
+      case 9: //已取消
         this.setData({
           all: false,
-          status: "-1000",
+          status: 9,
           list: [],
           page: 1,
           pageEnd: false,

@@ -6,9 +6,9 @@
       <view class="" size="22">
         <van-icon name="location-o" />
       </view>
-      <view wx:if="{{location==null || location==''}}" bindtap="classify">获取当前位置</view>
-      <view class="" style="color:{{headerFontColor}}" wx:else>
-        {{location.info.address_component.street_number}}
+      <view wx:if="{{location==null || location==''}}" bindtap="onOpenLocation">获取当前位置</view>
+      <view class="location-viwe" style="color:{{headerFontColor}}" bindtap="onRefreshLocation" wx:else>
+        {{location.info.formatted_addresses.recommend}}
       </view>
       <!-- <tui-icon name="manage-fill" color="{{headerFontC  olor}}" size="22" tui-icon-class="tui-icon-category"></tui-icon>
       <view class="tui-category-scale" style="color:{{headerFontColor}}">浦东新区12356</view> -->

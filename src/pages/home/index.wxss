@@ -457,3 +457,11 @@ page {
   display: inline-block;
   vertical-align: middle;
 }
+
+.location-viwe {
+  max-width: 180rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all; /* 不换行 */
+  white-space: nowrap; /* 不换行 */
+}
