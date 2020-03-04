@@ -4,7 +4,7 @@
 
 - 这是一个微信商城小程序
 - [后台地址](https://github.com/YuJieQiu/ququgou-shop)
-- [微信商城商户端小程序项目地址](https://github.com/YuJieQiu/ququgou-xiaochengxu)
+- [微信商城商户端小程序项目地址](https://github.com/YuJieQiu/ququgou-merchant)
 
 #### 小程序体验地址
 
