@@ -130,8 +130,8 @@ App({
       }
     })
   },
-  //baseUrl: 'https://main.ququgo.club/user/main/api/v1/',
-  baseUrl: 'http://127.0.0.1:7001/user/main/api/v1/',
+  baseUrl: 'https://main.ququgo.club/user/main/api/v1/',
+  //baseUrl: 'http://127.0.0.1:7001/user/main/api/v1/',
   httpBase: function (method, url, data, loading) {
     let _this = this
     let requestUrl = this.baseUrl + url
